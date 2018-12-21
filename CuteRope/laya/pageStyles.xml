@@ -1,0 +1,6 @@
+<page>
+   <item name="Loading.ui" props="" ifExport="分离模式" aName=""/>
+   <item name="Select.ui" props="" ifExport="分离模式" aName=""/>
+   <item name="StartGame.ui" props="" ifExport="分离模式" aName=""/>
+   <item name="SelectBox/SelectBox.ui" props="" ifExport="分离模式" aName=""/>
+</page>

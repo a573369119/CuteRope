@@ -3,4 +3,11 @@
    <item name="Select.ui" props="" ifExport="分离模式" aName=""/>
    <item name="StartGame.ui" props="" ifExport="分离模式" aName=""/>
    <item name="SelectBox/SelectBox.ui" props="" ifExport="分离模式" aName=""/>
+   <item name="SelectBox/Box.ui" props="" ifExport="内嵌模式" aName=""/>
+   <item name="SelectRound/Round.ui" props="" ifExport="分离模式" aName=""/>
+   <item name="SelectRound/RoundItem.ui" props="" ifExport="内嵌模式" aName=""/>
+   <item name="GameView/GameViewDoor.ui" props="" ifExport="内嵌模式" aName=""/>
+   <item name="GameView/GameMenu.ui" props="" ifExport="内嵌模式" aName=""/>
+   <item name="Shop/ShopDialog.ui" props="" ifExport="内嵌模式" aName=""/>
+   <item name="topLeft.scene" props="" ifExport="内嵌模式" aName=""/>
 </page>

@@ -16,13 +16,19 @@ export default class SelectPage extends ui.SelectUI{
         this.btn_First_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[0]);
         this.btn_Second_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[1]);
         this.btn_Third_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[2]);
+        this.btn_Exit.on(Laya.Event.CLICK,this,this.onExit);
     }
 
+    /*退出 */
+    private onExit() : void
+    {
+        Laya.Scene.open("StartGame.scene",true);        
+    }
      /**按钮事件 进入季度关卡 */
      private onSelectBoxStart(index) : void
      {
         console.log("进入第：" + index + "季");
          //进入选择关卡
-         Laya.Scene.open("SelectBox/SelectBox.scene",true,[index]);
+         Laya.Scene.open("SelectBox/SelectBox.scene",true,index);
      }
 }

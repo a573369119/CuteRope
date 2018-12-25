@@ -1,0 +1,18 @@
+{
+    "limitList":[
+        {
+            "selectLimit":0,
+            "boxLimit":[0,20,40,60,100]
+        }
+        ,
+        {
+            "selectLimit":125,
+            "boxLimit":[0,25,46,62,120]
+        }
+        ,
+        {
+            "selectLimit":750,
+            "boxLimit":[0,22,40,60,100]
+        }
+    ]
+}

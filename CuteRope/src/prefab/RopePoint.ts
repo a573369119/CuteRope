@@ -8,8 +8,8 @@ export default class RopePoint{
 	/**刚体 */
 	public body:Laya.RigidBody;
 
-    constructor(x,y,type:string,lastRopePoint){	
-
+    constructor(x,y,type:string){	
+			this.init({"x":x,"y":y,"type":type}); 	
     }
     
     //初始化,创建绳子节点
@@ -26,11 +26,13 @@ export default class RopePoint{
         this.x=data.x;
         this.y=data.y;
         this.sp.pos(data.x,data.y);
-    }
+		}
+		
     //创建节点精灵
     ropePoint_CreateSprite(x,y):void{
 		this.sp=new Laya.Sprite();
-		this.sp.loadImage("gameView/rope.png");
+		this.sp.loadImage("gameView/rope1.png");
+		this.sp.pivot(this.sp.width/2,this.sp.height/2);
 		this.sp.pos(x,y);
 		Laya.stage.addChild(this.sp);
     }
@@ -40,7 +42,7 @@ export default class RopePoint{
 		this.body=new Laya.RigidBody();
 		this.body.type=type;
 		this.body.allowRotation = true;
-		this.body.angularDamping = 20;
+		this.body.angularDamping = 80;
 		this.body.linearDamping = 0.04;
 		this.sp.addComponentIntance(this.body);
     }
@@ -50,6 +52,7 @@ export default class RopePoint{
 		let colider = new Laya.BoxCollider();
 		colider.width = this.sp.width;
 		colider.height = this.sp.height;
+		colider.density = 1000;
 		colider.isSensor = true;
 		this.sp.addComponentIntance(colider);
     }

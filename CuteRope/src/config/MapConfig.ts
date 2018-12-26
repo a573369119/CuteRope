@@ -220,7 +220,7 @@ export module Config {
 
     /**绳子 */
     export class RopeConfig{
-        /**节点个数(长度) */
+        /** 长度像素     */
         public num : number;        
     }
 

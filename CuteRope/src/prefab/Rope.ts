@@ -1,4 +1,6 @@
     import RopePoint from "./RopePoint";
+import Candy from "./Candy";
+    
     export default class Rope{
     /**绳子节点数组 */
     public ropePointsArray:Array<RopePoint>;
@@ -12,35 +14,35 @@
     }
 
     //创建一根绳子，根据位置和长度创建
-    init(count,hookX,HookY,CandyX,CandyY):void{
-        this.count=count;
-        this.createMultiRopePoint(count,hookX,HookY,CandyX,CandyY);
+    init(hookX,HookY,ropeLength):void{
+        this.createMultiRopePoint(hookX,HookY,ropeLength);
     }
 
-    update(newCount,newHookX,newHookY,newCandyX,newCandyY):void{
+    update(newCount,newHookX,newHookY,ropeLength):void{
         
     }
-    createMultiRopePoint(count:number,hookX,hookY,candyX,candyY):void{
+    createMultiRopePoint(hookX,hookY,ropeLength):void{
         //第一个节点与最后一个节点的距离
-        let disTotal:number=Math.sqrt(Math.pow(hookX - candyX,2) + Math.pow(hookY - candyY,2));
-        //每个节点间的距离
-        let disPer:number=disTotal/(count-1);
+        //创建多少个节点 30个像素一个间隔
+        let disPer:number=ropeLength/30;
         //每一个节点水平方向偏移量
-        let x_Add=disPer*this.rotationDeal(hookX,hookY,candyX,candyY,"cos");
+        let x_Add=30*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"cos");
         //每一个节点竖直方向偏移量
-        let y_Add=disPer*this.rotationDeal(hookX,hookY,candyX,candyY,"sin");
-        if(disPer >= 60) {console.log("距离不够");}        
-        for(let i=0;i<count;i++){
-            let ropePoint;
+        let y_Add=30*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"sin");
+        // if(disPer >= 60) {console.log("距离不够");}        
+        for(let i=0;i<disPer;i++){
+            let ropePoint : RopePoint ;
             if(i==0){
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",this.ropePointsArray[i-1]);
+                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic");
             }
             else
             {
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"dynamic",this.ropePointsArray[i-1]);
+                ropePoint =new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"dynamic");
+                ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
             }
             this.ropePointsArray.push(ropePoint);
         }
+        console.log(this.ropePointsArray);
     }
 
     rotateRopePoint():void{
@@ -61,6 +63,17 @@
         
         }
         
+    }
+
+    /**连接糖果 */
+    public connectCandy(candy : Candy,index:number) : void
+    {
+        let ropePoint : RopePoint = this.ropePointsArray[this.ropePointsArray.length-1];
+        let joint = new Laya.RevoluteJoint();
+        joint.otherBody = ropePoint.sp.getComponent(Laya.RigidBody);
+        joint.selfBody = candy.getCandyBody(index);
+        joint.anchor = [candy.getCandySprite(index).width/2,candy.getCandySprite(index).height/2];
+        candy.getCandySprite(index).addComponentIntance(joint);
     }
     
     /**角度处理函数
@@ -107,5 +120,7 @@
             return (b/a);
         }
     }
-    }
+
+    /**添加绳子 */
+}
 

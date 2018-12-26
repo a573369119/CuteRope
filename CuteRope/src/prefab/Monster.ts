@@ -1,4 +1,4 @@
-export default class Candy{
+export default class Monster{
     /**横坐标 */
 	public x:number;
 	/**纵坐标 */

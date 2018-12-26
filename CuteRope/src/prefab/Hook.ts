@@ -26,6 +26,7 @@ export default class Hook{
     
     //更新状态
     update(data):void{
+        this.sp.visible = true;
         this.hook_X=data.hook_X;
         this.hook_Y=data.hook_Y;
         if(data.style=="hook1"){
@@ -43,6 +44,7 @@ export default class Hook{
         this.sp=new Laya.Sprite();
         this.sp.loadImage("gameView/"+style+".png");
         this.sp.pos(x,y);
+        this.sp.pivot(this.sp.width/2,this.sp.height/2);
         Laya.stage.addChild(this.sp);
     }
 

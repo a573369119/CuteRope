@@ -1,7 +1,7 @@
-import {ui} from "../ui/layaMaxUI";
-import {Config} from "../config/MapConfig";
-import ShopDialog from "./ShopDialog";
-
+import {ui}         from "../ui/layaMaxUI";
+import {Config}     from "../config/MapConfig";
+import ShopDialog   from "./ShopDialog";
+import Hook         from "../prefab/Hook";
  /**
  * 游戏界面 ani  1：开门动画 2： 
  */
@@ -28,7 +28,7 @@ export default class GamePage extends Laya.Scene{
     /**地图配置 */
     private mapConfig : Config.MapConfig;
 
-
+    public hookArray:Array<Hook>=new Array<Hook>();
     
     //  /**mapConfig 根据传入的id获取地图配置 。示例      获取  LoadingManager.ins_.getMapConfig("2-1",3) 第2季，第1个盒子，第三个关卡  返回mapConfig里面又所有东西  */
     //  private mapConfig : MapConfig;
@@ -68,6 +68,13 @@ export default class GamePage extends Laya.Scene{
         this.addEvents();
         //第一次更新游戏
         this.UpdateData(this.quarterIndex+ "-" + this.boxIndex,this.cardIndex,true);
+        //Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.check);
+    }
+
+    check():void{
+        for(let i=0;i<this.mapConfig.arr_Hook.length;i++){
+            this.mapConfig.arr_Hook[i];
+        }
     }
    /**添加事件 */
    protected addEvents() : void
@@ -266,5 +273,11 @@ export default class GamePage extends Laya.Scene{
         // Laya.timer.frameLoop(1,this,this.collisionCheckBalloon);
         // //怪兽
         // AnimationManager.ins.playAnimation(GameData.ANI_MONSTER_STAND,true,this.mapConfig.monster.x,this.mapConfig.monster.y,this.view.panel_GameWorld);    
+        for(let i=0;i<this.mapConfig.arr_Hook.length;i++){
+            let hook=new Hook();
+            hook.init(this.mapConfig.arr_Hook[i]);
+            
+        } 
+        
     }
 }

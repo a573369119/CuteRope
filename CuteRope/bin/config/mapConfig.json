@@ -16,9 +16,9 @@
                     {"style":"star","x":325,"y":600}
                 ],
                 "monster":{"x":325,"y":1100,"skin":""},
-                "hook":{"pos":[
-                    {"x":325,"y":200}
-                ]},
+                "hook":[
+					{"style":"hook1","x":325,"y":200}
+                ],
 				"rope":{
 					"length":[
 						15

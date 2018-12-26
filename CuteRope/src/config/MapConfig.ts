@@ -53,7 +53,7 @@ export module Config {
         /**怪物配置 */
         public monster : MonsterConfig;
         /**hook配置 */
-        public arr_Hooke : Array<HookConfig>;
+        public arr_Hook : Array<HookConfig>;
         /**rope配置 数组*/
         public arr_Rope : Array<RopeConfig>;
         /**泡泡 balloon*/
@@ -61,7 +61,7 @@ export module Config {
         
 
         constructor(data){
-            this.arr_Hooke = [];
+            this.arr_Hook = [];
             this.arr_Rope = [];
             this.arr_Star = [];
             this.arr_MapSkin = [];
@@ -113,15 +113,16 @@ export module Config {
             });
             console.log("rope -解析");
         } 
-        /**锚点hOOk */
-        private parseHook(hook) : void
+        /**钩子hook */
+        private parseHook(hookObject) : void
         {
-            let hookConfig : HookConfig;
-            hook.pos.forEach(pos => {
+            let hookConfig : HookConfig;           
+            hookObject.forEach(obj => {
                 hookConfig = new HookConfig();
-                hookConfig.hook_X = pos.x;
-                hookConfig.hook_Y = pos.y;
-                this.arr_Hooke.push(hookConfig);
+                hookConfig.style=obj.style;
+                hookConfig.hook_X = obj.x;
+                hookConfig.hook_Y = obj.y;
+                this.arr_Hook.push(hookConfig);
             });
             console.log("hook -解析");            
         }
@@ -156,7 +157,6 @@ export module Config {
                 starConfig.style = obj.style;
                 starConfig.star_X = obj.x;
                 starConfig.star_Y = obj.y;
-                if(obj.star_DestroyTime) starConfig.star_DestroyTime = obj.star_DestroyTime; 
                 this.arr_Star.push(starConfig);
             });
             console.log("star -解析");
@@ -205,13 +205,14 @@ export module Config {
         }
     }
 
-    /**hook*/
+    /**钩子*/
     export class HookConfig{
-        /**hook x*/
+        /**横坐标 */
         public hook_X : number;
-        /**hook y*/
+        /**纵坐标 */
         public hook_Y : number;
-        
+        /**钩子类型 */
+        public style : string;
         constructor(){
 
         }

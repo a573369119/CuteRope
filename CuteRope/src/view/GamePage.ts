@@ -4,7 +4,8 @@ import ShopDialog   from "./ShopDialog";
 import Hook         from "../prefab/Hook";
 import Rope         from "../prefab/Rope";
 import Candy         from "../prefab/Candy";
-
+import Monster from "../prefab/Monster";
+import Tool from "../Tool/Tool";
  /**
  * 游戏界面 ani  1：开门动画 2： 
  */
@@ -36,7 +37,8 @@ export default class GamePage extends Laya.Scene{
     public arr_Rope : Array<Rope>;
     //糖果  不需要重置
     public candy : Candy;
-
+    //怪兽  需要重置
+    public monster:Monster;
 
     constructor(){super();}
 
@@ -70,15 +72,14 @@ export default class GamePage extends Laya.Scene{
         this.menuUI.visible = false;
         //添加事件
         this.addEvents();
+        Laya.PhysicsDebugDraw.enable();
         //第一次更新游戏
         this.UpdateData(this.quarterIndex+ "-" + this.boxIndex,this.cardIndex,true);
-        //Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.check);
+        Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.check);
     }
 
     check():void{
-        for(let i=0;i<this.mapConfig.arr_Hook.length;i++){
-            this.mapConfig.arr_Hook[i];
-        }
+        
     }
    /**添加事件 */
    protected addEvents() : void
@@ -273,6 +274,8 @@ export default class GamePage extends Laya.Scene{
         this.hookInit(this.mapConfig.arr_Hook);
         //绳子数据初始化
         this.ropeInit(this.mapConfig.arr_Rope,this.arr_Hook);
+        //怪兽数据初始化
+        this.monsterInit(this.mapConfig.monster);
             //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
         // if(isNew)   this.mapopeToCandy();Config=LoadingManager.ins_.getMapConfig(mapWhere,mapId,this.view.panel_GameWorld,);  
@@ -301,8 +304,8 @@ export default class GamePage extends Laya.Scene{
         for(let i=0;i<this.arr_Rope.length;i++)
         {
             rope = this.arr_Rope[i];
-            obj.x = 10 * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"cos");
-            obj.y = 10 * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"sin");
+            obj.x = 10 * Tool.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"cos");
+            obj.y = 10 * Tool.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"sin");
             rope.ropePointsArray[rope.ropePointsArray.length-1].body.setVelocity(obj);
             if(Math.sqrt(Math.pow(this.arr_Rope[i].ropePointsArray[this.arr_Rope[i].ropePointsArray.length-1].sp.x - this.candy.getCandySprite(0).x,2) + Math.pow(this.arr_Rope[i].ropePointsArray[this.arr_Rope[i].ropePointsArray.length-1].sp.y - this.candy.getCandySprite(0).y,2)) < 5) add++;
         }
@@ -368,32 +371,17 @@ export default class GamePage extends Laya.Scene{
         
     }
     
-
-
-/////////////////////////////Tool
-    public rotationDeal(fx:number,fy:number,sx:number,sy:number,getString) : number
-    {
-        /**斜边 */
-        let c : number = Math.sqrt(Math.pow(fx - sx,2) + Math.pow(fy - sy,2));
-        /**临边 */
-        let a : number = sx - fx;
-        /**对边 */
-        let b : number = sy - fy;
-        
-        if(getString == "sin")
+    /**怪兽数据初始化 */
+    private monsterInit(monster){
+        if(!this.monster) 
         {
-            //console.log("#sin ==" + (b/c));
-            return (b/c);
-        }
-        else if(getString == "cos")
-        {
-            //console.log("#cos ==" + (a/c));
-            return (a/c);
+            this.monster = new Monster();
+            this.monster.init(monster);
         }
         else
         {
-            //console.log("#tan ==" + (b/a));//对边 比 临边 
-            return (b/a);
+            this.monster.update(monster);
         }
     }
+
 }

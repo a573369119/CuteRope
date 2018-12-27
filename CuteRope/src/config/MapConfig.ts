@@ -94,11 +94,18 @@ export module Config {
         }
 
         /**泡泡 */
-        private parseBalloon(balloon) : void
+        private parseBalloon(balloonObject) : void
         {
-            if(balloon)
+            if(balloonObject.isExist)
             {
-                this.arr_Balloon = [];
+                let balloonConfig : BalloonConfig;           
+                    balloonObject.forEach(obj => {
+                    balloonConfig = new BalloonConfig();
+                    balloonConfig.balloon_X = obj.x;
+                    balloonConfig.balloon_X = obj.y;
+                    this.arr_Balloon.push(balloonConfig);
+                    });
+            console.log("balloon -解析");    
             }
         }
 
@@ -132,7 +139,6 @@ export module Config {
             this.monster = new MonsterConfig();
             this.monster.monster_X = monster.x;
             this.monster.monster_Y = monster.y;
-            this.monster.down_skin = monster.skin;
             console.log("monster -解析");
             
         }
@@ -198,8 +204,6 @@ export module Config {
         public monster_X : number;
         /**怪物y位置 */
         public monster_Y : number;
-        /**怪物皮肤 */
-        public down_skin : string;
         constructor(){
             
         }
@@ -226,11 +230,12 @@ export module Config {
 
     /**泡泡 balloon*/
     export class BalloonConfig{
-        /**泡泡的位置x*/
+        /**横坐标 */
         public balloon_X : number;
-        /**泡泡的位置 */
+        /**纵坐标 */
         public balloon_Y : number;
-        
+        /**本关是否存在泡泡 */
+        public isExist:boolean;
     }
 
 

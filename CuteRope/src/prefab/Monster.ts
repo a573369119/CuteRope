@@ -1,36 +1,34 @@
 export default class Monster{
     /**横坐标 */
-	public x:number;
-	/**纵坐标 */
-    public y:number;
-    /**钩子类型 */
-    public style : string;
-    /**精灵 */
-    public sp:Laya.Sprite;
+    public monster_X : number;
+    /**纵坐标 */
+    public monster_Y : number;
+    /**吃到糖果宽度 */
+    public eatWidth:number;
+    /**吃到糖果高度 */
+    public eatHeight:number;
+    /**张嘴宽度 */
+    public openWidth:number;
+    /**张嘴高度 */ 
+    public openHeight:number;
     constructor(){
-
+        this.eatWidth=84;
+        this.eatHeight=84;
+        this.openWidth=200;
+        this.openHeight=200;
     }
 
-    init(x,y,style):void{
-        this.x=x;
-        this.y=y;
-        this.monster_CreateSprite(x,y,style);       
+    init(data):void{
+        this.monster_X=data.monster_X;
+        this.monster_Y=data.monster_Y;      
     }
 
-    update(newX,newY,newStyle):void{
-        this.x=newX;
-        this.y=newY;
+    update(data):void{
+        this.monster_X=data.monster_X;
+        this.monster_Y=data.monster_Y;
         
     }
 
-    monster_CreateSprite(x,y,style){
-        this.sp=new Laya.Sprite();
-        this.sp.loadImage("gameView/"+style+".png");
-		this.sp.pivot(this.sp.width/2,this.sp.height/2);
-		this.sp.pos(x,y);
-    }
 
-    hook_CreateRope():void{
-        //检测与糖果得距离
-    }
+    
 }

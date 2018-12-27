@@ -1,6 +1,5 @@
 import {ui} from "../ui/layaMaxUI";
 import GameConfig from "../GameConfig";
-
 export default class LoadingPage extends ui.LoadingUI{
       
     constructor(){

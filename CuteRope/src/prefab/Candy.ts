@@ -26,8 +26,8 @@ export default class Candy{
     //初始化,糖果仅有图片的更换  count绳子数量
     init(data,count):void{
         this.count = count;
-        this.candy_X=data.x;
-        this.candy_Y=data.y;
+        this.candy_X=data.candy_X;
+        this.candy_Y=data.candy_Y;
         this.style = data.style;
         this.candy_CreateSprite(data.x,data.y,data.style);
         this.candy_AddBody();
@@ -38,8 +38,8 @@ export default class Candy{
     //更新状态
     update(data,count):void{
         this.count = count;
-        this.candy_X=data.x;
-        this.candy_Y=data.y;
+        this.candy_X=data.candy_X;
+        this.candy_Y=data.candy_Y;
         this.style=data.style;
         for(let i=0;i<this.count;i++)
         {
@@ -56,8 +56,8 @@ export default class Candy{
         {
             if(!this.arr_Sp[i]) this.arr_Sp[i]=new Laya.Sprite();//不存在 才新创建
             this.arr_Sp[i].loadImage("gameView/"+style+".png");
-            this.arr_Sp[i].zOrder=1;
             this.arr_Sp[i].pivot(this.arr_Sp[i].width/2,this.arr_Sp[i].height/2);
+            this.arr_Sp[i].zOrder=1;
             this.arr_Sp[i].pos(x,y);
             //没有加上舞台
             Laya.stage.addChild(this.arr_Sp[i]);

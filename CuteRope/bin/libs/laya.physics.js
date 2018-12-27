@@ -35,7 +35,10 @@ g.superClass_&&g.superClass_.constructor)if(g.prototype[b]===d)f=!0;else if(f)re
 goog.defineClass=function(a,b){var c=b.constructor,d=b.statics;c&&c!=Object.prototype.constructor||(c=function(){throw Error("cannot instantiate an interface (no constructor defined).");});c=goog.defineClass.createSealingConstructor_(c,a);a&&goog.inherits(c,a);delete b.constructor;delete b.statics;goog.defineClass.applyProperties_(c.prototype,b);null!=d&&(d instanceof Function?d(c):goog.defineClass.applyProperties_(c,d));return c};goog.defineClass.SEAL_CLASS_INSTANCES=goog.DEBUG;
 goog.defineClass.createSealingConstructor_=function(a,b){if(goog.defineClass.SEAL_CLASS_INSTANCES&&Object.seal instanceof Function){if(b&&b.prototype&&b.prototype[goog.UNSEALABLE_CONSTRUCTOR_PROPERTY_])return a;var c=function(){var b=a.apply(this,arguments)||this;b[goog.UID_PROPERTY_]=b[goog.UID_PROPERTY_];this.constructor===c&&Object.seal(b);return b};return c}return a};goog.defineClass.OBJECT_PROTOTYPE_FIELDS_="constructor hasOwnProperty isPrototypeOf propertyIsEnumerable toLocaleString toString valueOf".split(" ");
 goog.defineClass.applyProperties_=function(a,b){for(var c in b)Object.prototype.hasOwnProperty.call(b,c)&&(a[c]=b[c]);for(var d=0;d<goog.defineClass.OBJECT_PROTOTYPE_FIELDS_.length;d++)c=goog.defineClass.OBJECT_PROTOTYPE_FIELDS_[d],Object.prototype.hasOwnProperty.call(b,c)&&(a[c]=b[c])};goog.tagUnsealableClass=function(a){!COMPILED&&goog.defineClass.SEAL_CLASS_INSTANCES&&(a.prototype[goog.UNSEALABLE_CONSTRUCTOR_PROPERTY_]=!0)};goog.UNSEALABLE_CONSTRUCTOR_PROPERTY_="goog_defineClass_legacy_unsealable";var box2d={b2Settings:{}};Object.defineProperty||(Object.defineProperty=function(a,b,c){Object.__defineGetter__&&("get"in c?a.__defineGetter__(b,c.get):"value"in c&&a.__defineGetter__(b,c.value));Object.__defineSetter__&&("set"in c?a.__defineSetter__(b,c.set):"value"in c&&a.__defineSetter__(b,c.value));return a});box2d.DEBUG=!0;goog.exportSymbol("box2d.DEBUG",box2d.DEBUG);box2d.ENABLE_ASSERTS=box2d.DEBUG;goog.exportSymbol("box2d.ENABLE_ASSERTS",box2d.ENABLE_ASSERTS);
-box2d.b2Assert=function(a,b,c){if(box2d.DEBUG&&!a)throw Error();};goog.exportSymbol("box2d.b2Assert",box2d.b2Assert);box2d.b2_maxFloat=1E37;goog.exportSymbol("box2d.b2_maxFloat",box2d.b2_maxFloat);box2d.b2_epsilon=1E-5;goog.exportSymbol("box2d.b2_epsilon",box2d.b2_epsilon);box2d.b2_epsilon_sq=box2d.b2_epsilon*box2d.b2_epsilon;goog.exportSymbol("box2d.b2_epsilon_sq",box2d.b2_epsilon_sq);box2d.b2_pi=Math.PI;goog.exportSymbol("box2d.b2_pi",box2d.b2_pi);box2d.b2_maxManifoldPoints=2;
+box2d.b2Assert=function(a,b,c){
+	if (box2d.DEBUG && !a) {console.log(box2d.DEBUG); console.log(a); throw Error() } else { };
+};
+goog.exportSymbol("box2d.b2Assert",box2d.b2Assert);box2d.b2_maxFloat=1E37;goog.exportSymbol("box2d.b2_maxFloat",box2d.b2_maxFloat);box2d.b2_epsilon=1E-5;goog.exportSymbol("box2d.b2_epsilon",box2d.b2_epsilon);box2d.b2_epsilon_sq=box2d.b2_epsilon*box2d.b2_epsilon;goog.exportSymbol("box2d.b2_epsilon_sq",box2d.b2_epsilon_sq);box2d.b2_pi=Math.PI;goog.exportSymbol("box2d.b2_pi",box2d.b2_pi);box2d.b2_maxManifoldPoints=2;
 goog.exportSymbol("box2d.b2_maxManifoldPoints",box2d.b2_maxManifoldPoints);box2d.b2_maxPolygonVertices=8;goog.exportSymbol("box2d.b2_maxPolygonVertices",box2d.b2_maxPolygonVertices);box2d.b2_aabbExtension=.1;goog.exportSymbol("box2d.b2_aabbExtension",box2d.b2_aabbExtension);box2d.b2_aabbMultiplier=2;goog.exportSymbol("box2d.b2_aabbMultiplier",box2d.b2_aabbMultiplier);box2d.b2_linearSlop=.008;goog.exportSymbol("box2d.b2_linearSlop",box2d.b2_linearSlop);box2d.b2_angularSlop=2/180*box2d.b2_pi;
 goog.exportSymbol("box2d.b2_angularSlop",box2d.b2_angularSlop);box2d.b2_polygonRadius=2*box2d.b2_linearSlop;goog.exportSymbol("box2d.b2_polygonRadius",box2d.b2_polygonRadius);box2d.b2_maxSubSteps=8;goog.exportSymbol("box2d.b2_maxSubSteps",box2d.b2_maxSubSteps);box2d.b2_maxTOIContacts=32;goog.exportSymbol("box2d.b2_maxTOIContacts",box2d.b2_maxTOIContacts);box2d.b2_velocityThreshold=1;goog.exportSymbol("box2d.b2_velocityThreshold",box2d.b2_velocityThreshold);box2d.b2_maxLinearCorrection=.2;
 goog.exportSymbol("box2d.b2_maxLinearCorrection",box2d.b2_maxLinearCorrection);box2d.b2_maxAngularCorrection=8/180*box2d.b2_pi;goog.exportSymbol("box2d.b2_maxAngularCorrection",box2d.b2_maxAngularCorrection);box2d.b2_maxTranslation=2;goog.exportSymbol("box2d.b2_maxTranslation",box2d.b2_maxTranslation);box2d.b2_maxTranslationSquared=box2d.b2_maxTranslation*box2d.b2_maxTranslation;goog.exportSymbol("box2d.b2_maxTranslationSquared",box2d.b2_maxTranslationSquared);box2d.b2_maxRotation=.5*box2d.b2_pi;
@@ -789,8 +792,36 @@ box2d.b2World.prototype.DestroyBody=function(a){box2d.ENABLE_ASSERTS&&box2d.b2As
 a.m_contactList=null;for(b=a.m_fixtureList;b;)c=b,b=b.m_next,this.m_destructionListener&&this.m_destructionListener.SayGoodbyeFixture(c),c.DestroyProxies(this.m_contactManager.m_broadPhase),c.Destroy(),a.m_fixtureList=b,--a.m_fixtureCount;a.m_fixtureList=null;a.m_fixtureCount=0;a.m_prev&&(a.m_prev.m_next=a.m_next);a.m_next&&(a.m_next.m_prev=a.m_prev);a===this.m_bodyList&&(this.m_bodyList=a.m_next);--this.m_bodyCount}};goog.exportProperty(box2d.b2World.prototype,"DestroyBody",box2d.b2World.prototype.DestroyBody);
 box2d.b2World.prototype.CreateJoint=function(a){box2d.ENABLE_ASSERTS&&box2d.b2Assert(!this.IsLocked());if(this.IsLocked())return null;var b=box2d.b2JointFactory.Create(a,null);b.m_prev=null;if(b.m_next=this.m_jointList)this.m_jointList.m_prev=b;this.m_jointList=b;++this.m_jointCount;b.m_edgeA.joint=b;b.m_edgeA.other=b.m_bodyB;b.m_edgeA.prev=null;if(b.m_edgeA.next=b.m_bodyA.m_jointList)b.m_bodyA.m_jointList.prev=b.m_edgeA;b.m_bodyA.m_jointList=b.m_edgeA;b.m_edgeB.joint=b;b.m_edgeB.other=b.m_bodyA;
 b.m_edgeB.prev=null;if(b.m_edgeB.next=b.m_bodyB.m_jointList)b.m_bodyB.m_jointList.prev=b.m_edgeB;b.m_bodyB.m_jointList=b.m_edgeB;var c=a.bodyA,d=a.bodyB;if(!a.collideConnected)for(a=d.GetContactList();a;)a.other===c&&a.contact.FlagForFiltering(),a=a.next;return b};goog.exportProperty(box2d.b2World.prototype,"CreateJoint",box2d.b2World.prototype.CreateJoint);
-box2d.b2World.prototype.DestroyJoint=function(a){box2d.ENABLE_ASSERTS&&box2d.b2Assert(!this.IsLocked());if(!this.IsLocked()){var b=a.m_collideConnected;a.m_prev&&(a.m_prev.m_next=a.m_next);a.m_next&&(a.m_next.m_prev=a.m_prev);a===this.m_jointList&&(this.m_jointList=a.m_next);var c=a.m_bodyA,d=a.m_bodyB;c.SetAwake(!0);d.SetAwake(!0);a.m_edgeA.prev&&(a.m_edgeA.prev.next=a.m_edgeA.next);a.m_edgeA.next&&(a.m_edgeA.next.prev=a.m_edgeA.prev);a.m_edgeA===c.m_jointList&&(c.m_jointList=a.m_edgeA.next);a.m_edgeA.prev=
-null;a.m_edgeA.next=null;a.m_edgeB.prev&&(a.m_edgeB.prev.next=a.m_edgeB.next);a.m_edgeB.next&&(a.m_edgeB.next.prev=a.m_edgeB.prev);a.m_edgeB===d.m_jointList&&(d.m_jointList=a.m_edgeB.next);a.m_edgeB.prev=null;a.m_edgeB.next=null;box2d.b2JointFactory.Destroy(a,null);box2d.ENABLE_ASSERTS&&box2d.b2Assert(0<this.m_jointCount);--this.m_jointCount;if(!b)for(a=d.GetContactList();a;)a.other===c&&a.contact.FlagForFiltering(),a=a.next}};goog.exportProperty(box2d.b2World.prototype,"DestroyJoint",box2d.b2World.prototype.DestroyJoint);
+box2d.b2World.prototype.DestroyJoint=function(a){
+	box2d.ENABLE_ASSERTS&&box2d.b2Assert(!this.IsLocked());
+	if(!this.IsLocked()){
+		var b=a.m_collideConnected;
+		a.m_prev&&(a.m_prev.m_next=a.m_next);
+		a.m_next&&(a.m_next.m_prev=a.m_prev);
+		a===this.m_jointList&&(this.m_jointList=a.m_next);
+		var c=a.m_bodyA,d=a.m_bodyB;c.SetAwake(!0);d.SetAwake(!0);
+		a.m_edgeA.prev&&(a.m_edgeA.prev.next=a.m_edgeA.next);
+		a.m_edgeA.next&&(a.m_edgeA.next.prev=a.m_edgeA.prev);
+		a.m_edgeA===c.m_jointList&&(c.m_jointList=a.m_edgeA.next);
+		a.m_edgeA.prev=null;
+		a.m_edgeA.next = null;
+		a.m_edgeB.prev && (a.m_edgeB.prev.next = a.m_edgeB.next);
+		a.m_edgeB.next && (a.m_edgeB.next.prev = a.m_edgeB.prev);
+		a.m_edgeB === d.m_jointList && (d.m_jointList = a.m_edgeB.next);
+		a.m_edgeB.prev = null;
+		a.m_edgeB.next = null;
+		
+		box2d.DEBUG = false;
+
+		box2d.b2JointFactory.Destroy(a, null);
+		box2d.ENABLE_ASSERTS && box2d.b2Assert(0 < this.m_jointCount);
+		--this.m_jointCount;
+		if (!b) 
+		for (a = d.GetContactList(); a;)
+		a.other === c && a.contact.FlagForFiltering(), a = a.next
+		}
+};
+goog.exportProperty(box2d.b2World.prototype, "DestroyJoint", box2d.b2World.prototype.DestroyJoint);
 box2d.b2World.prototype.CreateParticleSystem=function(a){box2d.ENABLE_ASSERTS&&box2d.b2Assert(!this.IsLocked());if(this.IsLocked())return null;a=new box2d.b2ParticleSystem(a,this);a.m_prev=null;if(a.m_next=this.m_particleSystemList)this.m_particleSystemList.m_prev=a;return this.m_particleSystemList=a};goog.exportProperty(box2d.b2World.prototype,"CreateParticleSystem",box2d.b2World.prototype.CreateParticleSystem);
 box2d.b2World.prototype.DestroyParticleSystem=function(a){box2d.ENABLE_ASSERTS&&box2d.b2Assert(!this.IsLocked());this.IsLocked()||(a.m_prev&&(a.m_prev.m_next=a.m_next),a.m_next&&(a.m_next.m_prev=a.m_prev),a===this.m_particleSystemList&&(this.m_particleSystemList=a.m_next))};goog.exportProperty(box2d.b2World.prototype,"DestroyParticleSystem",box2d.b2World.prototype.DestroyParticleSystem);
 box2d.b2World.prototype.Solve=function(a){for(var b=this.m_bodyList;b;b=b.m_next)b.m_xf0.Copy(b.m_xf);for(var c=this.m_controllerList;c;c=c.m_next)c.Step(a);this.m_profile.solveInit=0;this.m_profile.solveVelocity=0;this.m_profile.solvePosition=0;c=this.m_island;c.Initialize(this.m_bodyCount,this.m_contactManager.m_contactCount,this.m_jointCount,null,this.m_contactManager.m_contactListener);for(b=this.m_bodyList;b;b=b.m_next)b.m_flag_islandFlag=!1;for(var d=this.m_contactManager.m_contactList;d;d=

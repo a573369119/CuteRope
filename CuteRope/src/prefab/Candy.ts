@@ -1,3 +1,6 @@
+import GameConfig from "../config/GameConfig";
+import Dic from "../Tool/dic";
+
 export default class Candy{
     /**横坐标 */
 	public candy_X:number;
@@ -13,10 +16,13 @@ export default class Candy{
     public arr_Body:Array<Laya.RigidBody>;
     /**colider 数组 */
     public arr_Colider:Array<Laya.BoxCollider>;
-	/**关节数组 */
+    /**关节数组 */
+    /**假如的层 */
+    public view : Laya.Panel;
     public candy_JointArray:Array<Laya.RevoluteJoint>;
     
-    constructor(){
+    constructor(view){
+        this.view = view;
         this.candy_JointArray=new Array<Laya.RevoluteJoint>();
         this.arr_Body = new Array<Laya.RigidBody>();
         this.arr_Colider = new Array<Laya.BoxCollider>();
@@ -26,8 +32,8 @@ export default class Candy{
     //初始化,糖果仅有图片的更换  count绳子数量
     init(data,count):void{
         this.count = count;
-        this.candy_X=data.candy_X;
-        this.candy_Y=data.candy_Y;
+        this.candy_X=data.x;
+        this.candy_Y=data.y;
         this.style = data.style;
         this.candy_CreateSprite(data.x,data.y,data.style);
         this.candy_AddBody();
@@ -38,16 +44,23 @@ export default class Candy{
     //更新状态
     update(data,count):void{
         this.count = count;
-        this.candy_X=data.candy_X;
-        this.candy_Y=data.candy_Y;
+        this.candy_X=data.x;
+        this.candy_Y=data.y;
         this.style=data.style;
         for(let i=0;i<this.count;i++)
         {
             this.arr_Sp[i].visible = true;
-            this.arr_Sp[i].pos(data.candy_X,data.candy_Y);
+            this.arr_Sp[i].scaleX = 1;
+            this.arr_Sp[i].scaleY = 1;
+            this.arr_Sp[i].pos(this.candy_X,this.candy_Y);
             this.arr_Sp[i].loadImage("gameView/"+data.style+".png");
         }
         this.set("useg");
+        this.candy_AddBody();
+        // this.candy_AddColider();
+        this.candy_AddCom();
+        
+        console.log(this.arr_Sp);
     }
 
     //创建糖果精灵
@@ -56,11 +69,11 @@ export default class Candy{
         {
             if(!this.arr_Sp[i]) this.arr_Sp[i]=new Laya.Sprite();//不存在 才新创建
             this.arr_Sp[i].loadImage("gameView/"+style+".png");
-            this.arr_Sp[i].pivot(this.arr_Sp[i].width/2,this.arr_Sp[i].height/2);
             this.arr_Sp[i].zOrder=1;
+            this.arr_Sp[i].pivot(this.arr_Sp[i].width/2,this.arr_Sp[i].height/2);
             this.arr_Sp[i].pos(x,y);
             //没有加上舞台
-            Laya.stage.addChild(this.arr_Sp[i]);
+            this.view.addChild(this.arr_Sp[i]);
         }
     }
 
@@ -72,8 +85,8 @@ export default class Candy{
             body=new Laya.RigidBody();
             body.type="dynamic";
             body.allowRotation = true;
-            body.angularDamping = 8;
-            body.linearDamping = 0.03;
+            body.angularDamping = GameConfig.CANDY_ANGULARDAMPING;
+            body.linearDamping = GameConfig.CANDY_LINEARDAMPING;
             this.arr_Sp[i].addComponentIntance(body);
         }
     }
@@ -106,7 +119,7 @@ export default class Candy{
             this.arr_Colider[i].width = this.arr_Sp[i].width;
             this.arr_Colider[i].height = this.arr_Sp[i].height;
             this.arr_Colider[i].isSensor=true;
-            this.arr_Colider[i].density = 50;
+            this.arr_Colider[i].density = GameConfig.CANDY_DENSITY;
             this.arr_Sp[i].addComponentIntance(this.arr_Colider[i]);
         }
     }
@@ -154,4 +167,57 @@ export default class Candy{
         ////
     }
 
+    /** 糖果 被吃*/
+    public candyDestroy(x,y) : void
+    {
+        let rigidBody;
+        console.log(this.arr_Sp);
+        this.arr_Sp.forEach(sp => {
+            rigidBody = sp.getComponents(Laya.RigidBody)[0];
+            rigidBody.destroy();
+            rigidBody = sp.getComponents(Laya.RevoluteJoint)[0];
+            rigidBody.destroy();
+        });
+        Laya.timer.loop(1,this,this.nearMonster,[x,y]);
+    }
+
+    /**靠近怪物 */
+    public nearMonster(x,y) : void
+    {
+        let dic = Dic.countDic_Object({"x":this.arr_Sp[0].x,"y":this.arr_Sp[0].y},{x,y});
+        let addx = 5 * Dic.rotationDeal(this.arr_Sp[0].x,this.arr_Sp[0].y,x,y,"cos");
+        let addy = 5 * Dic.rotationDeal(this.arr_Sp[0].x,this.arr_Sp[0].y,x,y,"sin");
+        this.arr_Sp.forEach(sp => {
+            sp.x += addx;
+            sp.y += addy;
+            sp.scaleX -= 0.01;
+            sp.scaleY -= 0.01;
+        });
+        if(dic<4)
+        {
+            this.arr_Sp.forEach(sp => {
+                sp.visible = false;
+                sp.x = 10000;
+            });
+        }
+    }
+
+    public clearTimer() : void
+    {
+        Laya.timer.clear(this,this.nearMonster);
+        this.arr_Sp.forEach(sp => {
+            let body = sp.getComponents(Laya.RigidBody);
+            let joint = sp.getComponents(Laya.RevoluteJoint);
+            if(body && body[0])
+            {
+                body[0].destroy();
+            }
+            if(joint && joint[0])
+            {
+                joint[0].destroy();
+            }
+        });
+        this.arr_Body = [];
+        this.candy_JointArray = [];
+    }
 }

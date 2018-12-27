@@ -10,4 +10,5 @@
    <item name="GameView/GameMenu.ui" props="" ifExport="内嵌模式" aName=""/>
    <item name="Shop/ShopDialog.ui" props="" ifExport="内嵌模式" aName=""/>
    <item name="topLeft.scene" props="" ifExport="内嵌模式" aName=""/>
+   <item name="GameView/Star.scene" props="" ifExport="文件模式" aName=""/>
 </page>

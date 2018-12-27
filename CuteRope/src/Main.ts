@@ -36,7 +36,9 @@ class Main {
 			{url:"unpackage/loadingBg.jpg"},
 			{url:"config/selectConfig.json"},
             {url:"config/playerDataTest.json"},
-            {url:"config/mapConfig.json"}
+			{url:"config/mapConfig.json"},
+			{url:"res/atlas/gameView/stardestory.atlas"}
+			
 		];
 		Laya.loader.load(src,Laya.Handler.create(this,this.onLoad));
 	}

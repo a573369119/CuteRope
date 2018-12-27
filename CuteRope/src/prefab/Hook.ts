@@ -7,8 +7,10 @@ export default class Hook{
     public style : string;
     /**精灵 */
     public sp:Laya.Sprite;
-    constructor(){
-
+    /**所在层 */
+    private view : Laya.Panel
+    constructor(view){
+        this.view = view;
     }
 
     //初始化,"hook1"为钩子风格1，"hook2"为钩子风格2，检测糖果是否在设定范围内，如果在就生成新的绳子
@@ -45,7 +47,7 @@ export default class Hook{
         this.sp.loadImage("gameView/"+style+".png");
         this.sp.pos(x,y);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
-        Laya.stage.addChild(this.sp);
+        this.view.addChild(this.sp);
     }
 
     //检测与糖果得距离，距离内生成绳子

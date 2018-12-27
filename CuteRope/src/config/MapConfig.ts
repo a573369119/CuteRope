@@ -96,16 +96,19 @@ export module Config {
         /**泡泡 */
         private parseBalloon(balloonObject) : void
         {
-            if(balloonObject.isExist)
+            if(balloonObject)
             {
-                let balloonConfig : BalloonConfig;           
-                    balloonObject.forEach(obj => {
-                    balloonConfig = new BalloonConfig();
-                    balloonConfig.balloon_X = obj.x;
-                    balloonConfig.balloon_X = obj.y;
-                    this.arr_Balloon.push(balloonConfig);
-                    });
-            console.log("balloon -解析");    
+                if(balloonObject.isExist)
+                {
+                    let balloonConfig : BalloonConfig;           
+                        balloonObject.forEach(obj => {
+                        balloonConfig = new BalloonConfig();
+                        balloonConfig.balloon_X = obj.x;
+                        balloonConfig.balloon_X = obj.y;
+                        this.arr_Balloon.push(balloonConfig);
+                        });
+                console.log("balloon -解析");    
+                }
             }
         }
 

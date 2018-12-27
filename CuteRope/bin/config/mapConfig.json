@@ -9,19 +9,19 @@
                 "mapSkins":[
                     "gameView/gameBg/boxBg_1.jpg"
                 ],
-                "candy":{"style":"candy","x":400,"y":500},
+                "candy":{"style":"candy","x":376,"y":300},
                 "star":[
-                    {"style":"star","x":325,"y":500},
-                    {"style":"star","x":325,"y":600},
-                    {"style":"star","x":325,"y":600}
+                    {"style":"star1","x":375,"y":600},
+                    {"style":"star1","x":375,"y":750},
+                    {"style":"star1","x":375,"y":900}
                 ],
-                "monster":{"x":325,"y":1100,"skin":""},
+                "monster":{"x":375,"y":1100,"skin":""},
                 "hook":[
-					{"style":"hook1","x":325,"y":200}
+					{"style":"hook1","x":375,"y":200}
                 ],
 				"rope":{
 					"length":[
-						400
+						200
 					]
 				}
             }

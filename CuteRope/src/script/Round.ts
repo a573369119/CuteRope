@@ -17,6 +17,6 @@ export default class Round extends Laya.Script
 
     onUpdate() : void
     {
-        (this.owner as Laya.Sprite).rotation += 0.04;
+        (this.owner as Laya.Sprite).rotation += 0.06;
     }
 }

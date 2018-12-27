@@ -1,3 +1,4 @@
+import GameConfig from "../config/GameConfig";
 export default class RopePoint{
 	/**横坐标 */
 	public x:number;
@@ -34,16 +35,24 @@ export default class RopePoint{
 		this.sp.loadImage("gameView/rope1.png");
 		this.sp.pivot(this.sp.width/2,this.sp.height/2);
 		this.sp.pos(x,y);
-		Laya.stage.addChild(this.sp);
+		// Laya.stage.addChild(this.sp);
     }
+
+		/**
+			* 添加到舞台
+		 */
+		public addView(view) : void
+		{
+				view.addChild(this.sp);
+		}
 
     //添加RigidBody组件,设置刚体属性
     ropePoint_AddBody(type:string):void{               
 		this.body=new Laya.RigidBody();
 		this.body.type=type;
 		this.body.allowRotation = true;
-		this.body.angularDamping = 80;
-		this.body.linearDamping = 0.04;
+		this.body.angularDamping = GameConfig.ROPE_POINT_ANGULARDAMPING;
+		this.body.linearDamping = GameConfig.ROPE_POINT_LINEARDAMOING;
 		this.sp.addComponentIntance(this.body);
     }
     
@@ -52,7 +61,7 @@ export default class RopePoint{
 		let colider = new Laya.BoxCollider();
 		colider.width = this.sp.width;
 		colider.height = this.sp.height;
-		colider.density = 1000;
+		colider.density = GameConfig.ROPE_POINT_DENSITY;
 		colider.isSensor = true;
 		this.sp.addComponentIntance(colider);
     }

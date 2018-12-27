@@ -1,5 +1,6 @@
     import RopePoint from "./RopePoint";
 import Candy from "./Candy";
+import GameConfig from "../config/GameConfig";
     
     export default class Rope{
     /**绳子节点数组 */
@@ -8,7 +9,13 @@ import Candy from "./Candy";
     public jointsArray:Array<Laya.RevoluteJoint>;
     /**绳子长度 */
     public count:number;
-    constructor(){
+    /**所在界面 */
+    public view : Laya.Panel;
+    /**是否已断 */
+    public isCuted : boolean ;
+    constructor(view){
+        this.isCuted = false;
+        this.view = view;
         this.ropePointsArray=new Array<RopePoint>();
         this.jointsArray=new Array<Laya.RevoluteJoint>();
     }
@@ -18,13 +25,13 @@ import Candy from "./Candy";
         this.createMultiRopePoint(hookX,HookY,ropeLength);
     }
 
-    update(newCount,newHookX,newHookY,ropeLength):void{
-        
+    update(hookX,HookY,ropeLength):void{
+        this.init(hookX,HookY,ropeLength);
     }
     createMultiRopePoint(hookX,hookY,ropeLength):void{
         //第一个节点与最后一个节点的距离
         //创建多少个节点 30个像素一个间隔
-        let disPer:number=ropeLength/30;
+        let disPer:number=ropeLength/GameConfig.ROPE_DIC;
         //每一个节点水平方向偏移量
         let x_Add=30*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"cos");
         //每一个节点竖直方向偏移量
@@ -34,14 +41,21 @@ import Candy from "./Candy";
             let ropePoint : RopePoint ;
             if(i==0){
                 ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic");
+                ropePoint.addView(this.view);
             }
             else
             {
                 ropePoint =new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"dynamic");
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
+                ropePoint.addView(this.view);
+            }
+            if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
+            {
+                this.jointsArray.push(ropePoint.sp.getComponent(Laya.RevoluteJoint));
             }
             this.ropePointsArray.push(ropePoint);
         }
+        console.log(this.jointsArray);
         console.log(this.ropePointsArray);
     }
 
@@ -121,6 +135,45 @@ import Candy from "./Candy";
         }
     }
 
-    /**添加绳子 */
+    /**绳子断掉 */
+    public ropeCuted() : void
+    {
+        this.isCuted = true;
+        Laya.timer.loop(16,this,this.pointDestroy)
+    }
+
+    /**渐变 */
+    public pointDestroy() : void
+    {
+        this.ropePointsArray.forEach(point => {
+            point.sp.alpha -=0.01;
+        });
+        if(this.ropePointsArray[0].sp.alpha <= 0)
+        {
+            Laya.timer.clear(this,this.pointDestroy);
+        }
+    }
+
+    public clearTimer() : void
+    {
+        Laya.timer.clear(this,this.pointDestroy);      
+        this.ropePointsArray.forEach(point => {
+            point.sp.removeSelf();
+            let body = point.sp.getComponents(Laya.RigidBody);
+            let joint = point.sp.getComponents(Laya.RevoluteJoint);
+            let colider = point.sp.getComponents(Laya.BoxCollider);
+            if(body && body[0])
+            {
+                body[0].destroy();
+            }
+            if(joint && joint[0])
+            {
+                joint[0].destroy();
+            }
+        });  
+        this.ropePointsArray = [];
+        this.jointsArray = [];
+        this.isCuted = false;
+    }
 }
 

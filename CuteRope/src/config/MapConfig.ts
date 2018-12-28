@@ -58,8 +58,10 @@ export module Config {
         public arr_Rope : Array<RopeConfig>;
         /**泡泡 balloon*/
         public arr_Balloon : Array<BalloonConfig>;
-        
-
+        /**锥子 knife*/
+        public arr_Knife : Array<KnifeConfig>;
+        /**推力球 forceball*/
+        public arr_Forceball : Array<ForceBallConfig>;
         constructor(data){
             this.arr_Hook = [];
             this.arr_Rope = [];
@@ -93,24 +95,6 @@ export module Config {
             this.parseBalloon(data.balloon);
         }
 
-        /**泡泡 */
-        private parseBalloon(balloonObject) : void
-        {
-            if(balloonObject)
-            {
-                if(balloonObject.isExist)
-                {
-                    let balloonConfig : BalloonConfig;           
-                        balloonObject.forEach(obj => {
-                        balloonConfig = new BalloonConfig();
-                        balloonConfig.balloon_X = obj.x;
-                        balloonConfig.balloon_X = obj.y;
-                        this.arr_Balloon.push(balloonConfig);
-                        });
-                console.log("balloon -解析");    
-                }
-            }
-        }
 
         /**绳子节点解析 */
         private parseRope(rope) : void
@@ -170,6 +154,60 @@ export module Config {
             });
             console.log("star -解析");
             
+        }
+
+        /**泡泡 */
+        private parseBalloon(balloonObject) : void
+        {
+            if(balloonObject)
+            {
+                if(balloonObject.isExist)
+                {
+                    let balloonConfig : BalloonConfig;           
+                        balloonObject.forEach(obj => {
+                        balloonConfig = new BalloonConfig();
+                        balloonConfig.balloon_X = obj.x;
+                        balloonConfig.balloon_X = obj.y;
+                        this.arr_Balloon.push(balloonConfig);
+                        });
+                console.log("balloon -解析");    
+                }
+            }
+        }
+
+        /**锥子 */
+        private parseKnife(knifeObject) : void
+        {
+            if(knifeObject)
+            {                
+                    let knifeConfig : KnifeConfig;           
+                        knifeObject.forEach(obj => {
+                        knifeConfig = new KnifeConfig();
+                        knifeConfig.knife_X = obj.x;
+                        knifeConfig.knife_Y = obj.y;
+                        knifeConfig.rotation=obj.rotation;
+                        knifeConfig.style=obj.style;
+                        this.arr_Knife.push(knifeConfig);
+                        });
+                console.log("knife -解析");    
+            }
+        }
+
+        /**推力球 */
+        private parseForceBall(forceballObject) : void
+        {
+            if(forceballObject)
+            {                
+                    let forceballConfig : ForceBallConfig;           
+                        forceballObject.forEach(obj => {
+                        forceballConfig = new ForceBallConfig();
+                        forceballConfig.forceball_X = obj.x;
+                        forceballConfig.forceball_Y = obj.y;
+                        forceballConfig.rotation=obj.rotation;
+                        this.arr_Forceball.push(forceballConfig);
+                        });
+                console.log("forceball -解析");    
+            }
         }
     }
 
@@ -237,10 +275,30 @@ export module Config {
         public balloon_X : number;
         /**纵坐标 */
         public balloon_Y : number;
-        /**本关是否存在泡泡 */
-        public isExist:boolean;
+    }
+
+    /**锥子 balloon*/
+    export class KnifeConfig{
+        /**横坐标 */
+        public knife_X : number;
+        /**纵坐标 */
+        public knife_Y : number;
+        /**锥子类型 */
+        public style : string;
+        /**旋转角度 */
+        public rotation : number;
+
     }
 
 
+    /**推力球 balloon*/
+    export class ForceBallConfig{
+        /**横坐标 */
+        public forceball_X : number;
+        /**纵坐标 */
+        public forceball_Y : number;
+        /**旋转角度 */
+        public rotation : number;
+    }
 
 }

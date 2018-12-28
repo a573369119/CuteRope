@@ -205,10 +205,10 @@ export default class GamePage extends Laya.Scene{
                 this.showSocreMenu();
                 break;
             case 4:
-                // this.doorOpen.visible = false;//关闭动画层
+                 this.doorOpen.visible = false;//关闭动画层
                 break;
             //重新开始 或者 下一关。关闭计分板 打开箱子操作
-            case 4:
+            case 5:
                 // this.doorOpen.visible = false;//关闭动画层
                 break;
         }
@@ -266,6 +266,11 @@ export default class GamePage extends Laya.Scene{
     private onReplay() : void
     {
         console.log("重玩  效果开门重开");
+        this.removeEvents();
+        this.score = 0;
+        this.showSocre();
+        this.doorOpen.ani4.play(0,false);
+        this.UpdateData(this.quarterIndex + "-" + this.boxIndex,this.cardIndex,false);
         
     }
     /**事件 继续游戏 */
@@ -557,6 +562,7 @@ export default class GamePage extends Laya.Scene{
         Laya.timer.clear(this,this.showMenu);
         this.doorOpen.visible = true;
         this.doorOpen.ani3.play(0,false);
+        //比较之前在此关获得的星星，若比之前多则更新总分数
     }
 
      /**边界检测 */
@@ -568,6 +574,7 @@ export default class GamePage extends Laya.Scene{
             this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
             // Laya.timer.onc;
             Laya.timer.clear(this,this.candyTest);
+            this.onReGame();
         }
     } 
 ///////////////////////////////////////mouseCute

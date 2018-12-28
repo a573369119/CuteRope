@@ -29,7 +29,7 @@ import GameConfig from "../config/GameConfig";
         this.init(hookX,HookY,ropeLength);
     }
     createMultiRopePoint(hookX,hookY,ropeLength):void{
-        //第一个节点与最后一个节点的距离
+        //第一个节点与最后 一个节点的距离
         //创建多少个节点 30个像素一个间隔
         let disPer:number=ropeLength/GameConfig.ROPE_DIC;
         //每一个节点水平方向偏移量

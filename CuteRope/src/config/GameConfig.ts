@@ -10,7 +10,7 @@ export default class GameConfig{
     /**绳子线性阻力 */
     public static ROPE_POINT_LINEARDAMOING : number = 0.04;
     /**绳子密度 */
-    public static ROPE_POINT_DENSITY : number = 1000;
+    public static ROPE_POINT_DENSITY : number = 100;
     /**绳子自动靠近糖果速度 */
     public static ROPE_TO_CANDY_SPEED : number = 10;
     ///////////////////////////////糖果

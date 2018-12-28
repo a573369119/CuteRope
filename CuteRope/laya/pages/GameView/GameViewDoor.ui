@@ -2,6 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
+    "selecteID":7,
     "searchKey":"View",
     "props":{"width":750,"sceneColor":"#000000","height":1334},
     "nodeParent":-1,
@@ -99,118 +100,6 @@
         },
         {
             "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite",
-            "props":{"y":0,"x":-12,"width":763,"visible":false,"height":1314,"alpha":1},
-            "nodeParent":1,
-            "label":"Sprite",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":25,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,img_star1",
-                    "props":{"y":419,"x":144,"width":163,"var":"img_star1","skin":"gameView/gameDoor/getStar.png","height":163},
-                    "nodeParent":25,
-                    "label":"img_star1",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":24,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,img_star2",
-                    "props":{"y":421,"x":450,"width":163,"var":"img_star2","skin":"gameView/gameDoor/getStar.png","height":163},
-                    "nodeParent":25,
-                    "label":"img_star2",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":32,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,img_star3",
-                    "props":{"y":421,"x":299,"width":163,"var":"img_star3","skin":"gameView/gameDoor/getStar.png","height":163},
-                    "nodeParent":25,
-                    "label":"img_star3",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":33,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Label",
-                    "searchKey":"Label",
-                    "props":{"y":305,"x":191,"width":405,"text":"真棒","height":103,"fontSize":80,"font":"Microsoft YaHei","color":"#ffffff","bold":true,"align":"center"},
-                    "nodeParent":25,
-                    "label":"Label",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":34,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Button",
-                    "searchKey":"Button,btn_Replay",
-                    "props":{"y":710,"x":91,"width":295,"var":"btn_Replay","stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#1b1b1b","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"重玩","height":88},
-                    "nodeParent":25,
-                    "label":"btn_Replay",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":44,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Button",
-                    "searchKey":"Button,btn_ReturnRound",
-                    "props":{"y":841,"x":248,"width":295,"var":"btn_ReturnRound","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"菜单","height":88},
-                    "nodeParent":25,
-                    "label":"btn_ReturnRound",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":45,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Button",
-                    "searchKey":"Button,btn_Next",
-                    "props":{"y":710,"x":396,"width":295,"var":"btn_Next","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"下一关","height":88},
-                    "nodeParent":25,
-                    "label":"btn_Next",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":46,
-                    "child":[
-                        ]
-                }]
-        },
-        {
-            "x":15,
             "type":"Panel",
             "searchKey":"Panel",
             "props":{"y":97,"x":300,"width":145,"height":1121},
@@ -233,6 +122,111 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":4,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,ui",
+            "props":{"y":0,"x":-12,"width":763,"visible":true,"var":"ui","height":1314,"alpha":1},
+            "nodeParent":1,
+            "label":"ui",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":25,
+            "child":[
+                {
+                    "type":"Image",
+                    "searchKey":"Image,img_star1",
+                    "props":{"y":419,"x":144,"width":163,"var":"img_star1","skin":"gameView/gameDoor/getStar.png","height":163},
+                    "nodeParent":25,
+                    "label":"img_star1",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":24,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,img_star2",
+                    "props":{"y":421,"x":450,"width":163,"var":"img_star2","skin":"gameView/gameDoor/getStar.png","height":163},
+                    "nodeParent":25,
+                    "label":"img_star2",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":32,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,img_star3",
+                    "props":{"y":421,"x":299,"width":163,"var":"img_star3","skin":"gameView/gameDoor/getStar.png","height":163},
+                    "nodeParent":25,
+                    "label":"img_star3",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":33,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"y":305,"x":191,"width":405,"text":"真棒","height":103,"fontSize":80,"font":"Microsoft YaHei","color":"#ffffff","bold":true,"align":"center"},
+                    "nodeParent":25,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":34,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Button",
+                    "searchKey":"Button,btn_Replay",
+                    "props":{"y":710,"x":91,"width":295,"var":"btn_Replay","stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#1b1b1b","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"重玩","height":88},
+                    "nodeParent":25,
+                    "label":"btn_Replay",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":44,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Button",
+                    "searchKey":"Button,btn_ReturnRound",
+                    "props":{"y":841,"x":248,"width":295,"var":"btn_ReturnRound","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"菜单","height":88},
+                    "nodeParent":25,
+                    "label":"btn_ReturnRound",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":45,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Button",
+                    "searchKey":"Button,btn_Next",
+                    "props":{"y":710,"x":396,"width":295,"var":"btn_Next","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"下一关","height":88},
+                    "nodeParent":25,
+                    "label":"btn_Next",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":46,
                     "child":[
                         ]
                 }]
@@ -1404,8 +1398,9 @@
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":2,
+                                "label":null,
                                 "key":"y",
-                                "index":23
+                                "index":27
                             }],
                         "width":[
                             {
@@ -1421,8 +1416,17 @@
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":2,
+                                "label":null,
                                 "key":"width",
-                                "index":23
+                                "index":27
+                            },
+                            {
+                                "value":388,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"width",
+                                "index":29
                             }],
                         "height":[
                             {
@@ -1438,8 +1442,9 @@
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":2,
+                                "label":null,
                                 "key":"height",
-                                "index":23
+                                "index":27
                             }]
                     }
                 },
@@ -1460,8 +1465,9 @@
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
+                                "label":null,
                                 "key":"y",
-                                "index":23
+                                "index":27
                             }],
                         "width":[
                             {
@@ -1477,8 +1483,17 @@
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
+                                "label":null,
                                 "key":"width",
-                                "index":23
+                                "index":27
+                            },
+                            {
+                                "value":390,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"width",
+                                "index":29
                             }],
                         "visible":[
                             {
@@ -1494,8 +1509,9 @@
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
+                                "label":null,
                                 "key":"visible",
-                                "index":23
+                                "index":27
                             }],
                         "height":[
                             {
@@ -1511,8 +1527,9 @@
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
+                                "label":null,
                                 "key":"height",
-                                "index":23
+                                "index":27
                             }]
                     }
                 },
@@ -1592,15 +1609,16 @@
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":5,
+                                "label":null,
                                 "key":"visible",
-                                "index":23
+                                "index":27
                             }]
                     }
                 }],
             "name":"ani3",
             "id":3,
             "frameRate":24,
-            "action":0
+            "action":1
         },
         {
             "nodes":[

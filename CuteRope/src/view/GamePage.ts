@@ -202,6 +202,7 @@ export default class GamePage extends Laya.Scene{
                 this.closeDoor();
                 break
             case 3://吃到糖果显示计分板
+                this.showSocreMenu();
                 break;
             case 4:
                 // this.doorOpen.visible = false;//关闭动画层
@@ -265,7 +266,7 @@ export default class GamePage extends Laya.Scene{
     private onReplay() : void
     {
         console.log("重玩  效果开门重开");
-
+        
     }
     /**事件 继续游戏 */
     private onContinue() : void
@@ -280,7 +281,8 @@ export default class GamePage extends Laya.Scene{
         //选择关卡
         this.isMain = false;       
         this.doorOpen.visible = true;
-        this.doorOpen.ani2.play(0,false);
+        // this.doorOpen.ani2.gotoAndStop(25);
+        this.doorOpen.ani2.play(25,false);
         // GameManager.ins_.getMediator(GameData.SELECT_ROUND_MEDIATOR).runRound();
     }
 
@@ -328,12 +330,18 @@ export default class GamePage extends Laya.Scene{
         }
     }
 
-    /**吃到糖果显示计分板 */
+    /**吃到糖果显示计分面板 */
+    private showSocreMenu() : void
+    {
+
+    }
+
+    /**吃到星星数量 */
     private showSocre() : void
     {
         switch(this.score)
         {
-            case 0:this.scene.ani1.stop();this.scene.ani2.stop();this.scene.ani3.stop();break;
+            case 0:this.scene.ani1.gotoAndStop(0);this.scene.ani2.gotoAndStop(0);this.scene.ani3.gotoAndStop(0);break;
             case 1:this.scene.ani1.play(0,false);break;
             case 2:this.scene.ani2.play(0,false);break;
             case 3:this.scene.ani3.play(0,false);break;
@@ -350,14 +358,14 @@ export default class GamePage extends Laya.Scene{
         console.log(this.mapConfig);
         //怪物初始化
         this.monsterInit(this.mapConfig.monster);
-        //糖果数据初始化
-        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length);
         //钩子
         this.hookInit(this.mapConfig.arr_Hook);
         //绳子数据初始化
         this.ropeInit(this.mapConfig.arr_Rope,this.arr_Hook);
         //星星数据初始化
         this.starInit(this.mapConfig.arr_Star);
+        //糖果数据初始化
+        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length);
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
         //割绳检测
@@ -529,6 +537,7 @@ export default class GamePage extends Laya.Scene{
             Laya.timer.clear(this,this.candyTest);
             this.monster.monsterAction(GameConfig.ANI_MONSTER_EAT,true);
             this.candy.candyDestroy(this.monster.sp.x,this.monster.sp.y);
+            Laya.timer.once(1250,this,this.showMenu);
         }
         else if(dic<GameConfig.MONSTER_OPEN_MOUSE)
         {
@@ -536,12 +545,24 @@ export default class GamePage extends Laya.Scene{
             this.monster.monsterAction(GameConfig.ANI_MONSTER_OPEN,false);
             // this.monster.wantEat();
         }
+        else
+        {
+            this.monster.monsterAction(GameConfig.ANI_MONSTER_STAND,true);
+        }
+    }
+
+    /**显示菜单 */
+    private showMenu() : void
+    {
+        Laya.timer.clear(this,this.showMenu);
+        this.doorOpen.visible = true;
+        this.doorOpen.ani3.play(0,false);
     }
 
      /**边界检测 */
     private testStage(x,y) : void
     {
-        if(x<0||y<0||x>750||y>1334)
+        if(y<0||y>1334)
         {
             console.log("游戏失败");
             this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);

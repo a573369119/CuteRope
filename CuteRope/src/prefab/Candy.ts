@@ -49,16 +49,16 @@ export default class Candy{
         this.style=data.style;
         for(let i=0;i<this.count;i++)
         {
-            this.arr_Sp[i].visible = true;
             this.arr_Sp[i].scaleX = 1;
             this.arr_Sp[i].scaleY = 1;
             this.arr_Sp[i].pos(this.candy_X,this.candy_Y);
             this.arr_Sp[i].loadImage("gameView/"+data.style+".png");
         }
-        this.set("useg");
+        this.arr_Sp[0].visible = true;
         this.candy_AddBody();
         // this.candy_AddColider();
         this.candy_AddCom();
+        this.set("nog");
         
         console.log(this.arr_Sp);
     }
@@ -72,7 +72,8 @@ export default class Candy{
             this.arr_Sp[i].zOrder=1;
             this.arr_Sp[i].pivot(this.arr_Sp[i].width/2,this.arr_Sp[i].height/2);
             this.arr_Sp[i].pos(x,y);
-            //没有加上舞台
+            //没有加上舞台i
+            if(i!=0) this.arr_Sp[i].visible = false; 
             this.view.addChild(this.arr_Sp[i]);
         }
     }
@@ -88,6 +89,7 @@ export default class Candy{
             body.angularDamping = GameConfig.CANDY_ANGULARDAMPING;
             body.linearDamping = GameConfig.CANDY_LINEARDAMPING;
             this.arr_Sp[i].addComponentIntance(body);
+            this.arr_Body.push(body);
         }
     }
     //添加Joint组件,设置关节属性
@@ -208,6 +210,7 @@ export default class Candy{
         this.arr_Sp.forEach(sp => {
             let body = sp.getComponents(Laya.RigidBody);
             let joint = sp.getComponents(Laya.RevoluteJoint);
+            let jointW = sp.getComponents(Laya.WeldJoint);
             if(body && body[0])
             {
                 body[0].destroy();
@@ -215,6 +218,10 @@ export default class Candy{
             if(joint && joint[0])
             {
                 joint[0].destroy();
+            }
+            if(jointW && jointW[0])
+            {
+                jointW[0].destroy();
             }
         });
         this.arr_Body = [];

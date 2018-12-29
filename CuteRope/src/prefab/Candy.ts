@@ -17,7 +17,7 @@ export default class Candy{
     /**colider 数组 */
     public arr_Colider:Array<Laya.BoxCollider>;
     /**关节数组 */
-    /**假如的层 */
+    /**加入的层 */
     public view : Laya.Panel;
     public candy_JointArray:Array<Laya.RevoluteJoint>;
     

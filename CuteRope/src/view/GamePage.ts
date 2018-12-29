@@ -92,6 +92,7 @@ export default class GamePage extends Laya.Scene{
         this.alphaZ = 1;
         this.score = 0;
 
+        Laya.stage.mouseEnabled = false;
         this.doorOpen.ani1.play(0,false);
         this.menuUI.visible = false;
         //添加事件
@@ -193,33 +194,37 @@ export default class GamePage extends Laya.Scene{
     /**开门动画完成处理时间 */
     private doorAniEvent(index) : void
     {
+        Laya.stage.mouseEnabled = true;
         switch(index)
         {
             case 1://用刀划开盒子
                 this.afterCute();     
                 this.scene.ani1.visible = false; 
+                this.doorOpen.visible = false;//关闭动画层  
                 break;
             case 2://用胶带封住盒子
                 this.closeDoor();
                 this.scene.ani2.visible = false; 
-                
+                this.doorOpen.visible = false;//关闭动画层  
                 break;
             case 3://吃到糖果显示计分板
                 this.showSocreMenu();
                 this.scene.ani3.visible = false; 
-                
+                this.doorOpen.visible = false;//关闭动画层                  
                 break;
             case 4:
                 this.scene.ani4.visible = false; 
-            
+                this.doorOpen.visible = false;//关闭动画层                  
                 // this.doorOpen.visible = false;//关闭动画层
                 break;
             //重新开始 或者 下一关。关闭计分板 打开箱子操作
             case 5:
                 this.scene.ani5.visible = false; 
                 // this.doorOpen.visible = false;//关闭动画层
+                // this.doorOpen.visible = false;//关闭动画层                  
                 break;
         }
+   
     }
 
     /**事件 重玩 效果闪白光 ，重开*/
@@ -262,6 +267,7 @@ export default class GamePage extends Laya.Scene{
         this.score = 0;
         this.showSocre();
         this.UpdateData("0-0",++this.cardIndex,false);
+        Laya.stage.mouseEnabled = false;        
         this.doorOpen.ani4.play(0,false);
      }
 
@@ -269,7 +275,13 @@ export default class GamePage extends Laya.Scene{
     private onReplay() : void
     {
         console.log("重玩  效果开门重开");
-
+        this.removeEvents();
+        this.score = 0;
+        this.showSocre();
+        Laya.stage.mouseEnabled = false;        
+        this.doorOpen.ani4.play(0,false);
+        this.UpdateData(this.quarterIndex + "-" + this.boxIndex,this.cardIndex,false);
+        
     }
     /**事件 继续游戏 */
     private onContinue() : void
@@ -285,6 +297,7 @@ export default class GamePage extends Laya.Scene{
         this.isMain = false;       
         this.doorOpen.visible = true;
         // this.doorOpen.ani2.gotoAndStop(25);
+        Laya.stage.mouseEnabled = false;        
         this.doorOpen.ani2.play(25,false);
         // GameManager.ins_.getMediator(GameData.SELECT_ROUND_MEDIATOR).runRound();
     }
@@ -295,7 +308,9 @@ export default class GamePage extends Laya.Scene{
         //跳到主界面    
         this.isMain = true;        
         this.doorOpen.visible = true;        
-        this.doorOpen.ani2.play(0,false);       
+        this.doorOpen.ani2.play(0,false);   
+        Laya.stage.mouseEnabled = false;
+            
         // GameManager.ins_.getMediator(GameData.START_GAME_MEDIATOR).runRound();        
     }
 
@@ -315,7 +330,7 @@ export default class GamePage extends Laya.Scene{
     /**用刀划开盒子后 */
     private afterCute() : void
     {
-        this.doorOpen.visible = false;//关闭动画层                
+           
         Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.onMouseDown);		
 		Laya.stage.on(Laya.Event.MOUSE_UP,this,this.onMouseUp); 
     }
@@ -561,6 +576,9 @@ export default class GamePage extends Laya.Scene{
         Laya.timer.clear(this,this.showMenu);
         this.doorOpen.visible = true;
         this.doorOpen.ani3.play(0,false);
+        Laya.stage.mouseEnabled = false;
+        
+        //比较之前在此关获得的星星，若比之前多则更新总分数
     }
 
      /**边界检测 */
@@ -572,6 +590,7 @@ export default class GamePage extends Laya.Scene{
             this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
             // Laya.timer.onc;
             Laya.timer.clear(this,this.candyTest);
+            this.onReGame();
         }
     } 
 ///////////////////////////////////////mouseCute

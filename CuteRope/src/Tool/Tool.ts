@@ -31,9 +31,12 @@ export default class Tool{
     {
         if(Math.abs(object1.x - object2.x)< object1.width/2 + object2.width/2&&
            Math.abs(object1.y - object2.y) < object1.height/2 + object2.height/2){
+               console.log("true");
             return true;
         }
         else{
+            console.log("false");
+            
             return false;
         }                
     }

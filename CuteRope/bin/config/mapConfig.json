@@ -23,7 +23,10 @@
 					"length":[
 						200
 					]
-				}
+				},
+				"balloon":[
+                    
+                ]
             },
             {
                 "mapId":1,
@@ -49,9 +52,12 @@
 					"length":[
 						200,400,600
 					]
-				}
+				},
+				"balloon":[
+                    
+                ]
             },
-            {
+			{
                 "mapId":2,
                 "width":750,
                 "height":1334,
@@ -75,7 +81,66 @@
 					"length":[
 						300,200,320
 					]
-				}
+				},
+				"balloon":[
+                    
+                ]
+            },
+			{
+                "mapId":3,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_1.jpg"
+                ],
+                "candy":{"style":"candy","x":400,"y":500},
+                "star":[
+                    {"style":"star1","x":410,"y":600},
+                    {"style":"star1","x":100,"y":800},
+                    {"style":"star1","x":420,"y":1200}
+                ],
+                "monster":{"x":570,"y":1100,"skin":""},
+                "hook":[
+                    {"style":"hook1","x":400,"y":200},
+                    {"style":"hook1","x":100,"y":500},
+					{"style":"hook1","x":700,"y":500},                  
+                    {"style":"hook1","x":390,"y":800}      
+                ],
+				"rope":{
+					"length":[
+						250,240,240,250
+					]
+				},
+				"balloon":[
+                    
+                ]
+            },
+			{
+                "mapId":4,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_1.jpg"
+                ],
+                "candy":{"style":"candy","x":260,"y":650},
+                "star":[
+                    {"style":"star1","x":560,"y":300},
+                    {"style":"star1","x":560,"y":500},
+                    {"style":"star1","x":300,"y":800}
+                ],
+                "monster":{"x":550,"y":1100,"skin":""},
+                "hook":[
+                    {"style":"hook1","x":250,"y":300},
+                    {"style":"hook1","x":550,"y":600}
+                ],
+				"rope":{
+					"length":[
+						250,250
+					]
+				},
+				"balloon":[
+                    {"x":400,"y":950}
+                ]
             }
 
         ]

@@ -180,6 +180,7 @@ export default class Candy{
         let rigidBody;
         console.log(this.arr_Sp);
         this.arr_Sp.forEach(sp => {
+            console.log(sp);
             rigidBody = sp.getComponents(Laya.RigidBody)[0];
             rigidBody.destroy();
             rigidBody = sp.getComponents(Laya.RevoluteJoint)[0];
@@ -231,5 +232,6 @@ export default class Candy{
         });
         this.arr_Body = [];
         this.candy_JointArray = [];
+        this.arr_Sp = [];
     }
 }

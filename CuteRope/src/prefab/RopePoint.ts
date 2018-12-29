@@ -72,6 +72,7 @@ export default class RopePoint{
 		let joint : Laya.RevoluteJoint  = new Laya.RevoluteJoint();
 		joint.otherBody = lastRopePoint.sp.getComponent(Laya.RigidBody);
 		joint.anchor = [this.sp.width/2,this.sp.height/2];
+		joint.collideConnected = false;
 		this.sp.addComponentIntance(joint);
 	}
 		

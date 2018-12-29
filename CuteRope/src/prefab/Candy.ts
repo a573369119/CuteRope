@@ -39,6 +39,9 @@ export default class Candy{
         this.candy_AddBody();
         this.candy_AddCom();
         this.set("nog");
+        
+        console.log(this.arr_Sp);
+        console.log(this.arr_Body);
     }
     
     //更新状态
@@ -47,6 +50,7 @@ export default class Candy{
         this.candy_X=data.x;
         this.candy_Y=data.y;
         this.style=data.style;
+        this.candy_CreateSprite(data.x,data.y,data.style);
         for(let i=0;i<this.count;i++)
         {
             this.arr_Sp[i].scaleX = 1;
@@ -61,6 +65,7 @@ export default class Candy{
         this.set("nog");
         
         console.log(this.arr_Sp);
+        console.log(this.arr_Body);
     }
 
     //创建糖果精灵

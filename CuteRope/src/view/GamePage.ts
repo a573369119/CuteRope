@@ -196,19 +196,27 @@ export default class GamePage extends Laya.Scene{
         switch(index)
         {
             case 1://用刀划开盒子
-                this.afterCute();      
+                this.afterCute();     
+                this.scene.ani1.visible = false; 
                 break;
             case 2://用胶带封住盒子
                 this.closeDoor();
-                break
+                this.scene.ani2.visible = false; 
+                
+                break;
             case 3://吃到糖果显示计分板
                 this.showSocreMenu();
+                this.scene.ani3.visible = false; 
+                
                 break;
             case 4:
+                this.scene.ani4.visible = false; 
+            
                 // this.doorOpen.visible = false;//关闭动画层
                 break;
             //重新开始 或者 下一关。关闭计分板 打开箱子操作
-            case 4:
+            case 5:
+                this.scene.ani5.visible = false; 
                 // this.doorOpen.visible = false;//关闭动画层
                 break;
         }
@@ -250,23 +258,18 @@ export default class GamePage extends Laya.Scene{
     /**事件 吃到糖果->下一关*/
     private onNextRound() : void
     {        
+        this.removeEvents();
+        this.score = 0;
+        this.showSocre();
         this.UpdateData("0-0",++this.cardIndex,false);
-        // console.log("吃到糖果->下一关");
-        // this.doorOpen.ani4.play(0,false);      
-        // // AnimationManager.ins.stopAnimation(GameData.ANI_MONSTER_EAT);
-        // for(let i=0;i<this.mapConfig.arr_Points.length;i++){
-        //     this.mapConfig.arr_Points[i].point.visible=false;
-        // }       
-  
-        // this.round++;
-        // this.UpdateData("0-0",this.round,false);
+        this.doorOpen.ani4.play(0,false);
      }
 
     /**事件 吃到糖果->重玩  效果开门重开 */
     private onReplay() : void
     {
         console.log("重玩  效果开门重开");
-        
+
     }
     /**事件 继续游戏 */
     private onContinue() : void
@@ -292,7 +295,7 @@ export default class GamePage extends Laya.Scene{
         //跳到主界面    
         this.isMain = true;        
         this.doorOpen.visible = true;        
-        this.doorOpen.ani2.play(0,false);
+        this.doorOpen.ani2.play(0,false);       
         // GameManager.ins_.getMediator(GameData.START_GAME_MEDIATOR).runRound();        
     }
 
@@ -499,6 +502,7 @@ export default class GamePage extends Laya.Scene{
     {
         let x = this.candy.arr_Sp[0].x;
         let y = this.candy.arr_Sp[0].y;
+        // console.log(x + "," + y);
         //与怪物的距离检测
         this.testMonster(x,y);
         //与边界的距离检测
@@ -545,7 +549,7 @@ export default class GamePage extends Laya.Scene{
             this.monster.monsterAction(GameConfig.ANI_MONSTER_OPEN,false);
             // this.monster.wantEat();
         }
-        else
+        else if(dic < GameConfig.MONSTER_OPEN_MOUSE + 20)
         {
             this.monster.monsterAction(GameConfig.ANI_MONSTER_STAND,true);
         }

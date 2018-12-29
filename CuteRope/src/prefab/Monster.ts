@@ -28,6 +28,8 @@ export default class Monster{
     update(monsterConfig):void{
         this.x=monsterConfig.monster_X;
         this.y=monsterConfig.monster_Y;
+        this.sp.x = this.x;
+        this.sp.y = this.y;
         this.monsterAction(GameConfig.ANI_MONSTER_STAND,true);
     }
 
@@ -37,7 +39,6 @@ export default class Monster{
         this.sp.height = 85;
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
         this.sp.pos(x,y);
-        this.sp.graphics.drawCircle(x,y,20,"#f0f","#f0f");
         this.view.addChild(this.sp);
     }
 

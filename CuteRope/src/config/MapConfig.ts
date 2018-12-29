@@ -15,6 +15,7 @@ export module Config {
             let objectMapConfig ;
             for(let i =0;i<object.length; i++)
             {
+                console.log("获取得长度"+object.length);
                 if(object[i].mapWhere == mapWhere)
                 {
                     for(let h=0; h<object[i].mapList.length ;h++)
@@ -67,6 +68,7 @@ export module Config {
             this.arr_Rope = [];
             this.arr_Star = [];
             this.arr_MapSkin = [];
+            this.arr_Balloon = [];
             this.parseConfigData(data);
         }
 
@@ -161,17 +163,16 @@ export module Config {
         {
             if(balloonObject)
             {
-                if(balloonObject.isExist)
-                {
+                
                     let balloonConfig : BalloonConfig;           
                         balloonObject.forEach(obj => {
                         balloonConfig = new BalloonConfig();
                         balloonConfig.balloon_X = obj.x;
-                        balloonConfig.balloon_X = obj.y;
+                        balloonConfig.balloon_Y = obj.y;
                         this.arr_Balloon.push(balloonConfig);
                         });
                 console.log("balloon -解析");    
-                }
+                
             }
         }
 

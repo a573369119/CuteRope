@@ -18,6 +18,7 @@ export default class Balloon{
     init(data):void{
         this.balloon_X=data.balloon_X;
         this.balloon_Y=data.balloon_Y;
+        this.balloon_CreateSprite(data.balloon_X,data.balloon_Y);
     }
     
     //更新状态
@@ -31,7 +32,7 @@ export default class Balloon{
     }
 
     //创建泡泡精灵
-    balloon_CreateSprite(x,y,style){
+    balloon_CreateSprite(x,y){
         this.sp=new Laya.Sprite();
         this.sp.loadImage("gameView/balloon.png");
         this.sp.pos(x,y);
@@ -49,27 +50,31 @@ export default class Balloon{
     }
 
     //检测与糖果得距离，碰撞到则启动泡泡效果,在GamePage中开启此检测方法，obj1为糖果的sprite
-    balloon_Check(obj1):void{
-        if(Tool.collisionCheck(obj1,this.sp)){
+    balloon_Check(sp,arr_Body:Array<Laya.RigidBody>):void{
+        if(Tool.collisionCheck(sp,this.sp)){
             Laya.timer.clear(this,this.balloon_Check);
             this.sp.on(Laya.Event.MOUSE_DOWN,this,this.balloon_Pierce);
-            Laya.timer.frameLoop(1,this,this.balloon_UseFloat);
+            Laya.timer.frameLoop(1,this,this.balloon_UseFloat,[sp,arr_Body]);
             //播放泡泡漂浮动画
 
         }
     }
     //泡泡跟踪糖果的定位，并且设置泡泡的速度
-    balloon_UseFloat(obj1):void{
-        this.sp.x=obj1.x;
-        this.sp.y=obj1.y;
-        this.balloon_X=obj1.x;
-        this.balloon_Y=obj1.y;
-        obj1.body.setVelocity({x:0,y:-10});
+    balloon_UseFloat(sp,arr_Body:Array<Laya.RigidBody>):void{
+        this.sp.x=sp.x;
+        this.sp.y=sp.y;
+        this.balloon_X=sp.x;
+        this.balloon_Y=sp.y;
+        for(let i=0;i<arr_Body.length;i++){
+            arr_Body[i].setVelocity({x:0,y:-12});
+        }
+        
     }
 
     //戳破泡泡
     balloon_Pierce():void{
         Laya.timer.clear(this,this.balloon_UseFloat);
+        this.sp.off(Laya.Event.MOUSE_DOWN,this,this.balloon_Pierce);
         //播放泡泡破裂动画
 
     }

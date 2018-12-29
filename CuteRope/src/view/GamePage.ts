@@ -8,6 +8,7 @@ import Tail         from "../Tool/Tail";
 import GameConfig   from "../config/GameConfig"
 import Monster from "../prefab/Monster";
 import Star from "../prefab/Star";
+import Balloon from "../prefab/Balloon";
 
  /**
  * 游戏界面 ani  1：开门动画 2： 
@@ -50,6 +51,8 @@ export default class GamePage extends Laya.Scene{
     public monster : Monster;
     /**星星 */
     private arr_star : Array<Star>;
+    /**泡泡 */
+    public arr_Balloon:Array<Balloon>;
 //-------------------------------------------
     /**透明度转折变量 */
     private alphaZ : number = 0;
@@ -98,7 +101,7 @@ export default class GamePage extends Laya.Scene{
         this.addEvents();
         //第一次更新游戏
         this.UpdateData(this.quarterIndex+ "-" + this.boxIndex,this.cardIndex,true);
-        //Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.check);
+        
     }
 
     private initMouseTail() : void
@@ -109,11 +112,6 @@ export default class GamePage extends Laya.Scene{
         this.mouseTail.start();
     }
 
-    // check():void{
-    //     for(let i=0;i<this.mapConfig.arr_Hook.length;i++){
-    //         this.mapConfig.arr_Hook[i];
-    //     }
-    // }
    /**添加事件 */
    protected addEvents() : void
    {
@@ -223,6 +221,7 @@ export default class GamePage extends Laya.Scene{
         this.score = 0;
         this.showSocre();
         this.UpdateData(this.quarterIndex + "-" + this.boxIndex,this.cardIndex,false);
+        
     }
 
     /**白闪效果 */
@@ -371,6 +370,8 @@ export default class GamePage extends Laya.Scene{
         this.starInit(this.mapConfig.arr_Star);
         //糖果数据初始化
         this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length);
+        //泡泡数据初始化
+        this.balloonInit(this.mapConfig.arr_Balloon);
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
         //割绳检测
@@ -490,6 +491,27 @@ export default class GamePage extends Laya.Scene{
         
     }
 
+    /**泡泡数据初始化 */
+    private balloonInit(arr_Balloon) : void
+    {
+        if(this.arr_Balloon  === undefined)
+            this.arr_Balloon = new Array<Balloon>();
+        for(let i=0;i<arr_Balloon.length;i++)
+        {
+            if(this.arr_Balloon[i])
+            {
+                this.arr_Balloon[i].update({"balloon_X":arr_Balloon[i].balloon_X,"balloon_Y":arr_Balloon[i].balloon_Y});
+            }
+            else
+            {
+                this.arr_Balloon[i] = new Balloon(this.scene.panel_GameWorld);
+                this.arr_Balloon[i].init({"balloon_X":arr_Balloon[i].balloon_X,"balloon_Y":arr_Balloon[i].balloon_Y});                
+            }
+            Laya.timer.frameLoop(1,this.arr_Balloon[i],this.arr_Balloon[i].balloon_Check,[this.candy.arr_Sp[0],this.candy.arr_Body]);
+        }
+        console.log(this.arr_Balloon);
+        
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////////////游戏逻辑↓
 
 

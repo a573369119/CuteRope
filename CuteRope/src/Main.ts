@@ -29,6 +29,7 @@ class Main {
 	}
 
 	onConfigLoaded(): void {
+		Laya.URL.basePath = "http://gm.ykhuo.com/gameAesste/";
 		//加载IDE指定的场景
 		let src= [
 			{url:"res/atlas/loadingView.atlas"},
@@ -45,8 +46,8 @@ class Main {
 	
 	private onLoad() : void
 	{
-		GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
 		this.keepPlayerData();
+		GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
 	}
 
 	private keepPlayerData() : void

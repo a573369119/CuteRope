@@ -373,6 +373,8 @@ export default class GamePage extends Laya.Scene{
         // Laya.PhysicsDebugDraw.enable();
         this.mapConfig = Config.ConfigManger.ins.getMapConfig(mapWhere,mapId);
         console.log(this.mapConfig);
+        //背景初始化
+        this.setBackground(this.mapConfig.arr_MapSkin);
         //怪物初始化
         this.monsterInit(this.mapConfig.monster);
         //钩子
@@ -392,6 +394,14 @@ export default class GamePage extends Laya.Scene{
         //糖果检测 
         Laya.timer.loop(1,this,this.candyTest);
         
+    }
+    /*** */
+    private setBackground(arr_MapSkin) : void
+    {
+        if(arr_MapSkin.length == 1)
+        {
+            this.scene.img_gameBg.skin = arr_MapSkin[0];
+        }
     }
     /**ropeToCandy */
     private ropeToCandy() : void

@@ -21,6 +21,7 @@ export default class LoadingPage extends ui.LoadingUI{
             //大图加载
             {url:"unpackage/startGameBg.jpg"},
             {url:"unpackage/cutRope.png"},
+            {url:"GameView/gameBg/boxBg_1.jpg"}
         ];
         Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onPro));
     }

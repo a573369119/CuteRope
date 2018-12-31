@@ -1,7 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
+    "selectedBox":3,
+    "selecteID":2,
     "searchKey":"View,Door",
     "props":{"width":750,"var":"Door","sceneColor":"#000000","runtime":"./view/GamePage.ts","height":1334},
     "nodeParent":-1,
@@ -20,13 +21,14 @@
             "props":{"y":0,"x":0,"width":750,"var":"panel_GameWorld","height":1334},
             "nodeParent":1,
             "label":"panel_GameWorld",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":3,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,img_gameBg",
                     "props":{"y":0,"x":0,"width":750,"var":"img_gameBg","skin":"gameView/gameBg/boxBg_1.jpg","height":1337},

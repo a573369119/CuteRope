@@ -148,6 +148,9 @@ export default class GamePage extends Laya.Scene{
             rope.clearTimer();
         });
         this.candy.clearTimer();//取消糖果中的定时器
+        /*this.arr_Balloon.forEach(balloon=>{//取消泡泡中的定时器和事件
+            balloon.clearTimer();
+        });*/
    }
 
     /**鼠标点下 */
@@ -520,7 +523,6 @@ export default class GamePage extends Laya.Scene{
                 this.arr_Balloon[i] = new Balloon(this.scene.panel_GameWorld);
                 this.arr_Balloon[i].init({"balloon_X":arr_Balloon[i].balloon_X,"balloon_Y":arr_Balloon[i].balloon_Y});                
             }
-            Laya.timer.frameLoop(1,this.arr_Balloon[i],this.arr_Balloon[i].balloon_Check,[this.candy.arr_Sp[0],this.candy.arr_Body]);
         }
         console.log(this.arr_Balloon);
         
@@ -546,6 +548,8 @@ export default class GamePage extends Laya.Scene{
         this.testStage(x,y);
         //与星星的距离检测
         this.testStars(x,y);
+        //与泡泡的距离检测
+        this.testBalloon(x,y);
     }
     /** 与星星的距离检测*/
     private testStars(x,y) : void
@@ -592,6 +596,29 @@ export default class GamePage extends Laya.Scene{
         }
     }
 
+    /**与泡泡的距离检测 */
+    private testBalloon(x,y):void{
+        //检测与糖果得距离，碰撞到则启动泡泡效果,在GamePage中开启此检测方法，obj1为糖果的sprite
+        let dic;
+        this.arr_Balloon.forEach(balloon => {
+            if(!balloon.isCollision)
+            {
+                dic = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":balloon.sp.x,'y':balloon.sp.y});
+                if(dic < 80)
+                {
+                    balloon.isCollision=true;
+                    balloon.sp.alpha=0;
+                    balloon.anim1.visible=true;
+                    balloon.anim1.play(0,true);                    
+                    Laya.timer.frameLoop(1,balloon,balloon.balloon_Float,[this.candy.arr_Sp[0],this.candy.arr_Body]);                   
+                    balloon.sp.on(Laya.Event.MOUSE_DOWN,balloon,balloon.balloon_Boom,[this.candy.arr_Sp[0]]);
+                    
+                }
+            }
+        });
+        
+        
+    }
     /**显示菜单 */
     private showMenu() : void
     {

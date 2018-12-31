@@ -1,15 +1,14 @@
 {
-    "x":0,
     "type":"View",
     "selectedBox":2,
     "searchKey":"View",
     "props":{"sceneWidth":80,"sceneHeight":80,"sceneColor":"#000000"},
     "nodeParent":-1,
-    "maxID":3,
+    "maxID":11,
     "label":"View",
-    "isDirectory":false,
+    "isDirectory":true,
     "isAniNode":true,
-    "hasChild":false,
+    "hasChild":true,
     "compId":2,
     "child":[
         {

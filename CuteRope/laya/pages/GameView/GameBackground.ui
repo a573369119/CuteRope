@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":3,
-    "selecteID":2,
+    "selectedBox":1,
+    "selecteID":9,
     "searchKey":"View,Door",
     "props":{"width":750,"var":"Door","sceneColor":"#000000","runtime":"./view/GamePage.ts","height":1334},
     "nodeParent":-1,
-    "maxID":44,
+    "maxID":48,
     "label":"Door",
     "isOpen":true,
     "isDirectory":true,
@@ -74,7 +74,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image,img_star1",
-            "props":{"y":26,"x":240,"width":62,"var":"img_star1","skin":"gameView/gameBtn/star1.png","height":69},
+            "props":{"y":25,"x":238,"width":62,"var":"img_star1","skin":"gameView/gameBtn/star1.png","height":69},
             "nodeParent":1,
             "label":"img_star1",
             "isDirectory":false,
@@ -306,7 +306,7 @@
                             }],
                         "skin":[
                             {
-                                "value":"gameView/gameBtn/star11.png",
+                                "value":"gameView/gameBtn/star1.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":9,

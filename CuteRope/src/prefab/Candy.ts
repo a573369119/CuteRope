@@ -51,21 +51,14 @@ export default class Candy{
         this.candy_Y=data.y;
         this.style=data.style;
         this.candy_CreateSprite(data.x,data.y,data.style);
-        for(let i=0;i<this.count;i++)
-        {
-            this.arr_Sp[i].scaleX = 1;
-            this.arr_Sp[i].scaleY = 1;
-            this.arr_Sp[i].pos(this.candy_X,this.candy_Y);
-            this.arr_Sp[i].loadImage("gameView/"+data.style+".png");
-        }
         this.arr_Sp[0].visible = true;
         this.candy_AddBody();
         // this.candy_AddColider();
         this.candy_AddCom();
         this.set("nog");
         
-        console.log(this.arr_Sp);
-        console.log(this.arr_Body);
+        // console.log(this.arr_Sp);
+        // console.log(this.arr_Body);
     }
 
     //创建糖果精灵
@@ -75,10 +68,12 @@ export default class Candy{
             if(!this.arr_Sp[i]) this.arr_Sp[i]=new Laya.Sprite();//不存在 才新创建
             this.arr_Sp[i].loadImage("gameView/"+style+".png");
             this.arr_Sp[i].zOrder=1;
+            this.arr_Sp[i].scaleX = 1;
+            this.arr_Sp[i].scaleY = 1;
             this.arr_Sp[i].pivot(this.arr_Sp[i].width/2,this.arr_Sp[i].height/2);
             this.arr_Sp[i].pos(x,y);
             //没有加上舞台i
-            if(i!=0) this.arr_Sp[i].visible = false; 
+            // if(i!=0) this.arr_Sp[i].visible = false; 
             this.view.addChild(this.arr_Sp[i]);
         }
     }
@@ -180,7 +175,7 @@ export default class Candy{
         let rigidBody;
         console.log(this.arr_Sp);
         this.arr_Sp.forEach(sp => {
-            console.log(sp);
+            // console.log(sp);
             rigidBody = sp.getComponents(Laya.RigidBody)[0];
             rigidBody.destroy();
             rigidBody = sp.getComponents(Laya.RevoluteJoint)[0];
@@ -214,10 +209,11 @@ export default class Candy{
     {
         Laya.timer.clear(this,this.nearMonster);
         this.arr_Sp.forEach(sp => {
+            sp.removeSelf();
             let body = sp.getComponents(Laya.RigidBody);
             let joint = sp.getComponents(Laya.RevoluteJoint);
             let jointW = sp.getComponents(Laya.WeldJoint);
-            if(body && body[0])
+            if(body && body[0]) 
             {
                 body[0].destroy();
             }

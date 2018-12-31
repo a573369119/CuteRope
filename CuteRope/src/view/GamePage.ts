@@ -95,7 +95,7 @@ export default class GamePage extends Laya.Scene{
         this.alphaZ = 1;
         this.score = 0;
 
-        Laya.stage.mouseEnabled = false;
+        Laya.MouseManager.enabled = false;
         this.doorOpen.ani1.play(0,false);
         this.menuUI.visible = false;
         //添加事件
@@ -148,6 +148,9 @@ export default class GamePage extends Laya.Scene{
             rope.clearTimer();
         });
         this.candy.clearTimer();//取消糖果中的定时器
+        /*this.arr_Balloon.forEach(balloon=>{//取消泡泡中的定时器和事件
+            balloon.clearTimer();
+        });*/
    }
 
     /**鼠标点下 */
@@ -192,7 +195,7 @@ export default class GamePage extends Laya.Scene{
     /**开门动画完成处理时间 */
     private doorAniEvent(index) : void
     {
-        Laya.stage.mouseEnabled = true;
+        Laya.MouseManager.enabled = true;
         switch(index)
         {
             case 1://用刀划开盒子
@@ -266,7 +269,7 @@ export default class GamePage extends Laya.Scene{
         this.score = 0;
         this.showSocre();
         this.UpdateData("0-0",++this.cardIndex,false);
-        Laya.stage.mouseEnabled = false;        
+        Laya.MouseManager.enabled = false;        
         this.doorOpen.ani4.play(0,false);
      }
 
@@ -277,7 +280,7 @@ export default class GamePage extends Laya.Scene{
         this.removeEvents();
         this.score = 0;
         this.showSocre();
-        Laya.stage.mouseEnabled = false;        
+        Laya.MouseManager.enabled = false;              
         this.doorOpen.ani4.play(0,false);
         this.UpdateData(this.quarterIndex + "-" + this.boxIndex,this.cardIndex,false);
         
@@ -296,7 +299,7 @@ export default class GamePage extends Laya.Scene{
         this.isMain = false;       
         this.doorOpen.visible = true;
         // this.doorOpen.ani2.gotoAndStop(25);
-        Laya.stage.mouseEnabled = false;        
+        Laya.MouseManager.enabled = false;        
         this.doorOpen.ani2.play(25,false);
         // GameManager.ins_.getMediator(GameData.SELECT_ROUND_MEDIATOR).runRound();
     }
@@ -308,7 +311,7 @@ export default class GamePage extends Laya.Scene{
         this.isMain = true;        
         this.doorOpen.visible = true;        
         this.doorOpen.ani2.play(0,false);   
-        Laya.stage.mouseEnabled = false;
+        Laya.MouseManager.enabled = false;
             
         // GameManager.ins_.getMediator(GameData.START_GAME_MEDIATOR).runRound();        
     }
@@ -530,7 +533,6 @@ export default class GamePage extends Laya.Scene{
                 this.arr_Balloon[i] = new Balloon(this.scene.panel_GameWorld);
                 this.arr_Balloon[i].init({"balloon_X":arr_Balloon[i].balloon_X,"balloon_Y":arr_Balloon[i].balloon_Y});                
             }
-            Laya.timer.frameLoop(1,this.arr_Balloon[i],this.arr_Balloon[i].balloon_Check,[this.candy.arr_Sp[0],this.candy.arr_Body]);
         }
         console.log(this.arr_Balloon);
         
@@ -556,6 +558,8 @@ export default class GamePage extends Laya.Scene{
         this.testStage(x,y);
         //与星星的距离检测
         this.testStars(x,y);
+        //与泡泡的距离检测
+        this.testBalloon(x,y);
     }
     /** 与星星的距离检测*/
     private testStars(x,y) : void
@@ -584,7 +588,7 @@ export default class GamePage extends Laya.Scene{
         let dic = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":this.monster.x,'y':this.monster.y});
         if(dic<GameConfig.MONSTER_EAT_DIC)
         {
-            console.log("吃糖果");
+            // console.log("吃糖果");
             Laya.timer.clear(this,this.candyTest);
             this.monster.monsterAction(GameConfig.ANI_MONSTER_EAT,true);
             this.candy.candyDestroy(this.monster.sp.x,this.monster.sp.y);
@@ -592,7 +596,7 @@ export default class GamePage extends Laya.Scene{
         }
         else if(dic<GameConfig.MONSTER_OPEN_MOUSE)
         {
-            console.log("张大嘴");
+            // console.log("张大嘴");
             this.monster.monsterAction(GameConfig.ANI_MONSTER_OPEN,false);
             // this.monster.wantEat();
         }
@@ -602,13 +606,36 @@ export default class GamePage extends Laya.Scene{
         }
     }
 
+    /**与泡泡的距离检测 */
+    private testBalloon(x,y):void{
+        //检测与糖果得距离，碰撞到则启动泡泡效果,在GamePage中开启此检测方法，obj1为糖果的sprite
+        let dic;
+        this.arr_Balloon.forEach(balloon => {
+            if(!balloon.isCollision)
+            {
+                dic = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":balloon.sp.x,'y':balloon.sp.y});
+                if(dic < 80)
+                {
+                    balloon.isCollision=true;
+                    balloon.sp.alpha=0;
+                    balloon.anim1.visible=true;
+                    balloon.anim1.play(0,true);                    
+                    Laya.timer.frameLoop(1,balloon,balloon.balloon_Float,[this.candy.arr_Sp[0],this.candy.arr_Body]);                   
+                    balloon.sp.on(Laya.Event.MOUSE_DOWN,balloon,balloon.balloon_Boom,[this.candy.arr_Sp[0]]);
+                    
+                }
+            }
+        });
+        
+        
+    }
     /**显示菜单 */
     private showMenu() : void
     {
         Laya.timer.clear(this,this.showMenu);
         this.doorOpen.visible = true;
         this.doorOpen.ani3.play(0,false);
-        Laya.stage.mouseEnabled = false;
+        Laya.MouseManager.enabled = false;
         
         //比较之前在此关获得的星星，若比之前多则更新总分数
     }

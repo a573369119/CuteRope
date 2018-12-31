@@ -33,9 +33,9 @@ export default class LoadingPage extends ui.LoadingUI{
         Laya.Scene.open("StartGame.scene");
     }
 
-    private onPro(pro) : void
+    private onPro(pro,e) : void
     {
-        console.log(pro);
+        console.log(pro+","+e);
         this.lab_Progress.text = "Loading …… " + Math.floor(pro) + "%";
         this.img_Progress.width = 499 * pro; 
     }

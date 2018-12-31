@@ -55,8 +55,8 @@ import GameConfig from "../config/GameConfig";
             }
             this.ropePointsArray.push(ropePoint);
         }
-        console.log(this.jointsArray);
-        console.log(this.ropePointsArray);
+        // console.log(this.jointsArray);
+        // console.log(this.ropePointsArray);
     }
 
     rotateRopePoint():void{

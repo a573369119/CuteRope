@@ -1,13 +1,14 @@
 import Tool from "../Tool/Tool";
 export default class Balloon{
-    /**横坐标 */
-	public balloon_X:number;
-	/**纵坐标 */
-    public balloon_Y:number;
     /**泡泡精灵 */
     public sp:Laya.Sprite;
     /**泡泡底图 */
     public spBg:Laya.Sprite;
+    /**动画*/
+    public anim1:Laya.Animation;
+    public anim2 : Laya.Animation;
+    /***是否碰撞 */
+    public isCollision : boolean;
     /**加入的层 */
     public view : Laya.Panel;
     constructor(view){
@@ -16,15 +17,15 @@ export default class Balloon{
 
     //初始化泡泡
     init(data):void{
-        this.balloon_X=data.balloon_X;
-        this.balloon_Y=data.balloon_Y;
+        this.isCollision=false;
         this.balloon_CreateSprite(data.balloon_X,data.balloon_Y);
+        this.balloon_FloatAnim();
+        this.balloon_BoomAnim();
     }
     
     //更新状态
     update(data):void{
-        this.balloon_X=data.balloon_X;
-        this.balloon_Y=data.balloon_Y;
+        this.isCollision=false;
         let randNum=Math.ceil(Math.random()*3);
         this.spBg.loadImage("gameView/balloonBg"+randNum+".png");
         this.spBg.pos(data.balloon_X,data.balloon_Y);
@@ -49,33 +50,59 @@ export default class Balloon{
         this.view.addChild(this.spBg);
     }
 
-    //检测与糖果得距离，碰撞到则启动泡泡效果,在GamePage中开启此检测方法，obj1为糖果的sprite
-    balloon_Check(sp,arr_Body:Array<Laya.RigidBody>):void{
-        if(Tool.collisionCheck(sp,this.sp)){
-            Laya.timer.clear(this,this.balloon_Check);
-            this.sp.on(Laya.Event.MOUSE_DOWN,this,this.balloon_Pierce);
-            Laya.timer.frameLoop(1,this,this.balloon_UseFloat,[sp,arr_Body]);
-            //播放泡泡漂浮动画
-
-        }
+    //创建漂浮动画
+    public balloon_FloatAnim():void{
+        this.anim1=new Laya.Animation();
+        this.anim1.loadAnimation("GameView/ani/Balloon.ani");
+        this.anim1.visible = false;
+        this.anim1.zOrder=2;
+        this.view.addChild(this.anim1);
     }
-    //泡泡跟踪糖果的定位，并且设置泡泡的速度
-    balloon_UseFloat(sp,arr_Body:Array<Laya.RigidBody>):void{
-        this.sp.x=sp.x;
-        this.sp.y=sp.y;
-        this.balloon_X=sp.x;
-        this.balloon_Y=sp.y;
+    //创建爆炸动画
+    public balloon_BoomAnim():void{
+        this.anim2 = new Laya.Animation();
+        this.anim2.loadAnimation("GameView/ani/BalloonBoom.ani");
+        this.anim2.visible = false;
+        this.anim2.zOrder=2;
+        this.view.addChild(this.anim2);
+    }
+
+    
+    //漂浮功能
+    balloon_Float(candySp:Laya.Sprite,arr_Body:Array<Laya.RigidBody>):void{
+        //追踪糖果位置
+        this.sp.pos(candySp.x,candySp.y);
+        this.anim1.pos(candySp.x,candySp.y);
+        this.anim1.x -= this.sp.width/2;
+        this.anim1.y -= this.sp.height/2;        
+        console.log(this.anim1.x);
+        //设置速度
         for(let i=0;i<arr_Body.length;i++){
             arr_Body[i].setVelocity({x:0,y:-12});
         }
+        //检测是否有其他糖果相撞
+
         
     }
 
-    //戳破泡泡
-    balloon_Pierce():void{
-        Laya.timer.clear(this,this.balloon_UseFloat);
-        this.sp.off(Laya.Event.MOUSE_DOWN,this,this.balloon_Pierce);
-        //播放泡泡破裂动画
-
+    //为泡泡添加点击事件，点击到则泡泡爆炸
+    balloon_Boom(candySp:Laya.Sprite):void{
+        Laya.timer.clear(this,this.balloon_Float);
+        this.sp.off(Laya.Event.MOUSE_DOWN,this,this.balloon_Boom);
+        //播放戳破动画
+        this.anim1.stop();
+        this.anim1.visible=false;
+        this.anim2.visible = true;
+        this.anim2.pos(candySp.x,candySp.y);
+        this.anim2.x -= this.sp.width/2;
+        this.anim2.y -= this.sp.height/2;
+        this.anim2.play(0,false);
+        this.anim2.on(Laya.Event.COMPLETE,this,this.completeBoom);
     }
+
+    //爆炸完成后设置为不可见
+    completeBoom():void{
+        this.anim2.visible=false;
+    }
+    
 }

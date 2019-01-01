@@ -9,6 +9,8 @@ import GameConfig   from "../config/GameConfig"
 import Monster from "../prefab/Monster";
 import Star from "../prefab/Star";
 import Balloon from "../prefab/Balloon";
+import MagicHat from "../prefab/MagicHat";
+import RopePoint from "../prefab/RopePoint";
 
  /**
  * 游戏界面 ani  1：开门动画 2： 
@@ -53,6 +55,8 @@ export default class GamePage extends Laya.Scene{
     private arr_star : Array<Star>;
     /**泡泡 */
     public arr_Balloon:Array<Balloon>;
+    /**帽子 */
+    public arr_MagicHat : Array<MagicHat>;
 //-------------------------------------------
     /**透明度转折变量 */
     private alphaZ : number = 0;
@@ -103,6 +107,7 @@ export default class GamePage extends Laya.Scene{
         //第一次更新游戏
         this.UpdateData(this.quarterIndex+ "-" + this.boxIndex,this.cardIndex,true);
         
+        Laya.PhysicsDebugDraw.enable();
     }
 
     private initMouseTail() : void
@@ -151,6 +156,18 @@ export default class GamePage extends Laya.Scene{
         /*this.arr_Balloon.forEach(balloon=>{//取消泡泡中的定时器和事件
             balloon.clearTimer();
         });*/
+        if(this.arr_MagicHat)//取消帽子定时球
+        {
+            this.arr_MagicHat.forEach(hat => {
+                hat.destroy();
+            })
+        }
+        if(this.arr_Hook)
+        {
+            this.arr_Hook.forEach(hook => {
+                hook.hookDestroy();
+            })
+        }
    }
 
     /**鼠标点下 */
@@ -390,6 +407,8 @@ export default class GamePage extends Laya.Scene{
         this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length);
         //泡泡数据初始化
         this.balloonInit(this.mapConfig.arr_Balloon);
+        //帽子数据初始化
+        this.hatInit(this.mapConfig.arr_magicHat); 
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
         //割绳检测
@@ -429,6 +448,32 @@ export default class GamePage extends Laya.Scene{
             for(let i=0;i<this.arr_Rope.length;i++)
             {
                 this.arr_Rope[i].connectCandy(this.candy,i);
+            }
+        }
+    }
+
+    /**帽子初始化 */
+    private hatInit(hatConfig) : void
+    {
+        let hat : MagicHat;
+        let color = "";
+        if(!hatConfig[0]) return;
+        if(!this.arr_MagicHat) this.arr_MagicHat = new Array<MagicHat>();
+        for(let i=0; i<hatConfig.length; i++)
+        {   
+            if(i<2)
+                color = "red";
+            else
+                color = "green";
+
+            if(!this.arr_MagicHat[i])
+            {
+                hat = new MagicHat(hatConfig[i].x,hatConfig[i].y,hatConfig[i].rotation,this.scene.panel_GameWorld,color);
+                this.arr_MagicHat.push(hat);
+            }
+            else
+            {
+                this.arr_MagicHat[i].update(hatConfig[i].x,hatConfig[i].y,hatConfig[i].rotation);
             }
         }
     }
@@ -520,6 +565,7 @@ export default class GamePage extends Laya.Scene{
     /**泡泡数据初始化 */
     private balloonInit(arr_Balloon) : void
     {
+        if(!arr_Balloon[0]) return;
         if(this.arr_Balloon  === undefined)
             this.arr_Balloon = new Array<Balloon>();
         for(let i=0;i<arr_Balloon.length;i++)
@@ -560,7 +606,35 @@ export default class GamePage extends Laya.Scene{
         this.testStars(x,y);
         //与泡泡的距离检测
         this.testBalloon(x,y);
+        //与帽子的距离检测
+        this.testHat(x,y);
+        //与hook道具的检测
+        this.testHook(x,y);
     }
+
+    /** 与hook道具的检测*/
+    private testHook(x,y) : void//Hook2
+    {
+        let dic;
+        let rope : Rope;
+        for(let i = 0; i< this.arr_Hook.length ; i++)
+        {
+            if(this.arr_Hook[i].style == "hook1") continue;
+            if(this.arr_Hook[i].isCreate == true) continue;
+            //hook逻辑
+            dic = this.countDic_Object({"x":x,"y":y},{"x":this.arr_Hook[i].sp.x,'y':this.arr_Hook[i].sp.y});
+            if(dic < 150)
+            {//创建绳子
+                rope = new Rope(this.scene.panel_GameWorld);
+                rope.initRopeHook2(this.arr_Hook[i].sp.x,this.arr_Hook[i].sp.y,x,y);
+                this.arr_Hook[i].isCreate = true;
+                this.arr_Rope.push(rope);
+                rope.connectCandy(this.candy,i);
+            }
+        }
+        
+    }
+
     /** 与星星的距离检测*/
     private testStars(x,y) : void
     {
@@ -610,6 +684,7 @@ export default class GamePage extends Laya.Scene{
     private testBalloon(x,y):void{
         //检测与糖果得距离，碰撞到则启动泡泡效果,在GamePage中开启此检测方法，obj1为糖果的sprite
         let dic;
+        if(!this.arr_Balloon) return;
         this.arr_Balloon.forEach(balloon => {
             if(!balloon.isCollision)
             {
@@ -627,6 +702,22 @@ export default class GamePage extends Laya.Scene{
             }
         });
         
+        
+    }
+    /**与魔法帽的检测 **/
+    private testHat(x,y) : void
+    {
+        if(!this.arr_MagicHat) return;        
+        let dic;
+        for(let i=0;i<this.arr_MagicHat.length;i++)
+        {
+            dic = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":this.arr_MagicHat[i].sp.x,'y':this.arr_MagicHat[i].sp.y});
+            if(dic < 50)
+            {
+                //使小球换位置出现的方法
+
+            }
+        }
         
     }
     /**显示菜单 */
@@ -671,7 +762,7 @@ export default class GamePage extends Laya.Scene{
                         let s:any ={};
                         s.x = mX;
                         s.y = mY;
-                        if(this.countDic_Object(f,s) < 20)
+                        if(this.countDic_Object(f,s) < 20 && i < Rope.ropePointsArray.length )//优化绳子切割
                         {
                             if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
                             {

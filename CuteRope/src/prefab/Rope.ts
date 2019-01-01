@@ -1,6 +1,8 @@
     import RopePoint from "./RopePoint";
 import Candy from "./Candy";
 import GameConfig from "../config/GameConfig";
+import Tool from "../Tool/Tool";
+import Dic from "../Tool/dic";
     
     export default class Rope{
     /**绳子节点数组 */
@@ -13,6 +15,7 @@ import GameConfig from "../config/GameConfig";
     public view : Laya.Panel;
     /**是否已断 */
     public isCuted : boolean ;
+
     constructor(view){
         this.isCuted = false;
         this.view = view;
@@ -22,7 +25,42 @@ import GameConfig from "../config/GameConfig";
 
     //创建一根绳子，根据位置和长度创建
     init(hookX,HookY,ropeLength):void{
+
         this.createMultiRopePoint(hookX,HookY,ropeLength);
+    }
+    //自动连接绳子
+    initRopeHook2(hookX,hookY,candyX,candyY) : void
+    {
+        this.createRopeHook2(hookX,hookY,candyX,candyY);
+    }
+
+    private createRopeHook2(hookX,hookY,candyX,candyY) : void
+    {
+        let dic = Dic.countDic_Object({"x":hookX,"y":hookY},{"x":candyX,"y":candyY});
+        let count = Math.floor(dic / GameConfig.ROPE_DIC);
+        let x_Add = GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,candyX,candyY,"cos"); 
+        let y_Add = GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,candyX,candyY,"sin"); 
+        for(let i=0;i<count+1;i++){
+            let ropePoint : RopePoint ;
+            if(i==0){
+                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
+                // this.rotateRopePoint_2(ropePoint);
+                ropePoint.addView(this.view);
+            }
+            else
+            {
+                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic");
+                ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
+                // this.rotateRopePoint_2(ropePoint);
+                ropePoint.addView(this.view);
+            }
+            if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
+            {
+                this.jointsArray.push(ropePoint.sp.getComponent(Laya.RevoluteJoint));
+            }
+            this.ropePointsArray.push(ropePoint);
+        }
+        // this.rotateRopePoint();
     }
 
     update(hookX,HookY,ropeLength):void{
@@ -33,11 +71,11 @@ import GameConfig from "../config/GameConfig";
         //创建多少个节点 30个像素一个间隔
         let disPer:number=ropeLength/GameConfig.ROPE_DIC;
         //每一个节点水平方向偏移量
-        let x_Add=30*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"cos");
+        let x_Add=GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"cos");
         //每一个节点竖直方向偏移量
-        let y_Add=30*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"sin");
+        let y_Add=GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"sin");
         // if(disPer >= 60) {console.log("距离不够");}        
-        for(let i=0;i<disPer;i++){
+        for(let i=0;i<disPer+1;i++){
             let ropePoint : RopePoint ;
             if(i==0){
                 ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic");
@@ -45,7 +83,7 @@ import GameConfig from "../config/GameConfig";
             }
             else
             {
-                ropePoint =new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"dynamic");
+                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic");
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
                 ropePoint.addView(this.view);
             }
@@ -79,6 +117,23 @@ import GameConfig from "../config/GameConfig";
         
     }
 
+    private rotateRopePoint_2(x,y,X,Y):number
+    {
+            let cos=this.rotationDeal(x,y,X,Y,"cos");
+            let sin=this.rotationDeal(x,y,X,Y,"sin");
+            let rotation;
+            if(cos>=0&&sin>0){
+                rotation= 180/Math.PI*Math.acos(cos)-90;
+            }else if(cos<0&&sin>=0){
+                rotation=180/Math.PI*Math.acos(cos)-90;
+            }else if(cos<=0&&sin<0){
+                rotation=90-180/Math.PI*Math.acos(cos);               
+            }else if(cos>0&&sin<=0){
+                rotation= 90-180/Math.PI*Math.acos(cos);
+            }
+            return rotation;
+    }
+
     /**连接糖果 */
     public connectCandy(candy : Candy,index:number) : void
     {
@@ -86,6 +141,11 @@ import GameConfig from "../config/GameConfig";
         let joint = new Laya.RevoluteJoint();
         joint.otherBody = ropePoint.sp.getComponent(Laya.RigidBody);
         joint.selfBody = candy.getCandyBody(index);
+        if(!joint.selfBody)
+        {
+            candy.createBody();
+            joint.selfBody = candy.getCandyBody(index);
+        }
         joint.anchor = [candy.getCandySprite(index).width/2,candy.getCandySprite(index).height/2];
         candy.getCandySprite(index).addComponentIntance(joint);
     }
@@ -150,6 +210,9 @@ import GameConfig from "../config/GameConfig";
         });
         if(this.ropePointsArray[0].sp.alpha <= 0)
         {
+            this.ropePointsArray.forEach(RopePoint => {
+                RopePoint.sp.getComponents(Laya.RigidBody)[0].destroy();//对断掉的绳子进行优化
+            });
             Laya.timer.clear(this,this.pointDestroy);
         }
     }
@@ -174,6 +237,7 @@ import GameConfig from "../config/GameConfig";
         this.ropePointsArray = [];
         this.jointsArray = [];
         this.isCuted = false;
+
     }
 }
 

@@ -1,3 +1,5 @@
+import MagicHat from "../prefab/MagicHat";
+
 /**
  * 地图配置 ， 纯数据
  */
@@ -63,12 +65,16 @@ export module Config {
         public arr_Knife : Array<KnifeConfig>;
         /**推力球 forceball*/
         public arr_Forceball : Array<ForceBallConfig>;
+        /**魔术帽 */
+        public arr_magicHat : Array<MagicHatConfig>;
+
         constructor(data){
             this.arr_Hook = [];
             this.arr_Rope = [];
             this.arr_Star = [];
             this.arr_MapSkin = [];
             this.arr_Balloon = [];
+            this.arr_magicHat = [];
             this.parseConfigData(data);
         }
 
@@ -95,6 +101,8 @@ export module Config {
             this.parseRope(data.rope);
             /**泡泡解析 */
             this.parseBalloon(data.balloon);
+            /**解析帽子 */
+            this.parseMagicHat(data.magicHat);
         }
 
 
@@ -210,6 +218,21 @@ export module Config {
                 console.log("forceball -解析");    
             }
         }
+        /**魔术帽 */
+        private parseMagicHat(MagicHatObject) : void
+        {
+            if(MagicHatObject)
+            {
+                let magicHatConfig : MagicHatConfig;
+                MagicHatObject.forEach(hat => {
+                    magicHatConfig = new MagicHatConfig();
+                    magicHatConfig.x = hat.x;
+                    magicHatConfig.y = hat.y;
+                    magicHatConfig.rotation = hat.rotation;
+                    this.arr_magicHat.push(magicHatConfig);
+                });
+            }
+        }
     }
 
     /**candy */
@@ -300,6 +323,17 @@ export module Config {
         public forceball_Y : number;
         /**旋转角度 */
         public rotation : number;
+    }
+
+    /** */
+    export class MagicHatConfig{
+        /**横坐标 */
+        public x : number;
+        /**纵坐标 */
+        public y : number;
+        /**角度 */
+        public rotation : number;
+        
     }
 
 }

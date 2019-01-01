@@ -153,6 +153,42 @@ export default class Candy{
         return this.arr_Body[index];
     }
 
+    /**临时创建结合体 */
+    public createBody() : void
+    {
+        let sp = new Laya.Sprite();
+        sp.x = this.arr_Sp[0].x;
+        sp.y = this.arr_Sp[0].y;
+        sp.width = this.arr_Sp[0].width;
+        sp.height = this.arr_Sp[0].height;
+        sp.pivot(sp.width/2,sp.height/2);
+        this.arr_Sp.push(sp);
+        this.view.addChild(sp);
+        //
+        let body=new Laya.RigidBody();
+        body.type="dynamic";
+        body.allowRotation = true;
+        body.angularDamping = GameConfig.CANDY_ANGULARDAMPING;
+        body.linearDamping = GameConfig.CANDY_LINEARDAMPING;
+        sp.addComponentIntance(body);
+        this.arr_Body.push(body);
+        //
+        let colider = new Laya.BoxCollider();
+        colider.width = this.arr_Sp[this.arr_Sp.length-1].width;
+        colider.height = this.arr_Sp[this.arr_Sp.length-1].height;
+        colider.isSensor=true;
+        colider.density = GameConfig.CANDY_DENSITY;
+        this.arr_Colider.push(colider);
+        this.arr_Sp[this.arr_Sp.length-1].addComponentIntance(colider);
+        //
+        let weldJoint = new Laya.WeldJoint();
+        weldJoint.otherBody = this.arr_Body[this.arr_Body.length-2];
+        weldJoint.selfBody = this.arr_Body[this.arr_Body.length-1];
+        weldJoint.anchor = [this.arr_Sp[this.arr_Sp.length-1].width/2,this.arr_Sp[this.arr_Sp.length-1].height/2];
+        weldJoint.collideConnected = false;
+        this.arr_Sp[this.arr_Sp.length-1].addComponentIntance(weldJoint);
+    }
+
     /**string= nog 表示无重力   string= useg 表示有重力*/
     public set(string) : void
     {

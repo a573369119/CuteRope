@@ -4,7 +4,7 @@
 export default class GameConfig{
     /////////////////////////////////绳子
     /**绳子生成像素间隔 */
-    public static ROPE_DIC : number = 20;
+    public static ROPE_DIC : number = 30;
     /**绳子节点转动阻力 */
     public static ROPE_POINT_ANGULARDAMPING : number = 80;
     /**绳子线性阻力 */
@@ -12,7 +12,7 @@ export default class GameConfig{
     /**绳子密度 */
     public static ROPE_POINT_DENSITY : number = 50;
     /**绳子自动靠近糖果速度 */
-    public static ROPE_TO_CANDY_SPEED : number = 10;
+    public static ROPE_TO_CANDY_SPEED : number = 12;
     ///////////////////////////////糖果
     /**糖果转动阻力 */
     public static CANDY_ANGULARDAMPING : number = 8;

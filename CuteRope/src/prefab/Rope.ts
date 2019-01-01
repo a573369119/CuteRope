@@ -199,6 +199,9 @@ import Dic from "../Tool/dic";
     public ropeCuted() : void
     {
         this.isCuted = true;
+        this.ropePointsArray.forEach(point => {
+            point.sp.getComponents(Laya.BoxCollider)[0].density = 0.0001;
+        });
         Laya.timer.loop(16,this,this.pointDestroy)
     }
 

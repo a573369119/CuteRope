@@ -9,7 +9,7 @@ import GameConfig   from "../config/GameConfig"
 import Monster from "../prefab/Monster";
 import Star from "../prefab/Star";
 import Balloon from "../prefab/Balloon";
-
+import Knife from "../prefab/Knife";
  /**
  * 游戏界面 ani  1：开门动画 2： 
  */
@@ -53,6 +53,8 @@ export default class GamePage extends Laya.Scene{
     private arr_star : Array<Star>;
     /**泡泡 */
     public arr_Balloon:Array<Balloon>;
+    /**锥子 */
+    public arr_Knife:Array<Knife>;
 //-------------------------------------------
     /**透明度转折变量 */
     private alphaZ : number = 0;
@@ -148,9 +150,9 @@ export default class GamePage extends Laya.Scene{
             rope.clearTimer();
         });
         this.candy.clearTimer();//取消糖果中的定时器
-        /*this.arr_Balloon.forEach(balloon=>{//取消泡泡中的定时器和事件
+        this.arr_Balloon.forEach(balloon=>{
             balloon.clearTimer();
-        });*/
+        });
    }
 
     /**鼠标点下 */
@@ -390,6 +392,8 @@ export default class GamePage extends Laya.Scene{
         this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length);
         //泡泡数据初始化
         this.balloonInit(this.mapConfig.arr_Balloon);
+        //锥子数据初始化
+        this.knifeInit(this.mapConfig.arr_Knife);
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
         //割绳检测
@@ -520,7 +524,8 @@ export default class GamePage extends Laya.Scene{
     /**泡泡数据初始化 */
     private balloonInit(arr_Balloon) : void
     {
-        if(this.arr_Balloon  === undefined)
+        
+        if(this.arr_Balloon  == undefined)
             this.arr_Balloon = new Array<Balloon>();
         for(let i=0;i<arr_Balloon.length;i++)
         {
@@ -537,6 +542,28 @@ export default class GamePage extends Laya.Scene{
         console.log(this.arr_Balloon);
         
     }
+
+     /**锥子数据初始化 */
+     private knifeInit(arr_Knife) : void
+     {
+         
+         if(this.arr_Knife ==undefined)
+             this.arr_Knife = new Array<Knife>();
+         for(let i=0;i<arr_Knife.length;i++)
+         {
+             if(this.arr_Knife[i])
+             {
+                 this.arr_Knife[i].update({"knife_X":arr_Knife[i].knife_X,"knife_Y":arr_Knife[i].knife_Y,"style":arr_Knife[i].style,"rotation":arr_Knife[i].rotation,"isAlwaysRotate":arr_Knife[i].isAlwaysRotate});
+             }
+             else
+             {
+                 this.arr_Knife[i] = new Knife(this.scene.panel_GameWorld);
+                 this.arr_Knife[i].init({"knife_X":arr_Knife[i].knife_X,"knife_Y":arr_Knife[i].knife_Y,"style":arr_Knife[i].style,"rotation":arr_Knife[i].rotation,"isAlwaysRotate":arr_Knife[i].isAlwaysRotate});
+             }
+         }
+         console.log(this.arr_Knife);
+         
+     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////游戏逻辑↓
 
 
@@ -560,6 +587,8 @@ export default class GamePage extends Laya.Scene{
         this.testStars(x,y);
         //与泡泡的距离检测
         this.testBalloon(x,y);
+        //与锥子的距离检测
+        this.testKnife(x,y);
     }
     /** 与星星的距离检测*/
     private testStars(x,y) : void
@@ -608,6 +637,7 @@ export default class GamePage extends Laya.Scene{
 
     /**与泡泡的距离检测 */
     private testBalloon(x,y):void{
+        if(!this.arr_Balloon) return;
         //检测与糖果得距离，碰撞到则启动泡泡效果,在GamePage中开启此检测方法，obj1为糖果的sprite
         let dic;
         this.arr_Balloon.forEach(balloon => {
@@ -617,18 +647,46 @@ export default class GamePage extends Laya.Scene{
                 if(dic < 80)
                 {
                     balloon.isCollision=true;
-                    balloon.sp.alpha=0;
-                    balloon.anim1.visible=true;
-                    balloon.anim1.play(0,true);                    
-                    Laya.timer.frameLoop(1,balloon,balloon.balloon_Float,[this.candy.arr_Sp[0],this.candy.arr_Body]);                   
-                    balloon.sp.on(Laya.Event.MOUSE_DOWN,balloon,balloon.balloon_Boom,[this.candy.arr_Sp[0]]);
+                    //检测是否有其他泡泡与糖果相撞
+                    if(this.candy.isExistBalloon){
+                        balloon.balloon_Boom();
+                    }else{
+                        this.candy.isExistBalloon=true;
+                        balloon.sp.alpha=0;
+                        balloon.anim1.visible=true;
+                        balloon.anim1.play(0,true);                  
+                        Laya.timer.frameLoop(1,balloon,balloon.balloon_Float,[this.candy.arr_Sp[0],this.candy.arr_Body]);                   
+                        balloon.sp.on(Laya.Event.MOUSE_DOWN,balloon,balloon.balloon_ClickBoom,[this.candy.arr_Sp[0]]);                    
+                    }        
+                    
+                    
                     
                 }
             }
         });
         
-        
     }
+
+    /**与锥子的距离检测 */
+    private testKnife(x,y){
+        if(!this.arr_Knife) return;
+        //检测与锥子得距离，碰撞到则播放哭泣动画结束游戏,在GamePage中开启此检测方法
+        let collide;
+        this.arr_Knife.forEach(knife => {
+            if(!knife.isCollision)
+            {
+                
+                collide=knife.sp.hitTestPoint(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+                if(collide)
+                {
+                    knife.isCollision=true;
+                    //糖果破碎
+                    
+            }
+        }
+        });
+    }
+    
     /**显示菜单 */
     private showMenu() : void
     {

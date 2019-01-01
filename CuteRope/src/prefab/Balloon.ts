@@ -19,8 +19,8 @@ export default class Balloon{
     init(data):void{
         this.isCollision=false;
         this.balloon_CreateSprite(data.balloon_X,data.balloon_Y);
-        this.balloon_FloatAnim();
-        this.balloon_BoomAnim();
+        this.balloon_FloatAnim(data.balloon_X,data.balloon_Y);
+        this.balloon_BoomAnim(data.balloon_X,data.balloon_Y);
     }
     
     //更新状态
@@ -30,6 +30,18 @@ export default class Balloon{
         this.spBg.loadImage("gameView/balloonBg"+randNum+".png");
         this.spBg.pos(data.balloon_X,data.balloon_Y);
         this.sp.pos(data.balloon_X,data.balloon_Y);
+        this.sp.alpha=1;
+        this.sp.visible=true;
+        this.anim1.visible=false;
+        this.anim1.stop();
+        this.anim1.pos(data.balloon_X,data.balloon_Y);
+        this.anim1.x -= this.sp.width/2;
+        this.anim1.y -= this.sp.height/2; 
+        this.anim2.visible=false;
+        this.anim2.stop();
+        this.anim2.pos(data.balloon_X,data.balloon_Y);
+        this.anim2.x -= this.sp.width/2;
+        this.anim2.y -= this.sp.height/2; 
     }
 
     //创建泡泡精灵
@@ -51,17 +63,23 @@ export default class Balloon{
     }
 
     //创建漂浮动画
-    public balloon_FloatAnim():void{
+    public balloon_FloatAnim(x,y):void{
         this.anim1=new Laya.Animation();
         this.anim1.loadAnimation("GameView/ani/Balloon.ani");
+        this.anim1.pos(x,y);
+        this.anim1.x -= this.sp.width/2;
+        this.anim1.y -= this.sp.height/2; 
         this.anim1.visible = false;
         this.anim1.zOrder=2;
         this.view.addChild(this.anim1);
     }
     //创建爆炸动画
-    public balloon_BoomAnim():void{
+    public balloon_BoomAnim(x,y):void{
         this.anim2 = new Laya.Animation();
         this.anim2.loadAnimation("GameView/ani/BalloonBoom.ani");
+        this.anim2.pos(x,y);
+        this.anim2.x -= this.sp.width/2;
+        this.anim2.y -= this.sp.height/2; 
         this.anim2.visible = false;
         this.anim2.zOrder=2;
         this.view.addChild(this.anim2);
@@ -78,15 +96,14 @@ export default class Balloon{
         console.log(this.anim1.x);
         //设置速度
         for(let i=0;i<arr_Body.length;i++){
-            arr_Body[i].setVelocity({x:0,y:-12});
+            arr_Body[i].setVelocity({x:0,y:-10});
         }
-        //检测是否有其他糖果相撞
-
+        
         
     }
 
     //为泡泡添加点击事件，点击到则泡泡爆炸
-    balloon_Boom(candySp:Laya.Sprite):void{
+    balloon_ClickBoom(candySp:Laya.Sprite,isExistBalloon:boolean):void{
         Laya.timer.clear(this,this.balloon_Float);
         this.sp.off(Laya.Event.MOUSE_DOWN,this,this.balloon_Boom);
         //播放戳破动画
@@ -98,11 +115,26 @@ export default class Balloon{
         this.anim2.y -= this.sp.height/2;
         this.anim2.play(0,false);
         this.anim2.on(Laya.Event.COMPLETE,this,this.completeBoom);
+        isExistBalloon=false;
     }
 
+    //直接爆炸
+    balloon_Boom():void{
+        this.anim2.play(0,false);
+        this.anim2.on(Laya.Event.COMPLETE,this,this.completeBoom);
+    }
     //爆炸完成后设置为不可见
     completeBoom():void{
         this.anim2.visible=false;
+        this.sp.visible=false;
     }
     
+    public removeEvent():void{
+        this.sp.off(Laya.Event.MOUSE_DOWN,this,this.balloon_ClickBoom);
+        this.anim2.off(Laya.Event.COMPLETE,this,this.completeBoom);
+    }
+    public clearTimer():void{
+        Laya.timer.clearAll(this);
+        this.removeEvent();
+    }
 }

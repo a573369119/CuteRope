@@ -69,6 +69,7 @@ export module Config {
             this.arr_Star = [];
             this.arr_MapSkin = [];
             this.arr_Balloon = [];
+            this.arr_Knife=[];
             this.parseConfigData(data);
         }
 
@@ -95,6 +96,8 @@ export module Config {
             this.parseRope(data.rope);
             /**泡泡解析 */
             this.parseBalloon(data.balloon);
+            /**锥子解析 */
+            this.parseKnife(data.knife);
         }
 
 
@@ -185,9 +188,10 @@ export module Config {
                         knifeObject.forEach(obj => {
                         knifeConfig = new KnifeConfig();
                         knifeConfig.knife_X = obj.x;
-                        knifeConfig.knife_Y = obj.y;
-                        knifeConfig.rotation=obj.rotation;
+                        knifeConfig.knife_Y = obj.y;                        
                         knifeConfig.style=obj.style;
+                        knifeConfig.rotation=obj.rotation;
+                        knifeConfig.isAlwaysRotate=obj.isAlwaysRotate;
                         this.arr_Knife.push(knifeConfig);
                         });
                 console.log("knife -解析");    
@@ -288,7 +292,8 @@ export module Config {
         public style : string;
         /**旋转角度 */
         public rotation : number;
-
+        /**是否一直旋转 */
+        public isAlwaysRotate:boolean;
     }
 
 

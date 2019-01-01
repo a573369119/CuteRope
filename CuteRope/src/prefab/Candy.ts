@@ -20,7 +20,8 @@ export default class Candy{
     /**加入的层 */
     public view : Laya.Panel;
     public candy_JointArray:Array<Laya.RevoluteJoint>;
-    
+    /**是否存在泡泡 */
+    public isExistBalloon:boolean;
     constructor(view){
         this.view = view;
         this.candy_JointArray=new Array<Laya.RevoluteJoint>();
@@ -31,6 +32,7 @@ export default class Candy{
 
     //初始化,糖果仅有图片的更换  count绳子数量
     init(data,count):void{
+        this.isExistBalloon=false;
         this.count = count;
         this.candy_X=data.x;
         this.candy_Y=data.y;
@@ -46,6 +48,7 @@ export default class Candy{
     
     //更新状态
     update(data,count):void{
+        this.isExistBalloon=false;
         this.count = count;
         this.candy_X=data.x;
         this.candy_Y=data.y;

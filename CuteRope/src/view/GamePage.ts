@@ -410,7 +410,7 @@ export default class GamePage extends Laya.Scene{
         //星星数据初始化
         this.starInit(this.mapConfig.arr_Star);
         //糖果数据初始化
-        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length);
+        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length,this.mapConfig.arr_Knife);
         //泡泡数据初始化
         this.balloonInit(this.mapConfig.arr_Balloon);
         //帽子数据初始化
@@ -522,16 +522,24 @@ export default class GamePage extends Laya.Scene{
     }
     
     /**糖果数据初始化 */
-    private candyInit(candyConfig,num) : void
+    private candyInit(candyConfig,num,arr_Knife) : void
     {
         if(!this.candy) 
         {
             this.candy = new Candy(this.scene.panel_GameWorld);
             this.candy.init({"x":candyConfig.candy_X,"y":candyConfig.candy_Y,"style":candyConfig.style},num);
+            /**-------是否初始化糖果碎片----- */
+            if(arr_Knife[0]){
+                this.candy.createCandyApart();
+            }
         }
         else
         {
             this.candy.update({"x":candyConfig.candy_X,"y":candyConfig.candy_Y,"style":candyConfig.style},num);
+            /**-------是否初始化糖果碎片----- */
+            if(arr_Knife[0]){
+                this.candy.createCandyApart();
+            }
         }
     }
     
@@ -777,7 +785,7 @@ export default class GamePage extends Laya.Scene{
                 {
                     knife.isCollision=true;
                     //糖果破碎
-                    
+                    this.candy.becomeApart(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
             }
         }
         });

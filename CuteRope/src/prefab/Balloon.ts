@@ -96,7 +96,7 @@ export default class Balloon{
         console.log(this.anim1.x);
         //设置速度
         for(let i=0;i<arr_Body.length;i++){
-            arr_Body[i].setVelocity({x:0,y:-10});
+            arr_Body[i].setVelocity({x:0,y:-4});
         }
         
         

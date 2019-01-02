@@ -109,6 +109,11 @@ P C8B62FFD balloonDestroy6.png
 P B5E60CEF balloonDestroy7.png
 P 4ACC7C85 balloonDestroy8.png
 P 1BAFC71D balloonDestroy9.png
+P 2024DCAC becomeApart1.png
+P 64640449 becomeApart2.png
+P 67245DB6 becomeApart3.png
+P FB838CAA becomeApart4.png
+P 51CAA984 becomeApart5.png
 P FC6DA3A7 candy.png
 P 32D8A1FB eat1.png
 P 2B2DFC48 eat2.png
@@ -274,7 +279,7 @@ D loadingView
 P AB50B856 loading1.png
 P E6D87ED2 loading2.png
 D perfeb
-R 6D2E3553 Sprite.prefab
+R 2B0E910A Sprite.prefab
 D publicAssets
 P EB460D49 0.png
 P E0B7948B 1.png

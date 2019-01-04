@@ -125,6 +125,7 @@ export default class Candy{
             this.arr_Colider[i].height = this.arr_Sp[i].height;
             this.arr_Colider[i].isSensor=true;
             this.arr_Colider[i].density = GameConfig.CANDY_DENSITY;
+            // this.arr_Colider[i].density = 1000000;
             this.arr_Sp[i].addComponentIntance(this.arr_Colider[i]);
         }
     }

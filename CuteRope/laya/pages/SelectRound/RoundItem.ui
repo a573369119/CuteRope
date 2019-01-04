@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":4,
+    "selectedBox":5,
+    "selecteID":9,
     "searchKey":"View",
     "props":{"width":140,"sceneColor":"#888888","height":140,"cacheAs":"bitmap"},
     "nodeParent":-1,
@@ -35,16 +35,17 @@
             "props":{"y":95,"x":43,"width":90,"var":"img_Star","skin":"selectRound/star0.png","hitTestPrior":true,"height":50},
             "nodeParent":1,
             "label":"img_Star",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":5,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,img_Count1",
-                    "props":{"y":-56,"x":12,"width":17,"visible":false,"var":"img_Count1","skin":"publicAssets/1.png","height":49},
+                    "props":{"y":-56,"x":12,"width":13,"visible":false,"var":"img_Count1","skin":"publicAssets/1.png","height":49},
                     "nodeParent":5,
                     "label":"img_Count1",
                     "isDirectory":false,
@@ -55,9 +56,10 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,img_Count2",
-                    "props":{"y":-56,"x":34,"width":17,"var":"img_Count2","skin":"publicAssets/1.png","height":49},
+                    "props":{"y":-56,"x":38,"width":13,"var":"img_Count2","skin":"publicAssets/1.png","height":49},
                     "nodeParent":5,
                     "label":"img_Count2",
                     "isDirectory":false,

@@ -1,3 +1,3 @@
-2019/01/04-12:30:42.521 4f54 Reusing MANIFEST leveldb/MANIFEST-000001
-2019/01/04-12:30:42.526 4f54 Recovering log #390
-2019/01/04-12:30:42.624 4f54 Reusing old log leveldb/000390.log 
+2019/01/04-22:22:43.781 4db0 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/01/04-22:22:43.788 4db0 Recovering log #423
+2019/01/04-22:22:43.791 4db0 Reusing old log leveldb/000423.log 

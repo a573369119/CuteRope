@@ -1,5 +1,6 @@
 import GameConfig from "../config/GameConfig";
 import Dic from "../Tool/dic";
+import Balloon from "../prefab/Balloon";
 
 export default class Candy{
     /**横坐标 */
@@ -17,9 +18,13 @@ export default class Candy{
     /**colider 数组 */
     public arr_Colider:Array<Laya.BoxCollider>;
     /**关节数组 */
-    /**加入的层 */
-    public view : Laya.Panel;
     public candy_JointArray:Array<Laya.RevoluteJoint>;
+    /**糖果碎片数组 */
+    public arr_ApartSp:Array<Laya.Sprite>;
+    /**糖果刚体数组 */
+    public arr_ApartBody:Array<Laya.RigidBody>;
+    /**加入的层 */
+    public view : Laya.Panel;   
     /**是否存在泡泡 */
     public isExistBalloon:boolean;
     constructor(view){
@@ -28,6 +33,9 @@ export default class Candy{
         this.arr_Body = new Array<Laya.RigidBody>();
         this.arr_Colider = new Array<Laya.BoxCollider>();
         this.arr_Sp = new Array<Laya.Sprite>();
+        /**---------------糖果碎片------------------ */
+        this.arr_ApartSp=new Array<Laya.Sprite>();
+        this.arr_ApartBody=new Array<Laya.RigidBody>();
     }
 
     //初始化,糖果仅有图片的更换  count绳子数量
@@ -42,8 +50,6 @@ export default class Candy{
         this.candy_AddCom();
         this.set("nog");
         
-        console.log(this.arr_Sp);
-        console.log(this.arr_Body);
     }
     
     //更新状态
@@ -76,7 +82,7 @@ export default class Candy{
             this.arr_Sp[i].pivot(this.arr_Sp[i].width/2,this.arr_Sp[i].height/2);
             this.arr_Sp[i].pos(x,y);
             //没有加上舞台i
-            // if(i!=0) this.arr_Sp[i].visible = false; 
+            if(i!=0) this.arr_Sp[i].visible = false; 
             this.view.addChild(this.arr_Sp[i]);
         }
     }
@@ -148,13 +154,16 @@ export default class Candy{
     /**得到糖果结合体 sprite*/
     public getCandySprite(index) : Laya.Sprite
     {
-        return this.arr_Sp[index];
+        let sp = this.arr_Sp[index] ;
+        return sp;
     }
 
     /**得到糖果结合体 body*/
     public getCandyBody(index) : Laya.RigidBody
     {
-        return this.arr_Body[index];
+        let body = this.arr_Body[index] ;
+        return body;
+
     }
 
     /**临时创建结合体 */
@@ -165,6 +174,7 @@ export default class Candy{
         sp.y = this.arr_Sp[0].y;
         sp.width = this.arr_Sp[0].width;
         sp.height = this.arr_Sp[0].height;
+        sp.visible = false;
         sp.pivot(sp.width/2,sp.height/2);
         this.arr_Sp.push(sp);
         this.view.addChild(sp);
@@ -199,11 +209,11 @@ export default class Candy{
         this.arr_Body.forEach(body=>{
 			if(string == "nog")
 			{
-				body.gravityScale = 0;
+                body.gravityScale = 0;
 			}
 			if(string == "useg")
 			{
-				body.gravityScale = 1;
+                body.gravityScale = 1;              
 			}
         });
         ////
@@ -269,5 +279,58 @@ export default class Candy{
         this.arr_Body = [];
         this.candy_JointArray = [];
         this.arr_Sp = [];
+        /**----------------糖果碎片--------- */
+        if(this.arr_ApartSp!=[]){
+            this.arr_ApartSp.forEach(apartsp=>{
+                apartsp.removeSelf();
+                let body = apartsp.getComponents(Laya.RigidBody);
+                if(body && body[0]) 
+                {
+                    body[0].destroy();
+                }
+            });
+            this.arr_ApartSp=[];
+            this.arr_ApartBody=[];
+        }
+        
+    }
+
+    //初始化糖果碎片
+    createCandyApart():void{
+        for(let i=0;i<5;i++){
+            //精灵
+            let sprite=new Laya.Sprite();
+                sprite.loadImage("gameView/becomeApart"+(i+1)+".png");
+                sprite.pivot(sprite.width/2,sprite.height/2);
+                sprite.visible=false;
+                sprite.zOrder=1;
+                this.view.addChild(sprite);
+                this.arr_ApartSp.push(sprite);
+            //刚体
+            let body=new Laya.RigidBody();
+                body.type="static";
+                sprite.addComponentIntance(body);
+                this.arr_ApartBody.push(body);
+        }
+    }
+    
+    //糖果变成碎片
+    public becomeApart(x,y):void{
+        for(let i=0;i<5;i++){
+            this.arr_ApartSp[i].pos(x,y);
+            this.arr_ApartSp[i].visible=true;
+            this.arr_ApartBody[i].type="dynamic";
+            let currX;
+            if(Math.random()<0.5){
+                currX=Math.random()*(-3);
+            }
+            else{
+                currX=Math.random()*5;
+            }
+            this.arr_ApartBody[i].setVelocity({x:currX,y:-Math.random()*3-2});
+            this.arr_Sp.forEach(sprite => {//隐藏糖果
+                sprite.visible = false;
+            });
+        }
     }
 }

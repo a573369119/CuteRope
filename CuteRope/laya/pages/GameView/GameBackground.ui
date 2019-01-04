@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":50,
+    "selecteID":51,
     "searchKey":"View,Door",
     "props":{"width":750,"var":"Door","sceneColor":"#000000","runtime":"./view/GamePage.ts","height":1334},
     "nodeParent":-1,
-    "maxID":51,
+    "maxID":52,
     "label":"Door",
     "isOpen":true,
     "isDirectory":true,
@@ -21,14 +21,13 @@
             "props":{"y":0,"x":0,"width":750,"var":"panel_GameWorld","height":1334},
             "nodeParent":1,
             "label":"panel_GameWorld",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":3,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,img_gameBg",
                     "props":{"y":0,"x":0,"width":750,"var":"img_gameBg","skin":"gameView/gameBg/boxBg_1.jpg","height":1337},
@@ -128,6 +127,20 @@
             "child":[
                 ],
             "$HIDDEN":true
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite",
+            "props":{"y":1140,"x":338.5,"texture":"publicAssets/aniu1.png"},
+            "nodeParent":1,
+            "label":"Sprite",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":51,
+            "child":[
+                ]
         }],
     "animations":[
         {

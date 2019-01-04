@@ -140,12 +140,16 @@ import Dic from "../Tool/dic";
         let ropePoint : RopePoint = this.ropePointsArray[this.ropePointsArray.length-1];
         let joint = new Laya.RevoluteJoint();
         joint.otherBody = ropePoint.sp.getComponent(Laya.RigidBody);
-        joint.selfBody = candy.getCandyBody(index);
-        if(!joint.selfBody)
+        if(index == -1)
         {
             candy.createBody();
-            joint.selfBody = candy.getCandyBody(index);
+            index = candy.arr_Sp.length - 1;
         }
+        joint.selfBody = candy.getCandyBody(index);
+        // if(!joint.selfBody)
+        // {
+        //     joint.selfBody = candy.getCandyBody(index);
+        // }
         joint.anchor = [candy.getCandySprite(index).width/2,candy.getCandySprite(index).height/2];
         candy.getCandySprite(index).addComponentIntance(joint);
     }

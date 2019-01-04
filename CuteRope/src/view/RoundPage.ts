@@ -185,9 +185,8 @@ export default class RoundPage extends Laya.Scene{
         if(index + 1 >= 10)
         {
             this.arr_Card[index].img_Count1.visible = true
-
             this.arr_Card[index].img_Count1.skin = "publicAssets/" + Math.floor((index + 1)/10) + ".png";
-            this.arr_Card[index].img_Count1.skin = "publicAssets/" + (index + 1)%10 + ".png";       
+            this.arr_Card[index].img_Count2.skin = "publicAssets/" + (index + 1)%10 + ".png";       
          }
          else
          {

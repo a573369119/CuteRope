@@ -29,7 +29,7 @@ class Main {
 	}
 
 	onConfigLoaded(): void {
-		Laya.URL.basePath = "https://testcdn.chinaxwz.cn/game/gsz/CuteRope/";
+		// Laya.URL.basePath = "https://testcdn.chinaxwz.cn/game/gsz/CuteRope/";
 		//加载IDE指定的场景
 		let src= [
 			{url:"res/atlas/loadingView.atlas"},

@@ -28,6 +28,9 @@ import Tool from "../Tool/Tool";
         this.sp.loadImage("gameView/"+data.style+".png");
         this.sp.pos(data.knife_X,data.knife_Y);
         this.sp.rotation=data.rotation;
+        if(data.isAlwaysRotate){
+            Laya.timer.frameLoop(1,this,this.knife_RotateBySelf);
+        }
     }
 
     //创建锥子精灵
@@ -43,5 +46,9 @@ import Tool from "../Tool/Tool";
     //锥子一直自转
     knife_RotateBySelf():void{
         this.sp.rotation+=1;
+    }
+
+    public clearTimer():void{
+        Laya.timer.clearAll(this);
     }
 }

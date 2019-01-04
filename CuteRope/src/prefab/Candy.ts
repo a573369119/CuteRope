@@ -1,5 +1,6 @@
 import GameConfig from "../config/GameConfig";
 import Dic from "../Tool/dic";
+import Balloon from "../prefab/Balloon";
 
 export default class Candy{
     /**横坐标 */

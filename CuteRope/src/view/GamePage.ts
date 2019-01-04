@@ -162,6 +162,12 @@ export default class GamePage extends Laya.Scene{
                 balloon.clearTimer();
             });
         }
+        if(this.arr_Knife)//取消锥子定时器
+        {
+            this.arr_Knife.forEach(knife=>{
+                knife.clearTimer();
+            });
+        }
         if(this.arr_MagicHat)//取消帽子定时球
         {
             this.arr_MagicHat.forEach(hat => {
@@ -652,6 +658,7 @@ export default class GamePage extends Laya.Scene{
         this.testHook(x,y);
         //与锥子的距离检测
         this.testKnife(x,y);
+        console.log(this.candy.isExistBalloon);
     }
 
     /** 与hook道具的检测*/
@@ -705,9 +712,17 @@ export default class GamePage extends Laya.Scene{
         if(dic<GameConfig.MONSTER_EAT_DIC)
         {
             // console.log("吃糖果");
+            if(this.arr_Balloon){
+                for(let i=0;i<this.arr_Balloon.length;i++){
+                    if(this.candy.isExistBalloon){
+                        this.arr_Balloon[i].balloon_ClickBoom(this.candy);
+                    }
+                }
+            }            
             Laya.timer.clear(this,this.candyTest);
             this.monster.monsterAction(GameConfig.ANI_MONSTER_EAT,true);
             this.candy.candyDestroy(this.monster.sp.x,this.monster.sp.y);
+            
             Laya.timer.once(1250,this,this.showMenu);
         }
         else if(dic<GameConfig.MONSTER_OPEN_MOUSE)
@@ -744,7 +759,7 @@ export default class GamePage extends Laya.Scene{
                         balloon.anim1.visible=true;
                         balloon.anim1.play(0,true);                  
                         Laya.timer.frameLoop(1,balloon,balloon.balloon_Float,[this.candy.arr_Sp[0],this.candy.arr_Body]);                   
-                        balloon.sp.on(Laya.Event.MOUSE_DOWN,balloon,balloon.balloon_ClickBoom,[this.candy.arr_Sp[0]]);                    
+                        balloon.sp.on(Laya.Event.MOUSE_DOWN,balloon,balloon.balloon_ClickBoom,[this.candy]);                    
                     }        
                     
                     
@@ -786,6 +801,8 @@ export default class GamePage extends Laya.Scene{
                     knife.isCollision=true;
                     //糖果破碎
                     this.candy.becomeApart(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+                    this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
+                    Laya.timer.once(1250,this,this.onReGame);
             }
         }
         });

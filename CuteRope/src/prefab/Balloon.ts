@@ -1,4 +1,5 @@
 import Tool from "../Tool/Tool";
+import Candy from "../prefab/Candy";
 export default class Balloon{
     /**泡泡精灵 */
     public sp:Laya.Sprite;
@@ -49,16 +50,14 @@ export default class Balloon{
         this.sp=new Laya.Sprite();
         this.sp.loadImage("gameView/balloon.png");
         this.sp.pos(x,y);
-        this.sp.pivot(this.sp.width/2,this.sp.height/2);
-        this.sp.zOrder=1;
+        this.sp.pivot(this.sp.width/2,this.sp.height/2);        
         this.view.addChild(this.sp);
 
         this.spBg=new Laya.Sprite();
         let randNum=Math.ceil(Math.random()*3);
         this.spBg.loadImage("gameView/balloonBg"+randNum+".png");
         this.spBg.pivot(this.spBg.width/2,this.spBg.height/2);
-        this.spBg.pos(x,y);
-        this.spBg.zOrder=0;
+        this.spBg.pos(x,y);        
         this.view.addChild(this.spBg);
     }
 
@@ -93,7 +92,6 @@ export default class Balloon{
         this.anim1.pos(candySp.x,candySp.y);
         this.anim1.x -= this.sp.width/2;
         this.anim1.y -= this.sp.height/2;        
-        console.log(this.anim1.x);
         //设置速度
         for(let i=0;i<arr_Body.length;i++){
             arr_Body[i].setVelocity({x:0,y:-4});
@@ -103,19 +101,19 @@ export default class Balloon{
     }
 
     //为泡泡添加点击事件，点击到则泡泡爆炸
-    balloon_ClickBoom(candySp:Laya.Sprite,isExistBalloon:boolean):void{
+    balloon_ClickBoom(candy:Candy):void{
         Laya.timer.clear(this,this.balloon_Float);
         this.sp.off(Laya.Event.MOUSE_DOWN,this,this.balloon_Boom);
         //播放戳破动画
         this.anim1.stop();
         this.anim1.visible=false;
         this.anim2.visible = true;
-        this.anim2.pos(candySp.x,candySp.y);
+        this.anim2.pos(candy.arr_Sp[0].x,candy.arr_Sp[0].y);
         this.anim2.x -= this.sp.width/2;
         this.anim2.y -= this.sp.height/2;
         this.anim2.play(0,false);
         this.anim2.on(Laya.Event.COMPLETE,this,this.completeBoom);
-        isExistBalloon=false;
+        candy.isExistBalloon=false;
     }
 
     //直接爆炸

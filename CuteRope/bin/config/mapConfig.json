@@ -170,11 +170,11 @@
                 "mapSkins":[
                     "gameView/gameBg/boxBg_1.jpg"
                 ],
-                "candy":{"style":"candy","x":380,"y":500},
+                "candy":{"style":"candy","x":380,"y":530},
                 "star":[
-                    {"style":"star1","x":650,"y":350},
-                    {"style":"star1","x":650,"y":650},
-                    {"style":"star1","x":650,"y":950}
+                    {"style":"star1","x":150,"y":1000},
+                    {"style":"star1","x":600,"y":650},
+                    {"style":"star1","x":600,"y":950}
                 ],
                 "monster":{"x":550,"y":1200,"skin":""},
                 "hook":[
@@ -192,8 +192,154 @@
 				}
 
 
-            }
+            },
+			{
+                "mapId":7,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_1.jpg"
+                ],
+                "candy":{"style":"candy","x":600,"y":550},
+                "star":[
+                    {"style":"star1","x":385,"y":200},
+                    {"style":"star1","x":150,"y":700},
+                    {"style":"star1","x":630,"y":700}
+                ],
+                "monster":{"x":375,"y":1200,"skin":""},
+                "hook":[
+                    {"style":"hook1","x":375,"y":300},
+                    {"style":"hook1","x":375,"y":700}
+                ],
+				"rope":{
+					"length":[
+						350,350
+					]
+				},
+				"balloon":[
+					{"x":500,"y":1000}
+				]
+            },
+			{
+                "mapId":8,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_1.jpg"
+                ],
+                "candy":{"style":"candy","x":380,"y":850},
+                "star":[
+                    {"style":"star1","x":280,"y":500},
+                    {"style":"star1","x":280,"y":600},
+                    {"style":"star1","x":375,"y":1050}
+                ],
+                "monster":{"x":375,"y":200,"skin":""},
+                "hook":[
+                    {"style":"hook1","x":375,"y":300},
+                    {"style":"hook1","x":520,"y":700},
+					{"style":"hook1","x":220,"y":950}
+                ],
+				"rope":{
+					"length":[
+						600,350,400
+					]
+				},
+				"balloon":[
+					{"x":375,"y":1050}
+				]
 
+
+            },
+			{
+                "mapId":12,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_1.jpg"
+                ],
+                "candy":{"style":"candy","x":650,"y":800},
+                "star":[
+                    {"style":"star1","x":250,"y":400},
+                    {"style":"star1","x":375,"y":1100},
+                    {"style":"star1","x":525,"y":700}
+                ],
+                "monster":{"x":250,"y":200,"skin":""},
+                "hook":[
+                    {"style":"hook1","x":250,"y":300},
+                    {"style":"hook1","x":400,"y":300}
+                ],
+				"rope":{
+					"length":[
+						800,650
+					]
+				},
+				"balloon":[
+					{"x":225,"y":1050},
+					{"x":375,"y":1100},
+					{"x":525,"y":1050}
+				]
+            },
+			{
+                "mapId":15,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_1.jpg"
+                ],
+                "candy":{"style":"candy","x":185,"y":480},
+                "star":[
+                    {"style":"star1","x":175,"y":800},
+                    {"style":"star1","x":550,"y":525},
+                    {"style":"star1","x":550,"y":800}
+                ],
+                "monster":{"x":375,"y":1150,"skin":""},
+                "hook":[
+                    {"style":"hook1","x":175,"y":300},
+                    {"style":"hook1","x":375,"y":300},
+					{"style":"hook1","x":375,"y":525},
+					{"style":"hook1","x":375,"y":750}
+                ],
+				"rope":{
+					"length":[
+						200,280,280,400
+					]
+				},
+				"knife":[
+					{"x":375,"y":700,"style":"knife2","rotation":0,"isAlwaysRotate":false},
+					{"x":375,"y":925,"style":"knife2","rotation":0,"isAlwaysRotate":false}
+				]
+            },
+			{
+                "mapId":16,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_1.jpg"
+                ],
+                "candy":{"style":"candy","x":160,"y":450},
+                "star":[
+                    {"style":"star1","x":200,"y":600},
+                    {"style":"star1","x":475,"y":650},
+                    {"style":"star1","x":300,"y":1050}
+                ],
+                "monster":{"x":500,"y":1000,"skin":""},
+                "hook":[
+                    {"style":"hook1","x":150,"y":300},
+                    {"style":"hook1","x":375,"y":300},
+					{"style":"hook1","x":525,"y":300},
+					{"style":"hook1","x":200,"y":700}
+                ],
+				"rope":{
+					"length":[
+						200,350,750,280
+					]
+				},
+				"knife":[
+					{"x":200,"y":850,"style":"knife2","rotation":90,"isAlwaysRotate":false},
+					{"x":525,"y":650,"style":"knife2","rotation":90,"isAlwaysRotate":false}
+				]
+            }
+			
 
 
         ]

@@ -1,11 +1,15 @@
 {
-    "playerStars":20,
+    "playerStars":40,
     "playerSuper":1,
     "PlayerTeach":2,
     "playerCard":[
         {
             "card":"0-0",
             "stars":[3,3,3,3,3,3,2,3,3,3,2,1,2,3,1,2,1,3,1,2,-1]
+        },
+		{
+            "card":"0-1",
+            "stars":[3,3,3,-1]
         }
     ]
 }

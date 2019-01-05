@@ -16,7 +16,6 @@ import Tool from "../Tool/Tool";
     init(data):void{
         this.isCollision=false;
         this.knife_CreateSprite(data.knife_X,data.knife_Y,data.style,data.rotation);
-        console.log(data.isAlwaysRotate);
         if(data.isAlwaysRotate){
             Laya.timer.frameLoop(1,this,this.knife_RotateBySelf);
         }
@@ -28,6 +27,7 @@ import Tool from "../Tool/Tool";
         this.sp.loadImage("gameView/"+data.style+".png");
         this.sp.pos(data.knife_X,data.knife_Y);
         this.sp.rotation=data.rotation;
+        this.sp.visible=true;
         if(data.isAlwaysRotate){
             Laya.timer.frameLoop(1,this,this.knife_RotateBySelf);
         }
@@ -39,6 +39,7 @@ import Tool from "../Tool/Tool";
         this.sp.loadImage("gameView/"+style+".png");
         this.sp.pos(x,y);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
+        this.sp.visible=true;
         this.sp.rotation=rotation;
         this.view.addChild(this.sp);
     }
@@ -50,5 +51,12 @@ import Tool from "../Tool/Tool";
 
     public clearTimer():void{
         Laya.timer.clearAll(this);
+    }
+
+    /**假销毁 */
+    public destroy() : void
+    {
+        this.sp.visible = false;
+        this.sp.x = 100000;
     }
 }

@@ -11,8 +11,8 @@ import Star from "../prefab/Star";
 import Balloon from "../prefab/Balloon";
 import MagicHat from "../prefab/MagicHat";
 import RopePoint from "../prefab/RopePoint";
-
 import Knife from "../prefab/Knife";
+import ForceBall from "../prefab/ForceBall";
  /**
  * 游戏界面 ani  1：开门动画 2： 
  */
@@ -60,6 +60,8 @@ export default class GamePage extends Laya.Scene{
     public arr_MagicHat : Array<MagicHat>;
     /**锥子 */
     public arr_Knife:Array<Knife>;
+    /**推力球 */
+    public arr_ForceBall:Array<ForceBall>;
 //-------------------------------------------
     /**透明度转折变量 */
     private alphaZ : number = 0;
@@ -170,6 +172,7 @@ export default class GamePage extends Laya.Scene{
         {
             this.arr_Knife.forEach(knife=>{
                 knife.clearTimer();
+                knife.destroy();
             });
         }
         if(this.arr_MagicHat)//取消帽子定时球
@@ -182,6 +185,13 @@ export default class GamePage extends Laya.Scene{
         {
             this.arr_Hook.forEach(hook => {
                 hook.hookDestroy();
+            });
+        }
+        if(this.arr_ForceBall)//forceball销毁
+        {
+            this.arr_ForceBall.forEach(forceball => {
+                forceball.removeEvent();
+                forceball.destroy();
             });
         }
    }
@@ -447,8 +457,10 @@ export default class GamePage extends Laya.Scene{
         this.balloonInit(this.mapConfig.arr_Balloon);
         //帽子数据初始化
         this.hatInit(this.mapConfig.arr_magicHat); 
-        //锥子数据初始化test
+        //锥子数据初始化
         this.knifeInit(this.mapConfig.arr_Knife);
+        //推力球数据初始化
+        this.forceBallInit(this.mapConfig.arr_Forceball);
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
         //割绳检测
@@ -661,6 +673,29 @@ export default class GamePage extends Laya.Scene{
          console.log(this.arr_Knife);
          
      }
+
+     /**推力球数据初始化 */
+    private forceBallInit(arr_ForceBall) : void
+    {
+        if(this.arr_ForceBall == undefined)
+            this.arr_ForceBall = new Array<ForceBall>();
+        for(let i=0;i<arr_ForceBall.length;i++)
+        {
+            if(this.arr_ForceBall[i])
+            {
+                this.arr_ForceBall[i].update({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
+                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy]);
+            }
+            else
+            {
+                this.arr_ForceBall[i] = new ForceBall(this.scene.panel_GameWorld);
+                this.arr_ForceBall[i].init({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
+                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy]);
+            }
+        }
+        console.log(this.arr_ForceBall);
+        
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////////////游戏逻辑↓
 
 
@@ -690,7 +725,8 @@ export default class GamePage extends Laya.Scene{
         this.testHook(x,y);
         //与锥子的距离检测
         this.testKnife(x,y);
-        console.log(this.candy.isExistBalloon);
+        //与推力球的距离检测
+        this.testForceBall(x,y);
     }
 
     /** 与hook道具的检测*/
@@ -841,6 +877,20 @@ export default class GamePage extends Laya.Scene{
         });
     }
     
+    private testForceBall(x,y){
+        if(!this.arr_Knife) return;
+        //检测糖果是否进入推力球检测区域，若在区域内点击推力球触发推力功能
+        let collide;
+        this.arr_ForceBall.forEach(forceball=>{
+            collide=forceball.spRect.hitTestPoint(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+            if(collide){
+                forceball.isApplyForce=true;
+                
+            }else{
+                forceball.isApplyForce=false;
+            }
+        })
+    }
     /**显示菜单 */
     private showMenu() : void
     {

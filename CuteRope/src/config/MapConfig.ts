@@ -76,6 +76,7 @@ export module Config {
             this.arr_Balloon = [];
             this.arr_magicHat = [];
             this.arr_Knife=[];
+            this.arr_Forceball=[];
             this.parseConfigData(data);
         }
 
@@ -106,6 +107,8 @@ export module Config {
             this.parseMagicHat(data.magicHat);
             /**锥子解析 */
             this.parseKnife(data.knife);
+            /**推力球解析 */
+            this.parseForceBall(data.forceball);
         }
 
 

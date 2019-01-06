@@ -93,7 +93,7 @@ export default class Candy{
         for(let i=0;i<this.count; i++)
         {
             body=new Laya.RigidBody();
-            body.type="dynamic";
+            body.type="static";
             body.allowRotation = true;
             body.angularDamping = GameConfig.CANDY_ANGULARDAMPING;
             body.linearDamping = GameConfig.CANDY_LINEARDAMPING;
@@ -213,7 +213,8 @@ export default class Candy{
 			}
 			if(string == "useg")
 			{
-                body.gravityScale = 1;              
+                body.gravityScale = 1;     
+                body.type = "dynamic";                         
 			}
         });
         ////

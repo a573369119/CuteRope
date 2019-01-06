@@ -13,6 +13,7 @@ import MagicHat from "../prefab/MagicHat";
 import RopePoint from "../prefab/RopePoint";
 
 import Knife from "../prefab/Knife";
+import { PlayerData } from "./Config/PlayerData";
  /**
  * 游戏界面 ani  1：开门动画 2： 
  */
@@ -41,6 +42,8 @@ export default class GamePage extends Laya.Scene{
     private isMouseDown : boolean;
     /**得分记录 */
     private score : number;
+    /**是否开启超能力 */
+    private isOpenSuper : boolean;
 //----------------------------------------------
     /**地图配置 */
     private mapConfig : Config.MapConfig;
@@ -101,6 +104,7 @@ export default class GamePage extends Laya.Scene{
         this.scene.img_replay.alpha = 0;
         this.alphaZ = 1;
         this.score = 0;
+        this.isOpenSuper = false;
         //界面 可视 初始化
         Laya.MouseManager.enabled = false;
         this.doorOpen.ani1.play(0,false);
@@ -249,8 +253,7 @@ export default class GamePage extends Laya.Scene{
                 this.doorOpen.visible = false;//关闭动画层  
                 
                 break;
-            //重新开始 或者 下一关。关闭计分板 打开箱子操作
-            case 5:
+            case 5://重新开始 或者 下一关。关闭计分板 打开箱子操作
                 this.scene.ani5.visible = false; 
                 this.doorOpen.visible = false;//关闭动画层
                 // this.doorOpen.visible = false;//关闭动画层                  
@@ -351,6 +354,15 @@ export default class GamePage extends Laya.Scene{
     private onShopSuper() : void
     {
         console.log("获得超能力");
+        if(PlayerData.ins.super > 0)
+        {
+            PlayerData.ins.super -- ;
+            this.isOpenSuper = true;
+        }
+        else
+        {
+            this.shopDialog.show();
+        }
     }
 
     /**退出游戏界面 */
@@ -472,16 +484,28 @@ export default class GamePage extends Laya.Scene{
         let rope : Rope;
         let add = 0;
         let speContorl = 1;
+        let speed  : number =  GameConfig.ROPE_TO_CANDY_SPEED ;
         for(let i=0;i<this.arr_Rope.length;i++)
         {
             rope = this.arr_Rope[i];
-            obj.x = GameConfig.ROPE_TO_CANDY_SPEED/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"cos");
-            obj.y = GameConfig.ROPE_TO_CANDY_SPEED/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"sin");
-            // console.log(rope.ropePointsArray[rope.ropePointsArray.length - 1].body.applyForceToCenter);
+            if(rope.ropePointsArray[1].style == "hook3")
+            {//弹性绳子
+                if(Math.sqrt(Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x - this.candy.getCandySprite(0).x,2) + Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y - this.candy.getCandySprite(0).y,2)) < 140)
+                {//进入加速范围
+                    speContorl = 0.15;
+                }       
+                speed = GameConfig.ROPE_JUMP__TO_CANDY_SPEED; 
+            }
+            obj.x = speed/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"cos");
+            obj.y = speed/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"sin");
+            
             rope.ropePointsArray[rope.ropePointsArray.length-1].body.setVelocity(obj);
-            // rope.ropePointsArray[rope.ropePointsArray.length - 1].body.applyForceToCenter(obj);
-            if(Math.sqrt(Math.pow(this.arr_Rope[i].ropePointsArray[this.arr_Rope[i].ropePointsArray.length-1].sp.x - this.candy.getCandySprite(0).x,2) + Math.pow(this.arr_Rope[i].ropePointsArray[this.arr_Rope[i].ropePointsArray.length-1].sp.y - this.candy.getCandySprite(0).y,2)) < 20) add++;
-
+            // rope.ropePointsArray[rope.ropePointsArray.length - 1].body.applyForceToCenter({x:obj.x,y:obj.y});
+            if(Math.sqrt(Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x - this.candy.getCandySprite(0).x,2) + Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y - this.candy.getCandySprite(0).y,2)) < 20)
+            {
+                add++;
+            } 
+            speContorl = 1;
         }
 
         if(add == this.arr_Rope.length)
@@ -492,6 +516,7 @@ export default class GamePage extends Laya.Scene{
             for(let i=0;i<this.arr_Rope.length;i++)
             {
                 this.arr_Rope[i].connectCandy(this.candy,i);
+                this.arr_Rope[i].ropePointsArray[this.arr_Rope.length - 1].sp.getComponents(Laya.RigidBody)[0].setVelocity({x:0,y:0});
             }
             //开启鼠标事件
             Laya.MouseManager.enabled = true;
@@ -610,7 +635,7 @@ export default class GamePage extends Laya.Scene{
         for(let i=0; i<arr_Rope.length; i++)
         {
             rope = new Rope(this.scene.panel_GameWorld);
-            rope.init(arr_Hook[i].hook_X,arr_Hook[i].hook_Y,arr_Rope[i].num);
+            rope.init(arr_Hook[i].hook_X,arr_Hook[i].hook_Y,arr_Rope[i].num,arr_Hook[i].style);
             this.arr_Rope.push(rope);
         }
         
@@ -690,7 +715,16 @@ export default class GamePage extends Laya.Scene{
         this.testHook(x,y);
         //与锥子的距离检测
         this.testKnife(x,y);
-        console.log(this.candy.isExistBalloon);
+        //与鼠标的距离检测 - 超能力
+        this.testSuper(x,y);
+        // console.log(this.candy.isExistBalloon);
+    }
+
+    /** 超能力 */
+    private testSuper(x,y) : void
+    {
+        if(!this.isOpenSuper) return;
+        //
     }
 
     /** 与hook道具的检测*/
@@ -700,7 +734,7 @@ export default class GamePage extends Laya.Scene{
         let rope : Rope;
         for(let i = 0; i< this.arr_Hook.length ; i++)
         {
-            if(this.arr_Hook[i].style == "hook1") continue;
+            if(this.arr_Hook[i].style != "hook2") continue;
             if(this.arr_Hook[i].isCreate == true) continue;
             //hook逻辑
             dic = this.countDic_Object({"x":x,"y":y},{"x":this.arr_Hook[i].sp.x,'y':this.arr_Hook[i].sp.y});
@@ -847,7 +881,7 @@ export default class GamePage extends Laya.Scene{
         Laya.timer.clear(this,this.showMenu);
         this.doorOpen.visible = true;
         this.doorOpen.ani3.play(0,false);
-        
+        Laya.MouseManager.enabled = false;                
         //比较之前在此关获得的星星，若比之前多则更新总分数
     }
 

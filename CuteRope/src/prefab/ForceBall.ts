@@ -70,7 +70,7 @@ import Candy from "./Candy";
         this.anim.play(0,false);
         if(this.isApplyForce){
             for(let i=0;i<candy.arr_Body.length;i++){
-                candy.arr_Body[i].applyForce({x:candy.arr_Sp[i].x,y:candy.arr_Sp[i].y},{x:1500*Math.sin(this.Rotation/180*Math.PI),y:1500*Math.sin(this.Rotation/180*Math.PI)});
+                candy.arr_Body[i].applyForce({x:candy.arr_Sp[i].x,y:candy.arr_Sp[i].y},{x:1500*Math.sin(this.Rotation/180*Math.PI),y:1500*Math.cos(this.Rotation/180*Math.PI)});
                 console.log(Math.sin(this.Rotation/180*Math.PI));
                 console.log(Math.cos(this.Rotation/180*Math.PI));
             }

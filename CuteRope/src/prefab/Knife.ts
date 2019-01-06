@@ -8,6 +8,12 @@ import Tool from "../Tool/Tool";
     public view : Laya.Panel;
     /***是否碰撞 */
     public isCollision : boolean;
+    /**横坐标 */
+    private knife_X:number;
+    /**纵坐标 */
+    private knife_Y:number;
+    /**是否前进 */
+    private isGoing:boolean;
     constructor(view){
         this.view=view;
     }
@@ -16,9 +22,18 @@ import Tool from "../Tool/Tool";
     init(data):void{
         this.isCollision=false;
         this.knife_CreateSprite(data.knife_X,data.knife_Y,data.style,data.rotation);
+        
         if(data.isAlwaysRotate){
             Laya.timer.frameLoop(1,this,this.knife_RotateBySelf);
         }
+        if(data.move[0]){
+            this.knife_X=this.sp.x;
+            this.knife_Y=this.sp.y;
+            this.isGoing=true;
+            Laya.timer.frameLoop(1,this,this.knife_MoveBySelf,[data.move]);
+        }
+        
+
     }
 
     //更新状态
@@ -30,6 +45,12 @@ import Tool from "../Tool/Tool";
         this.sp.visible=true;
         if(data.isAlwaysRotate){
             Laya.timer.frameLoop(1,this,this.knife_RotateBySelf);
+        }
+        if(data.move!=[]){
+            this.knife_X=this.sp.x;
+            this.knife_Y=this.sp.y;
+            this.isGoing=true;
+            Laya.timer.frameLoop(1,this,this.knife_MoveBySelf,[data.move]);
         }
     }
 
@@ -49,6 +70,31 @@ import Tool from "../Tool/Tool";
         this.sp.rotation+=1;
     }
 
+    //锥子来回移动
+    knife_MoveBySelf(move):void{        
+        let x_Add=Tool.rotationDeal(this.knife_X,this.knife_Y,move[0],move[1],"cos");
+        let y_Add=Tool.rotationDeal(this.knife_X,this.knife_Y,move[0],move[1],"sin");
+        if(this.isGoing){
+            this.sp.x+=x_Add;
+            this.sp.y+=y_Add;
+            if(Math.abs(this.sp.x-move[0])<0.3){
+                this.sp.x=move[0];
+                this.sp.y=move[1];
+                this.isGoing=false;
+                
+            }
+        }else{
+            this.sp.x-=x_Add;
+            this.sp.y-=y_Add;
+            if(Math.abs(this.sp.x-this.knife_X)<0.3){
+                this.sp.x=this.knife_X;
+                this.sp.y=this.knife_Y;
+                this.isGoing=true;
+            }
+            console.log(this.isGoing);
+        }
+        
+    }
     public clearTimer():void{
         Laya.timer.clearAll(this);
     }

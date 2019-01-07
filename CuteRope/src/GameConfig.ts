@@ -19,7 +19,7 @@ export default class GameConfig{
     static alignH:string="center";
     static startScene:any="Loading.scene";
     static sceneRoot:string="";
-    static debug:boolean=true;
+    static debug:boolean=false;
     static stat:boolean=false;
     static physicsDebug:boolean=false;
     static exportSceneToJson:boolean=true;

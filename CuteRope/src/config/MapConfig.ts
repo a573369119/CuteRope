@@ -203,6 +203,7 @@ export module Config {
                         knifeConfig.style=obj.style;
                         knifeConfig.rotation=obj.rotation;
                         knifeConfig.isAlwaysRotate=obj.isAlwaysRotate;
+                        knifeConfig.move=obj.move;
                         this.arr_Knife.push(knifeConfig);
                         });
                 console.log("knife -解析");    
@@ -320,6 +321,8 @@ export module Config {
         public rotation : number;
         /**是否一直旋转 */
         public isAlwaysRotate:boolean;
+        /**移动到某点 */
+        public move:Array<number>;
     }
 
 

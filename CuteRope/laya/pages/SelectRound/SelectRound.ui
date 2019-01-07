@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":24,
+    "selectedBox":24,
+    "selecteID":23,
     "searchKey":"View",
     "props":{"width":750,"sceneColor":"#9c9c9c","runtime":"./view/RoundPage.ts","hitTestPrior":true,"height":1334},
     "nodeParent":-1,
@@ -136,13 +136,14 @@
             "props":{"y":7,"var":"sp","presetID":1,"preset":"laya/assets/perfeb/Sprite1.prefab"},
             "nodeParent":1,
             "label":"sp",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":24,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"presetID":2,"preset":"laya/assets/perfeb/Sprite1.prefab"},
@@ -156,9 +157,10 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
-                    "props":{"presetID":3,"preset":"laya/assets/perfeb/Sprite1.prefab"},
+                    "props":{"visible":false,"presetID":3,"preset":"laya/assets/perfeb/Sprite1.prefab"},
                     "nodeParent":24,
                     "label":"shi",
                     "isDirectory":false,
@@ -169,9 +171,10 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
-                    "props":{"presetID":4,"preset":"laya/assets/perfeb/Sprite1.prefab"},
+                    "props":{"visible":false,"presetID":4,"preset":"laya/assets/perfeb/Sprite1.prefab"},
                     "nodeParent":24,
                     "label":"bai",
                     "isDirectory":false,
@@ -182,6 +185,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"presetID":5,"preset":"laya/assets/perfeb/Sprite1.prefab"},
@@ -196,6 +200,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/script/PlayerStar.ts",

@@ -1,3 +1,3 @@
-2019/01/07-15:49:02.646 2fac Reusing MANIFEST leveldb/MANIFEST-000001
-2019/01/07-15:49:02.648 2fac Recovering log #575
-2019/01/07-15:49:02.651 2fac Reusing old log leveldb/000575.log 
+2019/01/07-23:28:55.872 894 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/01/07-23:28:55.893 894 Recovering log #575
+2019/01/07-23:28:55.902 894 Reusing old log leveldb/000575.log 

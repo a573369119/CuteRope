@@ -24,6 +24,7 @@
 						200
 					]
 				}
+				
             },
             {
                 "mapId":1,
@@ -88,11 +89,11 @@
                 ],
                 "candy":{"style":"candy","x":410,"y":500},
                 "star":[
-                    {"style":"star1","x":410,"y":600},
+                    {"style":"star1","x":410,"y":650},
                     {"style":"star1","x":100,"y":800},
                     {"style":"star1","x":420,"y":1200}
                 ],
-                "monster":{"x":570,"y":1100,"skin":""},
+                "monster":{"x":600,"y":1200,"skin":""},
                 "hook":[
                     {"style":"hook1","x":400,"y":200},
                     {"style":"hook1","x":100,"y":500},
@@ -445,8 +446,8 @@
 					]
 				},
 				"knife":[
-					{"x":375,"y":700,"style":"knife2","rotation":0,"isAlwaysRotate":false},
-					{"x":375,"y":925,"style":"knife2","rotation":0,"isAlwaysRotate":false}
+					{"x":375,"y":700,"style":"knife2","rotation":0,"isAlwaysRotate":false,"move":[]},
+					{"x":375,"y":925,"style":"knife2","rotation":0,"isAlwaysRotate":false,"move":[]}
 				]
             },
 			{
@@ -475,8 +476,8 @@
 					]
 				},
 				"knife":[
-					{"x":200,"y":850,"style":"knife2","rotation":90,"isAlwaysRotate":false},
-					{"x":525,"y":650,"style":"knife2","rotation":90,"isAlwaysRotate":false}
+					{"x":200,"y":850,"style":"knife2","rotation":90,"isAlwaysRotate":false,"move":[]},
+					{"x":525,"y":650,"style":"knife2","rotation":90,"isAlwaysRotate":false,"move":[]}
 				]
             },
 			{
@@ -506,8 +507,8 @@
 					]
 				},
 				"knife":[
-					{"x":375,"y":750,"style":"knife1","rotation":90,"isAlwaysRotate":false},
-					{"x":600,"y":1100,"style":"knife1","rotation":0,"isAlwaysRotate":false}
+					{"x":375,"y":750,"style":"knife1","rotation":90,"isAlwaysRotate":false,"move":[]},
+					{"x":600,"y":1100,"style":"knife1","rotation":0,"isAlwaysRotate":false,"move":[]}
 				]
             },
 			{
@@ -581,24 +582,27 @@
                 ],
                 "candy":{"style":"candy","x":375,"y":825},
                 "star":[
-                    {"style":"star1","x":375,"y":300},
-                    {"style":"star1","x":475,"y":500},
-                    {"style":"star1","x":375,"y":1200}
+                    {"style":"star1","x":275,"y":700},
+                    {"style":"star1","x":350,"y":200},
+                    {"style":"star1","x":575,"y":500}
                 ],
-                "monster":{"x":375,"y":200,"skin":""},
+                "monster":{"x":275,"y":800,"skin":""},
                 "hook":[
-                    {"style":"hook1","x":150,"y":825},
-                    {"style":"hook1","x":600,"y":825},
-					{"style":"hook1","x":150,"y":1025},
-					{"style":"hook1","x":600,"y":1025}
+                    {"style":"hook1","x":575,"y":200},
+                    {"style":"hook2","x":275,"y":400},
+					{"style":"hook2","x":475,"y":800}
                 ],
 				"rope":{
 					"length":[
-						300,300,400,400
+						120
 					]
-                },
-                "balloon":[
-					{"x":375,"y":1200}
+				},
+				"balloon":[
+					{"x":350,"y":900}
+				],
+				"knife":[
+					{"x":275,"y":200,"style":"knife2","rotation":90,"isAlwaysRotate":false,"move":[]},
+					{"x":475,"y":500,"style":"knife4","rotation":90,"isAlwaysRotate":false,"move":[]}
 				]
             },			
             {
@@ -608,22 +612,87 @@
                 "mapSkins":[
                     "gameView/gameBg/boxBg_1.jpg"
                 ],
-                "candy":{"style":"candy","x":375,"y":825},
+                "candy":{"style":"candy","x":375,"y":350},
                 "star":[
-                    {"style":"star1","x":375,"y":300},
-                    {"style":"star1","x":475,"y":500},
-                    {"style":"star1","x":375,"y":1200}
+                    {"style":"star1","x":375,"y":600},
+                    {"style":"star1","x":375,"y":800},
+                    {"style":"star1","x":375,"y":1000}
                 ],
-                "monster":{"x":375,"y":200,"skin":""},
+                "monster":{"x":375,"y":1200,"skin":""},
                 "hook":[
-                    {"style":"hook1","x":150,"y":825},
-                    {"style":"hook1","x":600,"y":825},
-					{"style":"hook1","x":150,"y":1025},
-					{"style":"hook1","x":600,"y":1025}
+                    {"style":"hook1","x":275,"y":200},
+                    {"style":"hook1","x":475,"y":200},
+					{"style":"hook2","x":275,"y":700},
+					{"style":"hook2","x":475,"y":700}
                 ],
 				"rope":{
 					"length":[
-						300,300,400,400
+						200,200
+					]
+				},
+				"knife":[
+					{"x":275,"y":850,"style":"knife4","rotation":-80,"isAlwaysRotate":false,"move":[]},
+					{"x":475,"y":850,"style":"knife4","rotation":80,"isAlwaysRotate":false,"move":[]}
+				]
+            },
+			{
+                "mapId":21,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_1.jpg"
+                ],
+                "candy":{"style":"candy","x":380,"y":500},
+                "star":[
+                    {"style":"star1","x":150,"y":700},
+                    {"style":"star1","x":375,"y":350},
+                    {"style":"star1","x":600,"y":700}
+                ],
+                "monster":{"x":375,"y":1100,"skin":""},
+                "hook":[
+                    {"style":"hook1","x":150,"y":400},
+                    {"style":"hook1","x":375,"y":700},
+					{"style":"hook1","x":600,"y":400}
+                ],
+				"rope":{
+					"length":[
+						250,250,250
+					]
+				},
+				"balloon":[
+					{"x":150,"y":700},
+					{"x":600,"y":700}
+				],
+				"knife":[
+					{"x":225,"y":1100,"style":"knife1","rotation":0,"isAlwaysRotate":false,"move":[325,900]},
+					{"x":525,"y":1100,"style":"knife1","rotation":0,"isAlwaysRotate":false,"move":[425,900]}
+				]
+            },
+			{
+                "mapId":22,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_1.jpg"
+                ],
+                "candy":{"style":"candy","x":380,"y":475},
+                "star":[
+                    {"style":"star1","x":375,"y":700},
+                    {"style":"star1","x":275,"y":800},
+                    {"style":"star1","x":375,"y":1000}
+                ],
+                "monster":{"x":375,"y":200,"skin":""},
+                "hook":[
+                    {"style":"hook1","x":225,"y":300},
+                    {"style":"hook1","x":225,"y":500},
+					{"style":"hook1","x":225,"y":700},
+					{"style":"hook1","x":525,"y":300},
+					{"style":"hook1","x":525,"y":500},
+					{"style":"hook1","x":525,"y":700}
+                ],
+				"rope":{
+					"length":[
+						300,300,400,300,300,400
 					]
 				},
                 "balloon":[
@@ -718,13 +787,13 @@
 					"length":[
 						230,230
 					]
-                },
-                "balloon":[
-					{"x":375,"y":600}
-                ],
-                "knife":[
-					{"x":200,"y":950,"style":"knife4","rotation":0,"isAlwaysRotate":false},
-                    {"x":550,"y":950,"style":"knife4","rotation":0,"isAlwaysRotate":false}                
+                },            
+				"balloon":[
+					{"x":375,"y":1000}
+				],
+				"knife":[
+					{"x":300,"y":500,"style":"knife4","rotation":90,"isAlwaysRotate":false,"move":[]},
+					{"x":450,"y":500,"style":"knife4","rotation":90,"isAlwaysRotate":false,"move":[]}
 				]
             }
         ]
@@ -741,9 +810,9 @@
                 ],
                 "candy":{"style":"candy","x":380,"y":700},
                 "star":[
-                    {"style":"star1","x":375,"y":600},
-                    {"style":"star1","x":375,"y":750},
-                    {"style":"star1","x":375,"y":900}
+                    {"style":"star1","x":175,"y":400},
+                    {"style":"star1","x":375,"y":500},
+                    {"style":"star1","x":575,"y":400}
                 ],
                 "monster":{"x":525,"y":1100,"skin":""},
                 "hook":[

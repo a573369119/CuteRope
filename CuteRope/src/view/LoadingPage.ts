@@ -18,6 +18,8 @@ export default class LoadingPage extends ui.LoadingUI{
             {url:"res/atlas/gameView/gameDoor.atlas"},
             {url:"res/atlas/gameView/gamePos.atlas"},
             {url:"res/atlas/gameView/gameBtn.atlas"},
+            {url:"res/atlas/comp.atlas"},
+			{url:"res/atlas/gameView/stardestory.atlas"},
             //大图加载
             {url:"unpackage/startGameBg.jpg"},
             {url:"unpackage/cutRope.png"},

@@ -100,9 +100,10 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
         let box : Box;
         let img_Point : Laya.Image;
         this.boxCount = 5;//测试
+        let skins = Laya.WeakObject.I.get("boxSkin");
         for(let i=0; i<this.boxCount;i++)
         {
-            box = new Box(this,this.quarter,i);
+            box = new Box(this,this.quarter,i,skins[this.quarter+"-"+i][0]);
             img_Point = new Laya.Image();
             img_Point.skin = "selectBox/point1.png";
             img_Point.x += 70 * i;

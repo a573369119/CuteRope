@@ -4,6 +4,7 @@ import LoadingPage from "./view/LoadingPage"
 import SelectPage from "./view/SelectPage"
 import Round from "./script/Round"
 import SelectBoxPage from "./view/SelectBoxPage"
+import PlayerStar from "./script/PlayerStar"
 import RoundPage from "././view/RoundPage"
 import StartGamePage from "./view/StartGamePage"
 /*
@@ -18,7 +19,7 @@ export default class GameConfig{
     static alignH:string="center";
     static startScene:any="Loading.scene";
     static sceneRoot:string="";
-    static debug:boolean=false;
+    static debug:boolean=true;
     static stat:boolean=false;
     static physicsDebug:boolean=false;
     static exportSceneToJson:boolean=true;
@@ -30,6 +31,7 @@ export default class GameConfig{
         reg("view/SelectPage.ts",SelectPage);
         reg("script/Round.ts",Round);
         reg("view/SelectBoxPage.ts",SelectBoxPage);
+        reg("script/PlayerStar.ts",PlayerStar);
         reg("./view/RoundPage.ts",RoundPage);
         reg("view/StartGamePage.ts",StartGamePage);
     }

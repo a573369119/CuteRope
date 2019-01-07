@@ -34,6 +34,9 @@ export default class RoundPage extends Laya.Scene{
         this.scene.addChild(this.shopDoor);
         this.shopDoor.x = 0 ;
         this.shopDoor.y = 0;
+        let skins = Laya.WeakObject.I.get("boxSkin");
+        this.scene.img_DoorR.skin = skins[this.quarterIndex + "-" + this.boxIndex][1];
+        this.scene.img_DoorL.skin = skins[this.quarterIndex + "-" + this.boxIndex][1];
         this.Start();
     }
 
@@ -51,10 +54,10 @@ export default class RoundPage extends Laya.Scene{
     /**事件绑定 */
     private addEvents() : void
     {
-        for(let i=0;i<this.arr_Card.length;i++)
-        {
-            this.arr_Card[i].on(Laya.Event.CLICK,this,this.onClick,[i])
-        }
+        // for(let i=0;i<this.arr_Card.length;i++)
+        // {
+        //     this.arr_Card[i].on(Laya.Event.CLICK,this,this.onClick,[i])
+        // }
 
         this.scene.btn_Exit.on(Laya.Event.CLICK,this,this.onExit);
 
@@ -132,8 +135,8 @@ export default class RoundPage extends Laya.Scene{
     {   
         for(let i=0;i<thisCard.length;i++)
         {
-            if(this.arr_Card[i] != undefined)
-            this.addRoundEvents(this.arr_Card[i],i);            
+            if(thisCard[i] != undefined)
+                this.addRoundEvents(this.arr_Card[i],i);            
             if(thisCard[i] != -1)
             {
                 this.arr_Card[i].img_Star.skin = this.setStars(thisCard[i]);
@@ -164,13 +167,7 @@ export default class RoundPage extends Laya.Scene{
     /**加入 关卡事件 */
     private addRoundEvents(object,index) : void
     {
-        object.on(Laya.Event.CLICK,this,this.onClickRound,[index]);
-    }
-
-    /**事件 点击关卡 */
-    private onClickRound(index) : void
-    {
-
+        object.on(Laya.Event.CLICK,this,this.onClick,[index]);
     }
 
     /**卡牌星星和数字 处理 */

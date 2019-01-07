@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":6,
+    "selecteID":24,
     "searchKey":"View",
     "props":{"width":750,"sceneColor":"#9c9c9c","runtime":"./view/RoundPage.ts","hitTestPrior":true,"height":1334},
     "nodeParent":-1,
-    "maxID":19,
+    "maxID":26,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -118,21 +118,6 @@
         {
             "x":15,
             "type":"Image",
-            "searchKey":"Image",
-            "props":{"y":29,"x":645,"width":79,"skin":"comp/blank.png","height":67},
-            "nodeParent":1,
-            "label":"Image",
-            "isOpen":true,
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":7,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Image",
             "searchKey":"Image,btn_Exit",
             "props":{"width":147,"var":"btn_Exit","skin":"publicAssets/exit_R.png","left":20,"height":140,"bottom":20},
             "nodeParent":1,
@@ -143,6 +128,89 @@
             "compId":8,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,sp",
+            "props":{"y":7,"var":"sp","presetID":1,"preset":"laya/assets/perfeb/Sprite1.prefab"},
+            "nodeParent":1,
+            "label":"sp",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":24,
+            "child":[
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"presetID":2,"preset":"laya/assets/perfeb/Sprite1.prefab"},
+                    "nodeParent":24,
+                    "label":"ge",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":23,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"presetID":3,"preset":"laya/assets/perfeb/Sprite1.prefab"},
+                    "nodeParent":24,
+                    "label":"shi",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":22,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"presetID":4,"preset":"laya/assets/perfeb/Sprite1.prefab"},
+                    "nodeParent":24,
+                    "label":"bai",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":19,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"presetID":5,"preset":"laya/assets/perfeb/Sprite1.prefab"},
+                    "nodeParent":24,
+                    "label":"Image(Sprite1)",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":7,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Script",
+                    "switchAble":true,
+                    "source":"src/script/PlayerStar.ts",
+                    "searchKey":"Script,PlayerStar",
+                    "removeAble":true,
+                    "props":{"presetID":6,"preset":"laya/assets/perfeb/Sprite1.prefab"},
+                    "nodeParent":24,
+                    "label":"PlayerStar",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":25,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {

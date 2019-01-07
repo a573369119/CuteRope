@@ -12,7 +12,7 @@ export default class GameConfig{
     /**绳子密度 */
     public static ROPE_POINT_DENSITY : number = 50;
     /**绳子自动靠近糖果速度 */
-    public static ROPE_TO_CANDY_SPEED : number = 15;
+    public static ROPE_TO_CANDY_SPEED : number = 12;
     ////////////////////////////////弹力绳子
     /**绳子生成像素间隔*/
     public static ROPE_JUMP_DIC : number = 2;

@@ -14,5 +14,23 @@
             "selectLimit":750,
             "boxLimit":[0,22,40,60,100]
         }
-    ]
+    ],
+    "boxSkin":{
+        "0-0":["selectBox/box1.png","gameView/gameDoor/boxDoor_1.png"],
+        "0-1":["selectBox/Box (10).png","gameView/gameDoor/boxDoor_2.png"],
+        "0-2":["selectBox/Box (13).png","gameView/gameDoor/boxDoor_3.png"],
+        "0-3":["selectBox/Box (5).png","gameView/gameDoor/boxDoor_4.png"],
+        "0-4":["selectBox/Box (9).png","gameView/gameDoor/boxDoor_5.png"],
+        "1-0":["selectBox/Box (4).png","gameView/gameDoor/boxDoor_6.png"],
+        "1-1":["selectBox/Box (12).png","gameView/gameDoor/boxDoor_7.png"],
+        "1-2":["selectBox/Box (1).png","gameView/gameDoor/boxDoor_8.png"],
+        "1-3":["selectBox/Box (16).png","gameView/gameDoor/boxDoor_9.png"],
+        "1-4":["selectBox/Box (7).png","gameView/gameDoor/boxDoor_10.png"],
+        "2-0":["selectBox/Box (3).png","gameView/gameDoor/boxDoor_11.png"],
+        "2-1":["selectBox/Box (14).png","gameView/gameDoor/boxDoor_12.png"],
+        "2-2":["selectBox/Box (2).png","gameView/gameDoor/boxDoor_13.png"],
+        "2-3":["selectBox/Box (11).png","gameView/gameDoor/boxDoor_14.png"],
+        "2-4":["selectBox/Box (15).png","gameView/gameDoor/boxDoor_15.png"],
+        "2-5":["selectBox/Box (8).png","gameView/gameDoor/boxDoor_16.png"]      
+    }
 }

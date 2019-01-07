@@ -117,6 +117,10 @@ export module ui.SelectBox {
 		public btn_Exit:Laya.Image;
 		public sprite_SelectBox:Laya.Sprite;
 		public img_SelectBox:Laya.Image;
+		public sp:Laya.Sprite;
+		public ge:Laya.Image;
+		public shi:Laya.Image;
+		public bai:Laya.Image;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

@@ -29,16 +29,15 @@ class Main {
 	}
 
 	onConfigLoaded(): void {
-		// Laya.URL.basePath = "https://testcdn.chinaxwz.cn/game/gsz/CuteRope/";
 		//加载IDE指定的场景
+		//Laya.URL.basePath = "https://testcdn.chinaxwz.cn/game/gsz/";
 		let src= [
-			{url:"res/atlas/loadingView.atlas"},
-			{url:"res/atlas/comp.atlas"},
-			{url:"unpackage/loadingBg.jpg"},
 			{url:"config/selectConfig.json"},
             {url:"config/playerDataTest.json"},
 			{url:"config/mapConfig.json"},
-			{url:"res/atlas/gameView/stardestory.atlas"}
+			///
+			{url:"res/atlas/loadingView.atlas"},
+			{url:"unpackage/loadingBg.jpg"}
 			
 		];
 		Laya.loader.load(src,Laya.Handler.create(this,this.onLoad));
@@ -55,7 +54,8 @@ class Main {
 		        //数据保存
 		let object = Laya.loader.getRes("config/selectConfig.json");
 		this.keepLimit(object.limitList);
-		 
+		Laya.WeakObject.I.set("boxSkin",object.boxSkin);
+
 		let userData = Laya.loader.getRes("config/playerDataTest.json");
 		this.keepUserData(userData);
 				//--------------------------
@@ -73,7 +73,8 @@ class Main {
 			Laya.WeakObject.I.set(i,object[i]);
 			
             // PlayerData.ins.boxLimtDic.set(i,object[i]);
-        }
+		}
+
 	}
 
     /**保存用户信息 */

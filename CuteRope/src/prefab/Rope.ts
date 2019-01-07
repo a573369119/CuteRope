@@ -24,9 +24,9 @@ import Dic from "../Tool/dic";
     }
 
     //创建一根绳子，根据位置和长度创建
-    init(hookX,HookY,ropeLength):void{
+    init(hookX,HookY,ropeLength,hookStyle?):void{
 
-        this.createMultiRopePoint(hookX,HookY,ropeLength);
+        this.createMultiRopePoint(hookX,HookY,ropeLength,hookStyle);
     }
     //自动连接绳子
     initRopeHook2(hookX,hookY,candyX,candyY) : void
@@ -49,7 +49,7 @@ import Dic from "../Tool/dic";
             }
             else
             {
-                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic");
+                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic",null);
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
                 // this.rotateRopePoint_2(ropePoint);
                 ropePoint.addView(this.view);
@@ -66,24 +66,34 @@ import Dic from "../Tool/dic";
     update(hookX,HookY,ropeLength):void{
         this.init(hookX,HookY,ropeLength);
     }
-    createMultiRopePoint(hookX,hookY,ropeLength):void{
+
+    createMultiRopePoint(hookX,hookY,ropeLength,hookStyle?):void{
+        let ropeDic : number;
+        if(hookStyle == "hook3")
+        {   //弹力剩
+            ropeDic = GameConfig.ROPE_JUMP_DIC;
+        }
+        else
+        {
+            ropeDic = GameConfig.ROPE_DIC;
+        }
         //第一个节点与最后 一个节点的距离
         //创建多少个节点 30个像素一个间隔
-        let disPer:number=ropeLength/GameConfig.ROPE_DIC;
+        let disPer:number=ropeLength/ropeDic;
         //每一个节点水平方向偏移量
-        let x_Add=GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"cos");
+        let x_Add=ropeDic*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"cos");
         //每一个节点竖直方向偏移量
-        let y_Add=GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"sin");
+        let y_Add=ropeDic*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"sin");
         // if(disPer >= 60) {console.log("距离不够");}        
         for(let i=0;i<disPer+1;i++){
             let ropePoint : RopePoint ;
             if(i==0){
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic");
+                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",hookStyle);
                 ropePoint.addView(this.view);
             }
             else
             {
-                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic");
+                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic",hookStyle);
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
                 ropePoint.addView(this.view);
             }
@@ -204,7 +214,7 @@ import Dic from "../Tool/dic";
     {
         this.isCuted = true;
         this.ropePointsArray.forEach(point => {
-            point.sp.getComponents(Laya.BoxCollider)[0].density = 0.0001;
+            point.sp.getComponents(Laya.BoxCollider)[0].density = 0.01;
         });
         Laya.timer.loop(16,this,this.pointDestroy)
     }

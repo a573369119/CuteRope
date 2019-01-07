@@ -32,13 +32,18 @@ export default class Hook{
         this.hook_CreateSprite(data.hook_X,data.hook_Y,data.style);        
         if(data.style == "hook2")/////////没有图片
         {
-            this.spp = new Laya.Sprite();
-            this.spp.graphics.drawCircle(24,20,150,"#a24");
-            this.spp.alpha = 0.2;
-            this.sp.addChild(this.spp);
+            this.createSpp();
         }
     }
-    
+    //创建圈
+    private createSpp() : void
+    {
+        this.spp = new Laya.Sprite();
+        this.spp.graphics.drawCircle(24,20,150,"#a24");
+        this.spp.alpha = 0.2;
+        this.sp.addChild(this.spp);
+    }
+
     //更新状态
     update(data):void{
         this.isCreate = false; 
@@ -48,7 +53,21 @@ export default class Hook{
         this.style = data.style;          
         if(data.style == "hook2")/////////没有图片
         {
-            this.spp.visible = true;
+            if(this.spp)
+            {
+                this.spp.visible = true;
+            }
+            else
+            {
+                this.createSpp();
+            }
+        }
+        else
+        {
+            if(this.spp)
+            {
+                this.spp.visible = false;
+            }
         }
         this.sp.loadImage("gameView/"+"hook1"+".png");
 

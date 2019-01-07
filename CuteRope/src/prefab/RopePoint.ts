@@ -8,8 +8,13 @@ export default class RopePoint{
 	public sp:Laya.Sprite;
 	/**刚体 */
 	public body:Laya.RigidBody;
+	/**属于hook */
+	public style : string;
+	/**是否连接糖果 */
+	public isConnectCandy : boolean;
 
-    constructor(x,y,type:string,rotation?){	
+    constructor(x,y,type:string,style,rotation?){	
+			this.style = style;
 			this.init({"x":x,"y":y,"type":type,"rotation":rotation}); 	
     }
     
@@ -52,21 +57,33 @@ export default class RopePoint{
 		}
 
     //添加RigidBody组件,设置刚体属性
-    ropePoint_AddBody(type:string):void{               
+    ropePoint_AddBody(type:string):void{  
+		let ropePoint_A : number = GameConfig.ROPE_POINT_ANGULARDAMPING;
+		let ropePoint_L : number = GameConfig.ROPE_POINT_LINEARDAMOING;
+		if(this.style == "hook3")
+		{
+			ropePoint_A = GameConfig.ROPE_JUMP__POINT_ANGULARDAMPING;
+			ropePoint_L = GameConfig.ROPE_JUMP__POINT_LINEARDAMOING;
+		}
 		this.body=new Laya.RigidBody();
 		this.body.type=type;
 		this.body.allowRotation = true;
-		this.body.angularDamping = GameConfig.ROPE_POINT_ANGULARDAMPING;
-		this.body.linearDamping = GameConfig.ROPE_POINT_LINEARDAMOING;
+		this.body.angularDamping = ropePoint_A;
+		this.body.linearDamping = ropePoint_L;
 		this.sp.addComponentIntance(this.body);
     }
     
     //添加Collider组件,设置碰撞体属性
     ropePoint_AddCollider():void{ 
+		let density : number = GameConfig.ROPE_POINT_DENSITY;
+		if(this.style == "hook3")
+		{
+			density = GameConfig.ROPE_JUMP__POINT_DENSITY;
+		}
 		let colider = new Laya.BoxCollider();
 		colider.width = this.sp.width;
 		colider.height = this.sp.height;
-		colider.density = GameConfig.ROPE_POINT_DENSITY;
+		colider.density = density;
 		colider.isSensor = true;
 		this.sp.addComponentIntance(colider);
     }

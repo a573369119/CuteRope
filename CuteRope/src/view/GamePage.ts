@@ -14,6 +14,7 @@ import RopePoint from "../prefab/RopePoint";
 import Knife from "../prefab/Knife";
 import { PlayerData } from "./Config/PlayerData";
 import ForceBall from "../prefab/ForceBall";
+import Spider from "../prefab/Spider";
  /**
  * 游戏界面 ani  1：开门动画 2： 
  */
@@ -65,6 +66,8 @@ export default class GamePage extends Laya.Scene{
     public arr_Knife:Array<Knife>;
     /**推力球 */
     public arr_ForceBall:Array<ForceBall>;
+    /**蜘蛛 */
+    public arr_Spider:Array<Spider>;
 //-------------------------------------------
     /**透明度转折变量 */
     private alphaZ : number = 0;
@@ -491,6 +494,8 @@ export default class GamePage extends Laya.Scene{
         this.knifeInit(this.mapConfig.arr_Knife);
         //推力球数据初始化
         this.forceBallInit(this.mapConfig.arr_Forceball);
+        //蜘蛛数据初始化
+        this.spiderInit(this.mapConfig.arr_Spider);
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
         //割绳检测
@@ -674,9 +679,7 @@ export default class GamePage extends Laya.Scene{
     /**泡泡数据初始化 */
     private balloonInit(arr_Balloon) : void
     {
-        if(!arr_Balloon[0]) return;
-        if(this.arr_Balloon  === undefined)
-        
+        if(!arr_Balloon[0]) return;        
         if(this.arr_Balloon  == undefined)
             this.arr_Balloon = new Array<Balloon>();
         for(let i=0;i<arr_Balloon.length;i++)
@@ -698,7 +701,7 @@ export default class GamePage extends Laya.Scene{
      /**锥子数据初始化 */
      private knifeInit(arr_Knife) : void
      {
-         
+        if(!arr_Knife[0]) return;
          if(this.arr_Knife ==undefined)
              this.arr_Knife = new Array<Knife>();
          for(let i=0;i<arr_Knife.length;i++)
@@ -720,6 +723,7 @@ export default class GamePage extends Laya.Scene{
      /**推力球数据初始化 */
     private forceBallInit(arr_ForceBall) : void
     {
+        if(!arr_ForceBall[0]) return;
         if(this.arr_ForceBall == undefined)
             this.arr_ForceBall = new Array<ForceBall>();
         for(let i=0;i<arr_ForceBall.length;i++)
@@ -737,6 +741,28 @@ export default class GamePage extends Laya.Scene{
             }
         }
         console.log(this.arr_ForceBall);
+        
+    }
+
+    /**蜘蛛数据初始化 */
+    private spiderInit(arr_Spider) : void
+    {
+       if(!arr_Spider[0]) return;
+        if(this.arr_Spider ==undefined)
+            this.arr_Spider = new Array<Spider>();
+        for(let i=0;i<arr_Spider.length;i++)
+        {
+            if(this.arr_Spider[i])
+            {
+                this.arr_Spider[i].update({"spider_X":arr_Spider[i].spider_X,"spider_Y":arr_Spider[i].spider_Y});
+            }
+            else
+            {
+                this.arr_Spider[i] = new Spider(this.scene.panel_GameWorld);
+                this.arr_Spider[i].init({"spider_X":arr_Spider[i].spider_X,"spider_Y":arr_Spider[i].spider_Y});
+            }
+        }
+        console.log(this.arr_Spider);
         
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////游戏逻辑↓
@@ -818,7 +844,7 @@ export default class GamePage extends Laya.Scene{
                 // console.log(dic);
                 if(dic < 80)
                 {
-                    star.starDestroy();
+                    star.starDestroy(star.style);
                     this.score++;
                     this.showSocre();
                 }

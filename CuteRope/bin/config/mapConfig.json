@@ -12,8 +12,8 @@
                 "candy":{"style":"candy","x":376,"y":400},
                 "star":[
                     {"style":"star1","x":375,"y":600},
-                    {"style":"star1","x":375,"y":750},
-                    {"style":"star1","x":375,"y":900}
+                    {"style":"star2","x":375,"y":750},
+                    {"style":"star3","x":375,"y":900}
                 ],
                 "monster":{"x":375,"y":1100,"skin":""},
                 "hook":[

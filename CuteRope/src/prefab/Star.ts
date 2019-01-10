@@ -15,6 +15,7 @@ export default class Star{
     public anim:Laya.Animation;
     public anim2 : Laya.Animation;
     public anim3:Laya.Animation;
+    public anim4:Laya.Animation;
     private view : Laya.Panel;
     /***是否消失 */
     public isDestroy : boolean;
@@ -37,12 +38,6 @@ export default class Star{
     //更新状态
     update(data):void{
         this.isDestroy = false;        
-        if(data.style=="star1"){
-            // this.anim.pos(data.star_X,data.star_Y);
-        }else if(data.style=="star2"){
-            /*this.anim.pos(star_X,star_Y);
-            this.star_CreateDestroyAnim(star_X,star_Y);*/
-        }
         this.sp.visible = true;
         this.sp.x=data.star_X;
         this.sp.y=data.star_Y;
@@ -73,9 +68,9 @@ export default class Star{
         this.anim2.y -= this.sp.height/2;
         this.anim2.visible = false;
 
-        //创建时间寿命动画
+        //创建时间寿命动画1
         this.anim3=new Laya.Animation();
-        this.anim3.loadAnimation("GameView/ani/StarTime.ani");
+        this.anim3.loadAnimation("GameView/ani/StarTime1.ani");
         this.anim3.visible=false;
         if(style=="star2"){
             this.anim3.play(0,false);
@@ -83,9 +78,19 @@ export default class Star{
             this.anim3.visible=true;
         }
 
+        //创建时间寿命动画2
+        this.anim4=new Laya.Animation();
+        this.anim4.loadAnimation("GameView/ani/StarTime2.ani");
+        this.anim4.visible=false;
+        if(style=="star3"){
+            this.anim4.play(0,false);
+            this.anim4.on(Laya.Event.COMPLETE,this,this.destroyed);
+            this.anim4.visible=true;
+        }
         this.sp.addChild(this.anim);
         this.sp.addChild(this.anim2);
         this.sp.addChild(this.anim3);
+        this.sp.addChild(this.anim4);
         this.view.addChild(this.sp);
     }
 
@@ -103,6 +108,10 @@ export default class Star{
             this.anim3.stop();
             this.anim3.visible=false;
         }
+        if(style=="star3"){
+            this.anim4.stop();
+            this.anim4.visible=false;
+        }
         this.isDestroy = true;
     }
 
@@ -112,6 +121,7 @@ export default class Star{
         this.sp.x = 100000;
         this.sp.visible = false;
         this.anim3.visible=false;
+        this.anim4.visible=false;
     }
     
      

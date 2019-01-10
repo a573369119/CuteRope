@@ -30,7 +30,8 @@ class Main {
 
 	onConfigLoaded(): void {
 		//加载IDE指定的场景
-		//Laya.URL.basePath = "https://testcdn.chinaxwz.cn/game/gsz/";
+		// Laya.URL.basePath = "https://testcdn.chinaxwz.cn/game/gsz/";
+		Laya.MouseManager.instance.mouseMoveAccuracy = 0.001;
 		let src= [
 			{url:"config/selectConfig.json"},
             {url:"config/playerDataTest.json"},

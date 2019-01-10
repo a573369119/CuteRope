@@ -12,9 +12,12 @@ export default class RopePoint{
 	public style : string;
 	/**是否连接糖果 */
 	public isConnectCandy : boolean;
+	/**下标 */
+	private index : number;
 
-    constructor(x,y,type:string,style,rotation?){	
+    constructor(x,y,type:string,index,style,rotation?){	
 			this.style = style;
+			this.index = index;
 			this.init({"x":x,"y":y,"type":type,"rotation":rotation}); 	
     }
     
@@ -37,7 +40,7 @@ export default class RopePoint{
     //创建节点精灵
     ropePoint_CreateSprite(x,y,rotation):void{
 		this.sp=new Laya.Sprite();
-		this.sp.loadImage("gameView/rope1.png");
+		this.sp.loadImage("gameView/rope" + (Math.floor(this.index%8/4)+1) + ".png");
 		this.sp.pivot(this.sp.width/2,this.sp.height/2);
 		if(rotation)
 		{

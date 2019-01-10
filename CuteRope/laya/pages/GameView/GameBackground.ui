@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":53,
+    "selecteID":3,
     "searchKey":"View,Door",
-    "props":{"width":750,"var":"Door","sceneColor":"#000000","runtime":"./view/GamePage.ts","height":1334},
+    "props":{"width":750,"visible":true,"var":"Door","sceneColor":"#000000","runtime":"./view/GamePage.ts","height":1334},
     "nodeParent":-1,
-    "maxID":55,
+    "maxID":57,
     "label":"Door",
     "isOpen":true,
     "isDirectory":true,
@@ -18,7 +18,7 @@
             "x":15,
             "type":"Panel",
             "searchKey":"Panel,panel_GameWorld",
-            "props":{"y":0,"x":0,"width":750,"var":"panel_GameWorld","height":1334},
+            "props":{"y":0,"x":0,"width":750,"var":"panel_GameWorld","height":1334,"alpha":1},
             "nodeParent":1,
             "label":"panel_GameWorld",
             "isOpen":false,
@@ -39,13 +39,26 @@
                     "compId":2,
                     "child":[
                         ]
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,gamePos",
+                    "props":{"y":201,"x":126,"width":162,"var":"gamePos","texture":"gameView/gamePos/pos1.png","pivotY":20,"pivotX":60,"height":135},
+                    "nodeParent":3,
+                    "label":"gamePos",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":56,
+                    "child":[
+                        ]
                 }]
         },
         {
             "x":15,
             "type":"Image",
             "searchKey":"Image,btn_Menu",
-            "props":{"y":107,"x":604,"width":146,"var":"btn_Menu","skin":"gameView/gameBtn/menu.png","height":72},
+            "props":{"y":115,"x":109,"width":146,"var":"btn_Menu","skin":"gameView/gameBtn/menu.png","height":72},
             "nodeParent":1,
             "label":"btn_Menu",
             "isDirectory":false,
@@ -59,7 +72,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image,btn_ReGame",
-            "props":{"y":107,"x":516,"width":88,"var":"btn_ReGame","skin":"gameView/gameBtn/regame.png","height":74},
+            "props":{"y":116,"x":21,"width":88,"var":"btn_ReGame","skin":"gameView/gameBtn/regame.png","height":74},
             "nodeParent":1,
             "label":"btn_ReGame",
             "isDirectory":false,
@@ -73,7 +86,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image,img_star1",
-            "props":{"y":20,"x":238,"width":62,"var":"img_star1","skin":"gameView/gameBtn/star1.png","height":69},
+            "props":{"y":26,"x":271,"width":62,"var":"img_star1","skin":"gameView/gameBtn/star1.png","height":69},
             "nodeParent":1,
             "label":"img_star1",
             "isOpen":true,
@@ -88,7 +101,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image,img_star2",
-            "props":{"y":25,"x":307,"width":62,"var":"img_star2","skin":"gameView/gameBtn/star1.png","height":69},
+            "props":{"y":31,"x":340,"width":62,"var":"img_star2","skin":"gameView/gameBtn/star1.png","height":69},
             "nodeParent":1,
             "label":"img_star2",
             "isDirectory":false,
@@ -102,7 +115,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image,img_star3",
-            "props":{"y":25,"x":375,"width":62,"var":"img_star3","skin":"gameView/gameBtn/star1.png","height":69},
+            "props":{"y":31,"x":408,"width":62,"var":"img_star3","skin":"gameView/gameBtn/star1.png","height":69},
             "nodeParent":1,
             "label":"img_star3",
             "isDirectory":false,
@@ -116,7 +129,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,img_replay",
-            "props":{"y":0,"x":0,"width":750,"var":"img_replay","texture":"gameView/gameBg/white.jpg","height":1334},
+            "props":{"y":0,"x":0,"width":750,"var":"img_replay","texture":"gameView/gameBg/white.jpg","mouseThrough":true,"height":1334},
             "nodeParent":1,
             "label":"img_replay",
             "isOpen":true,
@@ -160,7 +173,7 @@
                                 "index":2
                             },
                             {
-                                "value":20,
+                                "value":24.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":9,
@@ -249,7 +262,7 @@
                                 "index":2
                             },
                             {
-                                "value":240,
+                                "value":278,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":9,
@@ -257,7 +270,7 @@
                                 "index":3
                             },
                             {
-                                "value":240,
+                                "value":278,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":9,
@@ -265,7 +278,7 @@
                                 "index":4
                             },
                             {
-                                "value":240,
+                                "value":278,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":9,
@@ -273,7 +286,7 @@
                                 "index":5
                             },
                             {
-                                "value":240,
+                                "value":278,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":9,
@@ -281,7 +294,7 @@
                                 "index":6
                             },
                             {
-                                "value":240,
+                                "value":278,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":9,
@@ -289,7 +302,7 @@
                                 "index":7
                             },
                             {
-                                "value":240,
+                                "value":278,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":9,
@@ -297,7 +310,7 @@
                                 "index":8
                             },
                             {
-                                "value":240,
+                                "value":278,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":9,
@@ -405,6 +418,23 @@
                 {
                     "target":10,
                     "keyframes":{
+                        "y":[
+                            {
+                                "value":31,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":10,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":19,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":10,
+                                "key":"y",
+                                "index":3
+                            }],
                         "x":[
                             {
                                 "value":307,
@@ -413,6 +443,14 @@
                                 "target":10,
                                 "key":"x",
                                 "index":0
+                            },
+                            {
+                                "value":333,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":10,
+                                "key":"x",
+                                "index":3
                             }],
                         "skin":[
                             {
@@ -515,6 +553,23 @@
                 {
                     "target":11,
                     "keyframes":{
+                        "y":[
+                            {
+                                "value":31,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":11,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":24.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":11,
+                                "key":"y",
+                                "index":3
+                            }],
                         "x":[
                             {
                                 "value":375,
@@ -523,6 +578,14 @@
                                 "target":11,
                                 "key":"x",
                                 "index":0
+                            },
+                            {
+                                "value":402,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":11,
+                                "key":"x",
+                                "index":3
                             }],
                         "skin":[
                             {

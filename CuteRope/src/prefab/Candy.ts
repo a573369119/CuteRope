@@ -334,4 +334,11 @@ export default class Candy{
             });
         }
     }
+    //////////////////////////////超能力调用方法
+    public superSetV(vX,vY) : void
+    {
+        this.arr_Body.forEach(body=>{
+            body.setVelocity({x:vX,y:vY});
+        });
+    }
 }

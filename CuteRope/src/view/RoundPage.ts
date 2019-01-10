@@ -60,11 +60,22 @@ export default class RoundPage extends Laya.Scene{
         // }
 
         this.scene.btn_Exit.on(Laya.Event.CLICK,this,this.onExit);
+        this.scene.btn_Exit.on(Laya.Event.MOUSE_DOWN,this,this.onDown);
+        this.scene.btn_Exit.on(Laya.Event.MOUSE_OUT,this,this.onUp);
 
         this.shopDoor.btn_Teach.on(Laya.Event.CLICK,this,this.onTeach);
         this.shopDoor.btn_Super.on(Laya.Event.CLICK,this,this.onSuper);
     }
 
+    private onDown() : void
+    {
+        this.scene.btn_Exit.skin = "publicAssets/exit_Y.png";
+    }
+
+    private onUp() : void
+    {
+        this.scene.btn_Exit.skin = "publicAssets/exit_R.png";
+    }
 
     private onTeach() :void
     {
@@ -187,7 +198,8 @@ export default class RoundPage extends Laya.Scene{
          }
          else
          {
-            this.arr_Card[index].img_Count2.skin = "publicAssets/" + (index + 1) + ".png";                    
+            this.arr_Card[index].img_Count2.skin = "publicAssets/" + (index + 1) + ".png";  
+            this.arr_Card[index].img_Count2.x = 20;                  
          }
     }   
 }

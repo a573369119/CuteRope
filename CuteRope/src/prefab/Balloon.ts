@@ -98,7 +98,7 @@ export default class Balloon{
             {
                 continue;
             }
-            arr_Body[i].setVelocity({x:0,y:-4});
+            arr_Body[i].setVelocity({x:0,y:-5});
         }
         
         

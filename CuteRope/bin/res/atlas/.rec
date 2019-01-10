@@ -79,21 +79,21 @@ P DE5C1715 ation7.png
 P 48122065 ation8.png
 P 0995A8FD ation9.png
 P 64858F12 balloon.png
-P F83F1756 balloon1.png
-P D37FB1E1 balloon10.png
-P 20EC719A balloon11.png
-P 31C1F942 balloon12.png
-P 6F634570 balloon13.png
-P CC53448A balloon14.png
-P 8887792C balloon15.png
-P 08820897 balloon2.png
-P EA4AA9A2 balloon3.png
-P 9ED7238C balloon4.png
-P 41313416 balloon5.png
-P 283599B3 balloon6.png
-P E1F54239 balloon7.png
-P 907F7E46 balloon8.png
-P B5DE1C67 balloon9.png
+P 3A526B5E balloon1.png
+P AF6B6B8A balloon10.png
+P 16569C2B balloon11.png
+P 584C278C balloon12.png
+P E6D250E4 balloon13.png
+P 5B0C19EB balloon14.png
+P BE065C84 balloon15.png
+P 65888F7C balloon2.png
+P 3495DCAA balloon3.png
+P 8FE4BB7F balloon4.png
+P ACAEB464 balloon5.png
+P 253B312B balloon6.png
+P 426892CA balloon7.png
+P 470354A2 balloon8.png
+P 3C15B77E balloon9.png
 P 6EE66B29 balloonBg1.png
 P 59CD2004 balloonBg2.png
 P 7E70B193 balloonBg3.png
@@ -114,7 +114,7 @@ P 64640449 becomeApart2.png
 P 67245DB6 becomeApart3.png
 P FB838CAA becomeApart4.png
 P 51CAA984 becomeApart5.png
-P FC6DA3A7 candy.png
+P BEC62DBA candy.png
 P 32D8A1FB eat1.png
 P 2B2DFC48 eat2.png
 P 1A313B8D eat3.png
@@ -240,25 +240,26 @@ P 6D1C8D41 open6.png
 P 53061187 open7.png
 P 7AAFFF83 open8.png
 P 86AF5892 open9.png
-P A8824E1F rope1.png
+P A8D51164 rope1.png
+P 56FEC775 rope2.png
 P D71944B7 rotate1.png
-P 7DE23412 rotate10.png
-P 1F505B75 rotate11.png
-P A456B42D rotate12.png
-P 19E3289D rotate13.png
-P 765AB805 rotate14.png
-P 114BFA79 rotate15.png
-P 99AF9697 rotate16.png
-P 6737583C rotate17.png
+P 7C413C2F rotate10.png
+P B6D9C3EA rotate11.png
+P C8552B73 rotate12.png
+P 53696DAA rotate13.png
+P C657751F rotate14.png
+P 71691C5E rotate15.png
+P A2542919 rotate16.png
+P 356B16E0 rotate17.png
 P D71944B7 rotate18.png
-P 25442C3E rotate2.png
-P 9665AC56 rotate3.png
-P 9AE88B99 rotate4.png
-P 04C35832 rotate5.png
-P C2A3C31B rotate6.png
-P 6F0AFAD1 rotate7.png
-P 28D56537 rotate8.png
-P AD9E5B7B rotate9.png
+P 9692C50F rotate2.png
+P 35FB737F rotate3.png
+P 9BCBEF43 rotate4.png
+P D6F56A49 rotate5.png
+P 2E13E4C4 rotate6.png
+P 6FA11F4B rotate7.png
+P 1BE7BA99 rotate8.png
+P 4FEF74E9 rotate9.png
 P 1EFA88FA stand1.png
 P 0294C7E5 stand10.png
 P 0ADDE962 stand11.png
@@ -280,19 +281,19 @@ D loadingView
 P AB50B856 loading1.png
 P E6D87ED2 loading2.png
 D perfeb
-R 6D2E3553 Sprite.prefab
+R 56DFA32E Sprite.prefab
 R 89D31129 Sprite1.prefab
 D publicAssets
-P EB460D49 0.png
-P E0B7948B 1.png
-P B2036E57 2.png
-P 04BC3593 3.png
-P 20251805 4.png
-P 897B5F7F 5.png
-P 33E796B8 6.png
-P 93F84C2E 7.png
-P F39D3AF2 8.png
-P AFA5920F 9.png
+P F9C8A936 0.png
+P 28382D07 1.png
+P 43AD68A0 2.png
+P DBE25A29 3.png
+P 8C0109AA 4.png
+P D2D85E15 5.png
+P 2935C5CF 6.png
+P 32567857 7.png
+P 2D111E84 8.png
+P F8512C5B 9.png
 P 06029B4F aniu1.png
 P 1FCFD7E2 aniu2.png
 P F69CB89E black.jpg
@@ -450,14 +451,14 @@ P 491CD577 regame.png
 P 88D23D7A star1.png
 P 2F08DD68 star10.png
 P B14709E9 star11.png
-P 8F5FCC4D star2.png
-P 4290871C star3.png
-P 8E31860F star4.png
-P 0342084D star5.png
-P D0B4920F star6.png
-P C2594E2F star7.png
-P 000D95CD star8.png
-P 40250189 star9.png
+P 598A2CE6 star2.png
+P 7CDDECB8 star3.png
+P E7A47A7B star4.png
+P 437EF1A8 star5.png
+P 1890782B star6.png
+P B8CE57EB star7.png
+P 656611A3 star8.png
+P 8E4D4C53 star9.png
 D gameView/gameDoor
 P 962127FF boxDoor_1.png
 P 54C1D3EC boxDoor_10.png
@@ -494,16 +495,16 @@ D gameView/mouseTail
 P 684C5219 tail.png
 P 39B957DA tail1.png
 D gameView/stardestory
-P 94CBFEBF Image 126.png
-P A63BF3F9 Image 128.png
-P 4537184D Image 130.png
-P 5E1F3CB5 Image 132.png
-P 6EB61731 Image 134.png
-P 00181487 Image 136.png
-P 8D0B1C69 Image 138.png
-P 8CE7C014 Image 140.png
-P 7BDB278F Image 142.png
-P 627C75D1 Image 144.png
-P A967C7D4 Image 146.png
-P 4F01D562 Image 148.png
-P C71400D0 Image 150.png
+P 42CC479E Image 126.png
+P 63E647A5 Image 128.png
+P A5AA47D6 Image 130.png
+P 1B18737A Image 132.png
+P BA091338 Image 134.png
+P 27FED862 Image 136.png
+P F951F1B8 Image 138.png
+P D8F2FB95 Image 140.png
+P 816CEDC1 Image 142.png
+P A168AC54 Image 144.png
+P FE669E77 Image 146.png
+P 388A3891 Image 148.png
+P 10FF61AA Image 150.png

@@ -22,12 +22,14 @@ export default class PlayerStar extends Laya.Script{
         let bai = this.owner.getChildByName("bai");
         //逻辑
         let count_ge;
-        let count_shi = -1;9
+        let count_shi = -1;
         let count_bai = -1;
         count_ge = this.playerStarNum%10;
         count_shi = (Math.floor(this.playerStarNum/10)%10);
         count_bai = (Math.floor(this.playerStarNum/100)%10);
 
+        (shi as Laya.Image).visible = false;
+        (bai as Laya.Image).visible = false;
         (ge as Laya.Image).skin = "publicAssets/" + count_ge + ".png";
         if(this.playerStarNum >= 10)
         {

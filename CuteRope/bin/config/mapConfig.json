@@ -9,7 +9,7 @@
                 "mapSkins":[
                     "GameView/gameBg/boxBg_1.jpg"
                 ],
-                "candy":{"style":"candy","x":376,"y":400},
+                "candy":{"style":"candy","x":376,"y":340},
                 "star":[
                     {"style":"star1","x":375,"y":600},
                     {"style":"star1","x":375,"y":750},

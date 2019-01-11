@@ -40,4 +40,21 @@ export default class Tool{
             return false;
         }                
     }
+
+    public static rotateRopePoint_2(x,y,X,Y):number
+    {
+            let cos=Tool.rotationDeal(x,y,X,Y,"cos");
+            let sin=Tool.rotationDeal(x,y,X,Y,"sin");
+            let rotation;
+            if(cos>=0&&sin>0){
+                rotation= 180/Math.PI*Math.acos(cos)-90;
+            }else if(cos<0&&sin>=0){
+                rotation=180/Math.PI*Math.acos(cos)-90;
+            }else if(cos<=0&&sin<0){
+                rotation=90-180/Math.PI*Math.acos(cos);               
+            }else if(cos>0&&sin<=0){
+                rotation= 90-180/Math.PI*Math.acos(cos);
+            }
+            return rotation;
+    }
 }

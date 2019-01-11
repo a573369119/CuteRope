@@ -67,6 +67,8 @@ export module Config {
         public arr_Forceball : Array<ForceBallConfig>;
         /**魔术帽 */
         public arr_magicHat : Array<MagicHatConfig>;
+        /**蜘蛛 */
+        public arr_Spider : Array<SpiderConfig>;
 
         constructor(data){
             this.arr_Hook = [];
@@ -77,6 +79,7 @@ export module Config {
             this.arr_magicHat = [];
             this.arr_Knife=[];
             this.arr_Forceball=[];
+            this.arr_Spider=[];
             this.parseConfigData(data);
         }
 
@@ -109,6 +112,8 @@ export module Config {
             this.parseKnife(data.knife);
             /**推力球解析 */
             this.parseForceBall(data.forceball);
+            /**蜘蛛解析 */
+            this.parseSpider(data.spider);
         }
 
 
@@ -241,6 +246,24 @@ export module Config {
                 });
             }
         }
+
+        /**蜘蛛 */
+        private parseSpider(spiderObject) : void
+        {
+            if(spiderObject)
+            {
+                
+                    let spiderConfig : SpiderConfig;           
+                        spiderObject.forEach(obj => {
+                        spiderConfig = new SpiderConfig();
+                        spiderConfig.spider_X = obj.x;
+                        spiderConfig.spider_Y = obj.y;
+                        this.arr_Spider.push(spiderConfig);
+                        });
+                console.log("spider -解析");    
+                
+            }
+        }
     }
 
     /**candy */
@@ -347,4 +370,13 @@ export module Config {
         
     }
 
+    /**蜘蛛 balloon*/
+    export class SpiderConfig{
+        /**横坐标 */
+        public spider_X : number;
+        /**纵坐标 */
+        public spider_Y : number;
+        /**所在绳子的下标 */
+        public ropeIndex : number;
+    }
 }

@@ -14,6 +14,8 @@ export default class Star{
     /**精灵 */
     public anim:Laya.Animation;
     public anim2 : Laya.Animation;
+    public anim3:Laya.Animation;
+    public anim4:Laya.Animation;
     private view : Laya.Panel;
     /***是否消失 */
     public isDestroy : boolean;
@@ -28,12 +30,7 @@ export default class Star{
     //初始化,"star1"为普通星星，"star2"为有时间寿命得星星
     init(data):void{
         this.isDestroy = false;        
-        if(data.style=="star1"){
-            this.star_CreateAnim(data.star_X,data.star_Y);
-        }else if(data.style=="star2"){
-            /*this.star_CreateAnim(star_X,star_Y);
-            this.star_CreateDestroyAnim(star_X,star_Y);*/
-        }
+        this.star_CreateAnim(data.star_X,data.star_Y,data.style);
         this.sp.x=data.star_X;
         this.sp.y=data.star_Y;
         this.style=data.style;
@@ -41,14 +38,6 @@ export default class Star{
     //更新状态
     update(data):void{
         this.isDestroy = false;        
-        // this.star_X=data.star_X;
-        // this.star_Y=data.star_Y;
-        if(data.style=="star1"){
-            // this.anim.pos(data.star_X,data.star_Y);
-        }else if(data.style=="star2"){
-            /*this.anim.pos(star_X,star_Y);
-            this.star_CreateDestroyAnim(star_X,star_Y);*/
-        }
         this.sp.visible = true;
         this.sp.x=data.star_X;
         this.sp.y=data.star_Y;
@@ -56,13 +45,19 @@ export default class Star{
         this.anim.visible = true;
         this.anim.play(0,true);
         this.anim2.visible = false;
+        if(data.style=="star2"){
+            this.anim3.visible=true;
+            this.anim3.play(0,false);
+        }else{
+            this.anim3.visible=false;
+
+        }
     }
     //创建星星动画
-    star_CreateAnim(x,y){
+    star_CreateAnim(x,y,style){
         this.anim=new Laya.Animation();
         this.anim.loadAnimation("GameView/ani/Star.ani");
         this.anim.play(0,true);
-        // this.anim.pos(x,y);
         this.anim.x -= this.sp.width/2;
         this.anim.y -= this.sp.height/2;
         
@@ -73,33 +68,61 @@ export default class Star{
         this.anim2.y -= this.sp.height/2;
         this.anim2.visible = false;
 
+        //创建时间寿命动画1
+        this.anim3=new Laya.Animation();
+        this.anim3.loadAnimation("GameView/ani/StarTime1.ani");
+        this.anim3.visible=false;
+        if(style=="star2"){
+            this.anim3.play(0,false);
+            this.anim3.on(Laya.Event.COMPLETE,this,this.destroyed);
+            this.anim3.visible=true;
+        }
+
+        //创建时间寿命动画2
+        this.anim4=new Laya.Animation();
+        this.anim4.loadAnimation("GameView/ani/StarTime2.ani");
+        this.anim4.visible=false;
+        if(style=="star3"){
+            this.anim4.play(0,false);
+            this.anim4.on(Laya.Event.COMPLETE,this,this.destroyed);
+            this.anim4.visible=true;
+        }
         this.sp.addChild(this.anim);
         this.sp.addChild(this.anim2);
+        this.sp.addChild(this.anim3);
+        this.sp.addChild(this.anim4);
         this.view.addChild(this.sp);
     }
 
+
     /**Star消失 */
-    public starDestroy() : void
+    public starDestroy(style) : void
     {
         this.anim.stop();
         this.anim.visible = false;
-
+        
         this.anim2.visible = true;
         this.anim2.play(0,false);
-        // this.anim2.pos(this.sp.x,this.sp.y);
+        
+        if(style=="star2"){
+            this.anim3.stop();
+            this.anim3.visible=false;
+        }
+        if(style=="star3"){
+            this.anim4.stop();
+            this.anim4.visible=false;
+        }
         this.isDestroy = true;
     }
 
     /**星星消失 */
-    private destroyed() : void
+    private destroyed(style) : void
     {
         this.sp.x = 100000;
         this.sp.visible = false;
+        this.anim3.visible=false;
+        this.anim4.visible=false;
     }
-    //创建时间寿命动画
-    star_CreateDestroyAnim(x,y):void{
-
-    }
-
+    
      
 }

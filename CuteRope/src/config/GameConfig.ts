@@ -55,4 +55,14 @@ export default class GameConfig{
     public static ANI_MONSTER_ACTION : string = "ation";
     ////////////////////////////超能力
     public static SUPER_V : number = 7;
+    //////////////////////////////////////////////蜘蛛动画
+    /**【蜘蛛】 糖果接近 */
+    public static ANI_FOUND_CANDY : string = "spiderfond";
+    /** 【蜘蛛】爬向糖果 */
+    public static ANI_TOWORD_CANDY : string = "spider";
+    /** 【蜘蛛】得到糖果 */
+    public static ANI_GET_CANDY : string = "spiderget" ;
+    //////////////////////////////////////////////蜘蛛
+    /**蜘蛛的移动速度 */
+    public static SPIDER_SPEED = 0.01;
 }

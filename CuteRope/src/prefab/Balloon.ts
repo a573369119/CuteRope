@@ -10,6 +10,8 @@ export default class Balloon{
     public anim2 : Laya.Animation;
     /***是否碰撞 */
     public isCollision : boolean;
+    /**是否已减速 */
+    public isSlow:boolean;
     /**加入的层 */
     public view : Laya.Panel;
     constructor(view){
@@ -19,6 +21,7 @@ export default class Balloon{
     //初始化泡泡
     init(data):void{
         this.isCollision=false;
+        this.isSlow=false;
         this.balloon_CreateSprite(data.balloon_X,data.balloon_Y);
         this.balloon_FloatAnim(data.balloon_X,data.balloon_Y);
         this.balloon_BoomAnim(data.balloon_X,data.balloon_Y);
@@ -27,6 +30,7 @@ export default class Balloon{
     //更新状态
     update(data):void{
         this.isCollision=false;
+        this.isSlow=false;
         let randNum=Math.ceil(Math.random()*3);
         this.spBg.loadImage("gameView/balloonBg"+randNum+".png");
         this.spBg.pos(data.balloon_X,data.balloon_Y);
@@ -98,9 +102,25 @@ export default class Balloon{
             {
                 continue;
             }
-            arr_Body[i].setVelocity({x:0,y:-5});
         }
-        
+        if(!this.isSlow){
+            for(let i=0;i<arr_Body.length;i++){
+                arr_Body[i].linearDamping=30;
+                console.log("成功");
+                if(Math.abs(arr_Body[i].linearVelocity.x)<1){
+                    this.isSlow=true;
+                    arr_Body[i].linearDamping=0.03;
+                    console.log("中立");
+                }
+            }
+        }else{
+                for(let i=0;i<arr_Body.length;i++){
+                    arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.85,y:-5});
+                    console.log("失败");
+            }
+            
+        }    
+           
         
     }
 
@@ -123,13 +143,14 @@ export default class Balloon{
     //直接爆炸
     balloon_Boom():void{
         Laya.timer.clear(this,this.balloon_Float);
+        this.anim2.visible=true;
         this.anim2.play(0,false);
+        this.sp.visible=false;
         this.anim2.on(Laya.Event.COMPLETE,this,this.completeBoom);
     }
     //爆炸完成后设置为不可见
     completeBoom():void{
-        this.anim2.visible=false;
-        this.sp.visible=false;
+        this.anim2.visible=false;        
     }
     
     public removeEvent():void{

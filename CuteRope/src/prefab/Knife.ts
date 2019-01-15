@@ -1,5 +1,9 @@
 import Tool from "../Tool/Tool";
     export default class Knife{
+    /**横坐标 */
+    private knife_X:number;
+    /**纵坐标 */
+    private knife_Y:number;
     /**锥子类型 */
     public style : string;
     /**锥子精灵 */
@@ -8,10 +12,6 @@ import Tool from "../Tool/Tool";
     public view : Laya.Panel;
     /***是否碰撞 */
     public isCollision : boolean;
-    /**横坐标 */
-    private knife_X:number;
-    /**纵坐标 */
-    private knife_Y:number;
     /**是否前进 */
     private isGoing:boolean;
     constructor(view){
@@ -91,7 +91,6 @@ import Tool from "../Tool/Tool";
                 this.sp.y=this.knife_Y;
                 this.isGoing=true;
             }
-            console.log(this.isGoing);
         }
         
     }

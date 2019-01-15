@@ -17,16 +17,13 @@
                 ],
                 "monster":{"x":375,"y":1100,"skin":""},
                 "hook":[
-					{"style":"hook1","x":375,"y":200}
+					{"style":"hookslider","x":375,"y":200,"rotation":0,"move":[240,480]}
                 ],
 				"rope":{
 					"length":[
 						200
 					]
-				},
-				"balloon":[
-					{"x":375,"y":800}
-				]
+				}
 				
             },
             {

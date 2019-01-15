@@ -76,7 +76,7 @@ export default class Candy{
         {
             if(!this.arr_Sp[i]) this.arr_Sp[i]=new Laya.Sprite();//不存在 才新创建
             this.arr_Sp[i].loadImage("gameView/"+style+".png");
-            this.arr_Sp[i].zOrder=1;
+            this.arr_Sp[i].zOrder=3;
             this.arr_Sp[i].scaleX = 1;
             this.arr_Sp[i].scaleY = 1;
             this.arr_Sp[i].pivot(this.arr_Sp[i].width/2,this.arr_Sp[i].height/2);
@@ -304,7 +304,7 @@ export default class Candy{
                 sprite.loadImage("gameView/becomeApart"+(i+1)+".png");
                 sprite.pivot(sprite.width/2,sprite.height/2);
                 sprite.visible=false;
-                sprite.zOrder=1;
+                sprite.zOrder=3;
                 this.view.addChild(sprite);
                 this.arr_ApartSp.push(sprite);
             //刚体
@@ -331,6 +331,8 @@ export default class Candy{
             this.arr_ApartBody[i].setVelocity({x:currX,y:-Math.random()*3-2});
             this.arr_Sp.forEach(sprite => {//隐藏糖果
                 sprite.visible = false;
+                sprite.x=0;
+                sprite.y=0;
             });
         }
     }

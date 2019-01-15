@@ -39,6 +39,7 @@ export default class RopePoint{
 		this.sp=new Laya.Sprite();
 		this.sp.loadImage("gameView/rope1.png");
 		this.sp.pivot(this.sp.width/2,this.sp.height/2);
+		this.sp.zOrder=2;
 		if(rotation)
 		{
 			this.sp.rotation = rotation;

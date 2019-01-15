@@ -67,9 +67,9 @@ export module Config {
         public arr_Forceball : Array<ForceBallConfig>;
         /**魔术帽 */
         public arr_magicHat : Array<MagicHatConfig>;
-        /**蜘蛛 */
-        public arr_Spider : Array<SpiderConfig>;
-
+        /**激光 */
+        public arr_Laser : Array<LaserConfig>;
+        
         constructor(data){
             this.arr_Hook = [];
             this.arr_Rope = [];
@@ -79,7 +79,7 @@ export module Config {
             this.arr_magicHat = [];
             this.arr_Knife=[];
             this.arr_Forceball=[];
-            this.arr_Spider=[];
+            this.arr_Laser=[];
             this.parseConfigData(data);
         }
 
@@ -112,8 +112,8 @@ export module Config {
             this.parseKnife(data.knife);
             /**推力球解析 */
             this.parseForceBall(data.forceball);
-            /**蜘蛛解析 */
-            this.parseSpider(data.spider);
+            /**激光解析 */
+            this.parseLaser(data.laser);
         }
 
 
@@ -137,6 +137,8 @@ export module Config {
                 hookConfig.style=obj.style;
                 hookConfig.hook_X = obj.x;
                 hookConfig.hook_Y = obj.y;
+                hookConfig.rotation=obj.rotation;
+                hookConfig.move=obj.move;
                 this.arr_Hook.push(hookConfig);
             });
             console.log("hook -解析");            
@@ -247,18 +249,22 @@ export module Config {
             }
         }
 
-        /**蜘蛛 */
-        private parseSpider(spiderObject) : void
+        /**激光 */
+        private parseLaser(laserObject) : void
         {
-            if(spiderObject)
+            if(laserObject)
             {
                 
-                    let spiderConfig : SpiderConfig;           
-                        spiderObject.forEach(obj => {
-                        spiderConfig = new SpiderConfig();
-                        spiderConfig.spider_X = obj.x;
-                        spiderConfig.spider_Y = obj.y;
-                        this.arr_Spider.push(spiderConfig);
+                    let laserConfig : LaserConfig;           
+                        laserObject.forEach(obj => {
+                        laserConfig = new LaserConfig();
+                        laserConfig.laser_X = obj.x;
+                        laserConfig.laser_Y = obj.y;
+                        laserConfig.isAdvanceLaser=obj.isAdvanceLaser;
+                        laserConfig.time=obj.time;
+                        laserConfig.move=obj.move;
+                        laserConfig.rotation=obj.rotation;
+                        this.arr_Laser.push(laserConfig);
                         });
                 console.log("spider -解析");    
                 
@@ -313,6 +319,10 @@ export module Config {
         public hook_Y : number;
         /**钩子类型 */
         public style : string;
+        /**旋转角度(hook3) */
+        public rotation:number;
+        /**移动范围 */
+        public move:Array<number>;
         constructor(){
 
         }
@@ -370,11 +380,19 @@ export module Config {
         
     }
 
-    /**蜘蛛 balloon*/
-    export class SpiderConfig{
+    /**激光 laser*/
+    export class LaserConfig{
         /**横坐标 */
-        public spider_X : number;
+        public laser_X : number;
         /**纵坐标 */
-        public spider_Y : number;
+        public laser_Y : number;
+        /**是否优先发射激光 */
+        public isAdvanceLaser:boolean;
+        /**发射激光间隔时间,单位为秒 */
+        public time:number;
+        /**移动到某点 */
+        public move:Array<number>;
+        /**旋转角度 */
+        public rotation : number;
     }
 }

@@ -86,7 +86,7 @@ export default class Balloon{
         this.anim2.x -= this.sp.width/2;
         this.anim2.y -= this.sp.height/2; 
         this.anim2.visible = false;
-        this.anim2.zOrder=2;
+        this.anim2.zOrder=4;
         this.view.addChild(this.anim2);
     }
 

@@ -1,7 +1,7 @@
 {
     "type":"View",
     "selectedBox":1,
-    "selecteID":25,
+    "selecteID":7,
     "searchKey":"View",
     "props":{"width":480,"visible":true,"sceneColor":"#000000","height":800},
     "nodeParent":-1,
@@ -919,6 +919,43 @@
                                 "target":25,
                                 "key":"visible",
                                 "index":20
+                            }]
+                    }
+                },
+                {
+                    "target":7,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":803,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":7,
+                                "key":"y",
+                                "index":0
+                            }],
+                        "x":[
+                            {
+                                "value":23,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":7,
+                                "key":"x",
+                                "index":0
+                            }]
+                    }
+                },
+                {
+                    "target":8,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":801,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":8,
+                                "key":"y",
+                                "index":0
                             }]
                     }
                 }],

@@ -308,7 +308,7 @@ export default class Candy{
                 sprite.loadImage("gameView/becomeApart"+(i+1)+".png");
                 sprite.pivot(sprite.width/2,sprite.height/2);
                 sprite.visible=false;
-                sprite.zOrder=1;
+                sprite.zOrder=3;
                 this.view.addChild(sprite);
                 this.arr_ApartSp.push(sprite);
             //刚体

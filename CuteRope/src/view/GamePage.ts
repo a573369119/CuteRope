@@ -14,6 +14,7 @@ import RopePoint from "../prefab/RopePoint";
 import Knife from "../prefab/Knife";
 import { PlayerData } from "./Config/PlayerData";
 import ForceBall from "../prefab/ForceBall";
+import Laser from "../prefab/Laser";
 import Spider from "../prefab/Spider";
  /**
  * 游戏界面 ani  1：开门动画 2： 
@@ -70,13 +71,15 @@ export default class GamePage extends Laya.Scene{
     public arr_Knife:Array<Knife>;
     /**推力球 */
     public arr_ForceBall:Array<ForceBall>;
+    /**激光 */
+    public arr_Laser:Array<Laser>;
     /**蜘蛛 */
     public arr_Spider:Array<Spider>;
 //-------------------------------------------
     /**透明度转折变量 */
     private alphaZ : number = 0;
     /**鼠标检测修正 上一鼠标坐标 */
-    private lastMousePos : any = {};
+    private lastMousePos : any ;
     /**距离最远的绳子 */
     private maxLongRope : number;
     /**最远距离绳子下标 */
@@ -109,6 +112,7 @@ export default class GamePage extends Laya.Scene{
         Laya.stage.width = 480;
         Laya.stage.height = 800;
         // ui初始化
+        // ui初始化
         this.newShopUi();
         this.initBgSkin();
         this.menuUI = new ui.GameView.GameMenuUI();
@@ -121,17 +125,16 @@ export default class GamePage extends Laya.Scene{
         this.scene.img_replay.alpha = 0;
         this.alphaZ = 1;
         this.score = 0;
-        this.lastMousePos.x = null;
-        this.lastMousePos.y = null;
+        this.lastMousePos = {};
         this.isOpenSuper = false;
         this.isReplay = false;
         this.isEated = false;
         Laya.Physics.I.gravity = {x:0,y:GameConfig.WOLDE_G};
         //界面 可视 初始化
         Laya.MouseManager.enabled = false;
+        // this.doorOpen.ani1.play(0,false);
         this.menuUI.visible = false;
         //添加事件
-
         this.addEvents();
         //第一次更新游戏
         this.UpdateData(this.quarterIndex+ "-" + this.boxIndex,this.cardIndex,true);
@@ -146,8 +149,7 @@ export default class GamePage extends Laya.Scene{
         this.scene.img_gameBg.skin = "GameView/gameBg/boxBg_"+(this.boxIndex+1)+".jpg";
     }
 
-    private newShopUi() : void
-    {
+    private newShopUi() {
         this.shopDoor = new ui.topLeftUI();
         this.shopDialog = Laya.WeakObject.I.get("dialog");
         this.scene.addChild(this.shopDoor);
@@ -197,7 +199,6 @@ export default class GamePage extends Laya.Scene{
    /**添加事件 */
    protected addEvents() : void
    {
-
        this.scene.btn_ReGame.on(Laya.Event.CLICK, this, this.onReGame);
        this.scene.btn_Menu.on(Laya.Event.CLICK, this, this.onMenu);
 
@@ -216,22 +217,22 @@ export default class GamePage extends Laya.Scene{
        //
        Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.onMouseDown);
        Laya.stage.on(Laya.Event.MOUSE_UP,this,this.onMouseUp);
-       
+
        //按钮效果添加
-       this.doorOpen.btn_Next.on(Laya.Event.MOUSE_DOWN, this, this.onBtn,["down",this.doorOpen.btn_Next]);
-       this.doorOpen.btn_Replay.on(Laya.Event.MOUSE_DOWN, this, this.onBtn,["down",this.doorOpen.btn_Replay]);
-       this.doorOpen.btn_ReturnRound.on(Laya.Event.MOUSE_DOWN,this, this.onBtn,["down",this.doorOpen.btn_ReturnRound]);
-       this.doorOpen.btn_Next.on(Laya.Event.MOUSE_OUT, this, this.onBtn,["",this.doorOpen.btn_Next]);
-       this.doorOpen.btn_Replay.on(Laya.Event.MOUSE_OUT, this, this.onBtn,["",this.doorOpen.btn_Replay]);
-       this.doorOpen.btn_ReturnRound.on(Laya.Event.MOUSE_OUT, this, this.onBtn,["",this.doorOpen.btn_ReturnRound]);
+       this.doorOpen.btn_Next.on(Laya.Event.MOUSE_DOWN, this, this.onBtn, ["down", this.doorOpen.btn_Next]);
+       this.doorOpen.btn_Replay.on(Laya.Event.MOUSE_DOWN, this, this.onBtn, ["down", this.doorOpen.btn_Replay]);
+       this.doorOpen.btn_ReturnRound.on(Laya.Event.MOUSE_DOWN, this, this.onBtn, ["down", this.doorOpen.btn_ReturnRound]);
+       this.doorOpen.btn_Next.on(Laya.Event.MOUSE_OUT, this, this.onBtn, ["", this.doorOpen.btn_Next]);
+       this.doorOpen.btn_Replay.on(Laya.Event.MOUSE_OUT, this, this.onBtn, ["", this.doorOpen.btn_Replay]);
+       this.doorOpen.btn_ReturnRound.on(Laya.Event.MOUSE_OUT, this, this.onBtn, ["", this.doorOpen.btn_ReturnRound]);
 
-       this.menuUI.btn_Continue.on(Laya.Event.MOUSE_DOWN, this, this.onBtn,["down",this.menuUI.btn_Continue]);
-       this.menuUI.btn_SelectRound.on(Laya.Event.MOUSE_DOWN, this, this.onBtn,["down",this.menuUI.btn_SelectRound]);
-       this.menuUI.btn_MainMenu.on(Laya.Event.MOUSE_DOWN, this, this.onBtn,["down",this.menuUI.btn_MainMenu]);
-       this.menuUI.btn_Continue.on(Laya.Event.MOUSE_OUT, this, this.onBtn,["",this.menuUI.btn_Continue]);
-       this.menuUI.btn_SelectRound.on(Laya.Event.MOUSE_OUT, this, this.onBtn,["",this.menuUI.btn_SelectRound]);
-       this.menuUI.btn_MainMenu.on(Laya.Event.MOUSE_OUT, this, this.onBtn,["",this.menuUI.btn_MainMenu]);
-
+       this.menuUI.btn_Continue.on(Laya.Event.MOUSE_DOWN, this, this.onBtn, ["down", this.menuUI.btn_Continue]);
+       this.menuUI.btn_SelectRound.on(Laya.Event.MOUSE_DOWN, this, this.onBtn, ["down", this.menuUI.btn_SelectRound]);
+       this.menuUI.btn_MainMenu.on(Laya.Event.MOUSE_DOWN, this, this.onBtn, ["down", this.menuUI.btn_MainMenu]);
+       this.menuUI.btn_Continue.on(Laya.Event.MOUSE_OUT, this, this.onBtn, ["", this.menuUI.btn_Continue]);
+       this.menuUI.btn_SelectRound.on(Laya.Event.MOUSE_OUT, this, this.onBtn, ["", this.menuUI.btn_SelectRound]);
+       this.menuUI.btn_MainMenu.on(Laya.Event.MOUSE_OUT, this, this.onBtn, ["", this.menuUI.btn_MainMenu]);
+       
        this.addAnimationOver();
    }
 
@@ -290,6 +291,13 @@ export default class GamePage extends Laya.Scene{
                 forceball.destroy();
             });
         }
+        if(this.arr_Laser)//laser销毁
+        {
+            this.arr_Laser.forEach(laser => {
+                laser.clearTimer();
+                laser.destroy();
+            });
+        }
    }
 
     /**鼠标点下 */
@@ -326,9 +334,10 @@ export default class GamePage extends Laya.Scene{
         }
    }
 
-   onclick(e) : void
-   {
 
+   oncleic(e) : void
+   {
+    console.log(e.traget);
    }
 
 
@@ -613,23 +622,23 @@ export default class GamePage extends Laya.Scene{
         //星星数据初始化
         this.starInit(this.mapConfig.arr_Star);
         //糖果数据初始化
-        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length,this.mapConfig.arr_Knife);
+        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length,this.mapConfig.arr_Knife,this.mapConfig.arr_Laser);
         //泡泡数据初始化
         this.balloonInit(this.mapConfig.arr_Balloon);
         //帽子数据初始化
         this.hatInit(this.mapConfig.arr_magicHat); 
         //锥子数据初始化
         this.knifeInit(this.mapConfig.arr_Knife);
-        //推力球数据初始化
-        this.forceBallInit(this.mapConfig.arr_Forceball);
-        //初始化开门动画
-        this.openDoorInit(this.mapConfig.arr_Rope);
         //蜘蛛数据初始化
         this.spiderInit(this.mapConfig.arr_Spider);
+        //推力球数据初始化
+        this.forceBallInit(this.mapConfig.arr_Forceball);
+        //激光数据初始化
+        this.laserInit(this.mapConfig.arr_Laser);
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
         //割绳检测
-        Laya.timer.loop(1,this,this.mouseCute);
+        Laya.timer.loop(16,this,this.mouseCute);
         //糖果检测 
         Laya.timer.loop(1,this,this.candyTest);
         
@@ -644,88 +653,88 @@ export default class GamePage extends Laya.Scene{
         this.newDoorUi();
         
     }
-    /**ropeToCandy */
-    private ropeToCandy() : void
-    {
-        let obj : any = {};
-        let rope : Rope;
-        let add = 0;
-        let speContorl = 1;
-        let dic;
-        let speed  : number =  GameConfig.ROPE_TO_CANDY_SPEED ;
-        for(let i=0;i<this.arr_Rope.length;i++)
-        {
-            rope = this.arr_Rope[i];
-            dic = Math.sqrt(Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x - this.candy.getCandySprite(0).x,2) + Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y - this.candy.getCandySprite(0).y,2));
-            if(rope.ropePointsArray[1].style == "hook3")
-            {//弹性绳子
-                if(dic < 200)
-                {//进入加速范围
-                    speContorl = 0.1;
-                }       
-                speed = GameConfig.ROPE_JUMP__TO_CANDY_SPEED; 
-            }
-            obj.x = speed/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"cos");
-            obj.y = speed/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"sin");
-            
-            rope.ropePointsArray[rope.ropePointsArray.length-1].body.setVelocity(obj);
-            // rope.ropePointsArray[rope.ropePointsArray.length - 1].body.applyForceToCenter({x:obj.x,y:obj.y});
-            if(dic < 15)
-            {
-                add++;
-            } 
-            speContorl = 1;
-            ///////////////开门等待
-            if(i == this.maxLongIndex)
-            {
-                this.doorOpen.img_xiaodao.y = (800+339) * dic/this.maxLongRope - 339;
-            }
-        }
-               
-        if(add == this.arr_Rope.length)
-        {
-			Laya.timer.clear(this,this.ropeToCandy);
-            this.candy.set("useg");
-            //连接糖果
-            for(let i=0;i<this.arr_Rope.length;i++)
-            {
     
-                this.arr_Rope[i].connectCandy(this.candy,i);
-                this.arr_Rope[i].ropePointsArray[this.arr_Rope.length - 1].sp.getComponents(Laya.RigidBody)[0].setVelocity({x:0,y:0});
-            }
-            //获取位置信息
-            for(let z=0 ;z <this.arr_Rope.length;z++)
-            {
-                if(this.arr_RemRope === undefined) 
-                {
-                    this.arr_RemRope = new Array<any>();
-                }
-                this.arr_RemRope.push(this.arr_Rope[z].getRemRope());
-            }
-            //开门动画处理
-            // if(this.isInit)
-            if(!this.isReplay)
-            {
-                if(this.doorOpen.img_xiaodao.y > -200)
-                {
-                    // this.doorOpen.img_xiaodao.visible = true;
-                    let num = this.doorOpen.img_xiaodao.y + 339;
-                    num = num/15;
-                    Laya.timer.loop(50,this,this.openDoorDeal,[num]);
-                }
-                else
-                {
-                    this.openDoorEnd();
-                }
-            }
-            else
-            {
-                //开启鼠标事件
-                Laya.MouseManager.enabled = true;
-            }
-        }
-    }
-
+   /**ropeToCandy */
+   private ropeToCandy() : void
+   {
+       let obj : any = {};
+       let rope : Rope;
+       let add = 0;
+       let speContorl = 1;
+       let dic;
+       let speed  : number =  GameConfig.ROPE_TO_CANDY_SPEED ;
+       for(let i=0;i<this.arr_Rope.length;i++)
+       {
+           rope = this.arr_Rope[i];
+           dic = Math.sqrt(Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x - this.candy.getCandySprite(0).x,2) + Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y - this.candy.getCandySprite(0).y,2));
+           if(rope.ropePointsArray[1].style == "hook3")
+           {//弹性绳子
+               if(dic < 200)
+               {//进入加速范围
+                   speContorl = 0.1;
+               }       
+               speed = GameConfig.ROPE_JUMP__TO_CANDY_SPEED; 
+           }
+           obj.x = speed/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"cos");
+           obj.y = speed/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy.getCandySprite(0).x,this.candy.getCandySprite(0).y,"sin");
+           
+           rope.ropePointsArray[rope.ropePointsArray.length-1].body.setVelocity(obj);
+           // rope.ropePointsArray[rope.ropePointsArray.length - 1].body.applyForceToCenter({x:obj.x,y:obj.y});
+           if(dic < 15)
+           {
+               add++;
+           } 
+           speContorl = 1;
+           ///////////////开门等待
+           if(i == this.maxLongIndex)
+           {
+               this.doorOpen.img_xiaodao.y = (800+339) * dic/this.maxLongRope - 339;
+           }
+       }
+              
+       if(add == this.arr_Rope.length)
+       {
+           Laya.timer.clear(this,this.ropeToCandy);
+           this.candy.set("useg");
+           //连接糖果
+           for(let i=0;i<this.arr_Rope.length;i++)
+           {
+   
+               this.arr_Rope[i].connectCandy(this.candy,i);
+               this.arr_Rope[i].ropePointsArray[this.arr_Rope.length - 1].sp.getComponents(Laya.RigidBody)[0].setVelocity({x:0,y:0});
+           }
+           //获取位置信息
+           for(let z=0 ;z <this.arr_Rope.length;z++)
+           {
+               if(this.arr_RemRope === undefined) 
+               {
+                   this.arr_RemRope = new Array<any>();
+               }
+               this.arr_RemRope.push(this.arr_Rope[z].getRemRope());
+           }
+           //开门动画处理
+           // if(this.isInit)
+           if(!this.isReplay)
+           {
+               if(this.doorOpen.img_xiaodao.y > -200)
+               {
+                   // this.doorOpen.img_xiaodao.visible = true;
+                   let num = this.doorOpen.img_xiaodao.y + 339;
+                   num = num/15;
+                   Laya.timer.loop(50,this,this.openDoorDeal,[num]);
+               }
+               else
+               {
+                   this.openDoorEnd();
+               }
+           }
+           else
+           {
+               //开启鼠标事件
+               Laya.MouseManager.enabled = true;
+           }
+       }
+   }
     private openDoorDeal(num) 
     {
         this.doorOpen.img_xiaodao.y += -num;
@@ -761,6 +770,28 @@ export default class GamePage extends Laya.Scene{
         }    
         
     }
+  /**蜘蛛数据初始化 */
+  private spiderInit(arr_Spider) : void
+  {
+     if(!arr_Spider[0]) return;
+      if(this.arr_Spider ==undefined)
+          this.arr_Spider = new Array<Spider>();
+      for(let i=0;i<arr_Spider.length;i++)
+      {
+          if(this.arr_Spider[i])
+          {
+              this.arr_Spider[i].update({"spider_X":arr_Spider[i].spider_X,"spider_Y":arr_Spider[i].spider_Y});
+          }
+          else
+          {
+              this.arr_Spider[i] = new Spider(this.scene.panel_GameWorld);
+              this.arr_Spider[i].init({"spider_X":arr_Spider[i].spider_X,"spider_Y":arr_Spider[i].spider_Y},this,this.failGame);
+          }
+          // 
+      }
+      console.log(this.arr_Spider);
+      
+  }
 
     /**帽子初始化 */
     private hatInit(hatConfig) : void
@@ -827,14 +858,14 @@ export default class GamePage extends Laya.Scene{
     }
     
     /**糖果数据初始化 */
-    private candyInit(candyConfig,num,arr_Knife) : void
+    private candyInit(candyConfig,num,arr_Knife,arr_Laser) : void
     {
         if(!this.candy) 
         {
             this.candy = new Candy(this.scene.panel_GameWorld);
             this.candy.init({"x":candyConfig.candy_X,"y":candyConfig.candy_Y,"style":candyConfig.style},num);
             /**-------是否初始化糖果碎片----- */
-            if(arr_Knife[0]){
+            if(arr_Knife[0]||arr_Laser[0]){
                 this.candy.createCandyApart();
             }
         }
@@ -842,7 +873,7 @@ export default class GamePage extends Laya.Scene{
         {
             this.candy.update({"x":candyConfig.candy_X,"y":candyConfig.candy_Y,"style":candyConfig.style},num);
             /**-------是否初始化糖果碎片----- */
-            if(arr_Knife[0]){
+            if(arr_Knife[0]||arr_Laser[0]){
                 this.candy.createCandyApart();
             }
         }
@@ -863,10 +894,10 @@ export default class GamePage extends Laya.Scene{
             else
             {
                 this.arr_Hook[i] = new Hook(this.scene.panel_GameWorld);
-                this.arr_Hook[i].init({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style},arr_Hook[i].size);
+                this.arr_Hook[i].init({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style,"rotation":arr_Hook[i].rotation,"move":arr_Hook[i].move},arr_Hook[i].size);
             }
         }
-        // console.log(this.arr_Hook);
+        console.log(this.arr_Hook);
         
     }
     
@@ -909,7 +940,7 @@ export default class GamePage extends Laya.Scene{
                 this.arr_Balloon[i].init({"balloon_X":arr_Balloon[i].balloon_X,"balloon_Y":arr_Balloon[i].balloon_Y});                
             }
         }
-        // console.log(this.arr_Balloon);
+        console.log(this.arr_Balloon);
         
     }
 
@@ -931,7 +962,7 @@ export default class GamePage extends Laya.Scene{
                  this.arr_Knife[i].init({"knife_X":arr_Knife[i].knife_X,"knife_Y":arr_Knife[i].knife_Y,"style":arr_Knife[i].style,"rotation":arr_Knife[i].rotation,"isAlwaysRotate":arr_Knife[i].isAlwaysRotate,"move":arr_Knife[i].move});
              }
          }
-        //  console.log(this.arr_Knife);
+         console.log(this.arr_Knife);
          
      }
 
@@ -955,30 +986,29 @@ export default class GamePage extends Laya.Scene{
                 this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy]);
             }
         }
-        // console.log(this.arr_ForceBall);
+        console.log(this.arr_ForceBall);
         
     }
 
-    /**蜘蛛数据初始化 */
-    private spiderInit(arr_Spider) : void
+    /**激光数据初始化 */
+    private laserInit(arr_Laser) : void
     {
-       if(!arr_Spider[0]) return;
-        if(this.arr_Spider ==undefined)
-            this.arr_Spider = new Array<Spider>();
-        for(let i=0;i<arr_Spider.length;i++)
+       if(!arr_Laser[0]) return;
+        if(this.arr_Laser ==undefined)
+            this.arr_Laser = new Array<Laser>();
+        for(let i=0;i<arr_Laser.length;i++)
         {
-            if(this.arr_Spider[i])
+            if(this.arr_Laser[i])
             {
-                this.arr_Spider[i].update({"spider_X":arr_Spider[i].spider_X,"spider_Y":arr_Spider[i].spider_Y});
+                this.arr_Laser[i].update({"laser_X":arr_Laser[i].laser_X,"laser_Y":arr_Laser[i].laser_Y,"rotation":arr_Laser[i].rotation,"isAdvanceLaser":arr_Laser[i].isAdvanceLaser,"time":arr_Laser[i].time,"move":arr_Laser[i].move});
             }
             else
             {
-                this.arr_Spider[i] = new Spider(this.scene.panel_GameWorld);
-                this.arr_Spider[i].init({"spider_X":arr_Spider[i].spider_X,"spider_Y":arr_Spider[i].spider_Y},this,this.failGame);
+                this.arr_Laser[i] = new Laser(this.scene.panel_GameWorld);
+                this.arr_Laser[i].init({"laser_X":arr_Laser[i].laser_X,"laser_Y":arr_Laser[i].laser_Y,"rotation":arr_Laser[i].rotation,"isAdvanceLaser":arr_Laser[i].isAdvanceLaser,"time":arr_Laser[i].time,"move":arr_Laser[i].move});
             }
-            // 
         }
-        console.log(this.arr_Spider);
+        console.log(this.arr_Laser);
         
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////游戏逻辑↓
@@ -1012,6 +1042,8 @@ export default class GamePage extends Laya.Scene{
         this.testKnife(x,y);
         //与推力球的距离检测
         this.testForceBall(x,y);
+        //与激光的距离检测
+        this.testLaser(x,y);
         //与鼠标的距离检测 - 超能力
         this.testSuper(x,y);
         // console.log(this.candy.isExistBalloon);
@@ -1051,7 +1083,6 @@ export default class GamePage extends Laya.Scene{
                 this.arr_Hook[i].isCreate = true;
                 this.arr_Rope.push(rope);
                 rope.connectCandy(this.candy,-1);
-                //绳子成功连接检测是否又蜘蛛
                 if(this.arr_Spider)
                 {
                     this.arr_Spider.forEach(spider =>{
@@ -1066,6 +1097,12 @@ export default class GamePage extends Laya.Scene{
             }
         }
         
+        for(let i = 0; i< this.arr_Hook.length ; i++)
+        {
+            if(this.arr_Hook[i].style=="hookslider"){
+                this.arr_Rope[i].ropePointsArray[0].sp.pos(this.arr_Hook[i].sp.x,this.arr_Hook[i].sp.y);
+            }
+        }
     }
 
     /** 与星星的距离检测*/
@@ -1114,8 +1151,6 @@ export default class GamePage extends Laya.Scene{
 
     /**糖果被吃 事件处理 */
     private candyEated() {
-        //设置超能力关闭
-        this.isOpenSuper = false;
         if (this.arr_Balloon) {
             for (let i = 0; i < this.arr_Balloon.length; i++) {
                 if (this.candy.isExistBalloon) {
@@ -1183,7 +1218,6 @@ export default class GamePage extends Laya.Scene{
 
     /**与锥子的距离检测 */
     private testKnife(x,y){
-        if(this.isOpenSuper) return;//如果开启超能力
         if(!this.arr_Knife) return;
         //检测与锥子得距离，碰撞到则播放哭泣动画结束游戏,在GamePage中开启此检测方法
         let collide;
@@ -1215,6 +1249,28 @@ export default class GamePage extends Laya.Scene{
             }else{
                 forceball.isApplyForce=false;
             }
+        })
+    }
+
+    private testLaser(x,y){
+        if(!this.arr_Laser) return;
+        //检测糖果是否进入激光检测区域，若在区域内则糖果破裂
+        let collide;
+        this.arr_Laser.forEach(laser=>{
+            if(!laser.isCollision){
+                collide=laser.spRect.hitTestPoint(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+                if(!laser.isAdvanceLaser){
+                    if(collide){
+                        laser.isCollision=true;
+                        //糖果破碎
+                        this.candy.becomeApart(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+                        this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
+                        Laya.timer.once(1250,this,this.onReGame);
+                    }
+                }
+            
+            }
+            
         })
     }
     /**显示菜单 */
@@ -1262,7 +1318,16 @@ export default class GamePage extends Laya.Scene{
 ///////////////////////////////////////mouseCute
     private mouseCute() : void
     {
-        if(this.isMouseDown)
+        //检测是否正按下鼠标移动钩子，若未按下则可开启割绳子检测
+        let count=0;
+        for(let i=0;i<this.arr_Hook.length;i++){
+           if(this.arr_Hook[i].isHookMouseDown)
+            {
+                count++;
+            }
+        }
+        
+        if(this.isMouseDown&&count==0)
         {
             let mX = Laya.stage.mouseX;
             let mY = Laya.stage.mouseY;
@@ -1328,7 +1393,7 @@ export default class GamePage extends Laya.Scene{
                         }
                     }
 
-                }
+                }   
             });
             //
             this.lastMousePos.x = mX;
@@ -1412,6 +1477,12 @@ export default class GamePage extends Laya.Scene{
         if(boxData[this.cardIndex] == -1 && this.cardIndex != 24)
         {
             boxData[this.cardIndex + 1] = -1; 
+        }
+        if(boxData[this.cardIndex] == 24)
+        {
+            let boxDataNext = Laya.WeakObject.I.get(this.quarterIndex + "-" + (++this.boxIndex));
+            if(boxDataNext)
+                boxDataNext[0] = -1;
         }
         boxData[this.cardIndex] = stars;
         this.score = 0;

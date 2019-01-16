@@ -2,7 +2,6 @@
     "x":0,
     "type":"Sprite",
     "selectedBox":16,
-    "selecteID":15,
     "searchKey":"Sprite,round_Lamp",
     "props":{"y":0,"x":0,"width":1600,"var":"round_Lamp","presetID":1,"preset":"laya/assets/perfeb/Sprite.prefab","pivotY":800,"pivotX":800,"isPresetRoot":true,"height":1600},
     "nodeParent":-1,

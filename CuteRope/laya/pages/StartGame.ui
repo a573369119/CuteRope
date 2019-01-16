@@ -2,7 +2,6 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":9,
     "searchKey":"View",
     "props":{"width":750,"sceneColor":"#000000","runtime":"view/StartGamePage.ts","height":1334},
     "nodeParent":-1,

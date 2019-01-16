@@ -7,13 +7,14 @@
     "nodeParent":-1,
     "maxID":5,
     "label":"View",
-    "isOpen":null,
+    "isOpen":true,
     "isDirectory":true,
     "isAniNode":true,
     "hasChild":true,
     "compId":2,
     "child":[
         {
+            "x":15,
             "type":"GraphicNode",
             "searchKey":"GraphicNode",
             "props":{},
@@ -52,7 +53,7 @@
                             }],
                         "width":[
                             {
-                                "value":100,
+                                "value":69,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":4,
@@ -61,7 +62,7 @@
                             }],
                         "skin":[
                             {
-                                "value":"gameView/balloon1.png",
+                                "value":"gameView/paopao/balloon1.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -69,7 +70,7 @@
                                 "index":0
                             },
                             {
-                                "value":"gameView/balloon2.png",
+                                "value":"gameView/paopao/balloon2.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -77,7 +78,7 @@
                                 "index":2
                             },
                             {
-                                "value":"gameView/balloon3.png",
+                                "value":"gameView/paopao/balloon3.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -85,7 +86,7 @@
                                 "index":4
                             },
                             {
-                                "value":"gameView/balloon4.png",
+                                "value":"gameView/paopao/balloon4.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -93,7 +94,7 @@
                                 "index":6
                             },
                             {
-                                "value":"gameView/balloon5.png",
+                                "value":"gameView/paopao/balloon5.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -101,7 +102,7 @@
                                 "index":8
                             },
                             {
-                                "value":"gameView/balloon6.png",
+                                "value":"gameView/paopao/balloon6.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -109,7 +110,7 @@
                                 "index":10
                             },
                             {
-                                "value":"gameView/balloon7.png",
+                                "value":"gameView/paopao/balloon7.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -117,7 +118,7 @@
                                 "index":12
                             },
                             {
-                                "value":"gameView/balloon8.png",
+                                "value":"gameView/paopao/balloon8.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -125,7 +126,7 @@
                                 "index":14
                             },
                             {
-                                "value":"gameView/balloon9.png",
+                                "value":"gameView/paopao/balloon9.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -133,7 +134,7 @@
                                 "index":16
                             },
                             {
-                                "value":"gameView/balloon10.png",
+                                "value":"gameView/paopao/balloon10.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -141,7 +142,7 @@
                                 "index":18
                             },
                             {
-                                "value":"gameView/balloon11.png",
+                                "value":"gameView/paopao/balloon11.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -149,7 +150,7 @@
                                 "index":20
                             },
                             {
-                                "value":"gameView/balloon12.png",
+                                "value":"gameView/paopao/balloon12.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -157,7 +158,7 @@
                                 "index":22
                             },
                             {
-                                "value":"gameView/balloon13.png",
+                                "value":"gameView/paopao/balloon13.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -165,7 +166,7 @@
                                 "index":24
                             },
                             {
-                                "value":"gameView/balloon14.png",
+                                "value":"gameView/paopao/balloon14.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -174,7 +175,7 @@
                             }],
                         "height":[
                             {
-                                "value":100,
+                                "value":66,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":4,

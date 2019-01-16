@@ -4,36 +4,40 @@
 export default class GameConfig{
     /////////////////////////////////绳子
     /**绳子生成像素间隔 */
-    public static ROPE_DIC : number = 30;
+    public static ROPE_DIC : number = 8;
     /**绳子节点转动阻力 */
-    public static ROPE_POINT_ANGULARDAMPING : number = 80;
+    public static ROPE_POINT_ANGULARDAMPING : number = 100000;
     /**绳子线性阻力 */
-    public static ROPE_POINT_LINEARDAMOING : number = 0.04;
+    public static ROPE_POINT_LINEARDAMOING : number = 0.001;
     /**绳子密度 */
-    public static ROPE_POINT_DENSITY : number = 30;
+    public static ROPE_POINT_DENSITY : number = 10;
     /**绳子自动靠近糖果速度 */
-    public static ROPE_TO_CANDY_SPEED : number = 12;
+    public static ROPE_TO_CANDY_SPEED : number = 20;
+    /**绳子粗细 */
+    public static ROPE_WIDTH : number = 7;
     ////////////////////////////////弹力绳子
     /**绳子生成像素间隔*/
-    public static ROPE_JUMP_DIC : number = 2;
+    public static ROPE_JUMP_DIC : number = 1;
     /**绳子节点转动阻力 */
     public static ROPE_JUMP__POINT_ANGULARDAMPING : number = 80;
     /**绳子线性阻力 */
-    public static ROPE_JUMP__POINT_LINEARDAMOING : number = 0.04;
+    public static ROPE_JUMP__POINT_LINEARDAMOING : number = 0.001;
     /**绳子密度 */
-    public static ROPE_JUMP__POINT_DENSITY : number = 10;
+    public static ROPE_JUMP__POINT_DENSITY : number = 2;
     /**绳子自动靠近糖果速度 */
-    public static ROPE_JUMP__TO_CANDY_SPEED : number = 15;
+    public static ROPE_JUMP__TO_CANDY_SPEED : number = 30;
     ///////////////////////////////糖果
     /**糖果转动阻力 */
-    public static CANDY_ANGULARDAMPING : number = 8;
+    public static CANDY_ANGULARDAMPING : number = 0;
     /**糖果线性转动阻力 */
-    public static CANDY_LINEARDAMPING : number = 0.03;
+    public static CANDY_LINEARDAMPING : number = 0;
     /**糖果密度 */
-    public static CANDY_DENSITY : number = 10;
+    public static CANDY_DENSITY : number = 1;
+    /**糖果重力洗漱 */
+    public static CANDY_GRAVITY : number = 1.5;
     /////////////////////////////////怪物
     /**吃糖果距离 */
-    public static MONSTER_EAT_DIC : number = 50;
+    public static MONSTER_EAT_DIC : number = 60;
     /**张大嘴距离 */
     public static MONSTER_OPEN_MOUSE : number = 200;
     //////////////////////////////////////
@@ -64,5 +68,17 @@ export default class GameConfig{
     public static ANI_GET_CANDY : string = "spiderget" ;
     //////////////////////////////////////////////蜘蛛
     /**蜘蛛的移动速度 */
-    public static SPIDER_SPEED = 0.01;
+    public static SPIDER_SPEED = 0.02;
+    /**蜘蛛下掉速度 */
+    public static SPIDER_SPEEDX = 0.0008;
+    /////////////////////////////////////////////世界
+    /***重力系数 世界 */
+    public static WOLDE_G = 14;
+    /////////////////////////////////////////////层级配置
+    /**hook顶部 */
+    public static ZORDER_HOOK_TOP = 2;
+    /**糖果 */
+    public static ZORDER_CANDY = 50;
+    /**气泡 */
+    public static ZORDER_BALLON = 51;
 }

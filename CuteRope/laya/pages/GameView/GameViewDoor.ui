@@ -1,10 +1,9 @@
 {
-    "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":48,
+    "selecteID":25,
     "searchKey":"View",
-    "props":{"width":750,"visible":true,"sceneColor":"#000000","height":1334},
+    "props":{"width":480,"visible":true,"sceneColor":"#000000","height":800},
     "nodeParent":-1,
     "maxID":49,
     "label":"View",
@@ -15,10 +14,9 @@
     "compId":1,
     "child":[
         {
-            "x":15,
             "type":"Image",
             "searchKey":"Image,img_doorL",
-            "props":{"y":0,"x":0,"width":377,"var":"img_doorL","skin":"gameView/gameDoor/boxDoor_1.png","height":1331},
+            "props":{"y":0,"x":0,"width":377,"var":"img_doorL","skin":"gameView/gameDoor/boxDoor_1.png","scaleY":0.6,"scaleX":0.64,"height":1331},
             "nodeParent":1,
             "label":"img_doorL",
             "isOpen":false,
@@ -30,7 +28,7 @@
                 {
                     "type":"Image",
                     "searchKey":"Image,img_jiaodaiL",
-                    "props":{"y":119,"x":329,"width":44,"visible":true,"var":"img_jiaodaiL","skin":"unpackage/jiaodao_l.png","height":1070},
+                    "props":{"y":119,"x":329,"width":44,"visible":false,"var":"img_jiaodaiL","skin":"unpackage/jiaodao_l.png","height":1070},
                     "nodeParent":2,
                     "label":"img_jiaodaiL",
                     "isDirectory":false,
@@ -43,10 +41,9 @@
                 }]
         },
         {
-            "x":15,
             "type":"Image",
             "searchKey":"Image,img_doorR",
-            "props":{"y":0,"x":753.5,"width":381,"visible":true,"var":"img_doorR","skin":"gameView/gameDoor/boxDoor_1.png","scaleX":-1,"height":1331},
+            "props":{"y":0,"x":480,"width":381,"visible":true,"var":"img_doorR","skin":"gameView/gameDoor/boxDoor_1.png","scaleY":0.6,"scaleX":-0.64,"height":1331},
             "nodeParent":1,
             "label":"img_doorR",
             "isOpen":false,
@@ -58,7 +55,7 @@
                 {
                     "type":"Image",
                     "searchKey":"Image,img_jiaodaiR",
-                    "props":{"y":117,"x":331,"width":50,"visible":true,"var":"img_jiaodaiR","skin":"unpackage/jiaodai_r.png","height":1067},
+                    "props":{"y":121,"x":383,"width":50,"visible":false,"var":"img_jiaodaiR","skin":"unpackage/jiaodai_r.png","height":1067},
                     "nodeParent":3,
                     "label":"img_jiaodaiR",
                     "isDirectory":false,
@@ -71,12 +68,12 @@
                 }]
         },
         {
-            "x":15,
             "type":"Image",
             "searchKey":"Image,img_xiaodao",
-            "props":{"y":-309,"x":38,"visible":true,"var":"img_xiaodao","skin":"gameView/gameDoor/dao.png"},
+            "props":{"y":800,"x":21,"visible":true,"var":"img_xiaodao","skin":"gameView/gameDoor/dao.png","scaleY":0.6,"scaleX":0.64},
             "nodeParent":1,
             "label":"img_xiaodao",
+            "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -85,10 +82,9 @@
                 ]
         },
         {
-            "x":15,
             "type":"Image",
             "searchKey":"Image,img_jiaodai",
-            "props":{"y":1342,"x":268,"width":160,"visible":true,"var":"img_jiaodai","skin":"gameView/gameDoor/jiaodai.png","height":215},
+            "props":{"y":800,"x":176,"width":160,"visible":true,"var":"img_jiaodai","skin":"gameView/gameDoor/jiaodai.png","scaleY":0.6,"scaleX":0.64,"height":215},
             "nodeParent":1,
             "label":"img_jiaodai",
             "isDirectory":false,
@@ -99,10 +95,9 @@
                 ]
         },
         {
-            "x":15,
             "type":"Panel",
             "searchKey":"Panel",
-            "props":{"y":97,"x":300,"width":145,"height":1121},
+            "props":{"y":67,"x":191.5,"width":145,"scaleY":0.6,"scaleX":0.64,"height":1121},
             "nodeParent":1,
             "label":"Panel",
             "isOpen":false,
@@ -114,7 +109,7 @@
                 {
                     "type":"Image",
                     "searchKey":"Image,img_jiaodaiM",
-                    "props":{"y":10,"x":22,"width":101,"visible":false,"var":"img_jiaodaiM","skin":"unpackage/jiaodai_m.png","height":1072},
+                    "props":{"y":10,"x":22,"width":101,"visible":true,"var":"img_jiaodaiM","skin":"unpackage/jiaodai_m.png","height":1072},
                     "nodeParent":47,
                     "label":"img_jiaodaiM",
                     "isOpen":true,
@@ -127,23 +122,21 @@
                 }]
         },
         {
-            "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,ui",
             "props":{"y":0,"x":-12,"width":763,"visible":false,"var":"ui","height":1314,"alpha":1},
             "nodeParent":1,
             "label":"ui",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":25,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,img_star1",
-                    "props":{"y":419,"x":144,"width":163,"var":"img_star1","skin":"gameView/gameDoor/getStar.png","height":163},
+                    "props":{"y":301,"x":85,"width":163,"var":"img_star1","skin":"gameView/gameDoor/getStar.png","scaleY":0.64,"scaleX":0.64,"height":163},
                     "nodeParent":25,
                     "label":"img_star1",
                     "isDirectory":false,
@@ -154,10 +147,9 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,img_star2",
-                    "props":{"y":421,"x":450,"width":163,"var":"img_star2","skin":"gameView/gameDoor/getStar.png","height":163},
+                    "props":{"y":301,"x":311,"width":163,"var":"img_star2","skin":"gameView/gameDoor/getStar.png","scaleY":0.64,"scaleX":0.64,"height":163},
                     "nodeParent":25,
                     "label":"img_star2",
                     "isDirectory":false,
@@ -168,10 +160,9 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,img_star3",
-                    "props":{"y":421,"x":299,"width":163,"var":"img_star3","skin":"gameView/gameDoor/getStar.png","height":163},
+                    "props":{"y":301,"x":199,"width":163,"var":"img_star3","skin":"gameView/gameDoor/getStar.png","scaleY":0.64,"scaleX":0.64,"height":163},
                     "nodeParent":25,
                     "label":"img_star3",
                     "isDirectory":false,
@@ -182,10 +173,9 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,lab_Content",
-                    "props":{"y":292,"x":11,"width":752,"var":"lab_Content","text":"真棒","strokeColor":"#e0d09e","stroke":2,"height":103,"fontSize":80,"font":"Microsoft YaHei","color":"#ffffff","bold":true,"align":"center"},
+                    "props":{"y":146,"x":-128,"width":752,"var":"lab_Content","text":"真棒","strokeColor":"#e0d09e","stroke":2,"height":103,"fontSize":80,"font":"Microsoft YaHei","color":"#ffffff","bold":true,"align":"center"},
                     "nodeParent":25,
                     "label":"lab_Content",
                     "isDirectory":false,
@@ -196,10 +186,9 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "searchKey":"Button,btn_Replay",
-                    "props":{"y":710,"x":91,"width":295,"var":"btn_Replay","stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#1b1b1b","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"重玩","height":88},
+                    "props":{"y":495,"x":34,"width":295,"var":"btn_Replay","stateNum":"1","skin":"publicAssets/btn_1.png","scaleY":0.64,"scaleX":0.64,"labelStrokeColor":"#1b1b1b","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"重玩","height":88},
                     "nodeParent":25,
                     "label":"btn_Replay",
                     "isDirectory":false,
@@ -210,10 +199,9 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "searchKey":"Button,btn_ReturnRound",
-                    "props":{"y":841,"x":248,"width":295,"var":"btn_ReturnRound","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"菜单","height":88},
+                    "props":{"y":569,"x":156,"width":295,"var":"btn_ReturnRound","stateNum":"1","skin":"publicAssets/btn_1.png","scaleY":0.64,"scaleX":0.64,"labelStroke":2,"labelSize":40,"labelPadding":"0,0,10,0","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"菜单","height":88},
                     "nodeParent":25,
                     "label":"btn_ReturnRound",
                     "isDirectory":false,
@@ -224,10 +212,9 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "searchKey":"Button,btn_Next",
-                    "props":{"y":710,"x":396,"width":295,"var":"btn_Next","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"下一关","height":88},
+                    "props":{"y":495,"x":281,"width":295,"var":"btn_Next","stateNum":"1","skin":"publicAssets/btn_1.png","scaleY":0.64,"scaleX":0.64,"labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"下一关","height":88},
                     "nodeParent":25,
                     "label":"btn_Next",
                     "isDirectory":false,
@@ -289,7 +276,7 @@
                             }],
                         "x":[
                             {
-                                "value":753,
+                                "value":480,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -297,7 +284,31 @@
                                 "index":0
                             },
                             {
-                                "value":758,
+                                "value":480,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"x",
+                                "index":5
+                            },
+                            {
+                                "value":480,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"x",
+                                "index":11
+                            },
+                            {
+                                "value":480,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"x",
+                                "index":15
+                            },
+                            {
+                                "value":480,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -962,7 +973,7 @@
                             }],
                         "x":[
                             {
-                                "value":758,
+                                "value":480,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -970,7 +981,7 @@
                                 "index":0
                             },
                             {
-                                "value":750,
+                                "value":480,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -1186,7 +1197,15 @@
                                 "index":20
                             },
                             {
-                                "value":128,
+                                "value":-58,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":8,
+                                "key":"y",
+                                "index":24
+                            },
+                            {
+                                "value":89.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
@@ -1194,7 +1213,7 @@
                                 "index":31
                             },
                             {
-                                "value":574,
+                                "value":382,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
@@ -1202,7 +1221,7 @@
                                 "index":37
                             },
                             {
-                                "value":931,
+                                "value":716,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
@@ -1219,7 +1238,7 @@
                             }],
                         "x":[
                             {
-                                "value":276,
+                                "value":176.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
@@ -1227,7 +1246,7 @@
                                 "index":0
                             },
                             {
-                                "value":276,
+                                "value":176.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
@@ -1236,7 +1255,15 @@
                                 "index":20
                             },
                             {
-                                "value":276,
+                                "value":176.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":8,
+                                "key":"x",
+                                "index":24
+                            },
+                            {
+                                "value":176.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
@@ -1244,7 +1271,7 @@
                                 "index":25
                             },
                             {
-                                "value":275,
+                                "value":176.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
@@ -1252,7 +1279,7 @@
                                 "index":31
                             },
                             {
-                                "value":274,
+                                "value":176.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
@@ -1260,7 +1287,7 @@
                                 "index":37
                             },
                             {
-                                "value":275,
+                                "value":176.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,

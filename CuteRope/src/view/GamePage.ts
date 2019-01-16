@@ -46,7 +46,9 @@ export default class GamePage extends Laya.Scene{
     /**是否开启超能力 */
     private isOpenSuper : boolean;
     /**是否是初始化 */
-    private isInit : boolean;
+    private isReplay : boolean;
+    /**是否被蜘蛛吃掉 */
+    private isEated : boolean;
 //----------------------------------------------
     /**地图配置 */
     private mapConfig : Config.MapConfig;
@@ -79,6 +81,9 @@ export default class GamePage extends Laya.Scene{
     private maxLongRope : number;
     /**最远距离绳子下标 */
     private maxLongIndex : number;
+//-------------------------------------------
+    /**关卡绳子记录 */
+    private arr_RemRope : Array<any>;
 
 
     constructor(){super();}
@@ -95,9 +100,14 @@ export default class GamePage extends Laya.Scene{
         this.cardIndex = arr[2];
         this.init();
     }
-
+    
     private init() : void
     {
+        ///物理线
+        // Laya.PhysicsDebugDraw.enable();
+        //舞台尺寸
+        Laya.stage.width = 480;
+        Laya.stage.height = 800;
         // ui初始化
         this.newShopUi();
         this.initBgSkin();
@@ -114,7 +124,9 @@ export default class GamePage extends Laya.Scene{
         this.lastMousePos.x = null;
         this.lastMousePos.y = null;
         this.isOpenSuper = false;
-        this.isInit = true;
+        this.isReplay = false;
+        this.isEated = false;
+        Laya.Physics.I.gravity = {x:0,y:GameConfig.WOLDE_G};
         //界面 可视 初始化
         Laya.MouseManager.enabled = false;
         this.menuUI.visible = false;
@@ -123,8 +135,6 @@ export default class GamePage extends Laya.Scene{
         this.addEvents();
         //第一次更新游戏
         this.UpdateData(this.quarterIndex+ "-" + this.boxIndex,this.cardIndex,true);
-        ///物理线
-        // Laya.PhysicsDebugDraw.enable();
         //鼠标joint
         // let joint=new Laya.MouseJoint();
         // joint.maxForce=1000000;
@@ -133,7 +143,7 @@ export default class GamePage extends Laya.Scene{
 
     private initBgSkin() : void
     {
-        this.scene.img_gameBg.skin = "GameView/gameBg/boxBg_1.jpg";
+        this.scene.img_gameBg.skin = "GameView/gameBg/boxBg_"+(this.boxIndex+1)+".jpg";
     }
 
     private newShopUi() : void
@@ -141,8 +151,13 @@ export default class GamePage extends Laya.Scene{
         this.shopDoor = new ui.topLeftUI();
         this.shopDialog = Laya.WeakObject.I.get("dialog");
         this.scene.addChild(this.shopDoor);
-        this.shopDoor.x = 0;
-        this.shopDoor.y = 0;
+        this.shopDoor.btn_Super.scale(0.7,0.7);
+        this.shopDoor.btn_Teach.scale(0.7,0.7);
+        this.shopDoor.btn_Teach.y -= 25;
+        this.shopDoor.sho.scale(0.7,0.7);
+        this.shopDoor.sho.y += 5;
+        this.shopDoor.x = -8;
+        this.shopDoor.y = 113;
         this.updateSuper();
     }
 
@@ -161,11 +176,14 @@ export default class GamePage extends Laya.Scene{
     }
 
     private newDoorUi() {
-        this.doorOpen = new ui.GameView.GameViewDoorUI();
+        if(!this.doorOpen)
+        {
+            this.doorOpen = new ui.GameView.GameViewDoorUI();
+            this.scene.addChild(this.doorOpen);
+        }
         let skins = Laya.WeakObject.I.get("boxSkin");
         this.doorOpen.img_doorL.skin = skins[this.quarterIndex + "-" + this.boxIndex][1];
         this.doorOpen.img_doorR.skin = skins[this.quarterIndex + "-" + this.boxIndex][1];
-        this.scene.addChild(this.doorOpen);
     }
 
     private initMouseTail() : void
@@ -366,6 +384,8 @@ export default class GamePage extends Laya.Scene{
         this.removeEvents();
         Laya.timer.loop(10,this,this.shooooo);
         this.score = 0;
+        this.isEated = false;
+        this.isReplay = true;
         this.showSocre();
         this.UpdateData(this.quarterIndex + "-" + this.boxIndex,this.cardIndex,false);
         //禁止鼠标事件
@@ -401,21 +421,48 @@ export default class GamePage extends Laya.Scene{
         this.removeEvents();
         this.score = 0;
         this.showSocre();
-        this.UpdateData(this.quarterIndex + "-" + this.boxIndex,++this.cardIndex,false);
-        Laya.MouseManager.enabled = false;     
+        //如果是最后一个关卡，跳到下一个盒子
+        this.nextBox();
+        this.arr_RemRope = undefined;
+        this.isReplay = false;
+        Laya.MouseManager.enabled = false; 
+        this.isEated = false;    
         this.doorOpen.visible = true;           
-        this.doorOpen.ani4.play(0,false);
+        this.UpdateData(this.quarterIndex + "-" + this.boxIndex,++this.cardIndex,false);
+        this.doorOpen.ani1.gotoAndStop(0);
+        this.doorOpen.img_xiaodao.y = 800;
      }
+
+     /**如果是最后一个关卡，跳到下一个盒子 （未测试）*/
+    private nextBox() 
+    {
+        if (this.cardIndex == 24) 
+        {
+            this.boxIndex++;
+            this.cardIndex = -1;
+            if (this.boxIndex == 4) 
+            {
+                this.quarterIndex++;
+                this.boxIndex = 0;
+            }
+            if (this.quarterIndex == 2) 
+            {
+                //通关逻辑
+            }
+        }
+    }
 
     /**事件 吃到糖果->重玩  效果开门重开 */
     private onReplay() : void
     {
         console.log("重玩  效果开门重开");
         this.removeEvents();
-        this.score = 0;
         this.showSocre();
         Laya.MouseManager.enabled = false;  
-        this.doorOpen.visible = true;                    
+        this.score = 0;
+        this.doorOpen.visible = true;     
+        this.isReplay = true;      
+        this.isEated = false;         
         this.doorOpen.ani4.play(0,false);
         this.UpdateData(this.quarterIndex + "-" + this.boxIndex,this.cardIndex,false);
         
@@ -433,7 +480,8 @@ export default class GamePage extends Laya.Scene{
         //选择关卡
         this.isMain = false;       
         this.doorOpen.visible = true;
-        // this.doorOpen.ani2.gotoAndStop(25);      
+        // this.doorOpen.ani2.gotoAndStop(25);    
+        this.doorOpen.img_xiaodao.visible = false;  
         this.doorOpen.ani2.play(25,false);
         // GameManager.ins_.getMediator(GameData.SELECT_ROUND_MEDIATOR).runRound();
     }
@@ -445,6 +493,8 @@ export default class GamePage extends Laya.Scene{
         this.isMain = true;        
         this.doorOpen.visible = true;        
         this.doorOpen.ani2.play(0,false);      
+        this.doorOpen.img_xiaodao.visible = false;  
+        
             
         // GameManager.ins_.getMediator(GameData.START_GAME_MEDIATOR).runRound();        
     }
@@ -490,6 +540,9 @@ export default class GamePage extends Laya.Scene{
         {
             Laya.Scene.open("SelectRound/SelectRound.scene",true,[this.quarterIndex,this.boxIndex]); 
         }
+        //舞台尺寸
+        Laya.stage.width = 750;
+        Laya.stage.height = 1334;
     }
 
     /**吃到糖果显示计分面板 */
@@ -541,6 +594,13 @@ export default class GamePage extends Laya.Scene{
         Laya.Physics.enable({allowSleeping:true,gravity:12});
         // Laya.PhysicsDebugDraw.enable();
         this.mapConfig = Config.ConfigManger.ins.getMapConfig(mapWhere,mapId);
+        if(!this.mapConfig)
+        {
+            alert("关卡为配置，请配置后再调试");
+            Laya.stage.height = 1334;
+            Laya.stage.width = 800;
+            Laya.Scene.open("SelectRound/SelectRound.scene",true,[this.quarterIndex,this.boxIndex]); 
+        }
         console.log(this.mapConfig);
         //背景初始化
         this.setBackground(this.mapConfig.arr_MapSkin);
@@ -581,6 +641,8 @@ export default class GamePage extends Laya.Scene{
         {
             this.scene.img_gameBg.skin = arr_MapSkin[0];
         }
+        this.newDoorUi();
+        
     }
     /**ropeToCandy */
     private ropeToCandy() : void
@@ -608,15 +670,15 @@ export default class GamePage extends Laya.Scene{
             
             rope.ropePointsArray[rope.ropePointsArray.length-1].body.setVelocity(obj);
             // rope.ropePointsArray[rope.ropePointsArray.length - 1].body.applyForceToCenter({x:obj.x,y:obj.y});
-            if(dic < 25)
+            if(dic < 15)
             {
                 add++;
             } 
             speContorl = 1;
             ///////////////开门等待
-            if(i == this.maxLongIndex && this.isInit)
+            if(i == this.maxLongIndex)
             {
-                this.doorOpen.img_xiaodao.y = (1334+339) * dic/this.maxLongRope - 339;
+                this.doorOpen.img_xiaodao.y = (800+339) * dic/this.maxLongRope - 339;
             }
         }
                
@@ -627,14 +689,26 @@ export default class GamePage extends Laya.Scene{
             //连接糖果
             for(let i=0;i<this.arr_Rope.length;i++)
             {
+    
                 this.arr_Rope[i].connectCandy(this.candy,i);
                 this.arr_Rope[i].ropePointsArray[this.arr_Rope.length - 1].sp.getComponents(Laya.RigidBody)[0].setVelocity({x:0,y:0});
             }
+            //获取位置信息
+            for(let z=0 ;z <this.arr_Rope.length;z++)
+            {
+                if(this.arr_RemRope === undefined) 
+                {
+                    this.arr_RemRope = new Array<any>();
+                }
+                this.arr_RemRope.push(this.arr_Rope[z].getRemRope());
+            }
             //开门动画处理
-            if(this.isInit)
+            // if(this.isInit)
+            if(!this.isReplay)
             {
                 if(this.doorOpen.img_xiaodao.y > -200)
                 {
+                    // this.doorOpen.img_xiaodao.visible = true;
                     let num = this.doorOpen.img_xiaodao.y + 339;
                     num = num/15;
                     Laya.timer.loop(50,this,this.openDoorDeal,[num]);
@@ -667,9 +741,8 @@ export default class GamePage extends Laya.Scene{
         this.doorOpen.visible = true;
         this.doorOpen.ani1.play(0, false);
         this.doorOpen.img_xiaodao.y = -339;
-        this.isInit = false;
         Laya.MouseManager.enabled = true;
-        
+
     }
 
     /**开门动画初始化 */
@@ -750,7 +823,7 @@ export default class GamePage extends Laya.Scene{
         }
         this.scene.gamePos.x =  this.monster.sp.x;
         this.scene.gamePos.y =  this.monster.sp.y;
-        this.scene.gamePos.skin = "gameView/gamePos/pos" + (this.boxIndex+1) + ".png";
+        this.scene.gamePos.skin = "gameView/gamePos/pos" +(this.boxIndex + 1)+ ".png";
     }
     
     /**糖果数据初始化 */
@@ -774,6 +847,7 @@ export default class GamePage extends Laya.Scene{
             }
         }
     }
+
     
     /**钩子数据初始化 */
     private hookInit(arr_Hook) : void
@@ -784,12 +858,12 @@ export default class GamePage extends Laya.Scene{
         {
             if(this.arr_Hook[i])
             {
-                this.arr_Hook[i].update({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style});
+                this.arr_Hook[i].update({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style},arr_Hook[i].size);
             }
             else
             {
                 this.arr_Hook[i] = new Hook(this.scene.panel_GameWorld);
-                this.arr_Hook[i].init({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style});
+                this.arr_Hook[i].init({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style},arr_Hook[i].size);
             }
         }
         // console.log(this.arr_Hook);
@@ -804,7 +878,14 @@ export default class GamePage extends Laya.Scene{
         for(let i=0; i<arr_Rope.length; i++)
         {
             rope = new Rope(this.scene.panel_GameWorld);
-            rope.init(arr_Hook[i].hook_X,arr_Hook[i].hook_Y,arr_Rope[i].num,arr_Hook[i].style);
+            if(this.arr_RemRope === undefined)
+            {
+                rope.init(arr_Hook[i].hook_X,arr_Hook[i].hook_Y,arr_Rope[i].num,arr_Hook[i].style);
+            }
+            else
+            {
+                rope.rePlay(this.arr_RemRope[i],arr_Hook[i].style);
+            }
             this.arr_Rope.push(rope);
         }
         
@@ -893,7 +974,7 @@ export default class GamePage extends Laya.Scene{
             else
             {
                 this.arr_Spider[i] = new Spider(this.scene.panel_GameWorld);
-                this.arr_Spider[i].init({"spider_X":arr_Spider[i].spider_X,"spider_Y":arr_Spider[i].spider_Y});
+                this.arr_Spider[i].init({"spider_X":arr_Spider[i].spider_X,"spider_Y":arr_Spider[i].spider_Y},this,this.failGame);
             }
             // 
         }
@@ -947,7 +1028,7 @@ export default class GamePage extends Laya.Scene{
         if(dic < 100)
         {
             let vX = GameConfig.SUPER_V * this.rotationDeal(mX,mY,x,y,"cos");
-            let vY = GameConfig.SUPER_V * this.rotationDeal(mX,mY,x,y,"sin");
+            let vY = GameConfig.SUPER_V * this.rotationDeal(mX,mY,x,y,"sin");   
             this.candy.superSetV(vX,vY);
         }
     }
@@ -963,7 +1044,7 @@ export default class GamePage extends Laya.Scene{
             if(this.arr_Hook[i].isCreate == true) continue;
             //hook逻辑
             dic = this.countDic_Object({"x":x,"y":y},{"x":this.arr_Hook[i].sp.x,'y':this.arr_Hook[i].sp.y});
-            if(dic < 150)
+            if(dic < this.arr_Hook[i].size)
             {//创建绳子
                 rope = new Rope(this.scene.panel_GameWorld);
                 rope.initRopeHook2(this.arr_Hook[i].sp.x,this.arr_Hook[i].sp.y,x,y);
@@ -1001,6 +1082,7 @@ export default class GamePage extends Laya.Scene{
                 if(dic < 80)
                 {
                     star.starDestroy(star.style);
+                    this.monster.monsterAction(GameConfig.ANI_MONSTER_HAPPYE,false);
                     this.score++;
                     this.showSocre();
                 }
@@ -1011,6 +1093,7 @@ export default class GamePage extends Laya.Scene{
     /**与怪物的距离检测 */
     private testMonster(x,y) : void
     {
+        if(this.isEated) return;
         let dic = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":this.monster.x,'y':this.monster.y});
         if(dic<GameConfig.MONSTER_EAT_DIC)
         {
@@ -1114,8 +1197,7 @@ export default class GamePage extends Laya.Scene{
                     knife.isCollision=true;
                     //糖果破碎
                     this.candy.becomeApart(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
-                    this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
-                    Laya.timer.once(1250,this,this.onReGame);
+                    this.failGame();
             }
         }
         });
@@ -1151,7 +1233,7 @@ export default class GamePage extends Laya.Scene{
         if(this.isOpenSuper)
         {
             let candy = this.candy.arr_Sp[0].getComponents(Laya.RigidBody)[0] as Laya.RigidBody;
-            if(y>1324)
+            if(y>770)
             {
                 candy.applyLinearImpulseToCenter({x:0,y:-4});
             }
@@ -1163,12 +1245,12 @@ export default class GamePage extends Laya.Scene{
             {
                 candy.applyLinearImpulseToCenter({x:4,y:0});
             }
-            if(x>740)
+            if(x>470)
             {
                 candy.applyLinearImpulseToCenter({x:-4,y:0}); 
             }
         }
-        else if(y<0||y>1334)
+        else if(y<0||y>800)
         {
             console.log("游戏失败");
             this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
@@ -1208,27 +1290,38 @@ export default class GamePage extends Laya.Scene{
                             count = count + Math.floor(dic/25);
                             // console.log("pointCount::" + Math.floor(dic));
                         }
-                        for(let i = 0; i<count ; i++)//循环检测
+                        for(let z = 0; z<count ; z++)//循环检测
                         {
-                            if(i == count - 1)//最后一个鼠标点
+                            if(z == count - 1)//最后一个鼠标点
                             {
                                 s.x = mX;
                                 s.y = mY; 
                             }
                             else//其他点
                             {
-                                s.x = this.lastMousePos.x + cos * i * 25;
-                                s.y = this.lastMousePos.y + sin * i * 25;
+                                s.x = this.lastMousePos.x + cos * z * 25;
+                                s.y = this.lastMousePos.y + sin * z * 25;
                                 // console.log("testPoint(" + s.x + "," + s.y + ")");
                             }
                             //开始检测
-
-                            if(this.countDic_Object(f,s) < 20 && i < Rope.ropePointsArray.length)//优化绳子切割
+                            if(this.countDic_Object(f,s) < 20 && i < Rope.ropePointsArray.length - 3)//优化绳子切割
                             {
+                                // console.log(Rope.ropePointsArray.length + " :::::::::: index ::::::::: " + i);
+                                //对蜘蛛进行操作
+                                if(this.arr_Spider)
+                                {
+                                    this.arr_Spider.forEach(Spider => {
+                                        if(Spider.rope == Rope)
+                                        {
+                                            Spider.stopEatCandy();
+                                        }
+                                    });
+                                }
                                 if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
                                 {
                                     ropePoint.sp.getComponent(Laya.RevoluteJoint).destroy();
                                     Rope.ropeCuted();
+                                    this.ropeJonitCute(Rope);
                                     break;
                                 }
                             }
@@ -1246,6 +1339,22 @@ export default class GamePage extends Laya.Scene{
 
 
 
+
+    private ropeJonitCute(Rope : Rope) {
+        let ropeJoint = Rope.ropePointsArray[0].sp.getComponents(Laya.RopeJoint);
+        if(ropeJoint)
+        {
+            ropeJoint[0].destroy();
+        }
+    }
+
+    /**游戏失败，统一处理 */
+    private failGame() : void
+    {
+        this.isEated = true;                 
+        this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
+        Laya.timer.once(1500,this,this.onReGame);
+    }
 
 /////////////////////////////Tool
     /**

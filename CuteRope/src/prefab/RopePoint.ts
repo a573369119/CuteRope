@@ -1,4 +1,5 @@
 import GameConfig from "../config/GameConfig";
+import Candy from "./Candy";
 export default class RopePoint{
 	/**横坐标 */
 	public x:number;
@@ -25,7 +26,7 @@ export default class RopePoint{
     init(data):void{
         this.x=data.x;
         this.y=data.y;
-				this.ropePoint_CreateSprite(data.x,data.y,data.rotation);
+		this.ropePoint_CreateSprite(data.x,data.y,data.rotation);
         this.ropePoint_AddBody(data.type);
         this.ropePoint_AddCollider();
     }
@@ -40,13 +41,19 @@ export default class RopePoint{
     //创建节点精灵
     ropePoint_CreateSprite(x,y,rotation):void{
 		this.sp=new Laya.Sprite();
-		this.sp.loadImage("gameView/rope" + (Math.floor(this.index%8/4)+1) + ".png");
+		this.sp.width = GameConfig.ROPE_WIDTH;
+		this.sp.height = 12;
 		this.sp.pivot(this.sp.width/2,this.sp.height/2);
+		this.sp.loadImage("gameView/rope" + (Math.floor(this.index%16/8)+1) + ".png");
+		// this.sp.loadImage("gameView/candy.png");
 		if(rotation)
 		{
 			this.sp.rotation = rotation;
 		}
-
+		if(this.index < 2)
+		{
+			this.sp.visible = false;
+		}
 		this.sp.pos(x,y);
 		// Laya.stage.addChild(this.sp);
     }
@@ -100,6 +107,28 @@ export default class RopePoint{
 		joint.collideConnected = false;
 		this.sp.addComponentIntance(joint);
 	}
+
+
+    ///////////////测试
+    ropeJoint_Last(candys : Candy,maxLeng) : void
+    {
+        let index;
+        for(let i = 0;i<candys.arr_Sp.length; i++)
+        {
+            if(!candys.arr_Sp[i].getComponents(Laya.RopeJoint))
+            {
+                index = i;
+                break;
+            }
+        }
+        let joint : Laya.RopeJoint = new Laya.RopeJoint();
+        joint.otherBody = candys.arr_Sp[index].getComponents(Laya.RigidBody)[0];
+        joint.otherAnchor = [candys.arr_Sp[index].width/2,candys.arr_Sp[index].height/2];
+        joint.selfBody = this.body;
+        joint.selfAnchor = [this.sp.width/2,this.sp.height/2];
+        joint.maxLength = maxLeng;
+        this.sp.addComponentIntance(joint);
+    }
 
 
 		

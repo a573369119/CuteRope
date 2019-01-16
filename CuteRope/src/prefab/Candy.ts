@@ -1,6 +1,7 @@
 import GameConfig from "../config/GameConfig";
 import Dic from "../Tool/dic";
 import Balloon from "../prefab/Balloon";
+import RopePoint from "./RopePoint";
 
 export default class Candy{
     /**横坐标 */
@@ -75,8 +76,8 @@ export default class Candy{
         for(let i=0; i<this.count;i++)
         {
             if(!this.arr_Sp[i]) this.arr_Sp[i]=new Laya.Sprite();//不存在 才新创建
-            this.arr_Sp[i].loadImage("gameView/"+style+".png");
-            this.arr_Sp[i].zOrder=1;
+            this.arr_Sp[i].loadImage("gameView/candy.png");
+            this.arr_Sp[i].zOrder=GameConfig.ZORDER_CANDY;
             this.arr_Sp[i].scaleX = 1;
             this.arr_Sp[i].scaleY = 1;
             this.arr_Sp[i].pivot(this.arr_Sp[i].width/2,this.arr_Sp[i].height/2);
@@ -95,6 +96,7 @@ export default class Candy{
             body=new Laya.RigidBody();
             body.type="static";
             body.allowRotation = true;
+            body.gravityScale = GameConfig.CANDY_GRAVITY;
             body.angularDamping = GameConfig.CANDY_ANGULARDAMPING;
             body.linearDamping = GameConfig.CANDY_LINEARDAMPING;
             this.arr_Sp[i].addComponentIntance(body);
@@ -296,6 +298,8 @@ export default class Candy{
         
     }
 
+
+
     //初始化糖果碎片
     createCandyApart():void{
         for(let i=0;i<5;i++){
@@ -329,9 +333,14 @@ export default class Candy{
                 currX=Math.random()*5;
             }
             this.arr_ApartBody[i].setVelocity({x:currX,y:-Math.random()*3-2});
-            this.arr_Sp.forEach(sprite => {//隐藏糖果
-                sprite.visible = false;
+            //销毁糖果
+            this.arr_Body.forEach(body => {
+                body.destroy();
             });
+            this.arr_Sp.forEach(sp =>{
+                sp.x = 1000;
+            });
+            this.arr_Body = [];
         }
     }
     //////////////////////////////超能力调用方法

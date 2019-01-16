@@ -2,17 +2,20 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
+    "selecteID":3,
     "searchKey":"View",
     "props":{"sceneWidth":200,"sceneHeight":200,"sceneColor":"#000000"},
     "nodeParent":-1,
-    "maxID":3,
+    "maxID":4,
     "label":"View",
-    "isDirectory":false,
+    "isOpen":true,
+    "isDirectory":true,
     "isAniNode":true,
-    "hasChild":false,
+    "hasChild":true,
     "compId":2,
     "child":[
         {
+            "x":15,
             "type":"GraphicNode",
             "searchKey":"GraphicNode",
             "props":{},
@@ -51,7 +54,7 @@
                             }],
                         "skin":[
                             {
-                                "value":"gameView/startime1.png",
+                                "value":"gameView/starTime/startime1.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -59,7 +62,7 @@
                                 "index":0
                             },
                             {
-                                "value":"gameView/startime2.png",
+                                "value":"gameView/starTime/startime2.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -67,7 +70,7 @@
                                 "index":4
                             },
                             {
-                                "value":"gameView/startime3.png",
+                                "value":"gameView/starTime/startime3.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -75,7 +78,7 @@
                                 "index":8
                             },
                             {
-                                "value":"gameView/startime4.png",
+                                "value":"gameView/starTime/startime4.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -83,7 +86,7 @@
                                 "index":12
                             },
                             {
-                                "value":"gameView/startime5.png",
+                                "value":"gameView/starTime/startime5.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -91,7 +94,7 @@
                                 "index":16
                             },
                             {
-                                "value":"gameView/startime6.png",
+                                "value":"gameView/starTime/startime6.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -99,7 +102,7 @@
                                 "index":20
                             },
                             {
-                                "value":"gameView/startime7.png",
+                                "value":"gameView/starTime/startime7.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -107,7 +110,7 @@
                                 "index":24
                             },
                             {
-                                "value":"gameView/startime8.png",
+                                "value":"gameView/starTime/startime8.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -115,7 +118,7 @@
                                 "index":28
                             },
                             {
-                                "value":"gameView/startime9.png",
+                                "value":"gameView/starTime/startime9.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -123,7 +126,7 @@
                                 "index":32
                             },
                             {
-                                "value":"gameView/startime10.png",
+                                "value":"gameView/starTime/startime10.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -131,7 +134,7 @@
                                 "index":36
                             },
                             {
-                                "value":"gameView/startime11.png",
+                                "value":"gameView/starTime/startime11.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -139,7 +142,7 @@
                                 "index":40
                             },
                             {
-                                "value":"gameView/startime12.png",
+                                "value":"gameView/starTime/startime12.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -147,7 +150,7 @@
                                 "index":44
                             },
                             {
-                                "value":"gameView/startime13.png",
+                                "value":"gameView/starTime/startime13.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -155,7 +158,7 @@
                                 "index":48
                             },
                             {
-                                "value":"gameView/startime14.png",
+                                "value":"gameView/starTime/startime14.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -163,7 +166,7 @@
                                 "index":52
                             },
                             {
-                                "value":"gameView/startime15.png",
+                                "value":"gameView/starTime/startime15.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -171,7 +174,7 @@
                                 "index":56
                             },
                             {
-                                "value":"gameView/startime16.png",
+                                "value":"gameView/starTime/startime16.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -179,7 +182,7 @@
                                 "index":60
                             },
                             {
-                                "value":"gameView/startime17.png",
+                                "value":"gameView/starTime/startime17.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -187,7 +190,7 @@
                                 "index":64
                             },
                             {
-                                "value":"gameView/startime18.png",
+                                "value":"gameView/starTime/startime18.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -195,7 +198,7 @@
                                 "index":68
                             },
                             {
-                                "value":"gameView/startime19.png",
+                                "value":"gameView/starTime/startime19.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -203,7 +206,7 @@
                                 "index":72
                             },
                             {
-                                "value":"gameView/startime20.png",
+                                "value":"gameView/starTime/startime20.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -211,7 +214,7 @@
                                 "index":76
                             },
                             {
-                                "value":"gameView/startime21.png",
+                                "value":"gameView/starTime/startime21.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -219,7 +222,7 @@
                                 "index":80
                             },
                             {
-                                "value":"gameView/startime22.png",
+                                "value":"gameView/starTime/startime22.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -227,7 +230,7 @@
                                 "index":84
                             },
                             {
-                                "value":"gameView/startime23.png",
+                                "value":"gameView/starTime/startime23.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -235,7 +238,7 @@
                                 "index":88
                             },
                             {
-                                "value":"gameView/startime24.png",
+                                "value":"gameView/starTime/startime24.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -243,7 +246,7 @@
                                 "index":92
                             },
                             {
-                                "value":"gameView/startime25.png",
+                                "value":"gameView/starTime/startime25.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -251,7 +254,7 @@
                                 "index":96
                             },
                             {
-                                "value":"gameView/startime26.png",
+                                "value":"gameView/starTime/startime26.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -259,7 +262,7 @@
                                 "index":100
                             },
                             {
-                                "value":"gameView/startime27.png",
+                                "value":"gameView/starTime/startime27.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -267,7 +270,7 @@
                                 "index":104
                             },
                             {
-                                "value":"gameView/startime28.png",
+                                "value":"gameView/starTime/startime28.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -275,7 +278,7 @@
                                 "index":108
                             },
                             {
-                                "value":"gameView/startime29.png",
+                                "value":"gameView/starTime/startime29.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -283,7 +286,7 @@
                                 "index":112
                             },
                             {
-                                "value":"gameView/startime30.png",
+                                "value":"gameView/starTime/startime30.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -291,7 +294,7 @@
                                 "index":116
                             },
                             {
-                                "value":"gameView/startime31.png",
+                                "value":"gameView/starTime/startime31.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -299,7 +302,7 @@
                                 "index":120
                             },
                             {
-                                "value":"gameView/startime32.png",
+                                "value":"gameView/starTime/startime32.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -307,7 +310,7 @@
                                 "index":124
                             },
                             {
-                                "value":"gameView/startime33.png",
+                                "value":"gameView/starTime/startime33.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -315,7 +318,7 @@
                                 "index":128
                             },
                             {
-                                "value":"gameView/startime34.png",
+                                "value":"gameView/starTime/startime34.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -323,7 +326,7 @@
                                 "index":132
                             },
                             {
-                                "value":"gameView/startime35.png",
+                                "value":"gameView/starTime/startime35.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -331,7 +334,7 @@
                                 "index":136
                             },
                             {
-                                "value":"gameView/startime36.png",
+                                "value":"gameView/starTime/startime36.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -339,7 +342,7 @@
                                 "index":140
                             },
                             {
-                                "value":"gameView/startime37.png",
+                                "value":"gameView/starTime/startime37.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,

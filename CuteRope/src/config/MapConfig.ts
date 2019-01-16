@@ -137,6 +137,10 @@ export module Config {
                 hookConfig.style=obj.style;
                 hookConfig.hook_X = obj.x;
                 hookConfig.hook_Y = obj.y;
+                if(obj.size)
+                {
+                    hookConfig.size = obj.size;
+                }
                 this.arr_Hook.push(hookConfig);
             });
             console.log("hook -解析");            
@@ -313,6 +317,8 @@ export module Config {
         public hook_Y : number;
         /**钩子类型 */
         public style : string;
+        /**hook3范围 */
+        public size : number;
         constructor(){
 
         }

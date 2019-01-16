@@ -60,7 +60,8 @@ export default class Star{
         this.anim.play(0,true);
         this.anim.x -= this.sp.width/2;
         this.anim.y -= this.sp.height/2;
-        
+        this.anim.zOrder = 100;
+
         this.anim2 = new Laya.Animation();
         this.anim2.loadAnimation("GameView/ani/StarDestroy.ani");
         this.anim2.on(Laya.Event.COMPLETE,this,this.destroyed);

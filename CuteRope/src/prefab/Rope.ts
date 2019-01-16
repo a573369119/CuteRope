@@ -1,4 +1,4 @@
-    import RopePoint from "./RopePoint";
+import RopePoint from "./RopePoint";
 import Candy from "./Candy";
 import GameConfig from "../config/GameConfig";
 import Tool from "../Tool/Tool";
@@ -15,17 +15,26 @@ import Dic from "../Tool/dic";
     public view : Laya.Panel;
     /**是否已断 */
     public isCuted : boolean ;
+    /**sprite */
+    public ropeView : Laya.Sprite;
+    /**图片补充数组 */
+    public arr_ImgRope : Array<Laya.Image>;
+    /**数组保存 */
+    public arr_RemPos : Array<any>;
 
     constructor(view){
         this.isCuted = false;
         this.view = view;
+        this.ropeView = new Laya.Sprite();
+        view.addChild(this.ropeView);
+        this.arr_ImgRope = new Array<Laya.Image>();
         this.ropePointsArray=new Array<RopePoint>();
         this.jointsArray=new Array<Laya.RevoluteJoint>();
+        this.arr_RemPos = new Array<any>();
     }
 
     //创建一根绳子，根据位置和长度创建
     init(hookX,HookY,ropeLength,hookStyle?):void{
-
         this.createMultiRopePoint(hookX,HookY,ropeLength,hookStyle);
     }
     //自动连接绳子
@@ -42,14 +51,17 @@ import Dic from "../Tool/dic";
         let y_Add = GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,candyX,candyY,"sin"); 
         for(let i=0;i<count+1;i++){
             let ropePoint : RopePoint ;
+            
             if(i==0){
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
+                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
                 // this.rotateRopePoint_2(ropePoint);
                 ropePoint.addView(this.view);
             }
             else
             {
-                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic",i,null);
+
+                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
+                //**添加Joint */
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
                 // this.rotateRopePoint_2(ropePoint);
                 ropePoint.addView(this.view);
@@ -62,10 +74,19 @@ import Dic from "../Tool/dic";
         }
         // this.rotateRopePoint();
     }
+    /**记录位置 */
+        private remPos(x,y,rotation) {
+            let Pos : any;
+            Pos = {};
+            Pos.x = x;
+            Pos.y = y;
+            Pos.rotation = rotation;
+            this.arr_RemPos.push(Pos);
+        }
 
-    update(hookX,HookY,ropeLength):void{
-        this.init(hookX,HookY,ropeLength);
-    }
+    // update(hookX,HookY,ropeLength):void{
+    //     // this.init(hookX,HookY,ropeLength);
+    // }
 
     createMultiRopePoint(hookX,hookY,ropeLength,hookStyle?):void{
         let ropeDic : number;
@@ -84,7 +105,7 @@ import Dic from "../Tool/dic";
         let x_Add=ropeDic*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"cos");
         //每一个节点竖直方向偏移量
         let y_Add=ropeDic*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"sin");
-        // if(disPer >= 60) {console.log("距离不够");}        
+        // if(disPer >= 60) {console.log("距离不够");}   
         for(let i=0;i<disPer+1;i++){
             let ropePoint : RopePoint ;
             if(i==0){
@@ -105,6 +126,8 @@ import Dic from "../Tool/dic";
         }
         // console.log(this.jointsArray);
         // console.log(this.ropePointsArray);
+        // Laya.timer.loop(16,this,this.followPoint);
+        
     }
 
     rotateRopePoint():void{
@@ -125,6 +148,45 @@ import Dic from "../Tool/dic";
         
         }
         
+    }
+    /**重开 */
+    public rePlay(arr_rem,style) : void
+    {
+        // if(disPer >= 60) {console.log("距离不够");}   
+             
+        for(let i=0;i<arr_rem.length;i++){
+            let ropePoint : RopePoint;
+            if(i==0){
+                ropePoint=new RopePoint(arr_rem[i].x,arr_rem[i].y,"kinematic",i,style,arr_rem[i].rotation);
+                ropePoint.addView(this.view);
+            }
+            else
+            {
+                ropePoint =new RopePoint(arr_rem[i].x,arr_rem[i].y,"dynamic",i,style,arr_rem[i].rotation);
+                ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
+                ropePoint.addView(this.view);
+            }
+            if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
+            {
+                this.jointsArray.push(ropePoint.sp.getComponent(Laya.RevoluteJoint));
+            }
+            this.ropePointsArray.push(ropePoint);
+        }
+    }
+
+    public getRemRope() : any
+    {
+        let x;
+        let y;
+        let rotation;
+        for(let i = 0; i<this.ropePointsArray.length ; i++)
+        {
+            x = this.ropePointsArray[i].sp.x;
+            y = this.ropePointsArray[i].sp.y;
+            rotation = this.ropePointsArray[i].sp.rotation;
+            this.remPos(x,y,rotation);
+        }
+        return this.arr_RemPos;
     }
 
     private rotateRopePoint_2(x,y,X,Y):number
@@ -162,6 +224,14 @@ import Dic from "../Tool/dic";
         // }
         joint.anchor = [candy.getCandySprite(index).width/2,candy.getCandySprite(index).height/2];
         candy.getCandySprite(index).addComponentIntance(joint);
+
+        console.log("-------------------");
+        console.log("maxlen::" + (this.ropePointsArray.length-1)*6);
+        console.log("ropePont::" + this.ropePointsArray.length);
+        console.log("spHeight::" + this.ropePointsArray[0].sp.height);
+        //测试
+        this.ropePointsArray[0].ropeJoint_Last(candy,(this.ropePointsArray.length-3)*(GameConfig.ROPE_DIC+3));
+        
     }
     
     /**角度处理函数
@@ -216,6 +286,7 @@ import Dic from "../Tool/dic";
         this.ropePointsArray.forEach(point => {
             point.sp.getComponents(Laya.BoxCollider)[0].density = 1;
         });
+        
         Laya.timer.loop(16,this,this.pointDestroy)
     }
 
@@ -256,5 +327,23 @@ import Dic from "../Tool/dic";
         this.isCuted = false;
 
     }
+    // /**跟随节点*/
+    // public followPoint() : void 
+    // {
+    //     let nextPoint : RopePoint;
+    //     let lastPoint : RopePoint;
+    //     let index;
+    //     let dic;
+    //     for(let i=0;i<this.arr_ImgRope.length;i++)
+    //     {
+    //         index = i+1;
+    //         lastPoint = this.ropePointsArray[index];
+    //         nextPoint = this.ropePointsArray[index+1];
+    //         dic = Dic.countDic_Object(lastPoint.sp,nextPoint.sp);
+    //         this.arr_ImgRope[i].x = 0 + dic*this.rotationDeal(lastPoint.sp.x,lastPoint.y,nextPoint.x,nextPoint.y,"cos");
+    //         this.arr_ImgRope[i].y = 0 + dic*this.rotationDeal(lastPoint.sp.x,lastPoint.y,nextPoint.x,nextPoint.y,"sin");
+    //     }
+    // }
+
 }
 

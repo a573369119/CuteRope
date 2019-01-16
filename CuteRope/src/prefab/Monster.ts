@@ -16,6 +16,9 @@ export default class Monster{
         this.view = view;
         this.init(monsterConfig);
         this.monsterAction(GameConfig.ANI_MONSTER_STAND,true);
+        this.ani.on(Laya.Event.COMPLETE,this,function(){
+            console.log("回复");
+        });
         this.sp.addChild(this.ani);
     }
 
@@ -63,7 +66,7 @@ export default class Monster{
         for (var i=1; i <= length; i++) 
         {
             //动画资源路径要和动画图集打包前的资源命名对应起来
-            urls.push("gameView/" + aniName + i + ".png");
+            urls.push("gameView/monster/" + aniName + i + ".png");
         }
         return urls;
     }

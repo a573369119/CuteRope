@@ -190,16 +190,26 @@ export default class RoundPage extends Laya.Scene{
     /**数字的处理 */
     private setCount(index:number) : void
     {
-        if(index + 1 >= 10)
-        {
-            this.arr_Card[index].img_Count1.visible = true
-            this.arr_Card[index].img_Count1.skin = "publicAssets/" + Math.floor((index + 1)/10) + ".png";
-            this.arr_Card[index].img_Count2.skin = "publicAssets/" + (index + 1)%10 + ".png";       
-         }
-         else
+        let indexCount = (this.quarterIndex)*125 + (this.boxIndex)*25 + index;
+        //312
+         if(indexCount+1 >= 100)
          {
-            this.arr_Card[index].img_Count2.skin = "publicAssets/" + (index + 1) + ".png";  
-            this.arr_Card[index].img_Count2.x = 20;                  
+            this.arr_Card[index].img_Count1.visible = true
+            this.arr_Card[index].img_Count3.visible = true
+            this.arr_Card[index].img_Count2.skin = "publicAssets/" + (indexCount + 1)%100 + ".png";
+            this.arr_Card[index].img_Count1.skin = "publicAssets/" + Math.floor((indexCount + 1)/10)%10 + ".png";
+            this.arr_Card[index].img_Count3.skin = "publicAssets/" + Math.floor((indexCount + 1)/100) + ".png";                                    
          }
+         else if(indexCount+1 >= 10)
+         {
+             this.arr_Card[index].img_Count1.visible = true
+             this.arr_Card[index].img_Count1.skin = "publicAssets/" + Math.floor((indexCount + 1)/10) + ".png";
+             this.arr_Card[index].img_Count2.skin = "publicAssets/" + (indexCount + 1)%10 + ".png";       
+        }
+        else 
+        {
+               this.arr_Card[index].img_Count2.skin = "publicAssets/" + (indexCount + 1) + ".png";  
+               this.arr_Card[index].img_Count2.x = 20;                  
+        }
     }   
 }

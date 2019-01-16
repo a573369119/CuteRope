@@ -8,6 +8,7 @@ import Candy from "./Candy";
 export default class Spider{
     /**精灵 */
     public sp:Laya.Sprite;
+    private img : Laya.Image;
     /**所在层 */
     private view : Laya.Panel
     /**蜘蛛动画*/
@@ -17,51 +18,109 @@ export default class Spider{
     /**下一个点*/
     private nextPoint : RopePoint;
     /**绳子 */
-    private rope : Rope;
+    public rope : Rope;
     /**移动距离 */
     private mov : number;
     /**ropeIndex */
     private ropeIndex : number;
     /**candy */
     private candy : Candy;
-
+    /**下降速度 */
+    private speedX : number
+    /**call */
+    private call : any;
+    /**callBack */
+    private callBack : Function;
+    
     constructor(view){
         this.view = view;
+        this.speedX  = GameConfig.SPIDER_SPEEDX;
     }
-
+    
     //初始化蜘蛛
-    init(data):void{ 
+    init(data,call,callBack):void{      
         this.ani = new Laya.Animation();     
         this.ropeIndex = 1;
+        this.call = call;
+        this.callBack = callBack;
         this.spider_CreateSprite(data.spider_X,data.spider_Y);        
     }
-
+    
     //更新状态
     update(data):void{
+        this.initStatus();  
+        Laya.timer.clear(this,this.followCandy);
         this.sp.visible = true;
         this.sp.pos(data.spider_X,data.spider_Y);
     }
-
+    
     //创建蜘蛛精灵
     spider_CreateSprite(x,y){
         this.sp=new Laya.Sprite();
-        this.sp.loadImage("gameView/spider1.png");        
+        this.img = new Laya.Image();
+        this.img.loadImage("gameView/spider/spider1.png");        
         this.sp.pos(x,y);
+        this.sp.width = 65;
+        this.sp.height = 62;
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
+        this.sp.addChild(this.img);
         this.sp.addChild(this.ani);
+        this.sp.zOrder = 100;
         this.view.addChild(this.sp);
     }
+    
+    //停止寻找
+    public stopEatCandy() : void
+    {
+        this.img.visible = true;
+        this.ani.visible = false;
+        Laya.timer.clear(this,this.spider_FollowRope);
+        Laya.timer.loop(16,this,this.down);
+    }
+    //**糖凋落 */
+    public down() : void
+    {
+        this.sp.y += this.speedX;
+        this.speedX += 0.098;
+        if(this.sp.y > 1334)
+        {
+            this.initStatus();
 
+        }
+    }
+    
+    private initStatus() {
+        this.speedX = GameConfig.SPIDER_SPEEDX;
+        this.ropeIndex = 1;
+        this.ani.stop();
+        this.ani.visible = false;
+        this.img.visible = true;
+        Laya.timer.clear(this, this.down);
+    }
+    
+    /**发现糖果 */
     public foundCandy(rope : Rope,candy : Candy) : void
     {
+        this.ropeIndex = 1;
         this.mov = 0;
         this.candy = candy;
         this.rope = rope;
         this.currentPoint = rope.ropePointsArray[this.ropeIndex];
         this.nextPoint = rope.ropePointsArray[this.ropeIndex+1];
-        Laya.timer.loop(10,this,this.spider_FollowRope);
+        this.monsterAction(GameConfig.ANI_FOUND_CANDY,false);
+        this.ani.on(Laya.Event.COMPLETE,this,this.moveStart);
+        // Laya.timer.loop(10,this,this.spider_FollowRope);
     }
-
+    
+    moveStart(): any 
+    {
+        if(this.ropeIndex == 1)
+        {
+            this.monsterAction(GameConfig.ANI_TOWORD_CANDY,true);
+            Laya.timer.loop(10,this,this.spider_FollowRope);
+        }
+    }
+    
     //蜘蛛爬绳
     spider_FollowRope():void
     {
@@ -74,10 +133,13 @@ export default class Spider{
             if(this.ropeIndex == this.rope.ropePointsArray.length)
             {
                 Laya.timer.clear(this,this.spider_FollowRope);
-                this.ropeIndex = 0;
                 //偷取糖果
                 this.rope.ropePointsArray[this.rope.ropePointsArray.length - 1].sp.getComponent(Laya.RevoluteJoint).destroy();
+                this.candy.arr_Body[0].applyLinearImpulseToCenter({x:0,y:-8});
+                this.monsterAction(GameConfig.ANI_GET_CANDY,false);
                 Laya.timer.loop(16,this,this.followCandy);
+                this.callBack.call(this.call);
+                // this.ropeIndex = 1;
                 return;
             }
             this.currentPoint = this.rope.ropePointsArray[this.ropeIndex];
@@ -108,7 +170,7 @@ export default class Spider{
         let dic = Dic.countDic_Object({x:current.x,y:current.y},{x:next.x,y:next.y});
         //复制
         dic = Math.floor(dic) * this.mov;
-        // this.sp.rotation = rotation ;
+        this.sp.rotation = rotation ;
         this.sp.x = current.x + dic * cos;
         this.sp.y = current.y + dic * sin;
     }
@@ -141,7 +203,9 @@ export default class Spider{
         if(!isLoop) isLoop=false;
         this.ani.loadImages(this.aniUrls(aName,this.getAniLength(aName)));
         this.ani.play(0,isLoop);
-        this.sp.visible = false;
+        this.img.visible = false;
+        this.ani.visible = true;
+        // this.sp.visible = false;
     } 
     /**
      * 创建一组动画的url数组（美术资源地址数组）
@@ -154,7 +218,7 @@ export default class Spider{
         for (var i=1; i <= length; i++) 
         {
             //动画资源路径要和动画图集打包前的资源命名对应起来
-            urls.push("gameView/" + aniName + i + ".png");
+            urls.push("gameView/spider/" + aniName + i + ".png");
         }
         return urls;
     }

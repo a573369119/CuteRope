@@ -1,5 +1,6 @@
 import Tool from "../Tool/Tool";
 import Candy from "../prefab/Candy";
+import GameConfig from "../config/GameConfig";
 export default class Balloon{
     /**泡泡精灵 */
     public sp:Laya.Sprite;
@@ -32,34 +33,35 @@ export default class Balloon{
         this.isCollision=false;
         this.isSlow=false;
         let randNum=Math.ceil(Math.random()*3);
-        this.spBg.loadImage("gameView/balloonBg"+randNum+".png");
+        this.spBg.loadImage("gameView/paopao/balloonBg"+randNum+".png");
         this.spBg.pos(data.balloon_X,data.balloon_Y);
         this.sp.pos(data.balloon_X,data.balloon_Y);
         this.sp.alpha=1;
         this.sp.visible=true;
+        this.sp.zOrder = GameConfig.ZORDER_BALLON;
         this.anim1.visible=false;
         this.anim1.stop();
         this.anim1.pos(data.balloon_X,data.balloon_Y);
-        this.anim1.x -= this.sp.width/2;
-        this.anim1.y -= this.sp.height/2; 
+        // this.anim1.x -= this.sp.width/2;
+        // this.anim1.y -= this.sp.height/2; 
         this.anim2.visible=false;
         this.anim2.stop();
         this.anim2.pos(data.balloon_X,data.balloon_Y);
-        this.anim2.x -= this.sp.width/2;
-        this.anim2.y -= this.sp.height/2; 
+        // this.anim2.x -= this.sp.width/2;
+        // this.anim2.y -= this.sp.height/2; 
     }
 
     //创建泡泡精灵
     balloon_CreateSprite(x,y){
         this.sp=new Laya.Sprite();
-        this.sp.loadImage("gameView/balloon.png");
+        this.sp.loadImage("gameView/paopao/balloon.png");
         this.sp.pos(x,y);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);        
         this.view.addChild(this.sp);
 
         this.spBg=new Laya.Sprite();
         let randNum=Math.ceil(Math.random()*3);
-        this.spBg.loadImage("gameView/balloonBg"+randNum+".png");
+        this.spBg.loadImage("gameView/paopao/balloonBg"+randNum+".png");
         this.spBg.pivot(this.spBg.width/2,this.spBg.height/2);
         this.spBg.pos(x,y);        
         this.view.addChild(this.spBg);
@@ -73,7 +75,7 @@ export default class Balloon{
         this.anim1.x -= this.sp.width/2;
         this.anim1.y -= this.sp.height/2; 
         this.anim1.visible = false;
-        this.anim1.zOrder=2;
+        this.anim1.zOrder= GameConfig.ZORDER_BALLON;
         this.view.addChild(this.anim1);
     }
     //创建爆炸动画
@@ -106,18 +108,21 @@ export default class Balloon{
         if(!this.isSlow){
             for(let i=0;i<arr_Body.length;i++){
                 arr_Body[i].linearDamping=30;
-                console.log("成功");
+                // console.log("成功");
                 if(Math.abs(arr_Body[i].linearVelocity.x)<1){
                     this.isSlow=true;
                     arr_Body[i].linearDamping=0.03;
-                    console.log("中立");
+                    // console.log("中立");
                 }
             }
-        }else{
-                for(let i=0;i<arr_Body.length;i++){
-                    arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.85,y:-5});
-                    console.log("失败");
-            }
+        }
+        else
+        {
+                for(let i=0;i<arr_Body.length;i++)
+                {
+                    if(arr_Body[i].owner) arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.85,y:-5});
+                        // console.log("失败");
+                }
             
         }    
            

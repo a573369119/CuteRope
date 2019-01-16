@@ -20,12 +20,19 @@ export default class LoadingPage extends ui.LoadingUI{
             {url:"res/atlas/gameView/gameBtn.atlas"},
             {url:"res/atlas/comp.atlas"},
 			{url:"res/atlas/gameView/stardestory.atlas"},
+            {url:"res/atlas/shop.atlas"},
+            {url:"res/atlas/gameView/mouseTail.atlas"},
+            {url:"res/atlas/gameView/paopao.atlas"},
+            {url:"res/atlas/gameView/spider.atlas"},
+            {url:"res/atlas/gameView/starTime.atlas"},
+            {url:"res/atlas/gameView/monster.atlas"},
             //大图加载
             {url:"unpackage/startGameBg.jpg"},
             {url:"unpackage/cutRope.png"},
-            {url:"GameView/gameBg/boxBg_1.jpg"}
+            {url:"GameView/gameBg/boxBg_1.jpg"},
+            {url:"GameView/gameBg/boxBg_2.jpg"}
         ];
-        Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onPro));
+        Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onPro,null,false));
     }
 
 
@@ -38,7 +45,7 @@ export default class LoadingPage extends ui.LoadingUI{
     private onPro(pro,e) : void
     {
         console.log(pro+","+e);
-        this.lab_Progress.text = "Loading …… " + Math.floor(pro) + "%";
+        this.lab_Progress.text = "Loading …… " + Math.floor(pro*100) + "%";
         this.img_Progress.width = 499 * pro; 
         
     }

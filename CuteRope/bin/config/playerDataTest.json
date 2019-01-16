@@ -1,6 +1,6 @@
 {
-    "playerStars":25,
-    "playerSuper":1,
+    "playerStars":50,
+    "playerSuper":4,
     "PlayerTeach":2,
     "playerCard":[
         {
@@ -11,6 +11,5 @@
             "card":"0-1",
             "stars":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] 
         }
-
     ]
 }

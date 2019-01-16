@@ -43,13 +43,13 @@ import Dic from "../Tool/dic";
         for(let i=0;i<count+1;i++){
             let ropePoint : RopePoint ;
             if(i==0){
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
+                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
                 // this.rotateRopePoint_2(ropePoint);
                 ropePoint.addView(this.view);
             }
             else
             {
-                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic",null);
+                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic",i,null);
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
                 // this.rotateRopePoint_2(ropePoint);
                 ropePoint.addView(this.view);
@@ -88,12 +88,12 @@ import Dic from "../Tool/dic";
         for(let i=0;i<disPer+1;i++){
             let ropePoint : RopePoint ;
             if(i==0){
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",hookStyle);
+                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,hookStyle);
                 ropePoint.addView(this.view);
             }
             else
             {
-                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic",hookStyle);
+                ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic",i,hookStyle);
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
                 ropePoint.addView(this.view);
             }
@@ -214,7 +214,7 @@ import Dic from "../Tool/dic";
     {
         this.isCuted = true;
         this.ropePointsArray.forEach(point => {
-            point.sp.getComponents(Laya.BoxCollider)[0].density = 0.01;
+            point.sp.getComponents(Laya.BoxCollider)[0].density = 1;
         });
         Laya.timer.loop(16,this,this.pointDestroy)
     }

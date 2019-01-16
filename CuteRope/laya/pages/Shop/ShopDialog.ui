@@ -6,7 +6,7 @@
     "searchKey":"Dialog",
     "props":{"width":750,"sceneColor":"#000000","height":1334},
     "nodeParent":-1,
-    "maxID":14,
+    "maxID":19,
     "label":"Dialog",
     "isOpen":true,
     "isDirectory":true,
@@ -26,7 +26,8 @@
             "hasChild":false,
             "compId":3,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -40,34 +41,8 @@
             "hasChild":false,
             "compId":4,
             "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,btn_close",
-            "props":{"y":182.5,"x":572,"var":"btn_close","texture":"shop/2 (12).png"},
-            "nodeParent":2,
-            "label":"btn_close",
-            "isOpen":false,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":5,
-            "child":[
-                {
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":19,"x":15,"texture":"shop/2 (22).png"},
-                    "nodeParent":5,
-                    "label":"Sprite",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":6,
-                    "child":[
-                        ]
-                }]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -81,7 +56,8 @@
             "hasChild":false,
             "compId":7,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -95,7 +71,8 @@
             "hasChild":false,
             "compId":8,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -104,13 +81,26 @@
             "props":{"y":283,"x":242,"width":300,"var":"shop1","texture":"shop/2 (4).png","height":251},
             "nodeParent":2,
             "label":"shop1",
-            "isDirectory":false,
+            "isOpen":false,
+            "isDirectory":true,
             "isAniNode":true,
-            "hasChild":false,
+            "hasChild":true,
             "compId":9,
             "child":[
-                ],
-            "$HIDDEN":true
+                {
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"y":391,"x":-85,"wordWrap":true,"width":470,"text":"点击右上角 ，观看广告直接通关！","height":351,"fontSize":40,"font":"Microsoft YaHei","color":"#ffffff","bold":true,"align":"center"},
+                    "nodeParent":9,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":17,
+                    "child":[
+                        ]
+                }],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -119,40 +109,102 @@
             "props":{"y":322.5,"x":203,"width":378,"var":"shop2","texture":"shop/2 (27).png","height":172},
             "nodeParent":2,
             "label":"shop2",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":10,
-            "child":[
-                ],
-            "$HIDDEN":true
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,film",
-            "props":{"y":269,"x":571,"var":"film","texture":"shop/2 (12).png"},
-            "nodeParent":2,
-            "label":"film",
             "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "compId":11,
+            "compId":10,
             "child":[
                 {
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":10.5,"x":6,"texture":"shop/2 (19).png"},
-                    "nodeParent":11,
-                    "label":"Sprite",
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"y":255,"x":-25,"wordWrap":true,"width":428,"text":"使用超能力！！让盒子变为密闭空间！！糖果不在掉落，用手指可推动糖果！并且糖果不会背破坏！","height":219,"fontSize":40,"font":"Microsoft YaHei","color":"#ffffff","bold":true,"align":"left"},
+                    "nodeParent":10,
+                    "label":"Text",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":12,
+                    "compId":18,
                     "child":[
                         ]
-                }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,film",
+                    "props":{"y":-53,"x":368,"var":"film","texture":"shop/2 (12).png"},
+                    "nodeParent":10,
+                    "label":"film",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":11,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"y":10.5,"x":6,"texture":"shop/2 (19).png"},
+                            "nodeParent":11,
+                            "label":"Sprite",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":12,
+                            "child":[
+                                ],
+                            "$HIDDEN":false
+                        }],
+                    "$HIDDEN":false
+                }],
+            "$HIDDEN":true
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "searchKey":"Image,imgBottom",
+            "props":{"y":1174,"x":138,"width":508,"var":"imgBottom","skin":"shop/2 (15).png","height":27},
+            "nodeParent":2,
+            "label":"imgBottom",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":16,
+            "child":[
+                ],
+            "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "searchKey":"Image,btn_close",
+            "props":{"y":189,"x":575,"var":"btn_close","skin":"publicAssets/aniu1.png"},
+            "nodeParent":2,
+            "label":"btn_close",
+            "isOpen":true,
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":15,
+            "child":[
+                ],
+            "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite",
+            "props":{"y":207,"x":590,"texture":"shop/2 (22).png"},
+            "nodeParent":2,
+            "label":"Sprite",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":6,
+            "child":[
+                ],
+            "$HIDDEN":false
         }],
     "animations":[
         {
@@ -162,5 +214,6 @@
             "id":1,
             "frameRate":24,
             "action":0
-        }]
+        }],
+    "$HIDDEN":false
 }

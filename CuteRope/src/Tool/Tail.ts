@@ -14,6 +14,8 @@ export default class Tail{
     ///----------------------------------
     /**鼠标控制 */
     private isDown : boolean;
+    /** */
+    private spriteImgs : Laya.Sprite;
     /**可拖尾界面**/
     private view : any;
     /**路径数组 */
@@ -49,6 +51,9 @@ export default class Tail{
         this.arr_RodePos = new Array<any>();
         this.arr_Imgs = new Array<Laya.Image>();
         this.rem_LastPos = {x:null,y:null};
+        this.spriteImgs = new Laya.Sprite();
+        this.view.addChild(this.spriteImgs);
+
         this.index_Img = 0;
         this.index_ImgUsed = 0;
     }
@@ -97,6 +102,8 @@ export default class Tail{
     private onMouseUp() : void
     {
         this.isDown = false;
+        this.rem_LastPos.x = null;
+        this.rem_LastPos.y = null;
     }
 
 
@@ -135,11 +142,14 @@ export default class Tail{
     {
         let mX = Laya.stage.mouseX;
         let mY = Laya.stage.mouseY;
+        // console.log("拖尾");
         if(this.isDown)
         {
+            // console.log("记录");
             //记录
             this.rem_Pos(mX,mY);
         }
+        // console.log("显示");
         this.changeStyle();
     }
 /////////////////////////////////////////////单图片圆形拖尾逻辑↑
@@ -215,6 +225,20 @@ export default class Tail{
             if(dic > this.createDic)
             {
                 let pos : any ={};
+                //空隙补全
+                let count;
+                // if(dic > 50)
+                // {
+                //     count  = Math.floor(dic/50);
+                //     let cos = this.rotationDeal(this.rem_LastPos.x,this.rem_LastPos.y,mX,mY,"cos");
+                //     let sin = this.rotationDeal(this.rem_LastPos.x,this.rem_LastPos.y,mX,mY,"sin");
+                //     for(let i = 1; i<=count ; i++)
+                //     {
+                //         let pos : any= {};
+                //         this.arr_RodePos.push({x:this.rem_LastPos.x + 50 * i * cos,y:this.rem_LastPos.y + 50 * i * sin});
+                //         if(this.skinCirle) this.showSingleCirle();
+                //     }
+                // }
                 pos.x = mX;
                 pos.y = mY;
                 this.arr_RodePos.push(pos);
@@ -223,6 +247,7 @@ export default class Tail{
                 this.rem_LastPos.y = mY;
                     // console.log(this.arr_RodePos);
                  //显示
+                //  console.log(this.arr_RodePos);
             }
         }
     }
@@ -301,7 +326,12 @@ export default class Tail{
         }
         else
         {
-            // console.log("对象池取出");
+            if((img as Laya.Image).parent != this.spriteImgs)
+            {
+                (img as Laya.Image).removeSelf();
+                this.spriteImgs.addChild(img);
+            }
+
         }
         //加入队列
         this.arr_Imgs.push(img);
@@ -329,7 +359,8 @@ export default class Tail{
     {
         let img : Laya.Image;
         img = new Laya.Image();
-        this.view.addChild(img);
+        img.zOrder = 10;
+        this.spriteImgs.addChild(img);
         if(this.skinCirle) img.skin = this.skinCirle;
         img.pivotX = img.width/2,
         img.pivotY = img.height/2;

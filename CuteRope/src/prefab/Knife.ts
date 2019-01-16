@@ -46,7 +46,7 @@ import Tool from "../Tool/Tool";
         if(data.isAlwaysRotate){
             Laya.timer.frameLoop(1,this,this.knife_RotateBySelf);
         }
-        if(data.move!=[]){
+        if(data.move.length !=0 ){
             this.knife_X=this.sp.x;
             this.knife_Y=this.sp.y;
             this.isGoing=true;

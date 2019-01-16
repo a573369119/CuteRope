@@ -1038,7 +1038,7 @@ export default class GamePage extends Laya.Scene{
 ///////////////////////////////////////mouseCute
     private mouseCute() : void
     {
-        //检测是否正按下鼠标移动钩子，移动钩子会影响割绳子的操作，若未按下则可开启割绳子检测
+        //检测是否正按下鼠标移动钩子，若未按下则可开启割绳子检测
         let count=0;
         for(let i=0;i<this.arr_Hook.length;i++){
            if(this.arr_Hook[i].isHookMouseDown)

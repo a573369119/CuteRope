@@ -10,7 +10,7 @@ export default class GameConfig{
     /**绳子线性阻力 */
     public static ROPE_POINT_LINEARDAMOING : number = 0.04;
     /**绳子密度 */
-    public static ROPE_POINT_DENSITY : number = 50;
+    public static ROPE_POINT_DENSITY : number = 30;
     /**绳子自动靠近糖果速度 */
     public static ROPE_TO_CANDY_SPEED : number = 12;
     ////////////////////////////////弹力绳子
@@ -21,7 +21,7 @@ export default class GameConfig{
     /**绳子线性阻力 */
     public static ROPE_JUMP__POINT_LINEARDAMOING : number = 0.04;
     /**绳子密度 */
-    public static ROPE_JUMP__POINT_DENSITY : number = 1;
+    public static ROPE_JUMP__POINT_DENSITY : number = 10;
     /**绳子自动靠近糖果速度 */
     public static ROPE_JUMP__TO_CANDY_SPEED : number = 15;
     ///////////////////////////////糖果
@@ -30,7 +30,7 @@ export default class GameConfig{
     /**糖果线性转动阻力 */
     public static CANDY_LINEARDAMPING : number = 0.03;
     /**糖果密度 */
-    public static CANDY_DENSITY : number = 1;
+    public static CANDY_DENSITY : number = 10;
     /////////////////////////////////怪物
     /**吃糖果距离 */
     public static MONSTER_EAT_DIC : number = 50;
@@ -53,4 +53,16 @@ export default class GameConfig{
     public static ANI_MONSTER_STAND : string = "stand";
     /**[monster]动作 翘脚 43*/
     public static ANI_MONSTER_ACTION : string = "ation";
+    ////////////////////////////超能力
+    public static SUPER_V : number = 7;
+    //////////////////////////////////////////////蜘蛛动画
+    /**【蜘蛛】 糖果接近 */
+    public static ANI_FOUND_CANDY : string = "spiderfond";
+    /** 【蜘蛛】爬向糖果 */
+    public static ANI_TOWORD_CANDY : string = "spider";
+    /** 【蜘蛛】得到糖果 */
+    public static ANI_GET_CANDY : string = "spiderget" ;
+    //////////////////////////////////////////////蜘蛛
+    /**蜘蛛的移动速度 */
+    public static SPIDER_SPEED = 0.01;
 }

@@ -115,7 +115,7 @@ export default class Balloon{
             }
         }else{
                 for(let i=0;i<arr_Body.length;i++){
-                    arr_Body[i].setVelocity({x:0,y:-5});
+                    arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.85,y:-5});
                     console.log("失败");
             }
             

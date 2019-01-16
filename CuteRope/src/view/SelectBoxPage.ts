@@ -29,6 +29,10 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
     private shopDoor : ui.topLeftUI;
     /**dilog */
     private shopDialog : ShopDialog; 
+    /**鼠标移动 */
+    private mouseMoveX : number;
+    /**当前下标 */
+    private index : number;
 
     constructor(){
         super();
@@ -38,6 +42,7 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
         this.arr_Box = new Array<Box>() ;
         this.arr_Point = new Array<Laya.Image>();
         this.posX = 250;
+        this.index = 0;
 
         this.shopDoor = new ui.topLeftUI();
         this.shopDialog = Laya.WeakObject.I.get("dialog");
@@ -51,9 +56,22 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
         this.shopDoor.btn_Super.on(Laya.Event.CLICK,this,this.onSuper);
         
         this.btn_Exit.on(Laya.Event.CLICK,this,this.onEixt);
-        
+        this.btn_Exit.on(Laya.Event.MOUSE_DOWN,this,this.onDown);
+        this.btn_Exit.on(Laya.Event.MOUSE_OUT,this,this.onUp);
+
         this.scrollBarSetting();
     }
+
+    private onDown() : void
+    {
+        this.btn_Exit.skin = "publicAssets/exit_Y.png";
+    }
+
+    private onUp() : void
+    {
+        this.btn_Exit.skin = "publicAssets/exit_R.png";
+    }
+
 
     private onTeach() :void
     {
@@ -126,6 +144,7 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
     /**事件 面板被点下   2250*/
     private onMouseDow() : void
     {
+        this.mouseMoveX = Laya.stage.mouseX;
     }
 
 
@@ -133,14 +152,23 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
     private onMouseUp() : void
     {
         let value = this.panel_ShowBox.hScrollBar.value;
+        let ca = this.mouseMoveX - Laya.stage.mouseX;
         let i = this.mouseJudge(value);
-        if(i == 0)
+        if(ca > 100)
+        {
+            this.index++;
+        }else if(ca <-100)
+        {
+            this.index--;
+        }
+
+        if(this.index == 0)
         {
             Laya.Tween.to(this.panel_ShowBox.hScrollBar,{value:0},100);
         }
         else
         {
-            Laya.Tween.to(this.panel_ShowBox.hScrollBar,{value:(550*i - 20)},100);         
+            Laya.Tween.to(this.panel_ShowBox.hScrollBar,{value:(550*this.index - 20)},100);         
         }
     }
 
@@ -151,7 +179,7 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
         this.img_SelectBox.x = value*(this.scale_ + 0.0289) - 10;//0.289距离宽就变大，距离低就变小
         for(let i=0; i<this.arr_Box.length;i++)
         {
-            if(value <= 130)
+            if(value <= 130 - 5)
             {
                 this.arr_Box[0].boxUI.sprite_BoxParent.addChild(this.moster);
                 this.moster.x = 123;
@@ -159,7 +187,7 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
                 this.mosterMove(value,i);
                 break;
             }
-            else if(i!=0 && value <= (i*(550)+100) && value >= ((i-1)*550+160+this.posX))
+            else if(i!=0 && value <= (i*(550)+100 - 5) && value >= ((i-1)*550+160+this.posX + 5))
             {
 
                 this.arr_Box[i].boxUI.sprite_BoxParent.addChild(this.moster);

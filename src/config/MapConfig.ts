@@ -1,5 +1,3 @@
-import MagicHat from "../prefab/MagicHat";
-
 /**
  * 地图配置 ， 纯数据
  */
@@ -66,7 +64,7 @@ export module Config {
         /**推力球 forceball*/
         public arr_Forceball : Array<ForceBallConfig>;
         /**魔术帽 */
-        public arr_magicHat : Array<MagicHatConfig>;
+        public arr_MagicHat : Array<MagicHatConfig>;
         /**激光 */
         public arr_Laser : Array<LaserConfig>;
         /**蜘蛛 */
@@ -78,7 +76,7 @@ export module Config {
             this.arr_Star = [];
             this.arr_MapSkin = [];
             this.arr_Balloon = [];
-            this.arr_magicHat = [];
+            this.arr_MagicHat = [];
             this.arr_Knife=[];
             this.arr_Forceball=[];
             this.arr_Laser=[];
@@ -260,17 +258,27 @@ export module Config {
             }
         }
         /**魔术帽 */
-        private parseMagicHat(MagicHatObject) : void
+        private parseMagicHat(magicHatObject) : void
         {
-            if(MagicHatObject)
+            if(magicHatObject)
             {
                 let magicHatConfig : MagicHatConfig;
-                MagicHatObject.forEach(hat => {
+                magicHatObject.forEach(magicHat => {
                     magicHatConfig = new MagicHatConfig();
-                    magicHatConfig.x = hat.x;
-                    magicHatConfig.y = hat.y;
-                    magicHatConfig.rotation = hat.rotation;
-                    this.arr_magicHat.push(magicHatConfig);
+                    magicHatConfig.magicHat_X1 = magicHat.x1;
+                    magicHatConfig.magicHat_Y1 = magicHat.y1;
+                    magicHatConfig.rotation1 = magicHat.rotation1;
+                    magicHatConfig.magicHat_X2 = magicHat.x2;
+                    magicHatConfig.magicHat_Y2 = magicHat.y2;
+                    magicHatConfig.rotation2 = magicHat.rotation2;
+                    magicHatConfig.color=magicHat.color;
+                    magicHatConfig.move1=magicHat.move1;
+                    magicHatConfig.move2=magicHat.move2;
+                    magicHatConfig.rotate1=magicHat.rotate1;
+                    magicHatConfig.rotate2=magicHat.rotate2;
+                    magicHatConfig.v1=magicHat.v1;
+                    magicHatConfig.v2=magicHat.v2;
+                    this.arr_MagicHat.push(magicHatConfig);
                 });
             }
         }
@@ -397,15 +405,34 @@ export module Config {
         public rotation : number;
     }
 
-    /** */
+    /**帽子 */
     export class MagicHatConfig{
-        /**横坐标 */
-        public x : number;
-        /**纵坐标 */
-        public y : number;
-        /**角度 */
-        public rotation : number;
-        
+        /**帽子1横坐标 */
+        public magicHat_X1 : number;
+        /**帽子2横坐标 */
+        public magicHat_X2 : number;
+        /**帽子1纵坐标 */
+        public magicHat_Y1 : number;
+        /**帽子2纵坐标 */
+        public magicHat_Y2 : number;
+        /**帽子1旋转角度 */
+        public rotation1 : number;
+        /**帽子2旋转角度 */
+        public rotation2 : number;
+        /**颜色 */
+        public color:string;
+        /**帽子1移动到某点 */
+        public move1:Array<number>;
+        /**帽子2移动到某点 */
+        public move2:Array<number>;
+        /**帽子1绕某点旋转 */
+        public rotate1:Array<number>;
+        /**帽子2绕某点旋转 */
+        public rotate2:Array<number>;
+        /**帽子1绕某点旋转角速度 */
+        public v1:number;
+        /**帽子2绕某点旋转 */
+        public v2:number;
     }
 
     /**激光 laser*/

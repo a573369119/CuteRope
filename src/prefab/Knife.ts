@@ -77,22 +77,45 @@ import Tool from "../Tool/Tool";
         if(this.isGoing){
             this.sp.x+=x_Add;
             this.sp.y+=y_Add;
-            if(Math.abs(this.sp.x-move[0])<0.3){
-                this.sp.x=move[0];
-                this.sp.y=move[1];
-                this.isGoing=false;
-                
+            if(x_Add==0){
+                if(this.sp.y==move[1]){
+                    this.isGoing=false;
+                }
+            }
+            else if(y_Add==0){
+                if(this.sp.x==move[0]){
+                    this.isGoing=false;
+                }
+            }
+            else
+            {
+                if(Math.abs(this.sp.x-move[0])<0.3){
+                    this.sp.x=move[0];
+                    this.sp.y=move[1];
+                    this.isGoing=false;
+                    
+                }
             }
         }else{
             this.sp.x-=x_Add;
             this.sp.y-=y_Add;
-            if(Math.abs(this.sp.x-this.knife_X)<0.3){
+            if(x_Add==0){
+                if(this.sp.y==this.knife_Y){
+                    this.isGoing=true;
+                }
+            }
+            else if(y_Add==0){
+                if(this.sp.x==this.knife_X){
+                    this.isGoing=true;
+                }
+            }else {
+                if(Math.abs(this.sp.x-this.knife_X)<0.3){
                 this.sp.x=this.knife_X;
                 this.sp.y=this.knife_Y;
                 this.isGoing=true;
             }
         }
-        
+    }
     }
     public clearTimer():void{
         Laya.timer.clearAll(this);

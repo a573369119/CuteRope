@@ -95,27 +95,51 @@ import Tool from "../Tool/Tool";
         }
     }
 
-    //锥子来回移动
+    //激光来回移动
     laser_MoveBySelf(move):void{        
         let x_Add=Tool.rotationDeal(this.laser_X,this.laser_Y,move[0],move[1],"cos");
         let y_Add=Tool.rotationDeal(this.laser_X,this.laser_Y,move[0],move[1],"sin");
         if(this.isGoing){
             this.spRect.x+=x_Add;
             this.spRect.y+=y_Add;
-            if(Math.abs(this.spRect.x-move[0])<0.3){
-                this.spRect.x=move[0];
-                this.spRect.y=move[1];
-                this.isGoing=false;
-                
+            if(x_Add==0){
+                if(this.spRect.y==move[1]){
+                    this.isGoing=false;
+                }
+            }
+            else if(y_Add==0){
+                if(this.spRect.x==move[0]){
+                    this.isGoing=false;
+                }
+            }
+            else
+            {
+                if(Math.abs(this.spRect.x-move[0])<0.3){
+                    this.spRect.x=move[0];
+                    this.spRect.y=move[1];
+                    this.isGoing=false;
+                    
+                }
             }
         }else{
             this.spRect.x-=x_Add;
             this.spRect.y-=y_Add;
-            if(Math.abs(this.spRect.x-this.laser_X)<0.3){
+            if(x_Add==0){
+                if(this.spRect.y==this.laser_Y){
+                    this.isGoing=true;
+                }
+            }
+            else if(y_Add==0){
+                if(this.spRect.x==this.laser_X){
+                    this.isGoing=true;
+                }
+            }else {
+                if(Math.abs(this.spRect.x-this.laser_X)<0.3){
                 this.spRect.x=this.laser_X;
                 this.spRect.y=this.laser_Y;
                 this.isGoing=true;
             }
+        }
         }
     }
     

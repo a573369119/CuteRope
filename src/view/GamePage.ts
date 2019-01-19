@@ -274,8 +274,9 @@ export default class GamePage extends Laya.Scene{
         }
         if(this.arr_MagicHat)//取消帽子定时球
         {
-            this.arr_MagicHat.forEach(hat => {
-                hat.destroy();
+            this.arr_MagicHat.forEach(magicHat => {
+                magicHat.destroy();
+                magicHat.clearTimer();
             })
         }
         if(this.arr_Hook)//hook销毁
@@ -627,7 +628,7 @@ export default class GamePage extends Laya.Scene{
         //泡泡数据初始化
         this.balloonInit(this.mapConfig.arr_Balloon);
         //帽子数据初始化
-        this.hatInit(this.mapConfig.arr_magicHat); 
+        this.magicHatInit(this.mapConfig.arr_MagicHat); 
         //锥子数据初始化
         this.knifeInit(this.mapConfig.arr_Knife);
         //蜘蛛数据初始化
@@ -796,31 +797,6 @@ export default class GamePage extends Laya.Scene{
       
   }
 
-    /**帽子初始化 */
-    private hatInit(hatConfig) : void
-    {
-        let hat : MagicHat;
-        let color = "";
-        if(!hatConfig[0]) return;
-        if(!this.arr_MagicHat) this.arr_MagicHat = new Array<MagicHat>();
-        for(let i=0; i<hatConfig.length; i++)
-        {   
-            if(i<2)
-                color = "red";
-            else
-                color = "green";
-
-            if(!this.arr_MagicHat[i])
-            {
-                hat = new MagicHat(hatConfig[i].x,hatConfig[i].y,hatConfig[i].rotation,this.scene.panel_GameWorld,color);
-                this.arr_MagicHat.push(hat);
-            }
-            else
-            {
-                this.arr_MagicHat[i].update(hatConfig[i].x,hatConfig[i].y,hatConfig[i].rotation);
-            }
-        }
-    }
     /**星星初始化 */
     private starInit(starConfig) : void
     {
@@ -1021,6 +997,36 @@ export default class GamePage extends Laya.Scene{
         console.log(this.arr_Laser);
         
     }
+
+    /**帽子初始化 */
+    private magicHatInit(arr_MagicHat) : void
+    {
+        if(!arr_MagicHat[0]) return;
+        if(this.arr_MagicHat==undefined)
+        {
+            this.arr_MagicHat = new Array<MagicHat>();
+        }
+            
+        for(let i=0; i<arr_MagicHat.length; i++)
+        {   
+            if(this.arr_MagicHat[i])
+            {
+                this.arr_MagicHat[i].update(
+                    {"magicHat_X1":arr_MagicHat[i].magicHat_X1,"magicHat_Y1":arr_MagicHat[i].magicHat_Y1,"rotation1":arr_MagicHat[i].rotation1,"move1":arr_MagicHat[i].move1,"rotate1":arr_MagicHat[i].rotate1,"v1":arr_MagicHat[i].v1,
+                     "magicHat_X2":arr_MagicHat[i].magicHat_X2,"magicHat_Y2":arr_MagicHat[i].magicHat_Y2,"rotation2":arr_MagicHat[i].rotation2,"move2":arr_MagicHat[i].move2,"rotate2":arr_MagicHat[i].rotate2,"v2":arr_MagicHat[i].v2,
+                     "color":arr_MagicHat[i].color});
+            }
+            else
+            { 
+                this.arr_MagicHat[i] = new MagicHat(this.scene.panel_GameWorld);
+                this.arr_MagicHat[i].init(
+                    {"magicHat_X1":arr_MagicHat[i].magicHat_X1,"magicHat_Y1":arr_MagicHat[i].magicHat_Y1,"rotation1":arr_MagicHat[i].rotation1,"move1":arr_MagicHat[i].move1,"rotate1":arr_MagicHat[i].rotate1,"v1":arr_MagicHat[i].v1,
+                     "magicHat_X2":arr_MagicHat[i].magicHat_X2,"magicHat_Y2":arr_MagicHat[i].magicHat_Y2,"rotation2":arr_MagicHat[i].rotation2,"move2":arr_MagicHat[i].move2,"rotate2":arr_MagicHat[i].rotate2,"v2":arr_MagicHat[i].v2,
+                     "color":arr_MagicHat[i].color});
+            }
+        }
+        console.log(this.arr_MagicHat);
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////////////游戏逻辑↓
 
 
@@ -1184,7 +1190,6 @@ export default class GamePage extends Laya.Scene{
         if(!this.arr_Balloon) return;
         //检测与糖果得距离，碰撞到则启动泡泡效果,在GamePage中开启此检测方法，obj1为糖果的sprite
         let dic;
-        if(!this.arr_Balloon) return;
         this.arr_Balloon.forEach(balloon => {
             if(!balloon.isCollision)
             {
@@ -1215,16 +1220,51 @@ export default class GamePage extends Laya.Scene{
     private testHat(x,y) : void
     {
         if(!this.arr_MagicHat) return;        
-        let dic;
-        for(let i=0;i<this.arr_MagicHat.length;i++)
-        {
-            dic = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":this.arr_MagicHat[i].sp.x,'y':this.arr_MagicHat[i].sp.y});
-            if(dic < 50)
-            {
-                //使小球换位置出现的方法
-
-            }
-        }
+        let dic1,dic2;
+        this.arr_MagicHat.forEach(magicHat => {
+                dic1 = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":magicHat.sp1.x,'y':magicHat.sp1.y});
+                dic2 = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":magicHat.sp2.x,'y':magicHat.sp2.y});
+                if(dic1>=50&&dic2>=50){
+                    magicHat.isCollision=false;
+                }
+                if(dic1 < 50){
+                    if(!magicHat.isCollision){
+                        //使小球换位置出现的方法
+                        this.candy.arr_Sp[0].pos(magicHat.sp2.x,magicHat.sp2.y);                        
+                        let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));
+                        for(let i=0;i<this.candy.arr_Body.length;i++){
+                            this.candy.arr_Body[0].setVelocity({x:0,y:0});
+                        }
+                        for(let i=0;i<this.candy.arr_Body.length;i++){
+                            this.candy.arr_Body[0].setVelocity({x:Math.sin(magicHat.rotation2)*velocity,y:-Math.cos(magicHat.rotation2)*velocity});
+                        }
+                        magicHat.isCollision=true;
+                        console.log(this.candy.arr_Body[0].linearVelocity);
+                    }else{
+                        magicHat.isCollision=true;
+                    }                                       
+                }
+        
+                if(dic2 < 50){
+                    if(!magicHat.isCollision){
+                        //使小球换位置出现的方法
+                        this.candy.arr_Sp[0].pos(magicHat.sp1.x,magicHat.sp1.y);
+                        
+                        let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));
+                        for(let i=0;i<this.candy.arr_Body.length;i++){
+                            this.candy.arr_Body[0].setVelocity({x:0,y:0});
+                        }
+                        for(let i=0;i<this.candy.arr_Body.length;i++){
+                        this.candy.arr_Body[0].setVelocity({x:Math.sin(magicHat.rotation1)*velocity,y:-Math.cos(magicHat.rotation1)*velocity});
+                        }
+                        magicHat.isCollision=true;
+                    }else{
+                        magicHat.isCollision=true;
+                    }
+                }
+                
+                
+            });
         
     }
 

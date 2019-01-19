@@ -1,3 +1,5 @@
-2019/01/18-18:08:14.135 3c08 Reusing MANIFEST leveldb/MANIFEST-000001
-2019/01/18-18:08:14.136 3c08 Recovering log #761
-2019/01/18-18:08:14.137 3c08 Reusing old log leveldb/000761.log 
+2019/01/19-09:35:57.097 2b14 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/01/19-09:35:57.098 2b14 Recovering log #761
+2019/01/19-09:35:57.302 2b14 Reusing old log leveldb/000761.log 
+2019/01/19-09:35:57.302 2b14 Delete type=0 #738
+2019/01/19-09:35:57.303 2b14 Delete type=2 #740

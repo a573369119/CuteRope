@@ -15,7 +15,7 @@
                     {"style":"star2","x":240,"y":500},
                     {"style":"star3","x":240,"y":600}
                 ],
-                "monster":{"x":240,"y":700,"skin":""},
+                "monster":{"x":100,"y":700,"skin":""},
                 "hook":[
                     {"style":"hook1","x":100,"y":100,"rotation":0,"length":300,"percent":0},
                     {"style":"hook2","x":200,"y":300,"size":100,"rotation":-90,"length":300,"percent":1},
@@ -27,11 +27,10 @@
 						200
 					]
                 },
-                "balloon":[
-					{"x":240,"y":500}
-                ],
-                "laser":[
-					{"x":100,"y":600,"rotation":0,"isAdvanceLaser":false,"time":2,"move":[100,400]}
+                "magicHat":[
+					{"x1":240,"y1":650,"rotation1":0,"move1":[],"rotate1":[80,150],"v1":2,
+					 "x2":360,"y2":400,"rotation2":0,"move2":[],"rotate2":[],"v2":2,
+					 "color":"hat_red"}
 				]
 				
             },

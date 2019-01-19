@@ -1,0 +1,340 @@
+import GameConfig from "../config/GameConfig";
+import RopePoint from "./RopePoint";
+
+export default class Hook{
+    /**横坐标 */
+	public hook_X:number;
+	/**纵坐标 */
+    public hook_Y:number;
+    /**钩子类型 */
+    public style : string;
+    /**精灵 */
+    public sp:Laya.Sprite;
+    /**画圈 */
+    public spp:Laya.Sprite;
+    /**滑动条 */
+    public sp_Silder : Laya.Sprite;
+    /**滑动条 */
+    public arr_img : Array<Laya.Image>;
+    /**所在层 */
+    private view : Laya.Panel
+    /**是否已创建 */
+    public isCreate : boolean;
+    /**范围 */
+    public size : number;
+    /**Top */
+    public imgTop : Laya.Image;
+    /**角度 */
+    public rotation : number;
+    /**长度 */
+    public length : number;
+    /**滑动点所占百分比 */
+    public percent : number;
+    /**是否可移动 */
+    public isDown : boolean;
+    /**绳子第一个节点*/
+    public ropePoint : RopePoint;
+    /**鼠标x，y记录 */
+    private rem_x : number;
+    private rem_y : number;
+
+    constructor(view){
+        this.view = view;
+    }
+
+    //初始化,"hook1"为钩子风格1，"hook2"为钩子风格2，检测糖果是否在设定范围内，如果在就生成新的绳子
+    init(data,size?):void{
+        this.isDown = false;
+        this.isCreate = false;     
+        this.setValue(data,size);
+        this.hook_CreateSprite(data.hook_X,data.hook_Y,data.style);        
+        if(data.style == "hook2")/////////没有图片
+        {
+            this.createSpp();
+        }
+        this.createSilder();
+    }
+    
+    //更新状态
+    update(data,size?):void{
+        this.isCreate = false; 
+        this.sp.visible = true;
+        this.imgTop.visible = true;
+        this.setValue(data, size);   
+        this.setHookTop(data.hook_X,data.hook_Y)    
+        if(data.style == "hook2")/////////没有图片
+        {
+            if(this.spp)
+            {
+                this.spp.visible = true;
+            }
+            else
+            {
+                this.createSpp();
+            }
+        }
+        else
+        {
+            if(this.spp)
+            {
+                this.spp.visible = false;
+            }
+        }
+        this.sp.pos(data.hook_X,data.hook_Y);
+        this.createSilder();
+    }
+    //创建圈
+    private createSpp() : void
+    {
+        this.spp = new Laya.Image();
+        this.spp.loadImage("gameView/ropeRage.png");
+        this.spp.width = this.size*2;
+        this.spp.height = this.size*2;
+        this.spp.pivot(this.spp.width/2,this.spp.height/2);
+        this.sp.addChild(this.spp);
+    }
+
+    private setValue(data: any, size: any) {
+        this.hook_X = data.hook_X;
+        this.hook_Y = data.hook_Y;
+        this.style = data.style;
+        this.size = size;
+        this.rotation = data.rotation;
+        this.length = data.length;
+        this.percent = data.percent;
+
+    }
+
+    //创建钩子精灵
+    hook_CreateSprite(x,y,style){
+        this.sp=new Laya.Sprite();
+        //hook图片
+        this.setHookBottom();
+        //Hook顶部
+        this.setHookTop(x, y);
+        this.sp.pivot(this.sp.width/2,this.sp.height/2);
+        // this.sp.loadImage("gameView/"+"hook1"+".png");
+        // this.sp.loadImage("gameView/"+style+".png");
+        this.sp.pos(x,y);
+        this.view.addChild(this.sp);
+    }
+
+    private setHookBottom() {
+        let img = new Laya.Image();
+        img.loadImage("gameView/" + "hook1" + ".png");
+        img.pivot(50 / 2, 43 / 2);
+        img.pos(0, 0);
+        this.sp.width = img.width;
+        this.sp.height = img.height;
+        this.sp.addChild(img);
+        return img;
+    }
+
+    private setHookTop(x: any, y: any) {
+        if(!this.imgTop)
+        {
+            this.imgTop = new Laya.Image();
+            this.view.addChild(this.imgTop);
+        }        
+        this.imgTop.skin ="gameView/hookTop.png";
+        this.imgTop.size(20,19);
+        this.imgTop.pivot(20 / 2, 10 / 2);
+        this.imgTop.zOrder = GameConfig.ZORDER_HOOK_TOP;
+        this.imgTop.pos(0, 0);
+        this.imgTop.pos(x + 2, y - 3);
+    }
+
+    /**创建滑动条 */
+    public createSilder() : void
+    {
+        if(this.length)
+        {
+            if(!this.sp_Silder)
+                this.createImage();
+            else
+            {
+                this.arr_img[0].visible = true;
+                this.arr_img[1].visible = true;
+                this.arr_img[2].visible = true;
+                this.setSilder();
+            }
+            this.addEvent();
+        }
+    }
+
+    /**创建滑动图片 */
+    private createImage() : void
+    {
+        this.sp_Silder = new Laya.Sprite();
+        this.arr_img = new Array<Laya.Image>();
+        this.arr_img[0] = new Laya.Image();
+        this.arr_img[1] = new Laya.Image();
+        this.arr_img[2] = new Laya.Image();
+        //左
+        this.arr_img[0].loadImage("gameView/hookslider_root1.png");
+        this.arr_img[0].width = 24;
+        this.arr_img[0].height = 49;
+        //中
+        this.arr_img[1].loadImage("gameView/hooksliderbg.png");
+        //右
+        this.arr_img[2].loadImage("gameView/hookslider_root2.png");
+        this.arr_img[2].width = 24;
+        
+        //属性设置
+        this.setImgValue();
+        //
+        this.view.addChild(this.sp_Silder);
+        this.setSilder();
+    }
+    /**设置属性值 */
+    private setImgValue() : void
+    {
+        let len = this.length - this.arr_img[0].width*2;//滑动背景
+        let x = 0;
+        this.arr_img[1].width = len;
+        for(let i=0;i<this.arr_img.length;i++)
+        {
+            this.sp_Silder.addChild(this.arr_img[i]);            
+            if(this.arr_img[i-1])
+            {
+                x += this.arr_img[i-1].width - 3;
+                this.arr_img[i].x = x;
+            }
+            else
+            {
+                this.arr_img[i].x = 0;
+            }
+        }
+    }
+    /***只是滚动条属性 */
+    private setSilder() : void
+    {
+        this.sp_Silder.pivot(this.arr_img[0].width, this.arr_img[0].height/2);
+        this.sp_Silder.pos(this.sp.x,this.sp.y);
+        this.sp_Silder.rotation = this.rotation;
+        this.imgTop.size(68,68);
+        this.imgTop.pivot(this.imgTop.width/2+2,this.imgTop.height/2-4);
+        this.imgTop.skin = "gameView/hookslider.png";
+        if(this.rotation == 0)
+        {
+            this.sp.x += ((this.length - this.arr_img[0].width*2) * this.percent); 
+            this.imgTop.x += ((this.length - this.arr_img[0].width*2) * this.percent);      
+        }
+        else
+        {
+            this.sp.y -= (this.length - this.arr_img[0].width*2) * (this.percent);
+            this.imgTop.y -= (this.length - this.arr_img[0].width*2) * (this.percent);
+        }
+    }
+    /**设置绑定绳子 */
+    public setRopePoint(ropePoint) : void
+    {
+        this.ropePoint = ropePoint;
+        Laya.timer.loop(16,this,this.followHook);
+    }
+
+    private followHook() : void
+    {
+        this.ropePoint.sp.x = this.imgTop.x;
+        this.ropePoint.sp.y = this.imgTop.y;
+    }
+
+    /**添加事件 */
+    private addEvent() : void
+    {
+        this.imgTop.on(Laya.Event.MOUSE_DOWN,this,this.imgDown);
+        Laya.stage.on(Laya.Event.MOUSE_MOVE,this,this.followMouse);
+        Laya.stage.on(Laya.Event.MOUSE_UP,this,this.mouseUp)
+    }
+
+    /**跟随鼠标 */
+    private followMouse() : void
+    {
+        if(!this.isDown) return ;
+        let mX = Laya.stage.mouseX;
+        let mY = Laya.stage.mouseY;
+        let dicX = mX - this.hook_X;
+        let dicY = mY - this.hook_Y;
+        if(this.rotation == -90 || this.rotation == 0)
+        {
+            dicX = dicX * Math.cos(this.rotation/360*2*Math.PI);
+            dicY = -dicY * Math.sin(this.rotation/360*2*Math.PI);
+            if(mX >= this.hook_X && mX <= this.hook_X + this.length - this.arr_img[0].width*2 )
+            {
+                this.imgTop.x = this.hook_X + dicX+3;
+                this.sp.x = this.hook_X + dicX;
+            }
+            if(mY <= this.hook_Y && mY >= this.hook_Y - this.length + this.arr_img[0].width*2)
+            {
+                this.imgTop.y = this.hook_Y + dicY-3;
+                this.sp.y = this.hook_Y + dicY;
+            }
+        }
+        else
+        {
+            // if(this.rem_x == undefined || this.rem_y == undefined)
+            // {
+            //     this.rem_x = mX;
+            //     this.rem_y = mY;
+            //     return ;
+            // }
+            // if(Math.pow(mX - this.rem_x,2) > Math.pow(mY - this.rem_y,2))
+            // {
+            //     dicX = dicX * Math.cos(this.rotation/360*2*Math.PI);
+            //     dicY = dicX * Math.tan(this.rotation/360*2*Math.PI);
+            //     if()   
+            //     {
+            //         this.imgTop.x = this.hook_X + dicX;
+            //         this.sp.x = this.hook_X + dicX;
+            //         this.imgTop.y = this.hook_Y + dicY;
+            //         this.sp.y = this.hook_Y + dicY;
+            //     }
+            // }   
+            // else
+            // {
+            //     dicY = dicY * Math.sin(this.rotation/360*2*Math.PI);
+            //     dicX = dicY / Math.tan(this.rotation/360*2*Math.PI);
+            //     this.imgTop.x = this.hook_X + dicX;
+            //     this.sp.x = this.hook_X + dicX;
+            //     this.imgTop.y = this.hook_Y + dicY;
+            //     this.sp.y = this.hook_Y + dicY; 
+            // }
+        }
+    
+    }
+    /**鼠标抬起*/
+    private mouseUp() : void
+    {
+        this.isDown = false;
+        this.rem_x = undefined;
+        this.rem_y = undefined;
+    }
+
+    /**图片被点下 */
+    private imgDown() : void
+    {
+        this.isDown = true;   
+    }
+
+    /**销毁处理 */
+    public hookDestroy() : void
+    {
+        this.sp.visible = false;
+        this.isCreate = false;
+        this.sp.x = 10000;
+        this.imgTop.visible = false;
+        this.isDown = false;
+        this.length = undefined;
+        this.rotation = undefined;
+        this.imgTop.skin = "gameView/hookTop.png";
+        this.imgTop.size(20,19);
+        // this.spp.pos(0,0);
+        if(this.arr_img)
+            this.arr_img.forEach(img => {
+                img.visible = false;
+            });
+        Laya.timer.clear(this,this.followMouse);
+        Laya.timer.clear(this,this.followHook);
+    }
+
+}

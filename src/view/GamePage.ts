@@ -609,7 +609,7 @@ export default class GamePage extends Laya.Scene{
         {
             alert("关卡为配置，请配置后再调试");
             Laya.stage.height = 1334;
-            Laya.stage.width = 800;
+            Laya.stage.width = 750;
             Laya.Scene.open("SelectRound/SelectRound.scene",true,[this.quarterIndex,this.boxIndex]); 
         }
         console.log(this.mapConfig);

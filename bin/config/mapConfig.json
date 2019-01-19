@@ -9,7 +9,7 @@
                 "mapSkins":[
                     "GameView/gameBg/boxBg_1.jpg"
                 ],
-                "candy":{"style":"candy","x":100,"y":300},
+                "candy":{"style":"candy","x":240,"y":300},
                 "star":[
                     {"style":"star1","x":240,"y":400},
                     {"style":"star2","x":240,"y":500},
@@ -17,9 +17,7 @@
                 ],
                 "monster":{"x":100,"y":700,"skin":""},
                 "hook":[
-                    {"style":"hook1","x":100,"y":100,"rotation":0,"length":300,"percent":0},
-                    {"style":"hook2","x":200,"y":300,"size":100,"rotation":-90,"length":300,"percent":1},
-                    {"style":"hook2","x":200,"y":500,"size":150,"rotation":0,"length":300,"percent":1}         
+                    {"style":"hook1","x":240,"y":100,"rotation":0,"length":300,"percent":0}    
                     
                 ],
 				"rope":{
@@ -28,7 +26,7 @@
 					]
                 },
                 "magicHat":[
-					{"x1":240,"y1":650,"rotation1":0,"move1":[],"rotate1":[80,150],"v1":2,
+					{"x1":240,"y1":650,"rotation1":90,"move1":[],"rotate1":[40,50],"v1":1,
 					 "x2":360,"y2":400,"rotation2":0,"move2":[],"rotate2":[],"v2":2,
 					 "color":"hat_red"}
 				]

@@ -92,8 +92,8 @@ export default class RopePoint{
 			density = GameConfig.ROPE_JUMP__POINT_DENSITY;
 		}
 		let colider = new Laya.BoxCollider();
-		colider.width = this.sp.width*1.5;
-		colider.height = this.sp.height*1.5;
+		colider.width = this.sp.width;
+		colider.height = this.sp.height;
 		colider.density = density;
 		colider.isSensor = true;
 		this.sp.addComponentIntance(colider);

@@ -27,10 +27,6 @@ export default class MagicHat {
     private isGoing2:boolean;
     /**加入的层 */
     public view : Laya.Panel;
-    /**旋转精灵1 */
-    public point1:Laya.Sprite;
-    /**旋转精灵2 */
-    public point2:Laya.Sprite;
     /**帽子1绕某点旋转 */
     public rotate1:Array<number>;
     /**帽子2绕某点旋转 */
@@ -41,7 +37,14 @@ export default class MagicHat {
 
     /***帽子初始化 */
     public init(data) : void
-    {
+    {   
+        //更新旋转点
+        this.rotate1=data.rotate1;
+        this.rotate2=data.rotate2;
+        //更新图片旋转角度
+        this.rotation1=data.rotation1;
+        this.rotation2=data.rotation2;
+        //创建帽子精灵
         this.createSprite1(data.magicHat_X1,data.magicHat_Y1,data.color,data.rotation1,data.rotate1);
         this.createSprite2(data.magicHat_X2,data.magicHat_Y2,data.color,data.rotation2,data.rotate2);
         //判断移动是否为空
@@ -73,9 +76,34 @@ export default class MagicHat {
     /**帽子更新 */
     public update(data) : void
     {
+       //更新旋转点
+       this.rotate1=data.rotate1;
+       this.rotate2=data.rotate2; 
+       //更新图片旋转角度
+       this.rotation1=data.rotation1;
+       this.rotation2=data.rotation2;
+       //更新帽子1
        this.sp1.visible=true;
        this.sp1.loadImage("gameView/"+data.color+".png");      
        this.sp1.pos(data.magicHat_X1,data.magicHat_Y1);
+       this.sp1.rotation=data.rotation1;
+       if(data.rotate1[0]){
+        this.sp1.pivot(data.rotate1[0],-data.rotate1[1]);
+        this.sp1.scaleY=-1;
+        }else{
+        this.sp1.pivot(this.sp1.width/2,this.sp1.height/2);
+        }
+       //更新帽子2
+       this.sp2.visible=true;
+       this.sp2.loadImage("gameView/"+data.color+".png");      
+       this.sp2.pos(data.magicHat_X2,data.magicHat_Y2);
+       this.sp2.rotation=data.rotation2;
+       if(data.rotate2[0]){
+        this.sp2.pivot(data.rotate2[0],-data.rotate2[1]);
+        this.sp2.scaleY=-1;
+        }else{
+        this.sp2.pivot(this.sp2.width/2,this.sp2.height/2);
+        }
        //判断旋转点是否存在
        if(data.rotate1[0]){
             this.sp1.pivot(data.rotate1[0],-data.rotate1[1]);
@@ -106,13 +134,15 @@ export default class MagicHat {
         
         //判断旋转点是否为空
         if(data.rotate1[0]){            
-            Laya.timer.frameLoop(1,this,this.magicHat_RotateFollowPoint,[this.sp1]);
+            Laya.timer.frameLoop(1,this,this.magicHat_RotateFollowPoint,[this.sp1,data.v1]);
         }
 
         //判断旋转点是否为空
         if(data.rotate2[0]){            
-            Laya.timer.frameLoop(1,this,this.magicHat_RotateFollowPoint,[this.sp2]);
+            Laya.timer.frameLoop(1,this,this.magicHat_RotateFollowPoint,[this.sp2,data.v2]);
         }
+
+        console.log(this.sp1);
     }
 
     //创建帽子1
@@ -120,6 +150,7 @@ export default class MagicHat {
     {
         this.sp1=new Laya.Sprite();
         this.sp1.loadImage("gameView/"+color+".png");      
+        this.sp1.rotation=rotation;
         this.sp1.pos(x,y);
         if(rotate[0]){
             this.sp1.pivot(rotate[0],-rotate[1]);
@@ -136,6 +167,7 @@ export default class MagicHat {
     {
         this.sp2=new Laya.Sprite();
         this.sp2.loadImage("gameView/"+color+".png");
+        this.sp2.rotation=rotation;
         this.sp2.pos(x,y);
         this.sp2.pivot(this.sp2.width/2,this.sp2.height/2);
         if(rotate[0]){
@@ -261,8 +293,10 @@ export default class MagicHat {
     {
         this.sp1.visible = false;
         this.sp1.x = 100000;
+        this.sp1.scaleY=1;
         this.sp2.visible=false;
         this.sp2.x=100000;
+        this.sp2.scaleY=1;
     }
 
 }

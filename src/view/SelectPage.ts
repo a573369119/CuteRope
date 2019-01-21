@@ -10,6 +10,7 @@ export default class SelectPage extends ui.SelectUI{
 
     onEnable() : void
     {
+        this.btn_Exit.y =this.thisWidth.width*(Laya.Browser.clientHeight/Laya.Browser.clientWidth)-142;
         this.btn_First.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[0]);
         this.btn_Second.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[1]);
         this.btn_Third.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[2]);
@@ -18,6 +19,7 @@ export default class SelectPage extends ui.SelectUI{
         this.btn_Third_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[2]);
         this.btn_Exit.on(Laya.Event.CLICK,this,this.onExit);
 
+        
         //鼠标点击效果
         this.btn_Exit.on(Laya.Event.MOUSE_DOWN,this,this.onDown,[0]);
         this.btn_Exit.on(Laya.Event.MOUSE_OUT,this,this.onUp,[0]);

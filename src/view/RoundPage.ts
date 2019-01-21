@@ -42,6 +42,9 @@ export default class RoundPage extends Laya.Scene{
 
     private Start() : void
     {
+        this.scene.img_DoorR.height = 750*(Laya.Browser.clientHeight/Laya.Browser.clientWidth);
+        this.scene.img_DoorL.height = 750*(Laya.Browser.clientHeight/Laya.Browser.clientWidth);
+        
         //初始化界面
         this.createUI();
         //事件绑定
@@ -59,10 +62,10 @@ export default class RoundPage extends Laya.Scene{
         //     this.arr_Card[i].on(Laya.Event.CLICK,this,this.onClick,[i])
         // }
 
+        this.scene.btn_Exit.y =750*(Laya.Browser.clientHeight/Laya.Browser.clientWidth)-142;        
         this.scene.btn_Exit.on(Laya.Event.CLICK,this,this.onExit);
         this.scene.btn_Exit.on(Laya.Event.MOUSE_DOWN,this,this.onDown);
         this.scene.btn_Exit.on(Laya.Event.MOUSE_OUT,this,this.onUp);
-
         this.shopDoor.btn_Teach.on(Laya.Event.CLICK,this,this.onTeach);
         this.shopDoor.btn_Super.on(Laya.Event.CLICK,this,this.onSuper);
     }

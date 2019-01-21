@@ -13,7 +13,7 @@ import StartGamePage from "./view/StartGamePage"
 export default class GameConfig{
     static width:number=750;
     static height:number=1334;
-    static scaleMode:string="exactfit";
+    static scaleMode:string="fixedwidth";
     static screenMode:string="none";
     static alignV:string="bottom";
     static alignH:string="center";

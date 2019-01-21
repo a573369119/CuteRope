@@ -43,7 +43,8 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
         this.arr_Point = new Array<Laya.Image>();
         this.posX = 250;
         this.index = 0;
-
+        
+        this.btn_Exit.y =750*(Laya.Browser.clientHeight/Laya.Browser.clientWidth)-142;        
         this.shopDoor = new ui.topLeftUI();
         this.shopDialog = Laya.WeakObject.I.get("dialog");
         this.addChild(this.shopDoor);
@@ -84,7 +85,7 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
     }
 
 
-    private onEixt() : void
+    private onEixt(e) : void
     {
         Laya.Scene.open("Select.scene",true);             
     }

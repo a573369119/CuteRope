@@ -87,7 +87,8 @@ export default class GamePage extends Laya.Scene{
     private arr_RemRope : Array<any>;
     /**得分记录 */
     private score : number;
-    
+    /**屏幕高度 */
+    private screenHeight : number;
     
     constructor(){super();}
 
@@ -134,6 +135,8 @@ export default class GamePage extends Laya.Scene{
         Laya.MouseManager.enabled = false;
         // this.doorOpen.ani1.play(0,false);
         this.menuUI.visible = false;
+        /**屏幕适配 */
+        this.gameShow();
         //添加事件
         this.addEvents();
         //第一次更新游戏
@@ -142,6 +145,15 @@ export default class GamePage extends Laya.Scene{
         // let joint=new Laya.MouseJoint();
         // joint.maxForce=1000000;
         // this.candy.arr_Sp[0].addComponentIntance(joint);
+    }
+
+    /**屏幕适配 */
+    private gameShow() : void
+    {
+        this.screenHeight = 480*(Laya.Browser.clientHeight/Laya.Browser.clientWidth);
+        this.scene.img_gameBg.height =this.screenHeight
+        this.scene.panel_GameWorld.height = this.screenHeight;
+        this.scene.starAni.y = this.screenHeight - this.scene.starAni.height;      
     }
 
     private initBgSkin() : void
@@ -437,7 +449,8 @@ export default class GamePage extends Laya.Scene{
         this.isReplay = false;
         Laya.MouseManager.enabled = false; 
         this.isEated = false;    
-        this.doorOpen.visible = true;           
+        this.doorOpen.visible = true;   
+        this.doorOpen.img_xiaodao.visible = true;        
         this.UpdateData(this.quarterIndex + "-" + this.boxIndex,++this.cardIndex,false);
         this.doorOpen.ani1.gotoAndStop(0);
         // this.doorOpen.img_xiaodao.y = 850;
@@ -692,7 +705,7 @@ export default class GamePage extends Laya.Scene{
            ///////////////开门等待
            if(i == this.maxLongIndex)
            {
-               this.doorOpen.img_xiaodao.y = (800+500) * dic/this.maxLongRope - 339;
+               this.doorOpen.img_xiaodao.y = (this.screenHeight+100) * dic/this.maxLongRope - 339;
            }
        }
               
@@ -754,6 +767,7 @@ export default class GamePage extends Laya.Scene{
         this.doorOpen.visible = true;
         this.doorOpen.ani1.play(0, false);
         this.doorOpen.img_xiaodao.y = -339;
+        this.doorOpen.img_xiaodao.visible = false;
         Laya.MouseManager.enabled = true;
 
     }
@@ -1342,7 +1356,7 @@ export default class GamePage extends Laya.Scene{
         if(this.isOpenSuper)
         {
             let candy = this.candy.arr_Sp[0].getComponents(Laya.RigidBody)[0] as Laya.RigidBody;
-            if(y>770)
+            if(y>this.screenHeight)
             {
                 candy.applyLinearImpulseToCenter({x:0,y:-4});
             }
@@ -1359,7 +1373,7 @@ export default class GamePage extends Laya.Scene{
                 candy.applyLinearImpulseToCenter({x:-4,y:0}); 
             }
         }
-        else if(y<0||y>800)
+        else if(y<0||y>this.screenHeight)
         {
             console.log("游戏失败");
             this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);

@@ -2,9 +2,9 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":35,
+    "selecteID":25,
     "searchKey":"View",
-    "props":{"width":750,"sceneColor":"#8b8b8b","runtime":"view/SelectBoxPage.ts","hitTestPrior":true,"height":1334},
+    "props":{"width":750,"sceneColor":"#8b8b8b","runtime":"view/SelectBoxPage.ts","hitTestPrior":true,"height":1900},
     "nodeParent":-1,
     "maxID":43,
     "label":"View",
@@ -18,7 +18,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image",
-            "props":{"y":0,"x":0,"width":749,"skin":"unpackage/startGameBg.jpg","height":1340},
+            "props":{"y":0,"x":0,"width":1040,"skin":"unpackage/startGameBg.jpg","height":1859},
             "nodeParent":1,
             "label":"Image",
             "isOpen":true,
@@ -35,7 +35,7 @@
             "selectedBox":16,
             "selecteID":18,
             "searchKey":"Sprite",
-            "props":{"y":642,"x":339,"presetID":1,"preset":"laya/assets/perfeb/Sprite.prefab"},
+            "props":{"y":642,"x":339,"width":1600,"presetID":1,"preset":"laya/assets/perfeb/Sprite.prefab","pivotY":800,"pivotX":800,"height":1600},
             "nodeParent":1,
             "maxID":19,
             "label":"Sprite(Sprite)",
@@ -119,20 +119,6 @@
         {
             "x":15,
             "type":"Image",
-            "searchKey":"Image,btn_Exit",
-            "props":{"y":1189,"x":19,"width":147,"var":"btn_Exit","skin":"publicAssets/exit_R.png","height":140},
-            "nodeParent":1,
-            "label":"btn_Exit",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":25,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Image",
             "searchKey":"Image",
             "props":{"y":886,"x":219,"width":323,"skin":"selectBox/selectBoxBottom.png","height":13},
             "nodeParent":1,
@@ -180,14 +166,13 @@
             "props":{"y":7,"x":0,"var":"sp","presetID":1,"preset":"laya/assets/perfeb/Sprite1.prefab"},
             "nodeParent":1,
             "label":"sp",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":40,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"presetID":2,"preset":"laya/assets/perfeb/Sprite1.prefab"},
@@ -201,7 +186,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"visible":false,"presetID":3,"preset":"laya/assets/perfeb/Sprite1.prefab"},
@@ -215,7 +199,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"visible":false,"presetID":4,"preset":"laya/assets/perfeb/Sprite1.prefab"},
@@ -229,7 +212,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"presetID":5,"preset":"laya/assets/perfeb/Sprite1.prefab"},
@@ -244,7 +226,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/script/PlayerStar.ts",
@@ -260,6 +241,20 @@
                     "child":[
                         ]
                 }]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "searchKey":"Image,btn_Exit",
+            "props":{"y":1194,"x":19,"width":147,"var":"btn_Exit","skin":"publicAssets/exit_R.png","height":140},
+            "nodeParent":1,
+            "label":"btn_Exit",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":25,
+            "child":[
+                ]
         }],
     "animations":[
         {

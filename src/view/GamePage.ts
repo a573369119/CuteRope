@@ -60,7 +60,7 @@ export default class GamePage extends Laya.Scene{
     //*怪物 */
     public monster : Monster;
     /**星星 */
-    private arr_star : Array<Star>;
+    private arr_Star : Array<Star>;
     /**泡泡 */
     public arr_Balloon:Array<Balloon>;
     /**帽子 */
@@ -276,6 +276,7 @@ export default class GamePage extends Laya.Scene{
         Laya.timer.clear(this,this.ropeToCandy);
         Laya.timer.clear(this,this.mouseCute);
         Laya.timer.clear(this,this.candyTest);
+        Laya.timer.clear(this,this.star_MoveBySelf);//清除星星的定时器
         this.arr_Rope.forEach(rope => {//取消绳子中的定时器
             rope.clearTimer();
         });
@@ -973,24 +974,40 @@ export default class GamePage extends Laya.Scene{
     /**星星初始化 */
     private starInit(starConfig) : void
     {
-        let star : Star;
-        if(!this.arr_star)
-        {
-            this.arr_star = new Array<Star>();
-            for(let i =0; i<3;i++)
+        if(this.arr_Star === undefined)
+            this.arr_Star = new Array<Star>();
+            let moveArray:Array<Star>=new Array<Star>();
+            let configArray:Array<Star>=new Array<any>();
+            for(let i=0;i<3;i++)
             {
-                star = new Star(starConfig[i],this.scene.panel_GameWorld);
-                this.arr_star.push(star);
+                if(this.arr_Star[i])
+                {
+                    this.arr_Star[i].update(starConfig[i]);
+                    if(starConfig[i].move[0]){
+                        starConfig[i].star_X=this.arr_Star[i].sp.x;
+                        starConfig[i].star_Y=this.arr_Star[i].sp.y;
+                        this.arr_Star[i].isGoing=true;
+                        moveArray.push(this.arr_Star[i]);
+                        configArray.push(starConfig[i]);
+                    }
+                }
+                else
+                {
+                    this.arr_Star[i] = new Star(this.scene.panel_GameWorld);
+                    this.arr_Star[i].init(starConfig[i]); 
+                    if(starConfig[i].move[0]){
+                        starConfig[i].star_X=this.arr_Star[i].sp.x;
+                        starConfig[i].star_Y=this.arr_Star[i].sp.y;
+                        this.arr_Star[i].isGoing=true;
+                        moveArray.push(this.arr_Star[i]);
+                        configArray.push(starConfig[i]);
+                    }               
+                }
             }
-        }
-        else
-        {
-            for(let i=0 ; i<3;i++)
-            {
-                star = this.arr_star[i];
-                star.update(starConfig[i]);
+            if(moveArray[0]){
+                Laya.timer.frameLoop(1,this,this.star_MoveBySelf,[moveArray,configArray]);
             }
-        }
+            
     }
 
     /**怪物数据初始化 */
@@ -1306,7 +1323,7 @@ export default class GamePage extends Laya.Scene{
     {
         let dic;
         // console.log(this.arr_star);
-        this.arr_star.forEach(star => {
+        this.arr_Star.forEach(star => {
             // console.log(star);
             if(!star.isDestroy)
             {
@@ -1563,7 +1580,7 @@ export default class GamePage extends Laya.Scene{
             }
         }
         
-        if(this.isMouseDown && isDown)
+        if(this.isMouseDown && isDown) 
         {
             let mX = Laya.stage.mouseX - this.scene.panel_GameWorld.x;
             let mY = Laya.stage.mouseY - this.scene.panel_GameWorld.y;
@@ -1743,6 +1760,57 @@ export default class GamePage extends Laya.Scene{
                 rope.moveTogether();
             });
         }
+    }
+
+    //星星来回移动
+    private star_MoveBySelf(moveArray:Array<Star>,configArray:Array<any>):void{      
+        for(let i=0;i<moveArray.length;i++){
+            let x_Add=this.rotationDeal(configArray[i].star_X,configArray[i].star_Y,configArray[i].move[0],configArray[i].move[1],"cos");
+            let y_Add=this.rotationDeal(configArray[i].star_X,configArray[i].star_Y,configArray[i].move[0],configArray[i].move[1],"sin");
+            if(moveArray[i].isGoing){
+                moveArray[i].sp.x+=x_Add;
+                moveArray[i].sp.y+=y_Add;
+                if(x_Add==0){
+                    if(moveArray[i].sp.y==configArray[i].move[1]){
+                        moveArray[i].isGoing=false;
+                    }
+                }
+                else if(y_Add==0){
+                    if(moveArray[i].sp.x==configArray[i].move[0]){
+                        moveArray[i].isGoing=false;
+                    }
+                }
+                else
+                {
+                    if(Math.abs(moveArray[i].sp.x-configArray[i].move[0])<0.3){
+                        moveArray[i].sp.x=configArray[i].move[0];
+                        moveArray[i].sp.y=configArray[i].move[1];
+                        moveArray[i].isGoing=false;
+                        
+                    }
+                }
+            }else{
+                moveArray[i].sp.x-=x_Add;
+                moveArray[i].sp.y-=y_Add;
+                if(x_Add==0){
+                    if(moveArray[i].sp.y==configArray[i].star_Y){
+                        moveArray[i].isGoing=true;
+                    }
+                }
+                else if(y_Add==0){
+                    if(moveArray[i].sp.x==configArray[i].star_X){
+                        moveArray[i].isGoing=true;
+                    }
+                }else {
+                    if(Math.abs(moveArray[i].sp.x-configArray[i].star_X)<0.3){
+                        moveArray[i].sp.x=configArray[i].star_X;
+                        moveArray[i].sp.y=configArray[i].star_Y;
+                        moveArray[i].isGoing=true;
+                    }
+                }
+            }
+            } 
+        
     }
 }
 

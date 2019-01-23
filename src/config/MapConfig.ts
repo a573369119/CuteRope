@@ -210,6 +210,8 @@ export module Config {
                 starConfig.style = obj.style;
                 starConfig.star_X = obj.x;
                 starConfig.star_Y = obj.y;
+                starConfig.interval = obj.interval;
+                starConfig.move = obj.move;
                 this.arr_Star.push(starConfig);
             });
             console.log("star -解析");
@@ -336,6 +338,10 @@ export module Config {
     export class StarConfig {
         /*星星类型 */
         public style : string;
+        /**动画帧间隔 */
+        public interval:number;
+        /**移动到某点 */
+        public move:Array<number>;
         /**星星初始x位置**/
         public star_X : number;
         /**星星初始y位置**/

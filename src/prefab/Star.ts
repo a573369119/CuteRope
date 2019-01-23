@@ -1,4 +1,5 @@
-export default class Star{
+import Tool from "../Tool/Tool";
+    export default class Star{
     /**星星类型 */
     public style : string;
     /**横坐标 */
@@ -15,30 +16,37 @@ export default class Star{
     public anim:Laya.Animation;
     public anim2 : Laya.Animation;
     public anim3:Laya.Animation;
-    public anim4:Laya.Animation;
+    /**是否前进 */
+    public isGoing:boolean;
     private view : Laya.Panel;
     /***是否消失 */
     public isDestroy : boolean;
-    constructor(data,view){
+    constructor(view){
         this.view = view;
-        this.sp = new Laya.Sprite();
-        this.sp.width=80;
-        this.sp.height=80;
-        this.init(data);
+        Laya.timer.frameLoop(1,this,this.check);
     }
 
     //初始化,"star1"为普通星星，"star2"为有时间寿命得星星
     init(data):void{
-        this.isDestroy = false;        
-        this.star_CreateAnim(data.star_X,data.star_Y,data.style);
+        this.isDestroy = false;     
+        this.sp = new Laya.Sprite();
+        this.sp.width=80;
+        this.sp.height=80;
+        this.star_CreateAnim(data.star_X,data.star_Y,data.style,data.interval);
         this.sp.x=data.star_X;
         this.sp.y=data.star_Y;
         this.style=data.style;
+        
+       /* if(data.move[0]){
+            this.star_X=this.sp.x;
+            this.star_Y=this.sp.y;
+            this.isGoing=true;
+            console.log("到底有没有呀");
+            Laya.timer.frameLoop(1,this,this.star_MoveBySelf,[data.move]);
+        }*/
     }
-    
-    private go() : void
-    {
-        console.log("xxx");
+    public check():void{
+        console.log("我没搞懂");
     }
     //更新状态
     update(data):void{
@@ -49,6 +57,7 @@ export default class Star{
         this.style=data.style;
         this.anim.visible = true;
         this.anim.play(0,true);
+        this.anim.interval=data.interval;
         this.anim2.visible = false;
         if(data.style=="star2"){
             this.anim3.visible=true;
@@ -59,9 +68,10 @@ export default class Star{
         }
     }
     //创建星星动画
-    star_CreateAnim(x,y,style){
+    star_CreateAnim(x,y,style,interval){
         this.anim=new Laya.Animation();
         this.anim.loadAnimation("GameView/ani/Star.ani");
+        this.anim.interval=interval;
         this.anim.play(0,true);
         this.anim.x -= this.sp.width/2;
         this.anim.y -= this.sp.height/2;
@@ -84,20 +94,59 @@ export default class Star{
             this.anim3.visible=true;
         }
 
-        //创建时间寿命动画2
-        this.anim4=new Laya.Animation();
-        this.anim4.loadAnimation("GameView/ani/StarTime2.ani");
-        this.anim4.visible=false;
-        if(style=="star3"){
-            this.anim4.play(0,false);
-            this.anim4.on(Laya.Event.COMPLETE,this,this.destroyed);
-            this.anim4.visible=true;
-        }
         this.sp.addChild(this.anim);
         this.sp.addChild(this.anim2);
         this.sp.addChild(this.anim3);
-        this.sp.addChild(this.anim4);
         this.view.addChild(this.sp);
+    }
+
+    //星星来回移动
+    private star_MoveBySelf():void{       
+        console.log("成没"); 
+        /*let x_Add=Tool.rotationDeal(this.star_X,this.star_Y,move[0],move[1],"cos");
+        let y_Add=Tool.rotationDeal(this.star_X,this.star_Y,move[0],move[1],"sin");
+        if(this.isGoing){
+            this.sp.x+=x_Add;
+            this.sp.y+=y_Add;
+            if(x_Add==0){
+                if(this.sp.y==move[1]){
+                    this.isGoing=false;
+                }
+            }
+            else if(y_Add==0){
+                if(this.sp.x==move[0]){
+                    this.isGoing=false;
+                }
+            }
+            else
+            {
+                if(Math.abs(this.sp.x-move[0])<0.3){
+                    this.sp.x=move[0];
+                    this.sp.y=move[1];
+                    this.isGoing=false;
+                    
+                }
+            }
+        }else{
+            this.sp.x-=x_Add;
+            this.sp.y-=y_Add;
+            if(x_Add==0){
+                if(this.sp.y==this.star_Y){
+                    this.isGoing=true;
+                }
+            }
+            else if(y_Add==0){
+                if(this.sp.x==this.star_X){
+                    this.isGoing=true;
+                }
+            }else {
+                if(Math.abs(this.sp.x-this.star_X)<0.3){
+                this.sp.x=this.star_X;
+                this.sp.y=this.star_Y;
+                this.isGoing=true;
+            }
+        }
+    }*/
     }
 
 
@@ -114,10 +163,6 @@ export default class Star{
             this.anim3.stop();
             this.anim3.visible=false;
         }
-        if(style=="star3"){
-            this.anim4.stop();
-            this.anim4.visible=false;
-        }
         this.isDestroy = true;
     }
 
@@ -127,7 +172,6 @@ export default class Star{
         this.sp.x = 100000;
         this.sp.visible = false;
         this.anim3.visible=false;
-        this.anim4.visible=false;
     }
     
      

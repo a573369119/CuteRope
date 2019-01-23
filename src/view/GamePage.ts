@@ -89,6 +89,14 @@ export default class GamePage extends Laya.Scene{
     private score : number;
     /**屏幕高度 */
     private screenHeight : number;
+    /**地图总长度 */
+    private mapHight : number;
+    /**地图总宽度 */
+    private mapWidth : number;
+    /**初始移动路径 */
+    private screenRoad : Array<number>;
+    /**路径下标 */
+    private roadIndex : number;
     
     constructor(){super();}
 
@@ -108,7 +116,7 @@ export default class GamePage extends Laya.Scene{
     private init() : void
     {
         ///物理线
-        // Laya.PhysicsDebugDraw.enable();
+        Laya.PhysicsDebugDraw.enable();
         //舞台尺寸
         Laya.stage.width = 480;
         Laya.stage.height = 800;
@@ -126,6 +134,7 @@ export default class GamePage extends Laya.Scene{
         this.scene.img_replay.alpha = 0;
         this.alphaZ = 1;
         this.score = 0;
+        this.roadIndex = 0;
         this.lastMousePos = {};
         this.isOpenSuper = false;
         this.isReplay = false;
@@ -151,8 +160,8 @@ export default class GamePage extends Laya.Scene{
     private gameShow() : void
     {
         this.screenHeight = 480*(Laya.Browser.clientHeight/Laya.Browser.clientWidth);
-        this.scene.img_gameBg.height =this.screenHeight
-        this.scene.panel_GameWorld.height = this.screenHeight;
+        this.scene.img_gameBg.height =this.screenHeight;
+        // this.scene.panel_GameWorld.height = this.screenHeight;
         this.scene.starAni.y = this.screenHeight - this.scene.starAni.height;      
     }
 
@@ -445,16 +454,29 @@ export default class GamePage extends Laya.Scene{
         this.showSocre();
         //如果是最后一个关卡，跳到下一个盒子
         this.nextBox();
-        this.arr_RemRope = undefined;
-        this.isReplay = false;
-        Laya.MouseManager.enabled = false; 
-        this.isEated = false;    
-        this.doorOpen.visible = true;   
-        this.doorOpen.img_xiaodao.visible = true;        
+        /**需要初始化的数据 */
+        this.DataInit();     
         this.UpdateData(this.quarterIndex + "-" + this.boxIndex,++this.cardIndex,false);
         this.doorOpen.ani1.gotoAndStop(0);
         // this.doorOpen.img_xiaodao.y = 850;
      }
+
+     /**需要初始化的数据 */
+    private DataInit() {
+        this.arr_RemRope = undefined;
+        this.isReplay = false;
+        Laya.MouseManager.enabled = false;
+        //设置是否被吃
+        this.isEated = false;
+        //开门动画可是
+        this.doorOpen.visible = true;
+        this.doorOpen.img_xiaodao.visible = true;
+        //路径重置
+        this.roadIndex = 0;
+        //背景皮肤恢复
+        this.scene.img_gameBg2.skin = "";
+        this.scene.img_gameBg3.skin = "";
+    }
 
      /**如果是最后一个关卡，跳到下一个盒子 （未测试）*/
     private nextBox() 
@@ -626,8 +648,9 @@ export default class GamePage extends Laya.Scene{
             Laya.Scene.open("SelectRound/SelectRound.scene",true,[this.quarterIndex,this.boxIndex]); 
         }
         console.log(this.mapConfig);
+
         //背景初始化
-        this.setBackground(this.mapConfig.arr_MapSkin);
+        this.setBackground(this.mapConfig.arr_MapSkin,this.mapConfig.arr_MapSkinPos,this.mapConfig.screenRoad);
         //怪物初始化
         this.monsterInit(this.mapConfig.monster);
         //钩子
@@ -660,17 +683,145 @@ export default class GamePage extends Laya.Scene{
         Laya.timer.loop(1,this,this.candyTest);
         
     }
-    /*** */
-    private setBackground(arr_MapSkin) : void
+
+    /***场景初始化*/
+    private setBackground(arr_MapSkin,arr_MapSkinPos,screenRoad) : void
     {
-        if(arr_MapSkin.length == 1)
+        if(!this.screenRoad)
+            this.screenRoad = [];
+        this.screenRoad = screenRoad;
+        //滚动设置
+        this.scene.panel_GameWorld.y = 0;
+        let bi = this.screenHeight/800;
+        //创建数组 装上img
+        let arr_Bg : Array<any> = [];
+        arr_Bg[0] = this.scene.img_gameBg;
+        arr_Bg[1] = this.scene.img_gameBg2;
+        arr_Bg[2] = this.scene.img_gameBg3;
+        for(let i=0;i<arr_MapSkin.length;i++)
         {
-            this.scene.img_gameBg.skin = arr_MapSkin[0];
+            if(i == 0) continue;        
+            //设置皮肤
+            arr_Bg[i].skin = arr_MapSkin[i];   
+            arr_Bg[i].height = arr_MapSkinPos[i].height * bi;
+            //位置设置
+            arr_Bg[i].x = arr_MapSkinPos[i].x;  
+            arr_Bg[i].y = arr_MapSkinPos[i].y * bi;
+            if(arr_Bg[i].x == arr_Bg[i-1].x)
+            {//竖
+                arr_Bg[i].width = arr_Bg[i-1].width;
+            }
+            else
+            {//横
+                arr_Bg[i].height = this.screenHeight;
+            }
         }
+        //地图高度初始化
+        this.mapHight = this.screenHeight;
+        //地图宽度初始化
+        this.mapWidth = 480;
+        if(arr_MapSkin.length>=2)
+        {
+            //获取地图总高
+            this.mapHight = arr_Bg[arr_Bg.length - 1].y + arr_Bg[arr_Bg.length - 1].height;
+            //获取地图总宽
+            this.mapWidth = arr_Bg[arr_Bg.length - 1].x + arr_Bg[arr_Bg.length - 1].width;
+
+            
+        }
+        //sprite 高度
+        this.scene.panel_GameWorld.height = this.mapHight;
+        //屏幕位置初始化
+        this.initMapPos();
+        //如果地图的皮肤大于1 开始滚动
         this.newDoorUi();
-        
+    }
+    /**屏幕位置初始化 */
+    private initMapPos() : void
+    {
+        if(this.screenRoad)
+        {
+        if(this.mapHight> this.screenHeight)
+            this.scene.panel_GameWorld.y = -this.screenRoad[this.roadIndex];
+        if(this.mapWidth > 480)
+            this.scene.panel_GameWorld.x = -this.screenRoad[this.roadIndex];
+        }
+        else
+        {
+            this.scene.panel_GameWorld.y = 0;
+            this.scene.panel_GameWorld.x = 0;
+        }
     }
     
+    /**背景移动 */
+    private runBg() : void
+    {
+        //是否可运动    
+        if(!this.screenRoad[this.roadIndex+1] && this.screenRoad[this.roadIndex] == 0) 
+        {
+            Laya.timer.clear(this,this.runBg);
+            return;
+        } 
+        //获取方向
+        let  Ca= this.screenRoad[this.roadIndex+1] - this.screenRoad[this.roadIndex];
+        Ca = -Ca/400;
+        if(this.mapHight > this.screenHeight)
+        {
+            this.scene.panel_GameWorld.y += Ca;
+            if(this.scene.panel_GameWorld.y < this.screenRoad[this.roadIndex+1]+5 && this.scene.panel_GameWorld.y > this.screenRoad[this.roadIndex+1] -5)
+            {//检测到到达目标点
+                this.roadIndex++;
+                if(!this.screenRoad[this.roadIndex])
+                {
+                    Laya.timer.clear(this,this.runBg);
+                    Laya.timer.loop(1,this,this.followCandy,[90]);
+                    //开启鼠标事件
+                    Laya.MouseManager.enabled = true;
+                }
+                return;
+            }
+        }
+        if(this.mapWidth > 480)
+        {
+            this.scene.panel_GameWorld.x += Ca;
+        }
+
+        //同步移动
+        this.moveTogether();
+
+    }
+
+    /**跟踪糖果 */
+    private followCandy(rotation) : void
+    {
+        let candyPosValue;
+        let followValue;
+        if(rotation == 0)
+        {//水平
+            candyPosValue = this.candy.arr_Sp[0].x;
+            followValue = 480/2;
+            this.mouseTail.setPosX(+this.scene.panel_GameWorld.x,0);            
+        }   
+        else
+        {//竖直
+            this.mouseTail.setPosX(0,-this.scene.panel_GameWorld.y);
+            candyPosValue = this.candy.arr_Sp[0].y;
+            followValue = this.screenHeight/2;
+        }
+        //**设置位置差 拖尾 */
+        //跟随         
+        if(candyPosValue>followValue && candyPosValue<this.mapHight-followValue)
+        {
+            this.scene.panel_GameWorld.y -= candyPosValue-followValue + this.scene.panel_GameWorld.y;
+            if(this.mapHight + this.scene.panel_GameWorld.y <= this.screenHeight )
+            {
+                Laya.timer.clear(this,this.followCandy);
+            }
+            this.moveTogether();
+        }
+        
+    }
+
    /**ropeToCandy */
    private ropeToCandy() : void
    {
@@ -708,19 +859,19 @@ export default class GamePage extends Laya.Scene{
                this.doorOpen.img_xiaodao.y = (this.screenHeight+100) * dic/this.maxLongRope - 339;
            }
        }
-              
+       //检测绳子是否全部帮上    
        if(add == this.arr_Rope.length)
        {
            Laya.timer.clear(this,this.ropeToCandy);
-           this.candy.set("useg");
            //连接糖果
            for(let i=0;i<this.arr_Rope.length;i++)
            {
-   
+               
                this.arr_Rope[i].connectCandy(this.candy,i);
                this.arr_Rope[i].ropePointsArray[this.arr_Rope.length - 1].sp.getComponents(Laya.RigidBody)[0].setVelocity({x:0,y:0});
-           }
-           //获取位置信息
+            }
+            this.candy.set("useg");
+           //获取记录位置信息
            for(let z=0 ;z <this.arr_Rope.length;z++)
            {
                if(this.arr_RemRope === undefined) 
@@ -751,7 +902,9 @@ export default class GamePage extends Laya.Scene{
                Laya.MouseManager.enabled = true;
            }
        }
+       
    }
+   
     private openDoorDeal(num) 
     {
         this.doorOpen.img_xiaodao.y += -num;
@@ -769,6 +922,12 @@ export default class GamePage extends Laya.Scene{
         this.doorOpen.img_xiaodao.y = -339;
         this.doorOpen.img_xiaodao.visible = false;
         Laya.MouseManager.enabled = true;
+        if(this.mapHight > this.screenHeight)
+        {
+            //关闭鼠标事件
+            Laya.MouseManager.enabled = false;
+            Laya.timer.loop(1,this,this.runBg);
+        }
 
     }
 
@@ -870,6 +1029,10 @@ export default class GamePage extends Laya.Scene{
                 this.candy.createCandyApart();
             }
         }
+        // Laya.timer.loop(500,this,function(){
+        //     console.log(this.candy.arr_Sp[0].x + " , " + this.candy.arr_Sp[0].y );
+        //     console.log(this.candy.arr_Sp[0].parent);
+        // });
     }
 
     
@@ -911,6 +1074,7 @@ export default class GamePage extends Laya.Scene{
                 rope.rePlay(this.arr_RemRope[i],arr_Hook[i].style);
             }
             this.arr_Rope.push(rope);
+            // rope.ropePointsArray[0].isCanMove(arr_Hook[i]);
         }
         for(let i = 0; i< arr_Rope.length;i++)
         {
@@ -1183,6 +1347,7 @@ export default class GamePage extends Laya.Scene{
 
     /**糖果被吃 事件处理 */
     private candyEated() {
+        Laya.timer.clear(this, this.candyTest);
         if (this.arr_Balloon) {
             for (let i = 0; i < this.arr_Balloon.length; i++) {
                 if (this.candy.isExistBalloon) {
@@ -1190,7 +1355,7 @@ export default class GamePage extends Laya.Scene{
                 }
             }
         }
-        Laya.timer.clear(this, this.candyTest);
+        this.isOpenSuper = false;
         this.monster.monsterAction(GameConfig.ANI_MONSTER_EAT, true);
         this.candy.candyDestroy(this.monster.sp.x, this.monster.sp.y);
         Laya.timer.once(1250, this, this.showMenu);
@@ -1360,7 +1525,7 @@ export default class GamePage extends Laya.Scene{
         if(this.isOpenSuper)
         {
             let candy = this.candy.arr_Sp[0].getComponents(Laya.RigidBody)[0] as Laya.RigidBody;
-            if(y>this.screenHeight)
+            if(y>this.mapHight)
             {
                 candy.applyLinearImpulseToCenter({x:0,y:-4});
             }
@@ -1377,7 +1542,7 @@ export default class GamePage extends Laya.Scene{
                 candy.applyLinearImpulseToCenter({x:-4,y:0}); 
             }
         }
-        else if(y<0||y>this.screenHeight)
+        else if(y<0||y>this.mapHight)
         {
             console.log("游戏失败");
             this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
@@ -1400,8 +1565,8 @@ export default class GamePage extends Laya.Scene{
         
         if(this.isMouseDown && isDown)
         {
-            let mX = Laya.stage.mouseX;
-            let mY = Laya.stage.mouseY;
+            let mX = Laya.stage.mouseX - this.scene.panel_GameWorld.x;
+            let mY = Laya.stage.mouseY - this.scene.panel_GameWorld.y;
             let cos = this.rotationDeal(this.lastMousePos.x,this.lastMousePos.y,mX,mY,"cos");
             let sin = this.rotationDeal(this.lastMousePos.x,this.lastMousePos.y,mX,mY,"sin");
             let dic : number;
@@ -1557,6 +1722,27 @@ export default class GamePage extends Laya.Scene{
         }
         boxData[this.cardIndex] = stars;
         this.score = 0;
+    }
+
+    /**同移动运行方法 */
+    private moveTogether() : void
+    {
+        //气泡移动同步
+        if(this.arr_Balloon)
+        {
+            this.arr_Balloon.forEach(ball =>{
+                ball.moveTogether();
+            });
+        }
+        //糖果移动同步
+        this.candy.moveTogether();
+        //绳子移动同步
+        if(this.arr_Rope)
+        {
+            this.arr_Rope.forEach(rope =>{
+                rope.moveTogether();
+            });
+        }
     }
 }
 

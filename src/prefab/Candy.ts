@@ -95,6 +95,7 @@ export default class Candy{
         {
             body=new Laya.RigidBody();
             body.type="static";
+            body.allowSleep = false;
             body.allowRotation = true;
             body.gravityScale = GameConfig.CANDY_GRAVITY;
             body.angularDamping = GameConfig.CANDY_ANGULARDAMPING;
@@ -349,5 +350,21 @@ export default class Candy{
         this.arr_Body.forEach(body=>{
             body.setVelocity({x:vX,y:vY});
         });
+    }
+
+    /**同步移动方法 */
+    public moveTogether() : void
+    {
+        this.arr_Sp.forEach(sp=>{
+            sp.x +=0;
+            sp.y +=0;
+        });
+        if(this.arr_ApartSp)
+        {
+            this.arr_ApartSp.forEach(sp=>{
+                sp.x += 0;
+                sp.y += 0;
+            })
+        }
     }
 }

@@ -26,6 +26,18 @@ import Dic from "../Tool/dic";
         this.isCuted = false;
         this.view = view;
         this.ropeView = new Laya.Sprite();
+
+        //         // //测试
+        // let img = new Laya.Sprite();
+        // img.loadImage('gameView/gameBtn/regame.png');
+        // img.pos(240,400);
+        // let RigidBody = new Laya.RigidBody();
+        // RigidBody.type = "kinematic";
+        // // RigidBody.allowSleep = false;
+		// RigidBody.allowRotation = true;
+        // img.addComponentIntance(RigidBody);
+        // this.ropeView.addChild(img);
+
         view.addChild(this.ropeView);
         this.arr_ImgRope = new Array<Laya.Image>();
         this.ropePointsArray=new Array<RopePoint>();
@@ -53,9 +65,9 @@ import Dic from "../Tool/dic";
             let ropePoint : RopePoint ;
             
             if(i==0){
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
+                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"static",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
                 // this.rotateRopePoint_2(ropePoint);
-                ropePoint.addView(this.view);
+                ropePoint.addView(this.ropeView);
             }
             else
             {
@@ -64,7 +76,7 @@ import Dic from "../Tool/dic";
                 //**添加Joint */
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
                 // this.rotateRopePoint_2(ropePoint);
-                ropePoint.addView(this.view);
+                ropePoint.addView(this.ropeView);
             }
             if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
             {
@@ -110,13 +122,14 @@ import Dic from "../Tool/dic";
             let ropePoint : RopePoint ;
             if(i==0){
                 ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,hookStyle);
-                ropePoint.addView(this.view);
+                ropePoint.addView(this.ropeView);
             }
             else
             {
                 ropePoint =new RopePoint(hookX+x_Add*(i-1),hookY+(i-1)*y_Add,"dynamic",i,hookStyle);
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
-                ropePoint.addView(this.view);
+                ropePoint.addView(this.ropeView);
+                this.view.addChild(ropePoint.sp);
             }
             if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
             {
@@ -158,13 +171,13 @@ import Dic from "../Tool/dic";
             let ropePoint : RopePoint;
             if(i==0){
                 ropePoint=new RopePoint(arr_rem[i].x,arr_rem[i].y,"kinematic",i,style,arr_rem[i].rotation);
-                ropePoint.addView(this.view);
+                ropePoint.addView(this.ropeView);
             }
             else
             {
                 ropePoint =new RopePoint(arr_rem[i].x,arr_rem[i].y,"dynamic",i,style,arr_rem[i].rotation);
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
-                ropePoint.addView(this.view);
+                ropePoint.addView(this.ropeView);
             }
             if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
             {
@@ -344,6 +357,13 @@ import Dic from "../Tool/dic";
     //         this.arr_ImgRope[i].y = 0 + dic*this.rotationDeal(lastPoint.sp.x,lastPoint.y,nextPoint.x,nextPoint.y,"sin");
     //     }
     // }
-
+     /**绳子同步移动 */
+     public moveTogether() : void
+     {
+         this.ropePointsArray.forEach(RopePoint => {
+             RopePoint.sp.x += 0;
+             RopePoint.sp.y += 0;
+         });
+     }
 }
 

@@ -28,6 +28,9 @@ export default class Tail{
     private index_ImgUsed : number;
     /**图片对象数组 */
     private arr_Imgs : Array<any>;
+    //****位置差 */
+    private _x : number;
+    private _y : number;
 
     /**
      * view:可拖尾sprite层   
@@ -56,6 +59,8 @@ export default class Tail{
 
         this.index_Img = 0;
         this.index_ImgUsed = 0;
+        this._x = 0;
+        this._y = 0;
     }
 
     /**
@@ -208,6 +213,15 @@ export default class Tail{
         }
     }
     /**
+     * 位置差
+     */
+    public setPosX(x,y) : void
+    {
+        this._x = x;
+        this._y = y;
+    }
+
+    /**
      * 队列记录坐标点  
      * mX 鼠标当前X坐标  
      * mY鼠标当前Y坐标
@@ -239,8 +253,8 @@ export default class Tail{
                 //         if(this.skinCirle) this.showSingleCirle();
                 //     }
                 // }
-                pos.x = mX;
-                pos.y = mY;
+                pos.x = mX + this._x;
+                pos.y = mY + this._y;
                 this.arr_RodePos.push(pos);
                 if(this.skinCirle) this.showSingleCirle();
                 this.rem_LastPos.x = mX;

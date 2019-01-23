@@ -171,4 +171,15 @@ export default class Balloon{
         Laya.timer.clearAll(this);
         this.removeEvent();
     }
+
+    /**同步移动 x,y上自加*/
+    public moveTogether() : void
+    {
+        this.sp.x +=0;
+        this.sp.y +=0;
+        this.anim1.x +=0;
+        this.anim1.y +=0;
+        this.anim2.x +=0;
+        this.anim2.y +=0;
+    }
 }

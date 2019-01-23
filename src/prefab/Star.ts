@@ -35,6 +35,11 @@ export default class Star{
         this.sp.y=data.star_Y;
         this.style=data.style;
     }
+    
+    private go() : void
+    {
+        console.log("xxx");
+    }
     //更新状态
     update(data):void{
         this.isDestroy = false;        

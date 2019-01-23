@@ -1,5 +1,6 @@
 import GameConfig from "../config/GameConfig";
 import Candy from "./Candy";
+import Hook from "./Hook";
 export default class RopePoint{
 	/**横坐标 */
 	public x:number;
@@ -28,32 +29,48 @@ export default class RopePoint{
         this.y=data.y;
 		this.ropePoint_CreateSprite(data.x,data.y,data.rotation);
         this.ropePoint_AddBody(data.type);
-        this.ropePoint_AddCollider();
+		this.ropePoint_AddCollider();
     }
 
+	
     //更新状态
     update(data):void{
         this.x=data.x;
         this.y=data.y;
-        this.sp.pos(data.x,data.y);
+		this.sp.pos(data.x,data.y);
+	}
+	public isCanMove(hook : Hook) : void
+	{	
+		if(hook.length>0)
+		{
+			this.ropePoint_AddMouseJoint();
 		}
-		
+	}
+
     //创建节点精灵
     ropePoint_CreateSprite(x,y,rotation):void{
 		this.sp=new Laya.Sprite();
 		this.sp.width = GameConfig.ROPE_WIDTH;
 		this.sp.height = 12;
-		this.sp.pivot(this.sp.width/2,this.sp.height/2);
-		this.sp.loadImage("gameView/rope" + (Math.floor(this.index%16/8)+1) + ".png");
+		if(this.index != 0)this.sp.mouseThrough = true;
+		// this.sp.zOrder = 10;
 		// this.sp.loadImage("gameView/candy.png");
 		if(rotation)
 		{
 			this.sp.rotation = rotation;
 		}
-		if(this.index < 2)
+		if(this.index == 0)
+		{
+			this.sp.width = 60;
+			this.sp.height = 60;
+		}
+		else if(this.index < 2)
 		{
 			this.sp.visible = false;
 		}
+		if(this.index != 0)
+		this.sp.loadImage("gameView/rope" + (Math.floor(this.index%16/8)+1) + ".png");
+		this.sp.pivot(this.sp.width/2,this.sp.height/2);
 		this.sp.pos(x,y);
 		// Laya.stage.addChild(this.sp);
     }
@@ -63,7 +80,7 @@ export default class RopePoint{
 		 */
 		public addView(view) : void
 		{
-				view.addChild(this.sp);
+			view.addChild(this.sp);
 		}
 
     //添加RigidBody组件,设置刚体属性
@@ -77,7 +94,7 @@ export default class RopePoint{
 		}
 		this.body=new Laya.RigidBody();
 		this.body.type=type;
-		this.body.allowSleep = false;
+        this.body.allowSleep = false;
 		this.body.allowRotation = true;
 		this.body.angularDamping = ropePoint_A;
 		this.body.linearDamping = ropePoint_L;
@@ -132,5 +149,38 @@ export default class RopePoint{
     }
 
 
+	/**添加鼠标JOint */
+	private ropePoint_AddMouseJoint() : void
+	{
+			let mouseJoint = new Laya.MouseJoint();
+			mouseJoint.anchor = [this.sp.width/2,this.sp.height/2];
+			mouseJoint.maxForce = 1000000;
+			mouseJoint.frequency = 10;
+			mouseJoint.damping = 0;
+			this.sp.addComponentIntance(mouseJoint);
+			this.addEvent();
+	}
+
+	private addEvent() : void
+	{
+		this.sp.on(Laya.Event.MOUSE_DOWN,this,this.mouseDown);
+		this.sp.on(Laya.Event.CLICK,this,function(e){
+			console.log(e);
+		});		
+		// Laya.stage.on(Laya.Event.MOUSE_UP,this,this.mouseUp);
+		// Laya.stage.on(Laya.Event.CLICK,this,function(e){
+		// 	console.log(e);
+		// });
+	}
+
+	private mouseUp() : void
+	{
+		this.body.type = "kinematic";
+	}
+
+	private mouseDown() : void
+	{
+		this.body.type = "dynamic";
+	}
 		
 }

@@ -41,6 +41,10 @@ export module Config {
         public mapWhere : string;
         /**地图皮肤 组*/
         public arr_MapSkin : Array<string>;
+        /**地图皮肤 对应位置 */
+        public arr_MapSkinPos : Array<any>;
+        /**路径 自动识别横竖 横默认为x number  竖默认为y number*/
+        public screenRoad : Array<number>;
         /**mapId */
         public mapId : number;
         /**地图宽度 */
@@ -71,6 +75,9 @@ export module Config {
         public arr_Spider : Array<SpiderConfig>;
         
         constructor(data){
+            this.screenRoad = [];
+            this.arr_MapSkinPos = [];
+            this.arr_MapSkin = [];
             this.arr_Hook = [];
             this.arr_Rope = [];
             this.arr_Star = [];
@@ -91,9 +98,11 @@ export module Config {
             this.mapId = data.mapId;
             this.width = data.width;
             this.height = data.height
+            this.screenRoad = data.screenRoad;
             //皮肤读取
             data.mapSkins.forEach(skin => {
-                this.arr_MapSkin.push(skin);
+                this.arr_MapSkin.push(skin.skin);
+                this.arr_MapSkinPos.push({x:skin.x,y:skin.y});
             });
             /**星星 */
             this.parseStar(data.star);

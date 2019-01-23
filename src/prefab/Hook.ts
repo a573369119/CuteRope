@@ -159,6 +159,7 @@ export default class Hook{
                 this.setSilder();
             }
             this.addEvent();
+            // this.addMouseJoint();
         }
     }
 
@@ -230,13 +231,56 @@ export default class Hook{
     public setRopePoint(ropePoint) : void
     {
         this.ropePoint = ropePoint;
-        Laya.timer.loop(16,this,this.followHook);
+        Laya.timer.loop(1,this,this.followHook);
     }
 
     private followHook() : void
     {
-        this.ropePoint.sp.x = this.imgTop.x;
-        this.ropePoint.sp.y = this.imgTop.y;
+        if(this.ropePoint.sp.alpha < 1)
+        {
+            Laya.timer.clear(this,this.followHook);
+        }
+        // this.ropePoint.sp.x = this.imgTop.x;
+        // this.ropePoint.sp.y = this.imgTop.y;
+        if(this.rotation == 0)
+        {
+            console.log(Math.abs(this.ropePoint.sp.x - this.imgTop.x));
+            if(Math.abs(this.ropePoint.sp.x - this.imgTop.x) >5)
+            {
+                let dic = this.ropePoint.sp.x - this.imgTop.x;
+                if(dic > 0)
+                {//左
+                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:-20,y:0};
+                }
+                else
+                {//右
+                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:20,y:0};
+                }
+            }
+            else
+            {
+                this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:0};
+            }
+        }
+        else
+        {
+            if(Math.abs(this.ropePoint.sp.y - this.imgTop.y) >5)
+            {
+                let dic = this.ropePoint.sp.y - this.imgTop.y;
+                if(dic > 0)
+                {//上
+                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:-20};
+                }
+                else
+                {//下
+                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:20};
+                }
+            }
+            else
+            {
+                this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:0};
+            }
+        }
     }
 
     /**添加事件 */

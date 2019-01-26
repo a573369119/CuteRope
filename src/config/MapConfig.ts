@@ -248,7 +248,7 @@ export module Config {
                         knifeConfig.knife_Y = obj.y;                        
                         knifeConfig.style=obj.style;
                         knifeConfig.rotation=obj.rotation;
-                        knifeConfig.isAlwaysRotate=obj.isAlwaysRotate;
+                        knifeConfig.v=obj.v;
                         knifeConfig.move=obj.move;
                         this.arr_Knife.push(knifeConfig);
                         });
@@ -409,8 +409,8 @@ export module Config {
         public style : string;
         /**旋转角度 */
         public rotation : number;
-        /**是否一直旋转 */
-        public isAlwaysRotate:boolean;
+        /**自转角速度 */
+        public v:number;
         /**移动到某点 */
         public move:Array<number>;
     }

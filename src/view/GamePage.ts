@@ -710,7 +710,10 @@ export default class GamePage extends Laya.Scene{
         arr_Bg[2] = this.scene.img_gameBg3;
         for(let i=0;i<arr_MapSkin.length;i++)
         {
-            if(i == 0) continue;        
+            if(i == 0) {
+                this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(this.boxIndex+1)+".png"; 
+                continue;
+            }        
             if(arr_MapSkinPos[i].height)
             {
                 arr_Bg[i].height = arr_MapSkinPos[i].height;

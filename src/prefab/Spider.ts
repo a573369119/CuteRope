@@ -24,7 +24,7 @@ export default class Spider{
     /**ropeIndex */
     private ropeIndex : number;
     /**candy */
-    private candy : Candy;
+    public candy : Candy;
     /**下降速度 */
     private speedX : number
     /**call */
@@ -82,8 +82,9 @@ export default class Spider{
     {
         this.sp.y += this.speedX;
         this.speedX += 0.098;
-        if(this.sp.y > 1334)
+        if(this.sp.y > 1600)
         {
+            this.sp.x = 10000;
             this.initStatus();
 
         }
@@ -98,8 +99,8 @@ export default class Spider{
         Laya.timer.clear(this, this.down);
     }
     
-    /**发现糖果 */
-    public foundCandy(rope : Rope,candy : Candy) : void
+    /**发现糖果 isnow true*/
+    public foundCandy(rope : Rope,candy : Candy,isNo?) : void
     {
         this.ropeIndex = 1;
         this.mov = 0;
@@ -107,9 +108,15 @@ export default class Spider{
         this.rope = rope;
         this.currentPoint = rope.ropePointsArray[this.ropeIndex];
         this.nextPoint = rope.ropePointsArray[this.ropeIndex+1];
+        if(!isNo)
+            this.starMove();
+        // Laya.timer.loop(10,this,this.spider_FollowRope);
+    }
+
+    public starMove() : void
+    {
         this.monsterAction(GameConfig.ANI_FOUND_CANDY,false);
         this.ani.on(Laya.Event.COMPLETE,this,this.moveStart);
-        // Laya.timer.loop(10,this,this.spider_FollowRope);
     }
     
     moveStart(): any 
@@ -134,7 +141,12 @@ export default class Spider{
             {
                 Laya.timer.clear(this,this.spider_FollowRope);
                 //偷取糖果
+                    //绳子断裂
                 this.rope.ropePointsArray[this.rope.ropePointsArray.length - 1].sp.getComponent(Laya.RevoluteJoint).destroy();
+                this.rope.ropeCuted();
+                let ropejoint = this.rope.ropePointsArray[0].sp.getComponents(Laya.RopeJoint);
+                if(ropejoint) ropejoint[0].destroy();
+                //
                 this.candy.arr_Body[0].applyLinearImpulseToCenter({x:0,y:-8});
                 this.monsterAction(GameConfig.ANI_GET_CANDY,false);
                 Laya.timer.loop(16,this,this.followCandy);
@@ -189,11 +201,16 @@ export default class Spider{
     }
 
 
-    /**获得糖果*/
-    private getCandy() : void
+    /**清楚定时器  扫尾*/
+    public clearTimer() : void
     {
-
+        Laya.timer.clear(this,this.spider_FollowRope);
+        Laya.timer.clear(this,this.down);
+        Laya.timer.clear(this,this.followCandy);
+        //数据初始化
+        this.ropeIndex = 1;
     }
+
     /***
      * 蜘蛛行为
      * 

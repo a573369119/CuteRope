@@ -46,8 +46,8 @@ export default class Monster{
 
     monster_CreateSprite(x,y){
         this.sp=new Laya.Sprite();
-        this.sp.width = 85;
-        this.sp.height = 85;
+        this.sp.width = 150;
+        this.sp.height = 200;
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
         this.sp.pos(x,y);
         this.view.addChild(this.sp);
@@ -62,6 +62,7 @@ export default class Monster{
         if(!isLoop) isLoop=false;
         this.aniStr = aName;
         this.ani.loadImages(this.aniUrls(aName,this.getAniLength(aName)));
+        this.ani.interval = 60;
         this.ani.play(0,isLoop);
     } 
     /**

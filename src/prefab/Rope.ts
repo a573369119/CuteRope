@@ -21,6 +21,8 @@ import Dic from "../Tool/dic";
     public arr_ImgRope : Array<Laya.Image>;
     /**数组保存 */
     public arr_RemPos : Array<any>;
+    /**所属hook类型 */
+    public hookStyle : string;
 
     constructor(view){
         this.isCuted = false;
@@ -47,11 +49,13 @@ import Dic from "../Tool/dic";
 
     //创建一根绳子，根据位置和长度创建
     init(hookX,HookY,ropeLength,hookStyle?):void{
+        this.hookStyle = hookStyle;
         this.createMultiRopePoint(hookX,HookY,ropeLength,hookStyle);
     }
     //自动连接绳子
-    initRopeHook2(hookX,hookY,candyX,candyY) : void
+    initRopeHook2(hookX,hookY,candyX,candyY,hookStyle?) : void
     {
+        this.hookStyle = hookStyle;
         this.createRopeHook2(hookX,hookY,candyX,candyY);
     }
 
@@ -65,7 +69,7 @@ import Dic from "../Tool/dic";
             let ropePoint : RopePoint ;
             
             if(i==0){
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"static",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
+                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
                 // this.rotateRopePoint_2(ropePoint);
                 ropePoint.addView(this.ropeView);
             }
@@ -238,11 +242,16 @@ import Dic from "../Tool/dic";
         joint.anchor = [candy.getCandySprite(index).width/2,candy.getCandySprite(index).height/2];
         candy.getCandySprite(index).addComponentIntance(joint);
 
-        console.log("-------------------");
-        console.log("maxlen::" + (this.ropePointsArray.length-1)*6);
-        console.log("ropePont::" + this.ropePointsArray.length);
-        console.log("spHeight::" + this.ropePointsArray[0].sp.height);
+        // console.log("-------------------");
+        // console.log("maxlen::" + (this.ropePointsArray.length-1)*6);
+        // console.log("ropePont::" + this.ropePointsArray.length);
+        // console.log("spHeight::" + this.ropePointsArray[0].sp.height);
         //测试
+        if(this.hookStyle == "hook3")
+        {
+            this.ropePointsArray[0].ropeJoint_Last(candy,(this.ropePointsArray.length-3)*(GameConfig.ROPE_DIC)/2.2);
+            return;
+        }
         this.ropePointsArray[0].ropeJoint_Last(candy,(this.ropePointsArray.length-3)*(GameConfig.ROPE_DIC+3));
         
     }

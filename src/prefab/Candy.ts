@@ -94,7 +94,7 @@ export default class Candy{
         for(let i=0;i<this.count; i++)
         {
             body=new Laya.RigidBody();
-            body.type="static";
+            body.type="kinematic";
             body.allowSleep = false;
             body.allowRotation = true;
             body.gravityScale = GameConfig.CANDY_GRAVITY;

@@ -4,7 +4,7 @@
 export default class GameConfig{
     /////////////////////////////////绳子
     /**绳子生成像素间隔 */
-    public static ROPE_DIC : number = 7;
+    public static ROPE_DIC : number = 8;
     /**绳子节点转动阻力 */
     public static ROPE_POINT_ANGULARDAMPING : number = 100000;
     /**绳子线性阻力 */
@@ -32,7 +32,7 @@ export default class GameConfig{
     /**糖果线性转动阻力 */
     public static CANDY_LINEARDAMPING : number = 0;
     /**糖果密度 */
-    public static CANDY_DENSITY : number = 1;
+    public static CANDY_DENSITY : number = 200;
     /**糖果重力洗漱 */
     public static CANDY_GRAVITY : number = 1.5;
     /////////////////////////////////怪物
@@ -68,7 +68,7 @@ export default class GameConfig{
     public static ANI_GET_CANDY : string = "spiderget" ;
     //////////////////////////////////////////////蜘蛛
     /**蜘蛛的移动速度 */
-    public static SPIDER_SPEED = 0.02;
+    public static SPIDER_SPEED = 0.03;
     /**蜘蛛下掉速度 */
     public static SPIDER_SPEEDX = 0.0008;
     /////////////////////////////////////////////世界

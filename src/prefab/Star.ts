@@ -30,8 +30,9 @@ import Tool from "../Tool/Tool";
     init(data):void{
         this.isDestroy = false;     
         this.sp = new Laya.Sprite();
-        this.sp.width=80;
-        this.sp.height=80;
+        this.sp.width=40;
+        this.sp.height=40;
+        this.sp.pivot(this.sp.width/2,this.sp.height/2);
         this.star_CreateAnim(data.star_X,data.star_Y,data.style,data.interval);
         this.sp.x=data.star_X;
         this.sp.y=data.star_Y;
@@ -73,19 +74,27 @@ import Tool from "../Tool/Tool";
         this.anim.loadAnimation("GameView/ani/Star.ani");
         this.anim.interval=interval;
         this.anim.play(0,true);
-        this.anim.x -= this.sp.width/2;
-        this.anim.y -= this.sp.height/2;
+        this.anim.width = this.sp.width;
+        this.anim.height = this.sp.height;
+        this.anim.x = this.sp.width/2;
+        this.anim.y = this.sp.height/2;
         this.anim.zOrder = 100;
 
         this.anim2 = new Laya.Animation();
         this.anim2.loadAnimation("GameView/ani/StarDestroy.ani");
         this.anim2.on(Laya.Event.COMPLETE,this,this.destroyed);
-        this.anim2.x -= this.sp.width/2;
-        this.anim2.y -= this.sp.height/2;
+        this.anim2.width = this.sp.width;
+        this.anim2.height = this.sp.height;
+        this.anim2.x = this.sp.width/2;
+        this.anim2.y = this.sp.height/2;
         this.anim2.visible = false;
 
         //创建时间寿命动画1
         this.anim3=new Laya.Animation();
+        this.anim3.width = this.sp.width;
+        this.anim3.height = this.sp.height;
+        this.anim3.x = this.sp.width/2;
+        this.anim3.y = this.sp.height/2;
         this.anim3.loadAnimation("GameView/ani/StarTime1.ani");
         this.anim3.visible=false;
         if(style=="star2"){

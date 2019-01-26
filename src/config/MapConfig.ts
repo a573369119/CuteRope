@@ -97,12 +97,12 @@ export module Config {
             //地图本身配置
             this.mapId = data.mapId;
             this.width = data.width;
-            this.height = data.height
+            this.height = data.height 
             this.screenRoad = data.screenRoad;
             //皮肤读取
             data.mapSkins.forEach(skin => {
                 this.arr_MapSkin.push(skin.skin);
-                this.arr_MapSkinPos.push({x:skin.x,y:skin.y});
+                this.arr_MapSkinPos.push({x:skin.x,y:skin.y,height:skin.height,width:skin.width});
             });
             /**星星 */
             this.parseStar(data.star);

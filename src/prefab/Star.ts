@@ -23,7 +23,6 @@ import Tool from "../Tool/Tool";
     public isDestroy : boolean;
     constructor(view){
         this.view = view;
-        Laya.timer.frameLoop(1,this,this.check);
     }
 
     //初始化,"star1"为普通星星，"star2"为有时间寿命得星星
@@ -41,12 +40,8 @@ import Tool from "../Tool/Tool";
             this.star_X=this.sp.x;
             this.star_Y=this.sp.y;
             this.isGoing=true;
-            console.log("到底有没有呀");
             Laya.timer.frameLoop(1,this,this.star_MoveBySelf,[data.move]);
         }*/
-    }
-    public check():void{
-        console.log("我没搞懂");
     }
     //更新状态
     update(data):void{
@@ -61,6 +56,7 @@ import Tool from "../Tool/Tool";
         this.anim2.visible = false;
         if(data.style=="star2"){
             this.anim3.visible=true;
+            this.anim3.interval=data.interval;
             this.anim3.play(0,false);
         }else{
             this.anim3.visible=false;
@@ -90,6 +86,7 @@ import Tool from "../Tool/Tool";
         this.anim3.visible=false;
         if(style=="star2"){
             this.anim3.play(0,false);
+            this.anim3.interval=interval;
             this.anim3.on(Laya.Event.COMPLETE,this,this.destroyed);
             this.anim3.visible=true;
         }

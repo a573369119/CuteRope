@@ -32,7 +32,7 @@ export default class GameConfig{
     /**糖果线性转动阻力 */
     public static CANDY_LINEARDAMPING : number = 0;
     /**糖果密度 */
-    public static CANDY_DENSITY : number = 1;
+    public static CANDY_DENSITY : number = 200;
     /**糖果重力洗漱 */
     public static CANDY_GRAVITY : number = 1.5;
     /////////////////////////////////怪物

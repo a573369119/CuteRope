@@ -23,8 +23,8 @@ import Tool from "../Tool/Tool";
         this.isCollision=false;
         this.knife_CreateSprite(data.knife_X,data.knife_Y,data.style,data.rotation);
         
-        if(data.isAlwaysRotate){
-            Laya.timer.frameLoop(1,this,this.knife_RotateBySelf);
+        if(data.v!=0){
+            Laya.timer.frameLoop(1,this,this.knife_RotateBySelf,[data.v]);
         }
         if(data.move[0]){
             this.knife_X=this.sp.x;
@@ -43,8 +43,8 @@ import Tool from "../Tool/Tool";
         this.sp.pos(data.knife_X,data.knife_Y);
         this.sp.rotation=data.rotation;
         this.sp.visible=true;
-        if(data.isAlwaysRotate){
-            Laya.timer.frameLoop(1,this,this.knife_RotateBySelf);
+        if(data.v!=0){
+            Laya.timer.frameLoop(1,this,this.knife_RotateBySelf,[data.v]);
         }
         if(data.move.length !=0 ){
             this.knife_X=this.sp.x;
@@ -66,8 +66,8 @@ import Tool from "../Tool/Tool";
     }
 
     //锥子一直自转
-    knife_RotateBySelf():void{
-        this.sp.rotation+=1;
+    knife_RotateBySelf(v):void{
+        this.sp.rotation+=v;
     }
 
     //锥子来回移动

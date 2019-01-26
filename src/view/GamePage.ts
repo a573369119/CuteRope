@@ -1082,7 +1082,7 @@ export default class GamePage extends Laya.Scene{
         for(let i=0; i<arr_Rope.length; i++)
         {
             rope = new Rope(this.scene.panel_GameWorld);
-            if(this.arr_RemRope === undefined)
+            if(this.arr_RemRope === undefined|| this.arr_Hook[i].style == "hook3")
             {
                 rope.init(arr_Hook[i].hook_X,arr_Hook[i].hook_Y,arr_Rope[i].num,arr_Hook[i].style);
             }
@@ -1135,12 +1135,12 @@ export default class GamePage extends Laya.Scene{
          {
              if(this.arr_Knife[i])
              {
-                 this.arr_Knife[i].update({"knife_X":arr_Knife[i].knife_X,"knife_Y":arr_Knife[i].knife_Y,"style":arr_Knife[i].style,"rotation":arr_Knife[i].rotation,"isAlwaysRotate":arr_Knife[i].isAlwaysRotate,"move":arr_Knife[i].move});
+                 this.arr_Knife[i].update({"knife_X":arr_Knife[i].knife_X,"knife_Y":arr_Knife[i].knife_Y,"style":arr_Knife[i].style,"rotation":arr_Knife[i].rotation,"v":arr_Knife[i].v,"move":arr_Knife[i].move});
              }
              else
              {
                  this.arr_Knife[i] = new Knife(this.scene.panel_GameWorld);
-                 this.arr_Knife[i].init({"knife_X":arr_Knife[i].knife_X,"knife_Y":arr_Knife[i].knife_Y,"style":arr_Knife[i].style,"rotation":arr_Knife[i].rotation,"isAlwaysRotate":arr_Knife[i].isAlwaysRotate,"move":arr_Knife[i].move});
+                 this.arr_Knife[i].init({"knife_X":arr_Knife[i].knife_X,"knife_Y":arr_Knife[i].knife_Y,"style":arr_Knife[i].style,"rotation":arr_Knife[i].rotation,"v":arr_Knife[i].v,"move":arr_Knife[i].move});
              }
          }
          console.log(this.arr_Knife);

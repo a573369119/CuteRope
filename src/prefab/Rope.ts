@@ -65,7 +65,7 @@ import Dic from "../Tool/dic";
             let ropePoint : RopePoint ;
             
             if(i==0){
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"static",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
+                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
                 // this.rotateRopePoint_2(ropePoint);
                 ropePoint.addView(this.ropeView);
             }

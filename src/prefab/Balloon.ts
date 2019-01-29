@@ -35,6 +35,7 @@ export default class Balloon{
         let randNum=Math.ceil(Math.random()*3);
         this.spBg.loadImage("gameView/paopao/balloonBg"+randNum+".png");
         this.spBg.pos(data.balloon_X,data.balloon_Y);
+        this.spBg.visible=true;
         this.sp.pos(data.balloon_X,data.balloon_Y);
         this.sp.alpha=1;
         this.sp.visible=true;
@@ -107,9 +108,8 @@ export default class Balloon{
         }
         if(!this.isSlow){
             for(let i=0;i<arr_Body.length;i++){
-                arr_Body[i].linearDamping=30;
-                // console.log("成功");
-                if(Math.abs(arr_Body[i].linearVelocity.x)<1){
+                arr_Body[i].linearDamping=18;
+                if(Math.abs(arr_Body[i].linearVelocity.y)<1){
                     this.isSlow=true;
                     arr_Body[i].linearDamping=0.03;
                     // console.log("中立");
@@ -120,7 +120,7 @@ export default class Balloon{
         {
                 for(let i=0;i<arr_Body.length;i++)
                 {
-                    if(arr_Body[i].owner) arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.85,y:-5});
+                    if(arr_Body[i].owner) arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.9,y:-3});
                         // console.log("失败");
                 }
             

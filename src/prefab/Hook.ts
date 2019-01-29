@@ -250,7 +250,7 @@ export default class Hook{
         // this.ropePoint.sp.y = this.imgTop.y;
         if(this.rotation == 0)
         {
-            console.log(Math.abs(this.ropePoint.sp.x - this.imgTop.x));
+            // console.log(Math.abs(this.ropePoint.sp.x - this.imgTop.x));
             if(Math.abs(this.ropePoint.sp.x - this.imgTop.x) >5)
             {
                 let dic = this.ropePoint.sp.x - this.imgTop.x;
@@ -302,7 +302,7 @@ export default class Hook{
     private followMouse() : void
     {
         if(!this.isDown) return ;
-        console.log(this.imgTop.y);
+        // console.log(this.imgTop.y);
         let mX = Laya.stage.mouseX - GameConfig.CaX;
         let mY = Laya.stage.mouseY - GameConfig.CaY;
         let dicX = mX - this.hook_X;

@@ -747,6 +747,8 @@ export default class GamePage extends Laya.Scene{
             this.mapHight = arr_Bg[arr_Bg.length - 1].y + arr_Bg[arr_Bg.length - 1].height;
             //获取地图总宽
             this.mapWidth = arr_Bg[arr_Bg.length - 1].x + arr_Bg[arr_Bg.length - 1].width;
+
+            
         }
         //sprite 高度
         this.scene.panel_GameWorld.height = this.mapHight;
@@ -760,10 +762,10 @@ export default class GamePage extends Laya.Scene{
     {
         if(this.screenRoad)
         {
-            if(this.mapHight> this.screenHeight)
-                this.scene.panel_GameWorld.y = -this.screenRoad[this.roadIndex];
-            if(this.mapWidth > 480)
-                this.scene.panel_GameWorld.x = -this.screenRoad[this.roadIndex];
+        if(this.mapHight> this.screenHeight)
+            this.scene.panel_GameWorld.y = -this.screenRoad[this.roadIndex];
+        if(this.mapWidth > 480)
+            this.scene.panel_GameWorld.x = -this.screenRoad[this.roadIndex];
         }
         else
         {
@@ -771,6 +773,7 @@ export default class GamePage extends Laya.Scene{
             this.scene.panel_GameWorld.x = 0;
         }
     }
+    
     /**背景移动 */
     private runBg() : void
     {
@@ -825,10 +828,8 @@ export default class GamePage extends Laya.Scene{
         }
         //同步移动
         this.moveTogether();
-        
-        
+
     }
-    
     private spiderMove() {
         if(this.mapConfig.arr_Spider.length == 0) return;
         if (this.arr_Spider) {
@@ -838,7 +839,6 @@ export default class GamePage extends Laya.Scene{
             });
         }
     }
-
     /**跟踪糖果 */
     private followCandy(rotation) : void
     {
@@ -848,7 +848,7 @@ export default class GamePage extends Laya.Scene{
         {//水平
             candyPosValue = this.candy.arr_Sp[0].x;
             followValue = 480/2;
-            this.mouseTail.setPosX(-this.scene.panel_GameWorld.x,0);            
+            this.mouseTail.setPosX(+this.scene.panel_GameWorld.x,0);             
         }   
         else
         {//竖直
@@ -857,8 +857,8 @@ export default class GamePage extends Laya.Scene{
             followValue = this.screenHeight/2;
         }
         //**设置位置差 拖尾 */
-        //跟随    0     
-        if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-followValue)
+//跟随    0     
+if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-followValue)
         {
             this.scene.panel_GameWorld.y -= candyPosValue-followValue + this.scene.panel_GameWorld.y;
             if(this.mapHight + this.scene.panel_GameWorld.y <= this.screenHeight )
@@ -867,7 +867,7 @@ export default class GamePage extends Laya.Scene{
             }
             this.moveTogether();
         }
-        //跟随 90
+                //跟随 90
         //跟随         
         if (rotation == 0 && candyPosValue > followValue && candyPosValue < this.mapWidth - followValue)  
         {
@@ -879,6 +879,7 @@ export default class GamePage extends Laya.Scene{
             this.moveTogether();
         }
 
+        
     }
 
    /**ropeToCandy */
@@ -925,6 +926,7 @@ export default class GamePage extends Laya.Scene{
            //连接糖果
            for(let i=0;i<this.arr_Rope.length;i++)
            {
+               
                this.arr_Rope[i].connectCandy(this.candy,i);
                this.arr_Rope[i].ropePointsArray[this.arr_Rope.length - 1].sp.getComponents(Laya.RigidBody)[0].setVelocity({x:0,y:0});
                if(this.arr_Spider)
@@ -1003,7 +1005,6 @@ export default class GamePage extends Laya.Scene{
         }
         //一出现就在线上的蜘蛛
         this.spiderMove();
-
 
     }
 
@@ -1157,7 +1158,7 @@ export default class GamePage extends Laya.Scene{
         for(let i=0; i<arr_Rope.length; i++)
         {
             rope = new Rope(this.scene.panel_GameWorld);
-            if(this.arr_RemRope === undefined || this.arr_Hook[i].style == "hook3")
+            if(this.arr_RemRope === undefined|| this.arr_Hook[i].style == "hook3")
             {
                 rope.init(arr_Hook[i].hook_X,arr_Hook[i].hook_Y,arr_Rope[i].num,arr_Hook[i].style);
             }
@@ -1559,7 +1560,7 @@ export default class GamePage extends Laya.Scene{
                 {
                     knife.isCollision=true;
                     //糖果破碎
-                    this.candy.becomeApart(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+                    this.candy.becomeApart(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
                     this.failGame();
             }
         }
@@ -1588,7 +1589,7 @@ export default class GamePage extends Laya.Scene{
         let collide;
         this.arr_Laser.forEach(laser=>{
             if(!laser.isCollision){
-                collide=laser.spRect.hitTestPoint(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y- this.scene.panel_GameWorld.y);
+                collide=laser.spRect.hitTestPoint(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
                 if(!laser.isAdvanceLaser){
                     if(collide){
                         laser.isCollision=true;
@@ -1667,8 +1668,8 @@ export default class GamePage extends Laya.Scene{
             let sin = this.rotationDeal(this.lastMousePos.x,this.lastMousePos.y,mX,mY,"sin");
             let dic : number;
             //hook切割点
-            let hookHead ;
-            let candyEnd ;
+            let hookHead;
+            let candyEnd;
             if(this.lastMousePos.x !=null && this.lastMousePos.y != null)
             {
                 dic = this.countDic_Object({x:this.lastMousePos.x,y:this.lastMousePos.y},{x:mX,y:mY});
@@ -1702,7 +1703,7 @@ export default class GamePage extends Laya.Scene{
                                 s.x = this.lastMousePos.x + cos * z * 25;
                                 s.y = this.lastMousePos.y + sin * z * 25;
                                 // console.log("testPoint(" + s.x + "," + s.y + ")");
-                            }
+                            }                            
                             //切割优化
                             hookHead = 5;
                             candyEnd = Rope.ropePointsArray.length - 3;

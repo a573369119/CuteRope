@@ -36,10 +36,10 @@ import Tool from "../Tool/Tool";
     //更新
     update(data):void{
         this.isCollision=false;
+        this.spRect.visible=true;
         this.isAdvanceLaser=data.isAdvanceLaser;
         this.spRect.rotation=data.rotation;
-        this.spRect.pos(data.laser_X,data.laser_Y);
-        this.spRect.visible=true;
+        this.spRect.pos(data.laser_X,data.laser_Y);    
         if(this.isAdvanceLaser){
             this.anim.visible=true;
             this.anim.play(0,true);
@@ -50,7 +50,7 @@ import Tool from "../Tool/Tool";
             this.isAdvanceLaser=true;
         }
         Laya.timer.frameLoop(data.time*60,this,this.laser_startLaser);
-        if(data.move!=[]){
+        if(data.move[0]){
             this.laser_X=this.spRect.x;
             this.laser_Y=this.spRect.y;
             this.isGoing=true;

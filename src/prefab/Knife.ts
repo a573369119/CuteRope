@@ -8,6 +8,8 @@ import Tool from "../Tool/Tool";
     public style : string;
     /**锥子精灵 */
     public sp:Laya.Sprite;
+    /**锥子图片 */
+    public knife:Laya.Image;
     /**加入的层 */
     public view : Laya.Panel;
     /***是否碰撞 */
@@ -39,7 +41,9 @@ import Tool from "../Tool/Tool";
     //更新状态
     update(data):void{
         this.isCollision=false;
-        this.sp.loadImage("gameView/"+data.style+".png");
+        this.knife.skin = "gameView/"+data.style+".png";
+        this.knife.pivot(this.knife.width/2,this.knife.height/2);
+        this.knife.pos(0,0);
         this.sp.pos(data.knife_X,data.knife_Y);
         this.sp.rotation=data.rotation;
         this.sp.visible=true;
@@ -57,11 +61,17 @@ import Tool from "../Tool/Tool";
     //创建锥子精灵
     knife_CreateSprite(x,y,style,rotation):void{
         this.sp=new Laya.Sprite();
-        this.sp.loadImage("gameView/"+style+".png");
+        this.knife = new Laya.Image();
+        this.sp.width = this.knife.width;
+        this.sp.height = this.sp.height; 
+        this.sp.visible=true;
         this.sp.pos(x,y);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
-        this.sp.visible=true;
+        this.knife.skin = "gameView/"+style+".png";
+        this.knife.pivot(this.knife.width/2,this.knife.height/2);
+        this.knife.pos(0,0);
         this.sp.rotation=rotation;
+        this.sp.addChild(this.knife);
         this.view.addChild(this.sp);
     }
 
@@ -125,6 +135,13 @@ import Tool from "../Tool/Tool";
     public destroy() : void
     {
         this.sp.visible = false;
-        this.sp.x = 100000;
+        this.sp.x = -1000;
+    }
+
+    /** 移动同步 */
+    public moveTogether() : void
+    {
+        this.sp.x +=0;
+        this.sp.y +=0;
     }
 }

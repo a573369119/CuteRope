@@ -848,7 +848,7 @@ export default class GamePage extends Laya.Scene{
         {//水平
             candyPosValue = this.candy.arr_Sp[0].x;
             followValue = 480/2;
-            this.mouseTail.setPosX(+this.scene.panel_GameWorld.x,0);            
+            this.mouseTail.setPosX(-this.scene.panel_GameWorld.x,0);            
         }   
         else
         {//竖直
@@ -930,7 +930,7 @@ export default class GamePage extends Laya.Scene{
                if(this.arr_Spider)
                {
                     this.arr_Spider.forEach(spider => {
-                        if(spider.sp.x == this.arr_Rope[i].ropePointsArray[0].x && spider.sp.y == this.arr_Rope[i].ropePointsArray[0].y)
+                        if(spider.sp.x <= this.arr_Rope[i].ropePointsArray[0].sp.x+1&&spider.sp.x >= this.arr_Rope[i].ropePointsArray[0].sp.x-1 && spider.sp.y >= this.arr_Rope[i].ropePointsArray[0].sp.y-1 && spider.sp.y <= this.arr_Rope[i].ropePointsArray[0].sp.y+1)
                         {
                             if(!spider.candy)
                                 spider.foundCandy(this.arr_Rope[i],this.candy,true);
@@ -938,7 +938,7 @@ export default class GamePage extends Laya.Scene{
                             {
                                 spider.foundCandy(this.arr_Rope[i],this.candy,false);                            
                             }
-                        }
+                        }   
                     });
                }
             }
@@ -1546,12 +1546,15 @@ export default class GamePage extends Laya.Scene{
     /**与锥子的距离检测 */
     private testKnife(x,y){
         if(!this.arr_Knife) return;
+        if(this.isOpenSuper) return;
         //检测与锥子得距离，碰撞到则播放哭泣动画结束游戏,在GamePage中开启此检测方法
         let collide;
         this.arr_Knife.forEach(knife => {
             if(!knife.isCollision)
             {
-                collide=knife.sp.hitTestPoint(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y - this.scene.panel_GameWorld.y);
+                // collide=knife.sp.hitTestPoint(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y - this.scene.panel_GameWorld.y);
+                // 
+                collide=knife.knife.hitTestPoint(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
                 if(collide)
                 {
                     knife.isCollision=true;
@@ -1568,7 +1571,8 @@ export default class GamePage extends Laya.Scene{
         //检测糖果是否进入推力球检测区域，若在区域内点击推力球触发推力功能
         let collide;
         this.arr_ForceBall.forEach(forceball=>{
-            collide=forceball.spRect.hitTestPoint(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+            // console.log(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x);
+            collide=forceball.spRect.hitTestPoint(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
             if(collide){
                 forceball.isApplyForce=true;
                 
@@ -1584,7 +1588,7 @@ export default class GamePage extends Laya.Scene{
         let collide;
         this.arr_Laser.forEach(laser=>{
             if(!laser.isCollision){
-                collide=laser.spRect.hitTestPoint(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+                collide=laser.spRect.hitTestPoint(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y- this.scene.panel_GameWorld.y);
                 if(!laser.isAdvanceLaser){
                     if(collide){
                         laser.isCollision=true;
@@ -1615,6 +1619,7 @@ export default class GamePage extends Laya.Scene{
     {
         if(this.isOpenSuper)
         {
+            // if(this.candy.arr_Sp[0].getComponents(Laya.RigidBody)) return;
             let candy = this.candy.arr_Sp[0].getComponents(Laya.RigidBody)[0] as Laya.RigidBody;
             if(y>this.mapHight)
             {
@@ -1829,6 +1834,8 @@ export default class GamePage extends Laya.Scene{
     /**同移动运行方法 */
     private moveTogether() : void
     {
+        GameConfig.CaX =this.scene.panel_GameWorld.x;
+        GameConfig.CaY =this.scene.panel_GameWorld.y;
         //气泡移动同步
         if(this.arr_Balloon)
         {
@@ -1840,9 +1847,16 @@ export default class GamePage extends Laya.Scene{
         this.candy.moveTogether();
         //绳子移动同步
         if(this.arr_Rope)
-        {
+        {   
             this.arr_Rope.forEach(rope =>{
                 rope.moveTogether();
+            });
+        }
+        //锥子移动同步
+        if(this.arr_Knife)
+        {
+            this.arr_Knife.forEach(knife =>{
+                knife.moveTogether();
             });
         }
     }

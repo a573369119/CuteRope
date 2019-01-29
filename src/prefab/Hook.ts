@@ -37,6 +37,9 @@ export default class Hook{
     /**鼠标x，y记录 */
     private rem_x : number;
     private rem_y : number;
+    /**屏幕长宽 */
+    private screenX : number;
+    private screenY : number;
 
     constructor(view){
         this.view = view;
@@ -67,6 +70,9 @@ export default class Hook{
             if(this.spp)
             {
                 this.spp.visible = true;
+                this.spp.width = this.size*2;
+                this.spp.pivot(this.spp.width/2,this.spp.height/2);
+                this.spp.pos(0,0);
             }
             else
             {
@@ -260,6 +266,7 @@ export default class Hook{
             else
             {
                 this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:0};
+
             }
         }
         else
@@ -295,8 +302,9 @@ export default class Hook{
     private followMouse() : void
     {
         if(!this.isDown) return ;
-        let mX = Laya.stage.mouseX;
-        let mY = Laya.stage.mouseY;
+        console.log(this.imgTop.y);
+        let mX = Laya.stage.mouseX - GameConfig.CaX;
+        let mY = Laya.stage.mouseY - GameConfig.CaY;
         let dicX = mX - this.hook_X;
         let dicY = mY - this.hook_Y;
         if(this.rotation == -90 || this.rotation == 0)

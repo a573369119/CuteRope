@@ -81,4 +81,7 @@ export default class GameConfig{
     public static ZORDER_CANDY = 50;
     /**气泡 */
     public static ZORDER_BALLON = 51;
+    /////////////////////////////////////////////////坐标差记录
+    public static CaX = 0;
+    public static CaY = 0;
 }

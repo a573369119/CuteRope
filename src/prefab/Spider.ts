@@ -32,6 +32,7 @@ export default class Spider{
     /**callBack */
     private callBack : Function;
     
+    
     constructor(view){
         this.view = view;
         this.speedX  = GameConfig.SPIDER_SPEEDX;
@@ -49,9 +50,9 @@ export default class Spider{
     //更新状态
     update(data):void{
         this.initStatus();  
-        Laya.timer.clear(this,this.followCandy);
-        this.sp.visible = true;
         this.sp.pos(data.spider_X,data.spider_Y);
+        this.sp.visible = true;
+        Laya.timer.clear(this,this.followCandy);
     }
     
     //创建蜘蛛精灵
@@ -92,7 +93,7 @@ export default class Spider{
     
     private initStatus() {
         this.speedX = GameConfig.SPIDER_SPEEDX;
-        this.ropeIndex = 1;
+        this.ropeIndex = 0;
         this.ani.stop();
         this.ani.visible = false;
         this.img.visible = true;
@@ -142,7 +143,8 @@ export default class Spider{
                 Laya.timer.clear(this,this.spider_FollowRope);
                 //偷取糖果
                     //绳子断裂
-                this.rope.ropePointsArray[this.rope.ropePointsArray.length - 1].sp.getComponent(Laya.RevoluteJoint).destroy();
+                if(this.rope.ropePointsArray[this.rope.ropePointsArray.length - 1].sp.getComponents(Laya.RevoluteJoint))
+                    this.rope.ropePointsArray[this.rope.ropePointsArray.length - 1].sp.getComponents(Laya.RevoluteJoint)[0].destroy();
                 this.rope.ropeCuted();
                 let ropejoint = this.rope.ropePointsArray[0].sp.getComponents(Laya.RopeJoint);
                 if(ropejoint) ropejoint[0].destroy();
@@ -208,7 +210,8 @@ export default class Spider{
         Laya.timer.clear(this,this.down);
         Laya.timer.clear(this,this.followCandy);
         //数据初始化
-        this.ropeIndex = 1;
+        this.ropeIndex = 0;
+        this.rope = null;
     }
 
     /***

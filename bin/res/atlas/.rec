@@ -48,6 +48,7 @@ P 043AE5C4 forceball4.png
 P B767E0E0 forceball5.png
 P 68B157AB forceball6.png
 P F7EE4D14 forceballBg.png
+R 0999AF11 gameView.rar
 P 6B57FDD1 hat_green.png
 P 438054E8 hat_red.png
 P 35E07590 hook1.png
@@ -66,7 +67,6 @@ P 694C3272 laser2.png
 P 1C467F39 laser3.png
 P 6ACBFD9D laser4.png
 P 2E39538F laser5.png
-R 2690CC38 monster.rar
 P A8D51164 rope1.png
 P 56FEC775 rope2.png
 P 9BD348A7 ropeRage.png
@@ -216,7 +216,7 @@ R 59B2E47F lamp.png
 R 086E2414 loadingBg.jpg
 R C5973349 startGameBg.jpg
 D gameView/gameBg
-R 5D3773B0 boxBg_1.png
+R 252A75DC boxBg_1.png
 P 7EA643A1 boxBg_10.png
 P 64A1FC6B boxBg_10_2.png
 P 3FE0C088 boxBg_11.png
@@ -256,7 +256,6 @@ P C3C4A431 boxBg_9.png
 P 6DBB62B7 boxBg_9_2.png
 P CED1E4A1 boxBg_9_3.png
 P CBFD005E white.jpg
-R 85CC7293 背景切图.xls
 D gameView/gameBtn
 P 3348F68D menu.png
 P 491CD577 regame.png

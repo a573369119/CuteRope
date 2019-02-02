@@ -97,7 +97,6 @@ export default class GamePage extends Laya.Scene{
     private screenRoad : Array<number>;
     /**路径下标 */
     private roadIndex : number;
-    
     constructor(){super();}
 
     onEnable() : void
@@ -1234,13 +1233,13 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
             if(this.arr_ForceBall[i])
             {
                 this.arr_ForceBall[i].update({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
-                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy]);
+                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
             }
             else
             {
                 this.arr_ForceBall[i] = new ForceBall(this.scene.panel_GameWorld);
                 this.arr_ForceBall[i].init({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
-                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy]);
+                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
             }
         }
         console.log(this.arr_ForceBall);
@@ -1494,8 +1493,8 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
         if(!this.arr_MagicHat) return;        
         
         this.arr_MagicHat.forEach(magicHat => {
-            let collide1=magicHat.sp1.hitTestPoint(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
-            let collide2=magicHat.sp2.hitTestPoint(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+            let collide1=magicHat.sp1.hitTestPoint(this.candy.arr_Sp[0].x+ this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y+ this.scene.panel_GameWorld.y);
+            let collide2=magicHat.sp2.hitTestPoint(this.candy.arr_Sp[0].x+ this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y+ this.scene.panel_GameWorld.y);
             //如果糖果未与这对帽子的任意一个碰撞
             if(!collide1&&!collide2){
                 magicHat.isCollision=false;
@@ -1575,10 +1574,11 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
             // console.log(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x);
             collide=forceball.spRect.hitTestPoint(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
             if(collide){
-                forceball.isApplyForce=true;
-                
+                forceball.isApplyForce=true;    
+                console.log(forceball.clickCount);           
             }else{
                 forceball.isApplyForce=false;
+                forceball.clickCount=0;
             }
         })
     }
@@ -1706,7 +1706,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                             }                            
                             //切割优化
                             hookHead = 5;
-                            candyEnd = Rope.ropePointsArray.length - 3;
+                            candyEnd = Rope.ropePointsArray.length - 6;
                             if(Rope.ropePointsArray.length <20)
                             {
                                 hookHead = 0;

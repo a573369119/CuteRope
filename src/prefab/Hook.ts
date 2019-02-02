@@ -71,6 +71,7 @@ export default class Hook{
             {
                 this.spp.visible = true;
                 this.spp.width = this.size*2;
+                this.spp.height = this.size*2;
                 this.spp.pivot(this.spp.width/2,this.spp.height/2);
                 this.spp.pos(0,0);
             }

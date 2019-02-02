@@ -107,12 +107,15 @@ export default class Balloon{
             }
         }
         if(!this.isSlow){
-            for(let i=0;i<arr_Body.length;i++){
-                arr_Body[i].linearDamping=18;
-                if(Math.abs(arr_Body[i].linearVelocity.y)<1){
+            for(let i=0;i<arr_Body.length;i++){               
+                if(Math.abs(arr_Body[i].linearVelocity.y)<=1){
                     this.isSlow=true;
                     arr_Body[i].linearDamping=0.03;
                     // console.log("中立");
+                }else if(Math.abs(arr_Body[i].linearVelocity.y)>1&&Math.abs(arr_Body[i].linearVelocity.y)<=4.5){
+                    arr_Body[i].linearDamping=25;
+                }else{
+                    arr_Body[i].linearDamping=18;
                 }
             }
         }
@@ -143,6 +146,7 @@ export default class Balloon{
         this.anim2.play(0,false);
         this.anim2.on(Laya.Event.COMPLETE,this,this.completeBoom);
         candy.isExistBalloon=false;
+        console.log("出现了几次泡泡爆炸")
     }
 
     //直接爆炸

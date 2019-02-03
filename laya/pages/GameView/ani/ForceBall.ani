@@ -7,6 +7,7 @@
     "nodeParent":-1,
     "maxID":4,
     "label":"View",
+    "isOpen":null,
     "isDirectory":true,
     "isAniNode":true,
     "hasChild":true,

@@ -63,12 +63,12 @@ export default class MagicHat {
         }
         
         //判断旋转点是否为空
-        if(data.rotate1[0]){            
+        if(data.rotate1!=0){            
             Laya.timer.frameLoop(1,this,this.magicHat_RotateFollowPoint,[this.sp1,data.v1]);
         }
 
         //判断旋转点是否为空
-        if(data.rotate2[0]){            
+        if(data.rotate2!=0){            
             Laya.timer.frameLoop(1,this,this.magicHat_RotateFollowPoint,[this.sp2,data.v2]);
         }
     }
@@ -152,14 +152,13 @@ export default class MagicHat {
         this.sp1.loadImage("gameView/"+color+".png");      
         this.sp1.rotation=rotation;
         this.sp1.pos(x,y);
-        if(rotate[0]){
-            this.sp1.pivot(rotate[0],-rotate[1]);
-            this.sp1.scaleY=-1;
+        if(rotate!=0){
+            this.sp1.pivot(this.sp1.width/2,rotate);
+            //this.sp1.scaleY=-1;
         }else{
             this.sp1.pivot(this.sp1.width/2,this.sp1.height/2);
         }
         this.view.addChild(this.sp1);
-        
     }
 
     //创建帽子2
@@ -170,9 +169,9 @@ export default class MagicHat {
         this.sp2.rotation=rotation;
         this.sp2.pos(x,y);
         this.sp2.pivot(this.sp2.width/2,this.sp2.height/2);
-        if(rotate[0]){
-            this.sp2.pivot(rotate[0],-rotate[1]);
-            this.sp2.scaleY=-1;
+        if(rotate!=0){
+            this.sp2.pivot(this.sp2.width/2,rotate);
+            //this.sp2.scaleY=-1;
         }else{
             this.sp2.pivot(this.sp2.width/2,this.sp2.height/2);
         }

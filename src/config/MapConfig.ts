@@ -446,10 +446,10 @@ export module Config {
         public move1:Array<number>;
         /**帽子2移动到某点 */
         public move2:Array<number>;
-        /**帽子1绕某点旋转 */
-        public rotate1:Array<number>;
+        /**帽子1绕某点旋转长度，默认竖直向下 */
+        public rotate1:number;
         /**帽子2绕某点旋转 */
-        public rotate2:Array<number>;
+        public rotate2:number;
         /**帽子1绕某点旋转角速度 */
         public v1:number;
         /**帽子2绕某点旋转 */

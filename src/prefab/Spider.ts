@@ -210,6 +210,7 @@ export default class Spider{
         Laya.timer.clear(this,this.down);
         Laya.timer.clear(this,this.followCandy);
         //数据初始化
+        this.sp.visible = false;
         this.ropeIndex = 0;
         this.rope = null;
     }

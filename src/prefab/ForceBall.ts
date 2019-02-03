@@ -1,18 +1,27 @@
 import Tool from "../Tool/Tool";
 import Candy from "./Candy";
+import Balloon from "./Balloon";
     export default class ForceBall{
     /**推力球精灵 */
     public sp:Laya.Sprite;
     /**推力球推动区域 */
     public spRect:Laya.Sprite;
     /**推力球动画 */
-    public anim:Laya.Animation;
+    public anim1:Laya.Animation;
+    /**吐泡动画1 */
+    public anim2_1:Laya.Animation;
+    /**吐泡动画2 */
+    public anim2_2:Laya.Animation;
     /**加入的层 */
     public view : Laya.Panel;
     /**是否可推力 */
     public isApplyForce:boolean;
     /**旋转的角度 */
     public Rotation:number;
+    /**点击次数 */
+    public clickCount:number;
+    /**是否播放动画2_1 */
+    public isPlayAnim2_1:boolean;
     constructor(view){
         this.view=view;
     }
@@ -23,6 +32,8 @@ import Candy from "./Candy";
         this.forceball_CreateSprite(data.forceball_X,data.forceball_Y,data.rotation);
         this.forceball_ApplyForceAnim(data.forceball_X,data.forceball_Y,data.rotation);
         this.Rotation=data.rotation; 
+        this.clickCount=0;
+        this.isPlayAnim2_1=true;
     }
 
     //更新状态
@@ -31,11 +42,12 @@ import Candy from "./Candy";
         this.sp.visible=true;
         this.sp.rotation=data.rotation;
         this.sp.pos(data.forceball_X,data.forceball_Y);
-        this.anim.rotation=data.rotation;
+        this.anim1.rotation=data.rotation;
         this.Rotation=data.rotation;
-        this.anim.visible=true;
-        this.anim.pos(data.forceball_X,data.forceball_Y);
-
+        this.anim1.visible=true;
+        this.anim1.pos(data.forceball_X,data.forceball_Y);
+        this.clickCount=0;
+        this.isPlayAnim2_1=true;
     }
 
     //创建推力球精灵,作为点击模板
@@ -56,23 +68,49 @@ import Candy from "./Candy";
     
     //创建推力球动画
     forceball_ApplyForceAnim(x,y,rotation):void{
-        this.anim=new Laya.Animation();
-        this.anim.pos(x,y);
-        this.anim.loadAnimation("GameView/ani/ForceBall.ani");
-        this.anim.rotation=rotation;
-        this.anim.visible=true;
-        this.view.addChild(this.anim);
-        
+        this.anim1=new Laya.Animation();
+        this.anim1.pos(x,y);
+        this.anim1.loadAnimation("GameView/ani/ForceBall.ani");
+        this.anim1.rotation=rotation;
+        this.anim1.visible=true;
+        this.view.addChild(this.anim1);
+        this.anim2_1=new Laya.Animation();
+        this.anim2_1.loadAnimation("GameView/ani/ForceBalloon1.ani");
+        this.anim2_1.visible=true;
+        this.anim1.addChild(this.anim2_1);
+        this.anim2_2=new Laya.Animation();
+        this.anim2_2.loadAnimation("GameView/ani/ForceBalloon2.ani");
+        this.anim2_2.visible=true;
+        this.anim1.addChild(this.anim2_2);
     }
 
     //发动推力功能，给糖果施加一个力
-    forceball_applyForce(candy:Candy):void{
-        this.anim.play(0,false);
+    forceball_applyForce(candy:Candy,balloonArray:Array<Balloon>):void{        
+        this.anim1.play(0,false);
+        if(this.isPlayAnim2_1){
+            this.anim2_1.play(0,false);
+            this.isPlayAnim2_1=false;
+        }else{
+            this.anim2_2.play(0,false);
+            this.isPlayAnim2_1=true;
+        }
         if(this.isApplyForce){
             for(let i=0;i<candy.arr_Body.length;i++){
-                //candy.arr_Body[0].applyForce({x:candy.arr_Sp[0].x,y:candy.arr_Sp[0].y},{x:1500*Math.sin(this.Rotation/180*Math.PI),y:-1500*Math.cos(this.Rotation/180*Math.PI)});
-                candy.arr_Body[i].setVelocity({x:10*Math.sin(this.Rotation/180*Math.PI),y:-10*Math.cos(this.Rotation/180*Math.PI)});
+                if(this.clickCount>2){
+                    this.clickCount=2;
+                }
+                candy.arr_Body[i].setVelocity({x:(10+(this.clickCount)*5)*Math.sin(this.Rotation/180*Math.PI),y:-(10+(this.clickCount)*5)*Math.cos(this.Rotation/180*Math.PI)});
+                if(candy.isExistBalloon){
+                    for(let i=0;i<balloonArray.length;i++){
+                        if(balloonArray[i].isCollision){
+                            balloonArray[i].isSlow=false;
+                        }
+                    }
+                    
+                }
             }
+            this.clickCount++;
+            
         }
         
     }
@@ -87,8 +125,8 @@ import Candy from "./Candy";
     {
         this.sp.visible = false;
         this.sp.x = 100000;
-        this.anim.visible=false;
-        this.anim.x=100000;
+        this.anim1.visible=false;
+        this.anim1.x=100000;
     }
 
 }

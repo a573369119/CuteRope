@@ -165,6 +165,7 @@ export default class Hook{
                 this.arr_img[1].visible = true;
                 this.arr_img[2].visible = true;
                 this.setSilder();
+                this.setImgValue();
             }
             this.addEvent();
             // this.addMouseJoint();

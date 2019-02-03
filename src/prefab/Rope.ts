@@ -253,7 +253,7 @@ import Dic from "../Tool/dic";
             return;
         }
         this.ropePointsArray[0].ropeJoint_Last(candy,(this.ropePointsArray.length-3)*(GameConfig.ROPE_DIC+3));
-        
+        console.log(this.ropePointsArray[0].sp);
     }
     
     /**角度处理函数
@@ -324,6 +324,16 @@ import Dic from "../Tool/dic";
                 RopePoint.sp.getComponents(Laya.RigidBody)[0].destroy();//对断掉的绳子进行优化
             });
             Laya.timer.clear(this,this.pointDestroy);
+        }
+    }
+
+    /**断开 */
+    public ropeJointDestroy() : void
+    {
+        let joint = this.ropePointsArray[0].sp.getComponents(Laya.RopeJoint);
+        if(joint)
+        {
+            joint[0].destroy();
         }
     }
 

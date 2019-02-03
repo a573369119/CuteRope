@@ -230,12 +230,26 @@ export default class Candy{
         console.log(this.arr_Sp);
         this.arr_Sp.forEach(sp => {
             // console.log(sp);
-            rigidBody = sp.getComponents(Laya.RigidBody)[0];
-            rigidBody.destroy();
-            rigidBody = sp.getComponents(Laya.RevoluteJoint)[0];
-            rigidBody.destroy();
+            rigidBody = sp.getComponents(Laya.RigidBody);
+            if(rigidBody)
+                rigidBody[0].destroy();
+            rigidBody = sp.getComponents(Laya.RevoluteJoint);
+            if(rigidBody)           
+                rigidBody[0].destroy();
         });
         Laya.timer.loop(1,this,this.nearMonster,[x,y]);
+    }
+
+    /**糖果断开 */
+    public candyDestroyJoint() : void
+    {
+        let rigidBody;
+        console.log(this.arr_Sp);
+        this.arr_Sp.forEach(sp => {
+            rigidBody = sp.getComponents(Laya.RevoluteJoint);
+            if(rigidBody)           
+                rigidBody[0].destroy();
+        });  
     }
 
     /**靠近怪物 */

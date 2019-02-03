@@ -97,7 +97,6 @@ export default class GamePage extends Laya.Scene{
     private screenRoad : Array<number>;
     /**路径下标 */
     private roadIndex : number;
-    
     constructor(){super();}
 
     onEnable() : void
@@ -116,7 +115,7 @@ export default class GamePage extends Laya.Scene{
     private init() : void
     {
         ///物理线
-        // Laya.PhysicsDebugDraw.enable();
+        Laya.PhysicsDebugDraw.enable();
         //舞台尺寸
         Laya.stage.width = 480;
         Laya.stage.height = 800;
@@ -127,7 +126,7 @@ export default class GamePage extends Laya.Scene{
         this.menuUI = new ui.GameView.GameMenuUI();
         this.scene.addChild(this.menuUI);
         this.newDoorUi();
-        // this.doorOpen.alpha = 0.3;
+        this.doorOpen.alpha = 0.3;
         //鼠标拖尾初始化
         this.initMouseTail();
 
@@ -1247,13 +1246,13 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
             if(this.arr_ForceBall[i])
             {
                 this.arr_ForceBall[i].update({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
-                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy]);
+                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
             }
             else
             {
                 this.arr_ForceBall[i] = new ForceBall(this.scene.panel_GameWorld);
                 this.arr_ForceBall[i].init({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
-                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy]);
+                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
             }
         }
         console.log(this.arr_ForceBall);
@@ -1507,8 +1506,8 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
         if(!this.arr_MagicHat) return;        
         
         this.arr_MagicHat.forEach(magicHat => {
-            let collide1=magicHat.sp1.hitTestPoint(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
-            let collide2=magicHat.sp2.hitTestPoint(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
+            let collide1=magicHat.sp1.hitTestPoint(this.candy.arr_Sp[0].x+ this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y+ this.scene.panel_GameWorld.y);
+            let collide2=magicHat.sp2.hitTestPoint(this.candy.arr_Sp[0].x+ this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y+ this.scene.panel_GameWorld.y);
             //如果糖果未与这对帽子的任意一个碰撞
             if(!collide1&&!collide2){
                 magicHat.isCollision=false;
@@ -1522,6 +1521,14 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                         (Math.cos(magicHat.sp1.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&!magicHat.rotate1[0]))
                     || ((Math.cos(magicHat.sp1.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&magicHat.rotate1[0])||
                         (Math.cos(magicHat.sp1.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&magicHat.rotate1[0]))){                           
+                        //断开joint
+                        this.candy.candyDestroyJoint();
+                        this.arr_Rope.forEach(rope => {
+                            if(!rope.isCuted)
+                            {
+                                rope.ropeJointDestroy();
+                            }
+                        });
                         //使小球换位置出现的方法
                         this.candy.arr_Sp[0].pos(magicHat.sp2.x,magicHat.sp2.y);      
                         //设置速度 -----测试-----                  
@@ -1542,6 +1549,14 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                         (Math.cos(magicHat.sp2.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&!magicHat.rotate2[0]))
                     || ((Math.cos(magicHat.sp2.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&magicHat.rotate2[0])||
                         (Math.cos(magicHat.sp2.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&magicHat.rotate2[0]))){
+                        //断裂joint
+                        this.candy.candyDestroyJoint();
+                        this.arr_Rope.forEach(rope => {
+                            if(!rope.isCuted)
+                            {
+                                rope.ropeJointDestroy();
+                            }
+                        });
                         //使小球换位置出现的方法
                         this.candy.arr_Sp[0].pos(magicHat.sp1.x,magicHat.sp1.y);                        
                         let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));
@@ -1573,7 +1588,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                 {
                     knife.isCollision=true;
                     //糖果破碎
-                    this.candy.becomeApart(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
+                    this.candy.becomeApart(this.candy.arr_Sp[0].x ,this.candy.arr_Sp[0].y );
                     this.failGame();
             }
         }
@@ -1588,10 +1603,11 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
             // console.log(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x);
             collide=forceball.spRect.hitTestPoint(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
             if(collide){
-                forceball.isApplyForce=true;
-                
+                forceball.isApplyForce=true;    
+                console.log(forceball.clickCount);           
             }else{
                 forceball.isApplyForce=false;
+                forceball.clickCount=0;
             }
         })
     }
@@ -1652,7 +1668,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                 candy.applyLinearImpulseToCenter({x:-4,y:0}); 
             }
         }
-        else if(y<0||y>this.mapHight)
+        else if(y<-200||y>this.mapHight)
         {
             console.log("游戏失败");
             this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
@@ -1719,7 +1735,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                             }                            
                             //切割优化
                             hookHead = 5;
-                            candyEnd = Rope.ropePointsArray.length - 3;
+                            candyEnd = Rope.ropePointsArray.length - 6;
                             if(Rope.ropePointsArray.length <20)
                             {
                                 hookHead = 0;

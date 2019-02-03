@@ -35,6 +35,7 @@ import Tool from "../Tool/Tool";
         this.sp.height=40;
         this.interval = data.interval;
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
+        this.sp.zOrder = 100;
         this.star_CreateAnim(data.star_X,data.star_Y,data.style,data.interval);
         this.sp.x=data.star_X;
         this.sp.y=data.star_Y;
@@ -75,7 +76,7 @@ import Tool from "../Tool/Tool";
         this.anim.height = this.sp.height;
         this.anim.x = this.sp.width/2;
         this.anim.y = this.sp.height/2;
-        this.anim.zOrder = 100;
+        
 
         this.anim2 = new Laya.Animation();
         this.anim2.loadAnimation("GameView/ani/StarDestroy.ani");

@@ -1559,7 +1559,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                 {
                     knife.isCollision=true;
                     //糖果破碎
-                    this.candy.becomeApart(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
+                    this.candy.becomeApart(this.candy.arr_Sp[0].x ,this.candy.arr_Sp[0].y );
                     this.failGame();
             }
         }

@@ -116,7 +116,7 @@ export default class GamePage extends Laya.Scene{
     private init() : void
     {
         ///物理线
-        Laya.PhysicsDebugDraw.enable();
+        // Laya.PhysicsDebugDraw.enable();
         //舞台尺寸
         Laya.stage.width = 480;
         Laya.stage.height = 800;
@@ -127,7 +127,7 @@ export default class GamePage extends Laya.Scene{
         this.menuUI = new ui.GameView.GameMenuUI();
         this.scene.addChild(this.menuUI);
         this.newDoorUi();
-        this.doorOpen.alpha = 0.3;
+        // this.doorOpen.alpha = 0.3;
         //鼠标拖尾初始化
         this.initMouseTail();
 
@@ -797,11 +797,16 @@ export default class GamePage extends Laya.Scene{
                 this.roadIndex++;
                 if(!this.screenRoad[this.roadIndex+1])
                 {
+
                     Laya.MouseManager.enabled = true;
                     Laya.timer.clear(this,this.runBg);
                     Laya.timer.loop(1,this,this.followCandy,[90]);
                     //一出现就在线上的蜘蛛
                     this.spiderMove();
+                    //星星是否开始计时
+                    this.arr_Star.forEach(star => {
+                        star.startToCount(); 
+                    });
                     //开启鼠标事件
                     return;
                 }
@@ -821,6 +826,10 @@ export default class GamePage extends Laya.Scene{
                     //蜘蛛
                     this.spiderMove();
                     Laya.timer.loop(1,this,this.followCandy,[0]);
+                    //星星是否开始计时
+                    this.arr_Star.forEach(star => {
+                        star.startToCount(); 
+                    });
                     //开启鼠标事件
                     return;
                 }
@@ -1005,6 +1014,10 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
         }
         //一出现就在线上的蜘蛛
         this.spiderMove();
+        //星星是否运动
+        this.arr_Star.forEach(star => {
+           star.startToCount(); 
+        });
 
     }
 
@@ -1713,7 +1726,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                                 candyEnd += 2;
                             }
                             //开始检测
-                            if(this.countDic_Object(f,s) < 20 && hookHead < i && i < candyEnd)//优化绳子切割
+                            if(this.countDic_Object(f,s) < 15 && hookHead < i && i < candyEnd)//优化绳子切割
                             {
                                 // console.log(Rope.ropePointsArray.length + " :::::::::: index ::::::::: " + i);
                                 //对蜘蛛进行操作
@@ -1735,6 +1748,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                                 }
                             }
                         }
+                        if(Rope.isCuted) break;
                     }
 
                 }   

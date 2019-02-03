@@ -21,6 +21,8 @@ import Tool from "../Tool/Tool";
     private view : Laya.Panel;
     /***是否消失 */
     public isDestroy : boolean;
+    /**帧率 */
+    public interval : number;
     constructor(view){
         this.view = view;
     }
@@ -31,10 +33,12 @@ import Tool from "../Tool/Tool";
         this.sp = new Laya.Sprite();
         this.sp.width=40;
         this.sp.height=40;
+        this.interval = data.interval;
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
         this.star_CreateAnim(data.star_X,data.star_Y,data.style,data.interval);
         this.sp.x=data.star_X;
         this.sp.y=data.star_Y;
+        this.sp.zOrder = 100;
         this.style=data.style;
         
        /* if(data.move[0]){
@@ -55,13 +59,10 @@ import Tool from "../Tool/Tool";
         this.anim.play(0,true);
         this.anim.interval=data.interval;
         this.anim2.visible = false;
-        if(data.style=="star2"){
-            this.anim3.visible=true;
-            this.anim3.interval=data.interval;
-            this.anim3.play(0,false);
-        }else{
+        this.startToCount();
+        if(data.style!="star2")
+        {
             this.anim3.visible=false;
-
         }
     }
     //创建星星动画
@@ -93,18 +94,20 @@ import Tool from "../Tool/Tool";
         this.anim3.y = this.sp.height/2;
         this.anim3.loadAnimation("GameView/ani/StarTime1.ani");
         this.anim3.visible=false;
-        if(style=="star2"){
-            this.anim3.play(0,false);
-            this.anim3.interval=interval;
-            this.anim3.on(Laya.Event.COMPLETE,this,this.destroyed);
-            this.anim3.visible=true;
-        }
-
         this.sp.addChild(this.anim);
         this.sp.addChild(this.anim2);
         this.sp.addChild(this.anim3);
         this.view.addChild(this.sp);
     }
+
+        public startToCount() {
+            if (this.style == "star2") {
+                this.anim3.play(0, false);
+                this.anim3.interval = this.interval;
+                this.anim3.on(Laya.Event.COMPLETE, this, this.destroyed);
+                this.anim3.visible = true;
+            }
+        }
 
     //星星来回移动
     private star_MoveBySelf():void{       

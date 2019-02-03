@@ -71,6 +71,7 @@ export default class Hook{
             {
                 this.spp.visible = true;
                 this.spp.width = this.size*2;
+                this.spp.height = this.size*2;
                 this.spp.pivot(this.spp.width/2,this.spp.height/2);
                 this.spp.pos(0,0);
             }
@@ -121,6 +122,7 @@ export default class Hook{
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
         // this.sp.loadImage("gameView/"+"hook1"+".png");
         // this.sp.loadImage("gameView/"+style+".png");
+        this.sp.zOrder = GameConfig.ZORDER_ROPEPOINT;
         this.sp.pos(x,y);
         this.view.addChild(this.sp);
     }

@@ -77,6 +77,8 @@ export default class GameConfig{
     /////////////////////////////////////////////层级配置
     /**hook顶部 */
     public static ZORDER_HOOK_TOP = 2;
+    /**ropePoint */
+    public static ZORDER_ROPEPOINT = 3;
     /**糖果 */
     public static ZORDER_CANDY = 50;
     /**气泡 */

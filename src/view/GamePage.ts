@@ -1534,7 +1534,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                         //设置速度 -----测试-----                  
                         let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));                    
                         this.candy.arr_Body[0].setVelocity({x:0,y:0});
-                        this.candy.arr_Body[0].setVelocity({x:Math.sin(magicHat.rotation2)*velocity,y:-Math.cos(magicHat.rotation2)*velocity});
+                        this.candy.arr_Body[0].setVelocity({x:Math.sin(magicHat.rotation2/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation2/180*Math.PI)*velocity});
                         magicHat.isCollision=true;
                     
                        }
@@ -1561,7 +1561,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                         this.candy.arr_Sp[0].pos(magicHat.sp1.x,magicHat.sp1.y);                        
                         let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));
                         this.candy.arr_Body[0].setVelocity({x:0,y:0});
-                        this.candy.arr_Body[0].setVelocity({x:Math.sin(magicHat.rotation1)*velocity,y:-Math.cos(magicHat.rotation1)*velocity});
+                        this.candy.arr_Body[0].setVelocity({x:Math.sin(magicHat.rotation1/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation1/180*Math.PI)*velocity});
                         magicHat.isCollision=true;
                         }else{
                             magicHat.isCollision=true;

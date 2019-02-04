@@ -29,7 +29,7 @@ export default class LoadingPage extends ui.LoadingUI{
             //大图加载
             {url:"unpackage/startGameBg.jpg"},
             {url:"unpackage/cutRope.png"},
-            {url:"GameView/gameBg/boxBg_1.jpg"}
+            {url:"gameView/gameBg/boxBg_1.png"}
         ];
         Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onPro,null,false));
     }

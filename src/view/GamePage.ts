@@ -115,7 +115,7 @@ export default class GamePage extends Laya.Scene{
     private init() : void
     {
         ///物理线
-        Laya.PhysicsDebugDraw.enable();
+        // Laya.PhysicsDebugDraw.enable();
         //舞台尺寸
         Laya.stage.width = 480;
         Laya.stage.height = 800;
@@ -126,7 +126,7 @@ export default class GamePage extends Laya.Scene{
         this.menuUI = new ui.GameView.GameMenuUI();
         this.scene.addChild(this.menuUI);
         this.newDoorUi();
-        this.doorOpen.alpha = 0.3;
+        // this.doorOpen.alpha = 0.3;
         //鼠标拖尾初始化
         this.initMouseTail();
 

@@ -256,7 +256,7 @@ R 59B2E47F lamp.png
 R 086E2414 loadingBg.jpg
 R C5973349 startGameBg.jpg
 D gameView/gameBg
-R 252A75DC boxBg_1.png
+P 252A75DC boxBg_1.png
 P 7EA643A1 boxBg_10.png
 P 64A1FC6B boxBg_10_2.png
 P 3FE0C088 boxBg_11.png

@@ -2810,6 +2810,36 @@
 					{"x":300,"y":850,"style":"knife4","rotation":0,"v":0,"move":[]}
 				]
             },
+            {
+                "mapId":10,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_4.png"
+                ],
+                "candy":{"style":"candy","x":351,"y":480},
+                "star":[
+                    {"style":"star1","x":172,"y":436,"interval":30,"move":[]},
+                    {"style":"star1","x":160,"y":216,"interval":30,"move":[]},
+                    {"style":"star1","x":273,"y":555,"interval":30,"move":[]}
+                ],
+                "monster":{"x":111,"y":708,"skin":""},
+                "hook":[
+					{"style":"hook3","x":254,"y":296},
+					{"style":"hook3","x":411,"y":621},
+					{"style":"hook2","x":190,"y":555,"size":100}
+                ],
+				"rope":{
+					"length":[
+						35,15
+					]
+				},
+				"magicHat":[
+					{"x1":100,"y1":208,"rotation1":92,"move1":[],"rotate1":0,"v1":0,
+					 "x2":100,"y2":386,"rotation2":92,"move2":[],"rotate2":0,"v2":0,
+					 "color":"hat_red"}
+				]
+            },
 			{
                 "mapId":11,
                 "width":750,

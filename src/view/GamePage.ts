@@ -126,7 +126,7 @@ export default class GamePage extends Laya.Scene{
         this.menuUI = new ui.GameView.GameMenuUI();
         this.scene.addChild(this.menuUI);
         this.newDoorUi();
-        // this.doorOpen.alpha = 0.3;
+        this.doorOpen.alpha = 0.3;
         //鼠标拖尾初始化
         this.initMouseTail();
 
@@ -1529,12 +1529,20 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                                 rope.ropeJointDestroy();
                             }
                         });
-                        //使小球换位置出现的方法
-                        this.candy.arr_Sp[0].pos(magicHat.sp2.x,magicHat.sp2.y);      
-                        //设置速度 -----测试-----                  
-                        let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));                    
-                        this.candy.arr_Body[0].setVelocity({x:0,y:0});
-                        this.candy.arr_Body[0].setVelocity({x:Math.sin(magicHat.rotation2)*velocity,y:-Math.cos(magicHat.rotation2)*velocity});
+                         //设置速度 -----测试-----                  
+                         let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));                    
+                        for(let i=0;i<this.candy.arr_Sp.length;i++){
+                            //使小球换位置出现的方法
+                            this.candy.arr_Sp[i].pos(magicHat.sp2.x,magicHat.sp2.y);   
+                            this.candy.arr_Body[i].setVelocity({x:0,y:0});
+                        this.candy.arr_Body[i].setVelocity({x:Math.sin(magicHat.rotation2/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation2/180*Math.PI)*velocity});
+                        }
+                           
+                        console.log("magicHat.sp2.x="+magicHat.sp2.x);   
+                        console.log("magicHat.sp2.y="+magicHat.sp2.y);    
+                       
+                        
+                        
                         magicHat.isCollision=true;
                     
                        }
@@ -1557,11 +1565,17 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                                 rope.ropeJointDestroy();
                             }
                         });
-                        //使小球换位置出现的方法
-                        this.candy.arr_Sp[0].pos(magicHat.sp1.x,magicHat.sp1.y);                        
                         let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));
-                        this.candy.arr_Body[0].setVelocity({x:0,y:0});
-                        this.candy.arr_Body[0].setVelocity({x:Math.sin(magicHat.rotation1)*velocity,y:-Math.cos(magicHat.rotation1)*velocity});
+                        //使小球换位置出现的方法
+                        for(let i=0;i<this.candy.arr_Sp.length;i++){
+                            this.candy.arr_Sp[i].pos(magicHat.sp1.x,magicHat.sp1.y);   
+                            this.candy.arr_Body[i].setVelocity({x:0,y:0});
+                        this.candy.arr_Body[i].setVelocity({x:Math.sin(magicHat.rotation1/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation1/180*Math.PI)*velocity});
+                        }
+                        console.log("magicHat.sp1.x="+magicHat.sp1.x);   
+                        console.log("magicHat.sp1.y="+magicHat.sp1.y);                
+                        
+                        
                         magicHat.isCollision=true;
                         }else{
                             magicHat.isCollision=true;

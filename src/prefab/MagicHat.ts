@@ -28,9 +28,9 @@ export default class MagicHat {
     /**加入的层 */
     public view : Laya.Panel;
     /**帽子1绕某点旋转 */
-    public rotate1:Array<number>;
+    public rotate1:number;
     /**帽子2绕某点旋转 */
-    public rotate2:Array<number>;
+    public rotate2:number;
     constructor(view){
         this.view = view;
     }
@@ -87,9 +87,9 @@ export default class MagicHat {
        this.sp1.loadImage("gameView/"+data.color+".png");      
        this.sp1.pos(data.magicHat_X1,data.magicHat_Y1);
        this.sp1.rotation=data.rotation1;
-       if(data.rotate1[0]){
-        this.sp1.pivot(data.rotate1[0],-data.rotate1[1]);
-        this.sp1.scaleY=-1;
+       if(data.rotate1!=0){
+        this.sp1.pivot(this.sp1.width/2,data.rotate1);
+        //this.sp1.scaleY=-1;
         }else{
         this.sp1.pivot(this.sp1.width/2,this.sp1.height/2);
         }
@@ -98,24 +98,11 @@ export default class MagicHat {
        this.sp2.loadImage("gameView/"+data.color+".png");      
        this.sp2.pos(data.magicHat_X2,data.magicHat_Y2);
        this.sp2.rotation=data.rotation2;
-       if(data.rotate2[0]){
-        this.sp2.pivot(data.rotate2[0],-data.rotate2[1]);
-        this.sp2.scaleY=-1;
+       if(data.rotate2!=0){
+        this.sp2.pivot(this.sp2.width/2,data.rotate2);
+        //this.sp2.scaleY=-1;
         }else{
         this.sp2.pivot(this.sp2.width/2,this.sp2.height/2);
-        }
-       //判断旋转点是否存在
-       if(data.rotate1[0]){
-            this.sp1.pivot(data.rotate1[0],-data.rotate1[1]);
-            this.sp1.scaleY=-1;
-        }else{
-            this.sp1.pivot(this.sp1.width/2,this.sp1.height/2);
-        }
-        if(data.rotate2[0]){
-            this.sp2.pivot(data.rotate2[0],-data.rotate2[1]);
-            this.sp2.scaleY=-1;
-        }else{
-            this.sp2.pivot(this.sp2.width/2,this.sp2.height/2);
         }
         //判断移动是否为空
         if(data.move1[0]){
@@ -133,12 +120,12 @@ export default class MagicHat {
         }
         
         //判断旋转点是否为空
-        if(data.rotate1[0]){            
+        if(data.rotate1!=0){            
             Laya.timer.frameLoop(1,this,this.magicHat_RotateFollowPoint,[this.sp1,data.v1]);
         }
 
         //判断旋转点是否为空
-        if(data.rotate2[0]){            
+        if(data.rotate2!=0){            
             Laya.timer.frameLoop(1,this,this.magicHat_RotateFollowPoint,[this.sp2,data.v2]);
         }
 

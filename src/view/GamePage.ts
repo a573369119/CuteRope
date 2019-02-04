@@ -1517,11 +1517,11 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                 //碰撞到了，但是检测时否还在另一个帽子的检测范围内
                 if(!magicHat.isCollision){   
                     //检测帽子碰撞的方向，若与帽子口相反，则不进行糖果位移
-                    if(((Math.cos(magicHat.sp1.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&!magicHat.rotate1[0])||
-                        (Math.cos(magicHat.sp1.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&!magicHat.rotate1[0]))
-                    || ((Math.cos(magicHat.sp1.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&magicHat.rotate1[0])||
-                        (Math.cos(magicHat.sp1.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&magicHat.rotate1[0]))){                           
-                        //断开joint
+                    if(((Math.cos(magicHat.sp1.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&magicHat.rotate1==0)||
+                        (Math.cos(magicHat.sp1.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&magicHat.rotate1==0))
+                    || ((Math.cos(magicHat.sp1.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&magicHat.rotate1!=0)||
+                        (Math.cos(magicHat.sp1.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&magicHat.rotate1!=0))){                           
+                            //断开joint
                         this.candy.candyDestroyJoint();
                         this.arr_Rope.forEach(rope => {
                             if(!rope.isCuted)
@@ -1531,18 +1531,18 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                         });
                          //设置速度 -----测试-----                  
                          let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));                    
-                        for(let i=0;i<this.candy.arr_Sp.length;i++){
-                            //使小球换位置出现的方法
-                            this.candy.arr_Sp[i].pos(magicHat.sp2.x,magicHat.sp2.y);   
+                        //使小球换位置出现的方法
+                         for(let i=0;i<this.candy.arr_Sp.length;i++){                            
+                            //根据帽子锚点位置调整距离
+                            if(magicHat.rotate2==0){
+                                this.candy.arr_Sp[i].pos(magicHat.sp2.x,magicHat.sp2.y);   
+                            }else{
+                                this.candy.arr_Sp[i].pos(magicHat.sp2.x+Math.sin((magicHat.sp2.rotation+180)/180*Math.PI)*(Math.abs(magicHat.rotate2)+magicHat.sp2.height/2),magicHat.sp2.y-Math.cos((magicHat.sp2.rotation+180)/180*Math.PI)*(Math.abs(magicHat.rotate2)+magicHat.sp2.height/2)); 
+                            }   
                             this.candy.arr_Body[i].setVelocity({x:0,y:0});
                         this.candy.arr_Body[i].setVelocity({x:Math.sin(magicHat.rotation2/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation2/180*Math.PI)*velocity});
                         }
-                           
-                        console.log("magicHat.sp2.x="+magicHat.sp2.x);   
-                        console.log("magicHat.sp2.y="+magicHat.sp2.y);    
-                       
-                        
-                        
+                      
                         magicHat.isCollision=true;
                     
                        }
@@ -1568,12 +1568,18 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                         let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));
                         //使小球换位置出现的方法
                         for(let i=0;i<this.candy.arr_Sp.length;i++){
-                            this.candy.arr_Sp[i].pos(magicHat.sp1.x,magicHat.sp1.y);   
-                            this.candy.arr_Body[i].setVelocity({x:0,y:0});
-                        this.candy.arr_Body[i].setVelocity({x:Math.sin(magicHat.rotation1/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation1/180*Math.PI)*velocity});
-                        }
-                        console.log("magicHat.sp1.x="+magicHat.sp1.x);   
-                        console.log("magicHat.sp1.y="+magicHat.sp1.y);                
+                            //根据帽子锚点位置调整距离
+                            if(magicHat.rotate1==0){
+                                this.candy.arr_Sp[i].pos(magicHat.sp1.x,magicHat.sp1.y);   
+                                this.candy.arr_Body[i].setVelocity({x:0,y:0});
+                                this.candy.arr_Body[i].setVelocity({x:Math.sin(magicHat.rotation1/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation1/180*Math.PI)*velocity});
+                            }else{
+                                this.candy.arr_Sp[i].pos(magicHat.sp1.x+Math.sin((magicHat.sp1.rotation+180)/180*Math.PI)*(Math.abs(magicHat.rotate1)+magicHat.sp1.height/2),magicHat.sp1.y-Math.cos((magicHat.sp1.rotation+180)/180*Math.PI)*(Math.abs(magicHat.rotate1)+magicHat.sp1.height/2)); 
+                                this.candy.arr_Body[i].setVelocity({x:0,y:0});
+                                this.candy.arr_Body[i].setVelocity({x:Math.sin(magicHat.rotation1/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation1/180*Math.PI)*velocity});
+                            }
+                            
+                        }             
                         
                         
                         magicHat.isCollision=true;

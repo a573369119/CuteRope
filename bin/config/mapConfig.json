@@ -2541,18 +2541,18 @@
                 "mapSkins":[
                     "gameView/gameBg/boxBg_4.png"
                 ],
-                "candy":{"style":"candy","x":240,"y":220},
+                "candy":{"style":"candy","x":240,"y":150},
                 "star":[
                     {"style":"star1","x":130,"y":260,"interval":30,"move":[]},
-                    {"style":"star1","x":350,"y":260,"interval":30,"move":[]},
+                    {"style":"star1","x":410,"y":350,"interval":30,"move":[]},
                     {"style":"star1","x":240,"y":630,"interval":30,"move":[]}
                 ],
-                "monster":{"x":250,"y":360,"skin":""},
+                "monster":{"x":410,"y":420,"skin":""},
                 "hook":[
-					{"style":"hook1","x":140,"y":90},
-					{"style":"hook1","x":340,"y":90},
-					{"style":"hook2","x":150,"y":500,"size":110},
-					{"style":"hook2","x":330,"y":500,"size":110}
+					{"style":"hook1","x":110,"y":90},
+					{"style":"hook1","x":370,"y":90},
+					{"style":"hook2","x":170,"y":500,"size":120},
+					{"style":"hook2","x":310,"y":500,"size":120}
                 ],
 				"rope":{
 					"length":[
@@ -2560,10 +2560,10 @@
 					]
 				},
 				"magicHat":[
-					{"x1":70,"y1":260,"rotation1":90,"move1":[],"rotate1":0,"v1":0,
-					 "x2":430,"y2":630,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
+					{"x1":50,"y1":240,"rotation1":92,"move1":[],"rotate1":0,"v1":0,
+					 "x2":430,"y2":580,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"},
-					{"x1":70,"y1":630,"rotation1":90,"move1":[],"rotate1":0,"v1":0,
+					{"x1":50,"y1":580,"rotation1":90,"move1":[],"rotate1":0,"v1":0,
 					 "x2":430,"y2":240,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_green"}
 				],
@@ -2775,9 +2775,9 @@
                 "star":[
                     {"style":"star1","x":120,"y":600,"interval":30,"move":[]},
                     {"style":"star1","x":240,"y":1200,"interval":30,"move":[]},
-                    {"style":"star1","x":360,"y":300,"interval":30,"move":[]}
+                    {"style":"star1","x":300,"y":300,"interval":30,"move":[]}
                 ],
-                "monster":{"x":370,"y":170,"skin":""},
+                "monster":{"x":320,"y":170,"skin":""},
                 "hook":[
 					{"style":"hook1","x":240,"y":900},
 					{"style":"hook2","x":200,"y":500,"size":110},
@@ -2973,11 +2973,11 @@
                 "star":[
                     {"style":"star1","x":240,"y":200,"interval":30,"move":[]},
                     {"style":"star1","x":240,"y":300,"interval":30,"move":[240,600]},
-                    {"style":"star1","x":380,"y":350,"interval":30,"move":[]}
+                    {"style":"star1","x":380,"y":450,"interval":30,"move":[]}
                 ],
-                "monster":{"x":390,"y":250,"skin":""},
+                "monster":{"x":390,"y":350,"skin":""},
                 "hook":[
-					{"style":"hook1","x":380,"y":450}
+					{"style":"hook1","x":380,"y":480}
                 ],
 				"rope":{
 					"length":[
@@ -2991,7 +2991,7 @@
 					{"x1":110,"y1":200,"rotation1":180,"move1":[],"rotate1":0,"v1":0,
 					 "x2":390,"y2":700,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"},
-					{"x1":130,"y1":700,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
+					{"x1":120,"y1":700,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
 					 "x2":250,"y2":700,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_green"}
 				]
@@ -3012,7 +3012,7 @@
                 "monster":{"x":250,"y":650,"skin":""},
                 "hook":[
 					{"style":"hook1","x":100,"y":270},
-					{"style":"hook2","x":260,"y":400,"size":120}
+					{"style":"hook2","x":320,"y":400,"size":120}
                 ],
 				"rope":{
 					"length":[
@@ -3023,7 +3023,7 @@
                     {"x":100,"y":250,"rotation":180}
 				],
 				"magicHat":[
-					{"x1":400,"y1":80,"rotation1":-90,"move1":[],"rotate1":0,"v1":0,
+					{"x1":400,"y1":120,"rotation1":-90,"move1":[],"rotate1":0,"v1":0,
 					 "x2":400,"y2":700,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"},
 					{"x1":110,"y1":700,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
@@ -3134,7 +3134,7 @@
                 "monster":{"x":240,"y":100,"skin":""},
                 "hook":[
 					{"style":"hook1","x":100,"y":380},
-					{"style":"hook2","x":160,"y":380,"size":100,"rotation":0,"length":200,"percent":0.5}
+					{"style":"hook2","x":160,"y":380,"size":100,"rotation":0,"length":250,"percent":0.5}
                 ],
 				"rope":{
 					"length":[
@@ -3142,8 +3142,8 @@
 					]
 				},
 				"magicHat":[
-					{"x1":110,"y1":680,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
-					 "x2":410,"y2":680,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
+					{"x1":100,"y1":680,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
+					 "x2":390,"y2":680,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"}
 				],
 				"forceball":[
@@ -3197,8 +3197,8 @@
                 ],
                 "candy":{"style":"candy","x":341,"y":550},
                 "star":[
-                    {"style":"star1","x":240,"y":170,"interval":70,"move":[]},
-                    {"style":"star1","x":240,"y":590,"interval":50,"move":[]},
+                    {"style":"star1","x":240,"y":200,"interval":70,"move":[]},
+                    {"style":"star1","x":240,"y":450,"interval":50,"move":[]},
                     {"style":"star1","x":420,"y":120,"interval":100,"move":[]}
                 ],
                 "monster":{"x":100,"y":100,"skin":""},
@@ -3213,8 +3213,8 @@
 					]
 				},
 				"magicHat":[
-					{"x1":110,"y1":670,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
-					 "x2":440,"y2":670,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
+					{"x1":100,"y1":670,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
+					 "x2":420,"y2":670,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"}
 				],
 				"balloon":[

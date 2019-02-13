@@ -53,6 +53,8 @@ export module Config {
         public height : number;
         /**糖果配置 */
         public candyConfig : CandyConfig;
+        /**糖果2配置 */
+        public candyConfig2 : CandyConfig;
         /**星星配置 数组 */
         public arr_Star : Array<StarConfig>;
         /**怪物配置 */
@@ -61,6 +63,8 @@ export module Config {
         public arr_Hook : Array<HookConfig>;
         /**rope配置 数组*/
         public arr_Rope : Array<RopeConfig>;
+        /**rope配置 数组*/
+        public arr_Rope2 : Array<RopeConfig>;
         /**泡泡 balloon*/
         public arr_Balloon : Array<BalloonConfig>;
         /**锥子 knife*/
@@ -80,6 +84,7 @@ export module Config {
             this.arr_MapSkin = [];
             this.arr_Hook = [];
             this.arr_Rope = [];
+            this.arr_Rope2 = [];
             this.arr_Star = [];
             this.arr_MapSkin = [];
             this.arr_Balloon = [];
@@ -107,13 +112,15 @@ export module Config {
             /**星星 */
             this.parseStar(data.star);
             /**糖果 */
-            this.parseCandy(data.candy);
+            this.parseCandy(data.candy,data.candy2);
             /**怪物 */
             this.parseMonster(data.monster);
             /**Hook  锚点*/
             this.parseHook(data.hook);
             /**绳子 */
             this.parseRope(data.rope);
+            /**绳子2 */
+            this.parseRope2(data.rope2);
             /**泡泡解析 */
             this.parseBalloon(data.balloon);
             /**解析帽子 */
@@ -146,15 +153,41 @@ export module Config {
             }
         }
 
+        /**绳子节点2解析 */
+        private parseRope2(rope2) : void
+        {
+            if(!rope2) return;
+            let ropeConfig : RopeConfig;
+            for(let i=0; i<rope2.length.length; i++)
+            {
+                ropeConfig = new RopeConfig();
+                ropeConfig.num = rope2.length[i];
+                ropeConfig.hookIndex = -1;                
+                if(rope2.hookIndex)
+                {
+                    if(rope2.hookIndex[i] || rope2.hookIndex[i] == 0)
+                    ropeConfig.hookIndex = rope2.hookIndex[i];
+                }
+                this.arr_Rope2.push(ropeConfig);
+            }
+        }
+
         /**绳子节点解析 */
         private parseRope(rope) : void
         {
-            let ropeConfig : RopeConfig;
-            rope.length.forEach(length => {
+            let ropeConfig : RopeConfig;          
+            for(let i=0; i<rope.length.length; i++)
+            {
                 ropeConfig = new RopeConfig();
-                ropeConfig.num = length;
+                ropeConfig.num = rope.length[i];
+                ropeConfig.hookIndex = -1;                
+                if(rope.hookIndex)
+                {
+                    if(rope.hookIndex[i] || rope.hookIndex[i] == 0)
+                    ropeConfig.hookIndex = rope.hookIndex[i];
+                }
                 this.arr_Rope.push(ropeConfig);
-            });
+            }
             console.log("rope -解析");
         } 
         /**钩子hook */
@@ -190,13 +223,20 @@ export module Config {
             
         }
         /**糖果 */
-        private parseCandy(candy) : void
+        private parseCandy(candy,candy2) : void
         {
             this.candyConfig = new CandyConfig();
             this.candyConfig.candy_X = candy.x;
             this.candyConfig.candy_Y = candy.y;
             this.candyConfig.style = candy.style;
             console.log("candy -解析");
+            if(candy2)
+            {
+                this.candyConfig2 = new CandyConfig();
+                this.candyConfig2.candy_X = candy2.x;
+                this.candyConfig2.candy_Y = candy2.y;
+                this.candyConfig2.style = candy2.style;
+            }
             
         }
 
@@ -388,7 +428,9 @@ export module Config {
     /**绳子 */
     export class RopeConfig{
         /** 长度像素     */
-        public num : number;        
+        public num : number;  
+        /** 绳子所属 hook**/
+        public hookIndex : number;      
     }
 
     /**泡泡 balloon*/

@@ -20,6 +20,7 @@
                     {"style":"hook1","x":240,"y":100}
                 ],
 				"rope":{
+                    "hookIndex":[0],
 					"length":[
 						150
 					]
@@ -46,6 +47,7 @@
                     
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2],                    
 					"length":[
 						100,200,350
 					]
@@ -71,6 +73,7 @@
 					{"style":"hook1","x":240,"y":400}                    
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2],                    
 					"length":[
 						130,100,140
 					]
@@ -97,6 +100,7 @@
 					{"style":"hook1","x":240,"y":410}    
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2,3],                    
 					"length":[
 						160,160,160,160
 					]
@@ -121,6 +125,7 @@
                     {"style":"hook1","x":360,"y":450}
                 ],
 				"rope":{
+                    "hookIndex":[0,1],                    
 					"length":[
 						190,250
 					]
@@ -147,6 +152,7 @@
                     {"style":"hook1","x":240,"y":250}
                 ],
 				"rope":{
+                    "hookIndex":[0],                                        
 					"length":[
 						100
 					]
@@ -180,6 +186,7 @@
                     {"style":"hook1","x":240,"y":400}
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2,3,4,5],                                        
 					"length":[
 						145,145,145,145,145,145
 					]
@@ -205,6 +212,7 @@
                     {"style":"hook1","x":240,"y":400}
                 ],
 				"rope":{
+                    "hookIndex":[0,1],                                        
 					"length":[
 						150,150
 					]
@@ -233,6 +241,7 @@
 					{"style":"hook1","x":380,"y":450}
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2],                                        
 					"length":[
 						270,150,220
 					]
@@ -264,6 +273,7 @@
 					{"style":"hook2","x":320,"y":510,"size":90}                    
                 ],
 				"rope":{
+                    "hookIndex":[0],                                       
 					"length":[
 						80
 					]
@@ -294,6 +304,7 @@
                                         
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2],                                        
 					"length":[
 						150,100,100
 					]
@@ -321,6 +332,7 @@
                                         
                 ],
 				"rope":{
+                    "hookIndex":[0,1],                                        
 					"length":[
 						20,40
 					]
@@ -345,6 +357,7 @@
                     {"style":"hook1","x":250,"y":250}
                 ],
 				"rope":{
+                    "hookIndex":[0,1],                                        
 					"length":[
 						360,270
 					]
@@ -374,6 +387,7 @@
                     {"style":"hook2","x":240,"y":300,"size":150}                   
                 ],
 				"rope":{
+                    "hookIndex":[0,1],                                       
 					"length":[
 						150
 					]
@@ -408,6 +422,7 @@
 					{"style":"hook2","x":340,"y":400,"size":130}
                 ],
 				"rope":{
+                    "hookIndex":[0], 
 					"length":[
 						100
 					]
@@ -438,6 +453,7 @@
 					{"style":"hook1","x":240,"y":460}
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2,3], 
 					"length":[
 						140,185,185,200
 					]
@@ -468,6 +484,7 @@
 					{"style":"hook1","x":130,"y":350}
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2,3], 
 					"length":[
 						90,200,390,170
 					]
@@ -499,6 +516,7 @@
 					{"style":"hook1","x":400,"y":400}
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2,3,4], 
 					"length":[
 						180,195,220,250,220
 					]
@@ -528,6 +546,7 @@
 					{"style":"hook2","x":340,"y":600,"size":130}
                 ],
 				"rope":{
+                    "hookIndex":[0], 
 					"length":[
 						100
 					]
@@ -561,6 +580,7 @@
 					{"style":"hook2","x":340,"y":450,"size":130}
                 ],
 				"rope":{
+                    "hookIndex":[0,1], 
 					"length":[
 						130,130
 					]
@@ -591,6 +611,7 @@
 					{"style":"hook1","x":420,"y":600}
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2,3], 
 					"length":[
 						220,220,220,220
 					]
@@ -620,6 +641,7 @@
 					{"style":"hook1","x":240,"y":400}
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2], 
 					"length":[
 						165,165,160 
 					]
@@ -656,6 +678,7 @@
                     {"style":"hook1","x":420,"y":450}
                 ],
 				"rope":{
+                    "hookIndex":[0,1,2,3,4,5], 
 					"length":[
 						180,180,220,180,180,220
 					]
@@ -687,6 +710,7 @@
                     {"style":"hook3","x":388,"y":644}
                 ],
 				"rope":{
+                    "hookIndex":[0,1], 
 					"length":[
 						20,12
 					]
@@ -715,6 +739,7 @@
 					{"style":"hook2","x":305,"y":500,"size":100}
                 ],
 				"rope":{
+                    "hookIndex":[0,1], 
 					"length":[
 						120,120
 					]
@@ -3334,5 +3359,81 @@
 				]
             }
 		]
-	}
+    },
+    {
+        "mapWhere":"0-4",
+        "mapList":[
+                {
+                    "mapId":0,
+                    "width":750,
+                    "height":1334,
+                    "mapSkins":[
+                        "gameView/gameBg/boxBg_5.png"
+                    ],
+                    "candy":{"style":"candyOne","x":150,"y":350},
+                    "candy2":{"style":"candyTwo","x":330,"y":350},
+                    "star":[
+                        {"style":"star1","x":240,"y":200,"interval":70,"move":[]},
+                        {"style":"star1","x":240,"y":450,"interval":50,"move":[]},
+                        {"style":"star1","x":420,"y":120,"interval":100,"move":[]}
+                    ],
+                    "monster":{"x":233,"y":735,"skin":""},
+                    "hook":[
+                        {"style":"hook1","x":150,"y":250},
+                        {"style":"hook1","x":330,"y":250},
+                        {"style":"hook1","x":240,"y":300}                                        
+                    ],
+                    "rope":{
+                        "hookIndex":[0,2],
+                        "length":[
+                            110,110
+                        ]
+                    },
+                    "rope2":{
+                        "hookIndex":[1,2],                        
+                        "length":[
+                            110,110
+                        ]
+                    }
+                },
+                {
+                    "mapId":1,
+                    "width":750,
+                    "height":1334,
+                    "mapSkins":[
+                        "gameView/gameBg/boxBg_5.png"
+                    ],
+                    "candy":{"style":"candyOne","x":90,"y":499},
+                    "candy2":{"style":"candyTwo","x":399,"y":499},
+                    "star":[
+                        {"style":"star1","x":240,"y":272,"interval":70,"move":[]},
+                        {"style":"star1","x":240,"y":339,"interval":50,"move":[]},
+                        {"style":"star1","x":240,"y":592,"interval":100,"move":[]}
+                    ],
+                    "monster":{"x":240,"y":209.5,"skin":""},
+                    "hook":[
+                        {"style":"hook1","x":90,"y":305},
+                        {"style":"hook1","x":399,"y":305},
+                        {"style":"hook1","x":243,"y":400}                                        
+                    ],
+                    "rope":{
+                        "hookIndex":[0,2],
+                        "length":[
+                            180,150
+                        ]
+                    },
+                    "rope2":{
+                        "hookIndex":[1,2],                        
+                        "length":[
+                            180,150
+                        ]
+                    },
+                    "balloon":[
+                        {"x":139,"y":592},
+                        {"x":251,"y":592},
+                        {"x":351,"y":592}
+                    ]
+                }
+            ]
+        }
 ]

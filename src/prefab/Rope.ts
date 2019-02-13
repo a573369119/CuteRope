@@ -23,6 +23,8 @@ import Dic from "../Tool/dic";
     public arr_RemPos : Array<any>;
     /**所属hook类型 */
     public hookStyle : string;
+    /**hookIndex */
+    public hookIndex : number;
 
     constructor(view){
         this.isCuted = false;
@@ -57,6 +59,12 @@ import Dic from "../Tool/dic";
     {
         this.hookStyle = hookStyle;
         this.createRopeHook2(hookX,hookY,candyX,candyY);
+    }
+
+    /**碎开的糖果才需要 */
+    public setHookIndex(arr) : void
+    {
+        this.hookIndex = arr;
     }
 
     private createRopeHook2(hookX,hookY,candyX,candyY) : void
@@ -141,10 +149,6 @@ import Dic from "../Tool/dic";
             }
             this.ropePointsArray.push(ropePoint);
         }
-        // console.log(this.jointsArray);
-        // console.log(this.ropePointsArray);
-        // Laya.timer.loop(16,this,this.followPoint);
-        
     }
 
     rotateRopePoint():void{
@@ -309,7 +313,7 @@ import Dic from "../Tool/dic";
             point.sp.getComponents(Laya.BoxCollider)[0].density = 1;
         });
         
-        Laya.timer.loop(16,this,this.pointDestroy)
+        Laya.timer.loop(16,this,this.pointDestroy);
     }
 
     /**渐变 */

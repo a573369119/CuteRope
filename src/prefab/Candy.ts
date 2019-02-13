@@ -76,7 +76,8 @@ export default class Candy{
         for(let i=0; i<this.count;i++)
         {
             if(!this.arr_Sp[i]) this.arr_Sp[i]=new Laya.Sprite();//不存在 才新创建
-            this.arr_Sp[i].loadImage("gameView/candy.png");
+            this.arr_Sp[i].loadImage("gameView/" + this.style + ".png");
+            //图片区分
             this.arr_Sp[i].zOrder=GameConfig.ZORDER_CANDY;
             this.arr_Sp[i].scaleX = 1;
             this.arr_Sp[i].scaleY = 1;
@@ -380,5 +381,19 @@ export default class Candy{
                 sp.y += 0;
             })
         }
+    }
+
+    /**碎糖果接近 融合 candyOneSp是 arr_sp[0]   sprite*/
+    public CandytoOne(candyOneSp) : void
+    {///TO DO
+        let weldJoint = new Laya.WeldJoint();
+        weldJoint.otherBody = candyOneSp.getComponents(Laya.RigidBody)[0];
+        weldJoint.selfBody = this.arr_Body[0];
+        weldJoint.anchor = [candyOneSp.width/2,candyOneSp.height/2];
+        weldJoint.collideConnected = false;
+        candyOneSp.loadImage("gameView/candy.png");
+        this.arr_Sp[0].pos(candyOneSp.x,candyOneSp.y);
+        this.arr_Sp[0].visible = false;
+        this.arr_Sp[0].addComponentIntance(weldJoint);
     }
 }

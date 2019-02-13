@@ -48,6 +48,8 @@ export default class GamePage extends Laya.Scene{
     private isReplay : boolean;
     /**是否被蜘蛛吃掉 */
     private isEated : boolean;
+    /**是否已经融合，糖果合并 */
+    private isToOne : boolean;
     //----------------------------------------------
     /**地图配置 */
     private mapConfig : Config.MapConfig;
@@ -55,8 +57,12 @@ export default class GamePage extends Laya.Scene{
     public arr_Hook:Array<Hook>=new Array<Hook>();
     //绳子  需要重置
     public arr_Rope : Array<Rope>;
+    //绳子  碎糖果需要
+    public arr_Rope2 : Array<Rope>;
     //糖果  不需要重置
     public candy : Candy;
+    //糖果 碎了才需要
+    public candy2 : Candy;
     //*怪物 */
     public monster : Monster;
     /**星星 */
@@ -85,6 +91,8 @@ export default class GamePage extends Laya.Scene{
     //-------------------------------------------
     /**关卡绳子记录 */
     private arr_RemRope : Array<any>;
+    /**关卡绳子记录2 */
+    private arr_RemRope2 : Array<any>;
     /**得分记录 */
     private score : number;
     /**屏幕高度 */
@@ -139,6 +147,7 @@ export default class GamePage extends Laya.Scene{
         this.isOpenSuper = false;
         this.isReplay = false;
         this.isEated = false;
+        this.isToOne = false;
         Laya.Physics.I.gravity = {x:0,y:GameConfig.WOLDE_G};
         //界面 可视 初始化
         Laya.MouseManager.enabled = false;
@@ -280,7 +289,14 @@ export default class GamePage extends Laya.Scene{
         this.arr_Rope.forEach(rope => {//取消绳子中的定时器
             rope.clearTimer();
         });
+        if(this.arr_Rope2)
+        {
+            this.arr_Rope2.forEach(rope =>{
+                rope.clearTimer(); 
+            });
+        }
         this.candy.clearTimer();//取消糖果中的定时器
+        if(this.candy2) this.candy2.clearTimer();//取消糖果中的定时器
         if(this.arr_Balloon)//取消泡泡定时器
         {
             this.arr_Balloon.forEach(balloon=>{
@@ -391,6 +407,7 @@ export default class GamePage extends Laya.Scene{
                 this.afterCute();     
                 this.scene.ani1.visible = false; 
                 this.doorOpen.visible = false;//关闭动画层  
+                Laya.MouseManager.enabled = true;                
                 break;
             case 2://用胶带封住盒子
                 this.closeDoor();
@@ -423,6 +440,7 @@ export default class GamePage extends Laya.Scene{
         Laya.timer.loop(10,this,this.shooooo);
         this.score = 0;
         this.isEated = false;
+        this.isToOne = false;
         this.isReplay = true;
         this.showSocre();
         this.UpdateData(this.quarterIndex + "-" + this.boxIndex,this.cardIndex,false);
@@ -471,10 +489,12 @@ export default class GamePage extends Laya.Scene{
      /**需要初始化的数据 */
     private DataInit() {
         this.arr_RemRope = undefined;
+        this.arr_RemRope2 = undefined;
         this.isReplay = false;
         Laya.MouseManager.enabled = false;
         //设置是否被吃
         this.isEated = false;
+        this.isToOne = false;        
         //开门动画可是
         this.doorOpen.visible = true;
         this.doorOpen.img_xiaodao.visible = true;
@@ -516,7 +536,8 @@ export default class GamePage extends Laya.Scene{
         this.score = 0;
         this.doorOpen.visible = true;     
         this.isReplay = true;      
-        this.isEated = false;         
+        this.isEated = false; 
+        this.isToOne = false;                
         this.doorOpen.ani4.play(0,false);
         // this.doorOpen.img_xiaodao.y = 840;
         this.UpdateData(this.quarterIndex + "-" + this.boxIndex,this.cardIndex,false);
@@ -665,11 +686,11 @@ export default class GamePage extends Laya.Scene{
         //钩子
         this.hookInit(this.mapConfig.arr_Hook);
         //绳子数据初始化
-        this.ropeInit(this.mapConfig.arr_Rope,this.arr_Hook);
+        this.ropeInit(this.mapConfig.arr_Rope,this.mapConfig.arr_Rope2,this.arr_Hook);
         //星星数据初始化
         this.starInit(this.mapConfig.arr_Star);
         //糖果数据初始化
-        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.arr_Rope.length,this.mapConfig.arr_Knife,this.mapConfig.arr_Laser);
+        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.candyConfig2,this.mapConfig.arr_Rope.length,this.mapConfig.arr_Knife,this.mapConfig.arr_Laser);
         //泡泡数据初始化
         this.balloonInit(this.mapConfig.arr_Balloon);
         //帽子数据初始化
@@ -681,11 +702,13 @@ export default class GamePage extends Laya.Scene{
         //推力球数据初始化
         this.forceBallInit(this.mapConfig.arr_Forceball);
         //初始化开门动画
-        this.openDoorInit(this.mapConfig.arr_Rope);
+        this.openDoorInit(this.mapConfig.arr_Rope,this.mapConfig.arr_Rope2);
         //激光数据初始化
         this.laserInit(this.mapConfig.arr_Laser);
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
+        //绳子寻找破碎糖果
+        if(this.candy2) Laya.timer.loop(1,this,this.ropeToCandy2);        
         //割绳检测
         Laya.timer.loop(16,this,this.mouseCute);
         //糖果检测 
@@ -796,7 +819,6 @@ export default class GamePage extends Laya.Scene{
                 this.roadIndex++;
                 if(!this.screenRoad[this.roadIndex+1])
                 {
-
                     Laya.MouseManager.enabled = true;
                     Laya.timer.clear(this,this.runBg);
                     Laya.timer.loop(1,this,this.followCandy,[90]);
@@ -865,8 +887,8 @@ export default class GamePage extends Laya.Scene{
             followValue = this.screenHeight/2;
         }
         //**设置位置差 拖尾 */
-//跟随    0     
-if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-followValue)
+        //跟随    0     
+        if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-followValue)
         {
             this.scene.panel_GameWorld.y -= candyPosValue-followValue + this.scene.panel_GameWorld.y;
             if(this.mapHight + this.scene.panel_GameWorld.y <= this.screenHeight )
@@ -889,7 +911,76 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
 
         
     }
-
+    /**绳子寻找破碎糖果**/
+    private ropeToCandy2() : void
+    {
+        let obj : any = {};
+        let rope : Rope;
+        let add = 0;
+        let speContorl = 1;
+        let dic;
+        let speed  : number =  GameConfig.ROPE_TO_CANDY_SPEED ;
+        for(let i=0;i<this.arr_Rope2.length;i++)
+        {
+            rope = this.arr_Rope2[i];
+            dic = Math.sqrt(Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x - this.candy2.getCandySprite(0).x,2) + Math.pow(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y - this.candy2.getCandySprite(0).y,2));
+            if(rope.ropePointsArray[1].style == "hook3")
+            {//弹性绳子
+                if(dic < 200)
+                {//进入加速范围
+                    speContorl = 0.1;
+                }       
+                speed = GameConfig.ROPE_JUMP__TO_CANDY_SPEED; 
+            }
+            obj.x = speed/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy2.getCandySprite(0).x,this.candy2.getCandySprite(0).y,"cos");
+            obj.y = speed/speContorl * this.rotationDeal(rope.ropePointsArray[rope.ropePointsArray.length-1].sp.x,rope.ropePointsArray[rope.ropePointsArray.length-1].sp.y,this.candy2.getCandySprite(0).x,this.candy2.getCandySprite(0).y,"sin");
+            
+            rope.ropePointsArray[rope.ropePointsArray.length-1].body.setVelocity(obj);
+            // rope.ropePointsArray[rope.ropePointsArray.length - 1].body.applyForceToCenter({x:obj.x,y:obj.y});
+            if(dic < 15)
+            {
+                add++;
+            } 
+            speContorl = 1;
+        }
+        //检测绳子是否全部帮上    
+        if(add == this.arr_Rope2.length)
+        {
+            Laya.timer.clear(this,this.ropeToCandy2);
+            //连接糖果
+            for(let i=0;i<this.arr_Rope2.length;i++)
+            {
+                
+                this.arr_Rope2[i].connectCandy(this.candy2,i);
+                this.arr_Rope2[i].ropePointsArray[this.arr_Rope2.length - 1].sp.getComponents(Laya.RigidBody)[0].setVelocity({x:0,y:0});
+                if(this.arr_Spider)
+                {
+                     this.arr_Spider.forEach(spider => {
+                         if(spider.sp.x <= this.arr_Rope2[i].ropePointsArray[0].sp.x+1&&spider.sp.x >= this.arr_Rope2[i].ropePointsArray[0].sp.x-1 && spider.sp.y >= this.arr_Rope2[i].ropePointsArray[0].sp.y-1 && spider.sp.y <= this.arr_Rope2[i].ropePointsArray[0].sp.y+1)
+                         {
+                             if(!spider.candy)
+                                 spider.foundCandy(this.arr_Rope2[i],this.candy2,true);
+                             else
+                             {
+                                 spider.foundCandy(this.arr_Rope2[i],this.candy2,false);                            
+                             }
+                         }   
+                     });
+                }
+             }
+             this.candy2.set("useg");
+            //获取记录位置信息
+            for(let z=0 ;z <this.arr_Rope2.length;z++)
+            {
+                if(this.arr_RemRope2 === undefined) 
+                {
+                    this.arr_RemRope2 = new Array<any>();
+                }
+                this.arr_RemRope2.push(this.arr_Rope2[z].getRemRope());
+            }
+        }
+                
+    }
    /**ropeToCandy */
    private ropeToCandy() : void
    {
@@ -1003,7 +1094,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
         this.doorOpen.ani1.play(0, false);
         this.doorOpen.img_xiaodao.y = -339;
         this.doorOpen.img_xiaodao.visible = false;
-        Laya.MouseManager.enabled = true;
+        // Laya.MouseManager.enabled = true;
         if(this.mapHight > this.screenHeight || this.mapWidth > 480)
         {
             //关闭鼠标事件
@@ -1021,8 +1112,8 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
     }
 
     /**开门动画初始化 */
-    private openDoorInit(arr_Rope) : void
-    {
+    private openDoorInit(arr_Rope,arr_Rope2) : void
+    {// TO DO
         this.maxLongIndex = 0;
         this.maxLongRope = Math.sqrt(Math.pow(this.arr_Rope[0].ropePointsArray[this.arr_Rope[0].ropePointsArray.length-1].sp.x - this.candy.getCandySprite(0).x,2) + Math.pow(this.arr_Rope[0].ropePointsArray[this.arr_Rope[0].ropePointsArray.length-1].sp.y - this.candy.getCandySprite(0).y,2));
         for(let i=0;i<arr_Rope.length;i++)
@@ -1034,8 +1125,8 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                 this.maxLongRope = dic;
             }
         }    
-        
     }
+
   /**蜘蛛数据初始化 */
   private spiderInit(arr_Spider) : void
   {
@@ -1115,7 +1206,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
     }
     
     /**糖果数据初始化 */
-    private candyInit(candyConfig,num,arr_Knife,arr_Laser) : void
+    private candyInit(candyConfig,candyConfig2,num,arr_Knife,arr_Laser) : void
     {
         if(!this.candy) 
         {
@@ -1132,6 +1223,25 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
             /**-------是否初始化糖果碎片----- */
             if(arr_Knife[0]||arr_Laser[0]){
                 this.candy.createCandyApart();
+            }
+        }
+        ////////////第二个糖果初始化
+        if(!candyConfig2) {this.isToOne = true;return;}//没有糖果二，就默认为已经融合了。
+        if(!this.candy2) 
+        {
+            this.candy2 = new Candy(this.scene.panel_GameWorld);
+            this.candy2.init({"x":candyConfig2.candy_X,"y":candyConfig2.candy_Y,"style":candyConfig2.style},num);
+            /**-------是否初始化糖果碎片----- */
+            if(arr_Knife[0]||arr_Laser[0]){
+                this.candy2.createCandyApart();
+            }
+        }
+        else
+        {
+            this.candy2.update({"x":candyConfig2.candy_X,"y":candyConfig2.candy_Y,"style":candyConfig2.style},num);
+            /**-------是否初始化糖果碎片----- */
+            if(arr_Knife[0]||arr_Laser[0]){
+                this.candy2.createCandyApart();
             }
         }
         // Laya.timer.loop(500,this,function(){
@@ -1163,29 +1273,61 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
     }
     
     /**绳子数据初始化 */
-    private ropeInit(arr_Rope,arr_Hook) : void
+    private ropeInit(arr_Rope,arr_Rope2,arr_Hook) : void
     {
         let rope : Rope;
+        let hIndex : number; 
         this.arr_Rope = new Array<Rope>();
+        ///普通rope
         for(let i=0; i<arr_Rope.length; i++)
         {
             rope = new Rope(this.scene.panel_GameWorld);
-            if(this.arr_RemRope === undefined|| this.arr_Hook[i].style == "hook3")
+            if(this.arr_RemRope === undefined || this.arr_Hook[arr_Rope[i].hookIndex].style == "hook3")
             {
-                rope.init(arr_Hook[i].hook_X,arr_Hook[i].hook_Y,arr_Rope[i].num,arr_Hook[i].style);
+                rope.setHookIndex(arr_Rope[i].hookIndex);//铆钉节点
+                rope.init(arr_Hook[rope.hookIndex].hook_X,arr_Hook[rope.hookIndex].hook_Y,arr_Rope[i].num,arr_Hook[rope.hookIndex].style);
             }
             else
             {
-                rope.rePlay(this.arr_RemRope[i],arr_Hook[i].style);
+                //TO DO
+                rope.rePlay(this.arr_RemRope[i],arr_Hook[arr_Rope[i].hookIndex].style);
             }
             this.arr_Rope.push(rope);
             // rope.ropePointsArray[0].isCanMove(arr_Hook[i]);
         }
+        ///碎糖果需求的绳子
+        if(arr_Rope2)
+        {
+            this.arr_Rope2 = new Array<Rope>();
+            for(let i=0; i<arr_Rope2.length; i++)
+            {
+            rope = new Rope(this.scene.panel_GameWorld);
+            if(this.arr_RemRope2 === undefined|| this.arr_Hook[arr_Rope2[i].hookIndex].style == "hook3")
+            {
+                rope.setHookIndex(arr_Rope2[i].hookIndex);
+                rope.init(arr_Hook[rope.hookIndex].hook_X,arr_Hook[rope.hookIndex].hook_Y,arr_Rope2[i].num,arr_Hook[rope.hookIndex].style);
+            }
+            else
+            {
+                rope.rePlay(this.arr_RemRope2[i],arr_Hook[arr_Rope2[i].hookIndex].style);
+            }
+            this.arr_Rope2.push(rope);
+            }
+        }
+        //滑动条需要绑定绳子
         for(let i = 0; i< arr_Rope.length;i++)
         {
+            
             if(this.arr_Hook[i].length)
             {
                 this.arr_Hook[i].setRopePoint(this.arr_Rope[i].ropePointsArray[0]);
+            }
+        }
+        for(let i = 0; i< arr_Rope2.length;i++)
+        {
+            if(this.arr_Hook[i].length)
+            {
+                this.arr_Hook[i].setRopePoint(this.arr_Rope2[i].ropePointsArray[0]);
             }
         }
         
@@ -1253,6 +1395,19 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                 this.arr_ForceBall[i] = new ForceBall(this.scene.panel_GameWorld);
                 this.arr_ForceBall[i].init({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
                 this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
+            }
+            //碎糖果的推力球注册
+            if(!this.candy2) return;
+            if(this.arr_ForceBall[i])
+            {
+                this.arr_ForceBall[i].update({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
+                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy2,this.arr_Balloon]);
+            }
+            else
+            {
+                this.arr_ForceBall[i] = new ForceBall(this.scene.panel_GameWorld);
+                this.arr_ForceBall[i].init({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
+                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy2,this.arr_Balloon]);
             }
         }
         console.log(this.arr_ForceBall);
@@ -1322,30 +1477,48 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
     /***糖果检测*/
     private candyTest() : void
     {
+        //x 
         let x = this.candy.arr_Sp[0].x;
         let y = this.candy.arr_Sp[0].y;
         // console.log(x + "," + y);
-        //与怪物的距离检测
+        //与怪物的距离检测 - 碎糖果已处理 没测试
         this.testMonster(x,y);
-        //与边界的距离检测
+        //与边界的距离检测 - 碎糖果已处理 没测试
         this.testStage(x,y);
-        //与星星的距离检测
+        //与星星的距离检测 - 碎糖果已处理 没测试
         this.testStars(x,y);
-        //与泡泡的距离检测
+        //与泡泡的距离检测 - 碎糖果已处理 没测试
         this.testBalloon(x,y);
-        //与帽子的距离检测
+        //与帽子的距离检测 - 碎糖果已处理 没测试
         this.testHat(x,y);
-        //与hook道具的检测
+        //与hook道具的检测 - 碎糖果已处理 没测试
         this.testHook(x,y);
-        //与锥子的距离检测
+        //与锥子的距离检测 - 碎糖果已处理 没测试 
         this.testKnife(x,y);
-        //与推力球的距离检测
+        //与推力球的距离检测 - 碎糖果已处理 没测试
         this.testForceBall(x,y);
-        //与激光的距离检测
+        //与激光的距离检测  - 碎糖果已处理 没测试
         this.testLaser(x,y);
-        //与鼠标的距离检测 - 超能力
+        //与鼠标的距离检测 - 超能力 - 碎糖果已处理
         this.testSuper(x,y);
+        //碎糖果与碎糖果的距离检测 
+        if(this.candy2) this.testCandyAndCandy(x,y);
         // console.log(this.candy.isExistBalloon);
+    }
+
+    /**碎糖果与碎糖果的距离检测 */
+    private testCandyAndCandy(x,y) : void
+    {
+        let candyOneX = x + this.scene.panel_GameWorld.x;
+        let candyOneY = y + this.scene.panel_GameWorld.y;
+        let candyTwoX = this.candy2.arr_Sp[0].x + this.scene.panel_GameWorld.x;
+        let candyTwoY = this.candy2.arr_Sp[0].y + this.scene.panel_GameWorld.y;
+        let dic = this.countDic_Object({x:candyOneX,y:candyOneY},{x:candyTwoX,y:candyTwoY});
+        if(dic < 25 && this.isToOne == false)
+        {//合并
+            this.candy2.CandytoOne(this.candy.arr_Sp[0]);
+            this.isToOne = true;        
+        }
     }
 
     /** 超能力 */
@@ -1361,11 +1534,30 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
             let vX = GameConfig.SUPER_V * this.rotationDeal(mX,mY,x,y,"cos");
             let vY = GameConfig.SUPER_V * this.rotationDeal(mX,mY,x,y,"sin");   
             this.candy.superSetV(vX,vY);
+            if(this.candy2) 
+            {
+                vX = GameConfig.SUPER_V * this.rotationDeal(mX,mY,this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y,"cos");
+                vY = GameConfig.SUPER_V * this.rotationDeal(mX,mY,this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y,"sin");
+                this.candy2.superSetV(vX,vY);
+            }
         }
     }
 
     /** 与hook道具的检测*/
     private testHook(x,y) : void//Hook2
+    {
+        this.testPublicHook(this.candy);
+        if(this.candy2)this.testPublicHook(this.candy2);    
+        // for(let i = 0; i< this.arr_Hook.length ; i++)
+        // {
+        //     if(this.arr_Hook[i].style=="hookslider"){
+        //         this.arr_Rope[i].ropePointsArray[0].sp.pos(this.arr_Hook[i].sp.x,this.arr_Hook[i].sp.y);
+        //     }
+        // }
+    }
+
+    /** 与Hook的检测 */
+    private testPublicHook(candy) : void
     {
         let dic;
         let rope : Rope;
@@ -1374,21 +1566,21 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
             if(this.arr_Hook[i].style != "hook2") continue;
             if(this.arr_Hook[i].isCreate == true) continue;
             //hook逻辑
-            dic = this.countDic_Object({"x":x,"y":y},{"x":this.arr_Hook[i].sp.x,'y':this.arr_Hook[i].sp.y});
+            dic = this.countDic_Object({"x":candy.arr_Sp[0].x,"y":candy.arr_Sp[0].y},{"x":this.arr_Hook[i].sp.x,'y':this.arr_Hook[i].sp.y});
             if(dic < this.arr_Hook[i].size)
             {//创建绳子
                 rope = new Rope(this.scene.panel_GameWorld);
-                rope.initRopeHook2(this.arr_Hook[i].sp.x,this.arr_Hook[i].sp.y,x,y);
+                rope.initRopeHook2(this.arr_Hook[i].sp.x,this.arr_Hook[i].sp.y,candy.arr_Sp[0].x,candy.arr_Sp[0].y);
                 this.arr_Hook[i].isCreate = true;
                 this.arr_Rope.push(rope);
-                rope.connectCandy(this.candy,-1);
+                rope.connectCandy(candy,-1);
                 if(this.arr_Spider)
                 {
                     this.arr_Spider.forEach(spider =>{
                         if(spider.sp.x == this.arr_Hook[i].sp.x && spider.sp.y == this.arr_Hook[i].sp.y)
                         {
                             console.log("有怪物！！");
-                            spider.foundCandy(rope,this.candy);
+                            spider.foundCandy(rope,candy);
                         }
                     });
                 }
@@ -1398,39 +1590,35 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
 
         }
         
-        // for(let i = 0; i< this.arr_Hook.length ; i++)
-        // {
-        //     if(this.arr_Hook[i].style=="hookslider"){
-        //         this.arr_Rope[i].ropePointsArray[0].sp.pos(this.arr_Hook[i].sp.x,this.arr_Hook[i].sp.y);
-        //     }
-        // }
     }
-
     /** 与星星的距离检测*/
     private testStars(x,y) : void
     {
+        this.candyTestStar(this.candy);
+        if(this.candy2) this.candyTestStar(this.candy2);
+    }
+
+    /** 与星星的距离检测  已添加碎糖果*/    
+    private candyTestStar(candy) : void
+    {
         let dic;
-        // console.log(this.arr_star);
         this.arr_Star.forEach(star => {
-            // console.log(star);
-            if(!star.isDestroy)
-            {
-                dic = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":star.sp.x,'y':star.sp.y});
-                // console.log(dic);
-                if(dic < (star.sp.width))
-                {
+            if (!star.isDestroy) {
+                dic = this.countDic_Object({ "x": candy.arr_Sp[0].x, "y": candy.arr_Sp[0].y }, { "x": star.sp.x, 'y': star.sp.y });
+                if (dic < (star.sp.width)) {
                     star.starDestroy(star.style);
-                    this.monster.monsterAction(GameConfig.ANI_MONSTER_HAPPYE,false);
+                    this.monster.monsterAction(GameConfig.ANI_MONSTER_HAPPYE, false);
                     this.score++;
                     this.showSocre();
                 }
             }
         });
     }
-    
-    /**与怪物的距离检测 */
+
+    /**与怪物的距离检测 碎糖果已处理*/
     private testMonster(x,y) : void
     {
+        if(!this.isToOne) return; //没有融合就不用检测
         if(this.isEated) return;
         let dic = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":this.monster.x,'y':this.monster.y});
         if(dic<GameConfig.MONSTER_EAT_DIC)
@@ -1473,123 +1661,125 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
     private testBalloon(x,y):void{
         if(!this.arr_Balloon) return;
         //检测与糖果得距离，碰撞到则启动泡泡效果,在GamePage中开启此检测方法，obj1为糖果的sprite
+        this.balloonPublicTest(this.candy);
+        if(this.candy2) this.balloonPublicTest(this.candy2);
+    }
+    /**处理泡泡碰撞逻辑 - 通用*/
+    private balloonPublicTest(candy) {
         let dic;
         this.arr_Balloon.forEach(balloon => {
-            if(!balloon.isCollision)
-            {
-                dic = this.countDic_Object({"x":this.candy.arr_Sp[0].x,"y":this.candy.arr_Sp[0].y},{"x":balloon.sp.x,'y':balloon.sp.y});
-                if(dic < balloon.sp.width/2 + 10)
-                {
-                    balloon.isCollision=true;
+            if (!balloon.isCollision) {
+                dic = this.countDic_Object({ "x": candy.arr_Sp[0].x, "y": candy.arr_Sp[0].y }, { "x": balloon.sp.x, 'y': balloon.sp.y });
+                if (dic < balloon.sp.width / 2 + 10) {
+                    balloon.isCollision = true;
                     //检测是否有其他泡泡与糖果相撞
-                    if(this.candy.isExistBalloon){
+                    if (candy.isExistBalloon) {
                         balloon.balloon_Boom();
-                    }else{
-                        this.candy.isExistBalloon=true;
-                        balloon.sp.alpha=0;
-                        balloon.anim1.visible=true;
-                        balloon.anim1.play(0,true);                  
-                        Laya.timer.frameLoop(1,balloon,balloon.balloon_Float,[this.candy.arr_Sp[0],this.candy.arr_Body]);                   
-                        balloon.sp.on(Laya.Event.MOUSE_DOWN,balloon,balloon.balloon_ClickBoom,[this.candy]);                    
-                    }        
-                    
-                    
-                    
+                    }
+                    else {
+                        candy.isExistBalloon = true;
+                        balloon.sp.alpha = 0;
+                        balloon.anim1.visible = true;
+                        balloon.anim1.play(0, true);
+                        Laya.timer.frameLoop(1, balloon, balloon.balloon_Float, [candy.arr_Sp[0], candy.arr_Body]);
+                        balloon.sp.on(Laya.Event.MOUSE_DOWN, balloon, balloon.balloon_ClickBoom, [candy]);
+                    }
                 }
             }
         });
-        
     }
+
     /**与魔法帽的检测 **/
     private testHat(x,y) : void
     {
         if(!this.arr_MagicHat) return;        
         
+        this.testPublicTest(this.candy);
+        if(this.candy2) this.testPublicTest(this.candy2);
+        
+    }
+    /**魔法帽的检测  通用*/
+    private testPublicTest(candy) {
         this.arr_MagicHat.forEach(magicHat => {
-            let collide1=magicHat.sp1.hitTestPoint(this.candy.arr_Sp[0].x+ this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y+ this.scene.panel_GameWorld.y);
-            let collide2=magicHat.sp2.hitTestPoint(this.candy.arr_Sp[0].x+ this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y+ this.scene.panel_GameWorld.y);
+            let collide1 = magicHat.sp1.hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x, candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
+            let collide2 = magicHat.sp2.hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x, candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
             //如果糖果未与这对帽子的任意一个碰撞
-            if(!collide1&&!collide2){
-                magicHat.isCollision=false;
+            if (!collide1 && !collide2) {
+                magicHat.isCollision = false;
             }
             //检测是否与这对帽子的任意一个碰撞
-            if(collide1){
+            if (collide1) {
                 //碰撞到了，但是检测时否还在另一个帽子的检测范围内
-                if(!magicHat.isCollision){   
+                if (!magicHat.isCollision) {
                     //检测帽子碰撞的方向，若与帽子口相反，则不进行糖果位移
-                    if(((Math.cos(magicHat.sp1.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&magicHat.rotate1==0)||
-                        (Math.cos(magicHat.sp1.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&magicHat.rotate1==0))
-                    || ((Math.cos(magicHat.sp1.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&magicHat.rotate1!=0)||
-                        (Math.cos(magicHat.sp1.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&magicHat.rotate1!=0))){                           
-                            //断开joint
-                        this.candy.candyDestroyJoint();
+                    if (((Math.cos(magicHat.sp1.rotation / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && magicHat.rotate1 == 0) ||
+                        (Math.cos(magicHat.sp1.rotation / 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && magicHat.rotate1 == 0))
+                        || ((Math.cos(magicHat.sp1.rotation / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && magicHat.rotate1 != 0) ||
+                            (Math.cos(magicHat.sp1.rotation / 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && magicHat.rotate1 != 0))) {
+                        //断开joint
+                        candy.candyDestroyJoint();
                         this.arr_Rope.forEach(rope => {
-                            if(!rope.isCuted)
-                            {
+                            if (!rope.isCuted) {
                                 rope.ropeJointDestroy();
                             }
                         });
-                         //设置速度 -----测试-----                  
-                         let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));                    
+                        //设置速度 -----测试-----                  
+                        let velocity = Math.sqrt(Math.pow(candy.arr_Body[0].linearVelocity.x, 2) + Math.pow(candy.arr_Body[0].linearVelocity.y, 2));
                         //使小球换位置出现的方法
-                         for(let i=0;i<this.candy.arr_Sp.length;i++){                            
+                        for (let i = 0; i < candy.arr_Sp.length; i++) {
                             //根据帽子锚点位置调整距离
-                            if(magicHat.rotate2==0){
-                                this.candy.arr_Sp[i].pos(magicHat.sp2.x,magicHat.sp2.y);   
-                            }else{
-                                this.candy.arr_Sp[i].pos(magicHat.sp2.x+Math.sin((magicHat.sp2.rotation+180)/180*Math.PI)*(Math.abs(magicHat.rotate2)+magicHat.sp2.height/2),magicHat.sp2.y-Math.cos((magicHat.sp2.rotation+180)/180*Math.PI)*(Math.abs(magicHat.rotate2)+magicHat.sp2.height/2)); 
-                            }   
-                            this.candy.arr_Body[i].setVelocity({x:0,y:0});
-                        this.candy.arr_Body[i].setVelocity({x:Math.sin(magicHat.rotation2/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation2/180*Math.PI)*velocity});
-                        }
-                      
-                        magicHat.isCollision=true;
-                    
-                       }
-                }else{
-                     magicHat.isCollision=true;
-                }    
-                
-            }  
-            if(collide2){
-                if(!magicHat.isCollision){
-                    if(((Math.cos(magicHat.sp2.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&!magicHat.rotate2[0])||
-                        (Math.cos(magicHat.sp2.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&!magicHat.rotate2[0]))
-                    || ((Math.cos(magicHat.sp2.rotation/180*Math.PI)>=0&&this.candy.arr_Body[0].linearVelocity.y<=0&&magicHat.rotate2[0])||
-                        (Math.cos(magicHat.sp2.rotation/180*Math.PI)<=0&&this.candy.arr_Body[0].linearVelocity.y>=0&&magicHat.rotate2[0]))){
-                        //断裂joint
-                        this.candy.candyDestroyJoint();
-                        this.arr_Rope.forEach(rope => {
-                            if(!rope.isCuted)
-                            {
-                                rope.ropeJointDestroy();
+                            if (magicHat.rotate2 == 0) {
+                                candy.arr_Sp[i].pos(magicHat.sp2.x, magicHat.sp2.y);
                             }
-                        });
-                        let velocity=Math.sqrt(Math.pow(this.candy.arr_Body[0].linearVelocity.x,2)+Math.pow(this.candy.arr_Body[0].linearVelocity.y,2));
-                        //使小球换位置出现的方法
-                        for(let i=0;i<this.candy.arr_Sp.length;i++){
-                            //根据帽子锚点位置调整距离
-                            if(magicHat.rotate1==0){
-                                this.candy.arr_Sp[i].pos(magicHat.sp1.x,magicHat.sp1.y);   
-                                this.candy.arr_Body[i].setVelocity({x:0,y:0});
-                                this.candy.arr_Body[i].setVelocity({x:Math.sin(magicHat.rotation1/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation1/180*Math.PI)*velocity});
-                            }else{
-                                this.candy.arr_Sp[i].pos(magicHat.sp1.x+Math.sin((magicHat.sp1.rotation+180)/180*Math.PI)*(Math.abs(magicHat.rotate1)+magicHat.sp1.height/2),magicHat.sp1.y-Math.cos((magicHat.sp1.rotation+180)/180*Math.PI)*(Math.abs(magicHat.rotate1)+magicHat.sp1.height/2)); 
-                                this.candy.arr_Body[i].setVelocity({x:0,y:0});
-                                this.candy.arr_Body[i].setVelocity({x:Math.sin(magicHat.rotation1/180*Math.PI)*velocity,y:-Math.cos(magicHat.rotation1/180*Math.PI)*velocity});
+                            else {
+                                candy.arr_Sp[i].pos(magicHat.sp2.x + Math.sin((magicHat.sp2.rotation + 180) / 180 * Math.PI) * (Math.abs(magicHat.rotate2) + magicHat.sp2.height / 2), magicHat.sp2.y - Math.cos((magicHat.sp2.rotation + 180) / 180 * Math.PI) * (Math.abs(magicHat.rotate2) + magicHat.sp2.height / 2));
                             }
-                            
-                        }             
-                        
-                        
-                        magicHat.isCollision=true;
-                        }else{
-                            magicHat.isCollision=true;
+                            candy.arr_Body[i].setVelocity({ x: 0, y: 0 });
+                            candy.arr_Body[i].setVelocity({ x: Math.sin(magicHat.rotation2 / 180 * Math.PI) * velocity, y: -Math.cos(magicHat.rotation2 / 180 * Math.PI) * velocity });
                         }
+                        magicHat.isCollision = true;
+                    }
                 }
-            }      
+                else {
+                    magicHat.isCollision = true;
+                }
+            }
+            if (collide2) {
+                if (!magicHat.isCollision) {
+                    if (((Math.cos(magicHat.sp2.rotation / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && !magicHat.rotate2[0]) ||
+                        (Math.cos(magicHat.sp2.rotation / 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && !magicHat.rotate2[0]))
+                        || ((Math.cos(magicHat.sp2.rotation / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && magicHat.rotate2[0]) ||
+                            (Math.cos(magicHat.sp2.rotation / 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && magicHat.rotate2[0]))) {
+                        //断裂joint
+                        candy.candyDestroyJoint();
+                        this.arr_Rope.forEach(rope => {
+                            if (!rope.isCuted) {
+                                rope.ropeJointDestroy();
+                            }
+                        });
+                        let velocity = Math.sqrt(Math.pow(candy.arr_Body[0].linearVelocity.x, 2) + Math.pow(candy.arr_Body[0].linearVelocity.y, 2));
+                        //使小球换位置出现的方法
+                        for (let i = 0; i < candy.arr_Sp.length; i++) {
+                            //根据帽子锚点位置调整距离
+                            if (magicHat.rotate1 == 0) {
+                                candy.arr_Sp[i].pos(magicHat.sp1.x, magicHat.sp1.y);
+                                candy.arr_Body[i].setVelocity({ x: 0, y: 0 });
+                                candy.arr_Body[i].setVelocity({ x: Math.sin(magicHat.rotation1 / 180 * Math.PI) * velocity, y: -Math.cos(magicHat.rotation1 / 180 * Math.PI) * velocity });
+                            }
+                            else {
+                                candy.arr_Sp[i].pos(magicHat.sp1.x + Math.sin((magicHat.sp1.rotation + 180) / 180 * Math.PI) * (Math.abs(magicHat.rotate1) + magicHat.sp1.height / 2), magicHat.sp1.y - Math.cos((magicHat.sp1.rotation + 180) / 180 * Math.PI) * (Math.abs(magicHat.rotate1) + magicHat.sp1.height / 2));
+                                candy.arr_Body[i].setVelocity({ x: 0, y: 0 });
+                                candy.arr_Body[i].setVelocity({ x: Math.sin(magicHat.rotation1 / 180 * Math.PI) * velocity, y: -Math.cos(magicHat.rotation1 / 180 * Math.PI) * velocity });
+                            }
+                        }
+                        magicHat.isCollision = true;
+                    }
+                    else {
+                        magicHat.isCollision = true;
+                    }
+                }
+            }
         });
-        
     }
 
     /**与锥子的距离检测 */
@@ -1597,62 +1787,76 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
         if(!this.arr_Knife) return;
         if(this.isOpenSuper) return;
         //检测与锥子得距离，碰撞到则播放哭泣动画结束游戏,在GamePage中开启此检测方法
-        let collide;
-        this.arr_Knife.forEach(knife => {
-            if(!knife.isCollision)
-            {
-                // collide=knife.sp.hitTestPoint(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y - this.scene.panel_GameWorld.y);
-                // 
-                collide=knife.knife.hitTestPoint(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
-                if(collide)
-                {
-                    knife.isCollision=true;
-                    //糖果破碎
-                    this.candy.becomeApart(this.candy.arr_Sp[0].x ,this.candy.arr_Sp[0].y );
-                    this.failGame();
-            }
-        }
-        });
+        this.testPublicKnife(this.candy);
+        if(this.candy2) this.testPublicKnife(this.candy2);
+
     }
     
+    private testPublicKnife(candy) {
+        let collide;
+        this.arr_Knife.forEach(knife => {
+            if (!knife.isCollision) {
+                // collide=knife.sp.hitTestPoint(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y - this.scene.panel_GameWorld.y);
+                // 
+                collide = knife.knife.hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
+                if (collide) {
+                    knife.isCollision = true;
+                    //糖果破碎
+                    candy.becomeApart(candy.arr_Sp[0].x, candy.arr_Sp[0].y);
+                    this.failGame();
+                }
+            }
+        });
+    }
+
     private testForceBall(x,y){
         if(!this.arr_ForceBall) return;
         //检测糖果是否进入推力球检测区域，若在区域内点击推力球触发推力功能
+        this.testPublicForceBall(this.candy);
+        this.testPublicForceBall(this.candy2);
+    }
+
+    private testPublicForceBall(candy) {
         let collide;
-        this.arr_ForceBall.forEach(forceball=>{
+        this.arr_ForceBall.forEach(forceball => {
             // console.log(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x);
-            collide=forceball.spRect.hitTestPoint(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
-            if(collide){
-                forceball.isApplyForce=true;    
-                console.log(forceball.clickCount);           
-            }else{
-                forceball.isApplyForce=false;
-                forceball.clickCount=0;
+            collide = forceball.spRect.hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x, candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
+            if (collide) {
+                forceball.isApplyForce = true;
+                // console.log(forceball.clickCount);
             }
-        })
+            else {
+                forceball.isApplyForce = false;
+                forceball.clickCount = 0;
+            }
+        });
     }
 
     private testLaser(x,y){
         if(!this.arr_Laser) return;
         //检测糖果是否进入激光检测区域，若在区域内则糖果破裂
+        this.testPublicLaser(this.candy);
+        this.testPublicLaser(this.candy2);
+    }
+
+    private testPublicLaser(candy) {
         let collide;
-        this.arr_Laser.forEach(laser=>{
-            if(!laser.isCollision){
-                collide=laser.spRect.hitTestPoint(this.candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,this.candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
-                if(!laser.isAdvanceLaser){
-                    if(collide){
-                        laser.isCollision=true;
+        this.arr_Laser.forEach(laser => {
+            if (!laser.isCollision) {
+                collide = laser.spRect.hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x, candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
+                if (!laser.isAdvanceLaser) {
+                    if (collide) {
+                        laser.isCollision = true;
                         //糖果破碎
-                        this.candy.becomeApart(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
-                        this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
-                        Laya.timer.once(1250,this,this.onReGame);
+                        candy.becomeApart(candy.arr_Sp[0].x, candy.arr_Sp[0].y);
+                        this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD, false);
+                        Laya.timer.once(1250, this, this.onReGame);
                     }
                 }
-            
             }
-            
-        })
+        });
     }
+
     /**显示菜单 */
     private showMenu() : void
     {
@@ -1669,34 +1873,48 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
     {
         if(this.isOpenSuper)
         {
-            // if(this.candy.arr_Sp[0].getComponents(Laya.RigidBody)) return;
             let candy = this.candy.arr_Sp[0].getComponents(Laya.RigidBody)[0] as Laya.RigidBody;
-            if(y>this.mapHight)
-            {
-                candy.applyLinearImpulseToCenter({x:0,y:-4});
-            }
-            if(y<10)
-            {
-                candy.applyLinearImpulseToCenter({x:0,y:4});
-            }
-            if(x<10)
-            {
-                candy.applyLinearImpulseToCenter({x:4,y:0});
-            }
-            if(x>this.mapWidth)
-            {
-                candy.applyLinearImpulseToCenter({x:-4,y:0}); 
-            }
+            this.superPower(y, candy, x);
+            let candy2 = this.candy2.arr_Sp[0];          
+            this.superPower(candy2.y,candy2.getComponents(Laya.RigidBody)[0],candy2.x);
         }
         else if(y<-200||y>this.mapHight)
         {
-            console.log("游戏失败");
-            this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD,false);
-            // Laya.timer.onc;
-            Laya.timer.clear(this,this.candyTest);
-            this.onReGame();
+            this.candyFall();
         }
-    } 
+        else if(this.candy2)
+        {//碎糖果的边界检测
+            if(this.candy2.arr_Sp[0].y<-200 || this.candy2.arr_Sp[0].y>this.mapHight)
+            {
+                this.candyFall();
+            }
+        }
+    }
+    
+    /**超能力效果 */
+    private superPower(y: any, candy: Laya.RigidBody, x: any) {
+        if (y > this.mapHight) {
+            candy.applyLinearImpulseToCenter({ x: 0, y: -4 });
+        }
+        if (y < 10) {
+            candy.applyLinearImpulseToCenter({ x: 0, y: 4 });
+        }
+        if (x < 10) {
+            candy.applyLinearImpulseToCenter({ x: 4, y: 0 });
+        }
+        if (x > this.mapWidth) {
+            candy.applyLinearImpulseToCenter({ x: -4, y: 0 });
+        }
+    }
+
+    /**糖果掉落出边界，游戏失败重开 */
+    private candyFall() {
+        console.log("游戏失败");
+        this.monster.monsterAction(GameConfig.ANI_MONSTER_SAD, false);
+        Laya.timer.clear(this, this.candyTest);
+        this.onReGame();
+    }
+
 ///////////////////////////////////////mouseCute
     private mouseCute() : void
     {
@@ -1708,7 +1926,6 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                 isDown = false;
             }
         }
-        
         if(this.isMouseDown && isDown) 
         {
             let mX = Laya.stage.mouseX - this.scene.panel_GameWorld.x;
@@ -1724,78 +1941,87 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
                 dic = this.countDic_Object({x:this.lastMousePos.x,y:this.lastMousePos.y},{x:mX,y:mY});
                 // console.log("dic::" + Math.floor(dic));
             }
-            this.arr_Rope.forEach(Rope => {
-                if(!Rope.isCuted)
-                {
-                    for(let i=0;i<Rope.ropePointsArray.length;i++)
-                    {
-                        let ropePoint = Rope.ropePointsArray[i];
-                        let f:any = {};
-                        let s:any ={};
-                        let count : number = 1;
-                        f.x = ropePoint.sp.x;
-                        f.y = ropePoint.sp.y;
-                        if(dic)//计算需求数量
-                        {
-                            count = count + Math.floor(dic/25);
-                            // console.log("pointCount::" + Math.floor(dic));
-                        }
-                        for(let z = 0; z<count ; z++)//循环检测
-                        {
-                            if(z == count - 1)//最后一个鼠标点
-                            {
-                                s.x = mX;
-                                s.y = mY; 
-                            }
-                            else//其他点
-                            {
-                                s.x = this.lastMousePos.x + cos * z * 25;
-                                s.y = this.lastMousePos.y + sin * z * 25;
-                                // console.log("testPoint(" + s.x + "," + s.y + ")");
-                            }                            
-                            //切割优化
-                            hookHead = 5;
-                            candyEnd = Rope.ropePointsArray.length - 6;
-                            if(Rope.ropePointsArray.length <20)
-                            {
-                                hookHead = 0;
-                                candyEnd += 2;
-                            }
-                            //开始检测
-                            if(this.countDic_Object(f,s) < 15 && hookHead < i && i < candyEnd)//优化绳子切割
-                            {
-                                // console.log(Rope.ropePointsArray.length + " :::::::::: index ::::::::: " + i);
-                                //对蜘蛛进行操作
-                                if(this.arr_Spider)
-                                {
-                                    this.arr_Spider.forEach(Spider => {
-                                        if(Spider.rope == Rope)
-                                        {
-                                            Spider.stopEatCandy();
-                                        }
-                                    });
-                                }
-                                if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
-                                {
-                                    ropePoint.sp.getComponent(Laya.RevoluteJoint).destroy();
-                                    Rope.ropeCuted();
-                                    this.ropeJonitCute(Rope);
-                                    break;
-                                }
-                            }
-                        }
-                        if(Rope.isCuted) break;
-                    }
-
-                }   
-            });
-            //
+            //普通绳子
+            this.testMouseCandy(dic,mX,mY,cos,sin,hookHead,this.candyEated,this.arr_Rope);
+            //破碎糖果的绳子
+            if(this.candy2) this.testMouseCandy(dic,mX,mY,cos,sin,hookHead,this.candyEated,this.arr_Rope2);
             this.lastMousePos.x = mX;
             this.lastMousePos.y = mY;
             // console.log(this.lastMousePos.x + ","  + this.lastMousePos.y);
         }
     }
 
+
+    /**鼠标绳子检测 */
+    private testMouseCandy(dic,mX,mY,cos,sin,hookHead,candyEnd,ropeArray) : void
+    {
+        ropeArray.forEach(Rope => {
+            if(!Rope.isCuted)
+            {
+                for(let i=0;i<Rope.ropePointsArray.length;i++)
+                {
+                    let ropePoint = Rope.ropePointsArray[i];
+                    let f:any = {};
+                    let s:any ={};
+                    let count : number = 1;
+                    f.x = ropePoint.sp.x;
+                    f.y = ropePoint.sp.y;
+                    if(dic)//计算需求数量
+                    {
+                        count = count + Math.floor(dic/25);
+                        // console.log("pointCount::" + Math.floor(dic));
+                    }
+                    for(let z = 0; z<count ; z++)//循环检测
+                    {
+                        if(z == count - 1)//最后一个鼠标点
+                        {
+                            s.x = mX;
+                            s.y = mY; 
+                        }
+                        else//其他点
+                        {
+                            s.x = this.lastMousePos.x + cos * z * 25;
+                            s.y = this.lastMousePos.y + sin * z * 25;
+                            // console.log("testPoint(" + s.x + "," + s.y + ")");
+                        }                            
+                        //切割优化
+                        hookHead = 5;
+                        candyEnd = Rope.ropePointsArray.length - 6;
+                        if(Rope.ropePointsArray.length <20)
+                        {
+                            hookHead = 0;
+                            candyEnd += 2;
+                        }
+                        //开始检测
+                        if(this.countDic_Object(f,s) < 15 && hookHead < i && i < candyEnd)//优化绳子切割
+                        {
+                            // console.log(Rope.ropePointsArray.length + " :::::::::: index ::::::::: " + i);
+                            //对蜘蛛进行操作
+                            if(this.arr_Spider)
+                            {
+                                this.arr_Spider.forEach(Spider => {
+                                    if(Spider.rope == Rope)
+                                    {
+                                        Spider.stopEatCandy();
+                                    }
+                                });
+                            }
+                            //断开连接
+                            if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
+                            {
+                                ropePoint.sp.getComponent(Laya.RevoluteJoint).destroy();
+                                Rope.ropeCuted();
+                                this.ropeJonitCute(Rope);
+                                break;
+                            }
+                        }
+                    }
+                    if(Rope.isCuted) break;
+                }
+
+            }   
+        });
+    }
 
 
 
@@ -1896,6 +2122,7 @@ if(rotation == 90 && candyPosValue>followValue && candyPosValue<this.mapHight-fo
         }
         //糖果移动同步
         this.candy.moveTogether();
+        if(this.candy2) this.candy2.moveTogether();
         //绳子移动同步
         if(this.arr_Rope)
         {   

@@ -1397,7 +1397,7 @@ export default class GamePage extends Laya.Scene{
                 this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
             }
             //碎糖果的推力球注册
-            if(!this.candy2) return;
+            if(!this.candy2) continue;
             if(this.arr_ForceBall[i])
             {
                 this.arr_ForceBall[i].update({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
@@ -1813,7 +1813,7 @@ export default class GamePage extends Laya.Scene{
         if(!this.arr_ForceBall) return;
         //检测糖果是否进入推力球检测区域，若在区域内点击推力球触发推力功能
         this.testPublicForceBall(this.candy);
-        this.testPublicForceBall(this.candy2);
+        if(this.candy2) this.testPublicForceBall(this.candy2);
     }
 
     private testPublicForceBall(candy) {
@@ -1836,7 +1836,7 @@ export default class GamePage extends Laya.Scene{
         if(!this.arr_Laser) return;
         //检测糖果是否进入激光检测区域，若在区域内则糖果破裂
         this.testPublicLaser(this.candy);
-        this.testPublicLaser(this.candy2);
+        if(this.candy2) this.testPublicLaser(this.candy2);
     }
 
     private testPublicLaser(candy) {

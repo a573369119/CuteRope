@@ -28,6 +28,9 @@ export default class Candy{
     public view : Laya.Panel;   
     /**是否存在泡泡 */
     public isExistBalloon:boolean;
+    /**碎糖果记录所在泡泡 */
+    public balloonIndex : number;
+
     constructor(view){
         this.view = view;
         this.candy_JointArray=new Array<Laya.RevoluteJoint>();

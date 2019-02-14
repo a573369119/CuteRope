@@ -148,6 +148,8 @@ export default class Balloon{
         this.anim2.y -= this.sp.height/2;
         this.anim2.play(0,false);
         this.anim2.on(Laya.Event.COMPLETE,this,this.completeBoom);
+        this.sp.x=-10;
+        this.sp.y=-10;
         candy.isExistBalloon=false;
         console.log("出现了几次泡泡爆炸")
     }

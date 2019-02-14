@@ -232,7 +232,7 @@ import Dic from "../Tool/dic";
     {
         let ropePoint : RopePoint = this.ropePointsArray[this.ropePointsArray.length-1];
         let joint = new Laya.RevoluteJoint();
-        joint.otherBody = ropePoint.sp.getComponent(Laya.RigidBody);
+        joint.otherBody = ropePoint.sp.getComponents(Laya.RigidBody)[0];
         if(index == -1)
         {
             candy.createBody();

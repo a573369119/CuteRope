@@ -690,7 +690,7 @@ export default class GamePage extends Laya.Scene{
         //星星数据初始化
         this.starInit(this.mapConfig.arr_Star);
         //糖果数据初始化
-        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.candyConfig2,this.mapConfig.arr_Rope.length,this.mapConfig.arr_Knife,this.mapConfig.arr_Laser);
+        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.candyConfig2,this.mapConfig.arr_Rope.length,this.mapConfig.arr_Rope2.length,this.mapConfig.arr_Knife,this.mapConfig.arr_Laser);
         //泡泡数据初始化
         this.balloonInit(this.mapConfig.arr_Balloon);
         //帽子数据初始化
@@ -1206,7 +1206,7 @@ export default class GamePage extends Laya.Scene{
     }
     
     /**糖果数据初始化 */
-    private candyInit(candyConfig,candyConfig2,num,arr_Knife,arr_Laser) : void
+    private candyInit(candyConfig,candyConfig2,num,num2,arr_Knife,arr_Laser) : void
     {
         if(!this.candy) 
         {
@@ -1230,7 +1230,7 @@ export default class GamePage extends Laya.Scene{
         if(!this.candy2) 
         {
             this.candy2 = new Candy(this.scene.panel_GameWorld);
-            this.candy2.init({"x":candyConfig2.candy_X,"y":candyConfig2.candy_Y,"style":candyConfig2.style},num);
+            this.candy2.init({"x":candyConfig2.candy_X,"y":candyConfig2.candy_Y,"style":candyConfig2.style},num2);
             /**-------是否初始化糖果碎片----- */
             if(arr_Knife[0]||arr_Laser[0]){
                 this.candy2.createCandyApart();
@@ -1238,7 +1238,7 @@ export default class GamePage extends Laya.Scene{
         }
         else
         {
-            this.candy2.update({"x":candyConfig2.candy_X,"y":candyConfig2.candy_Y,"style":candyConfig2.style},num);
+            this.candy2.update({"x":candyConfig2.candy_X,"y":candyConfig2.candy_Y,"style":candyConfig2.style},num2);
             /**-------是否初始化糖果碎片----- */
             if(arr_Knife[0]||arr_Laser[0]){
                 this.candy2.createCandyApart();
@@ -1397,7 +1397,7 @@ export default class GamePage extends Laya.Scene{
                 this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
             }
             //碎糖果的推力球注册
-            if(!this.candy2) return;
+            if(!this.candy2) continue;
             if(this.arr_ForceBall[i])
             {
                 this.arr_ForceBall[i].update({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
@@ -1517,6 +1517,10 @@ export default class GamePage extends Laya.Scene{
         if(dic < 25 && this.isToOne == false)
         {//合并
             this.candy2.CandytoOne(this.candy.arr_Sp[0]);
+            if(this.arr_Balloon) 
+            {
+                if(this.arr_Balloon[this.candy2.balloonIndex]) this.arr_Balloon[this.candy2.balloonIndex].balloon_ClickBoom(this.candy2);
+            }
             this.isToOne = true;        
         }
     }
@@ -1664,10 +1668,14 @@ export default class GamePage extends Laya.Scene{
         this.balloonPublicTest(this.candy);
         if(this.candy2) this.balloonPublicTest(this.candy2);
     }
+
     /**处理泡泡碰撞逻辑 - 通用*/
     private balloonPublicTest(candy) {
         let dic;
-        this.arr_Balloon.forEach(balloon => {
+        let balloon;
+        for(let i = 0 ; i< this.arr_Balloon.length ;i++)
+        {
+            balloon = this.arr_Balloon[i];
             if (!balloon.isCollision) {
                 dic = this.countDic_Object({ "x": candy.arr_Sp[0].x, "y": candy.arr_Sp[0].y }, { "x": balloon.sp.x, 'y': balloon.sp.y });
                 if (dic < balloon.sp.width / 2 + 10) {
@@ -1677,16 +1685,17 @@ export default class GamePage extends Laya.Scene{
                         balloon.balloon_Boom();
                     }
                     else {
+                        candy.balloonIndex = i;//记录所撞泡泡的index
                         candy.isExistBalloon = true;
                         balloon.sp.alpha = 0;
                         balloon.anim1.visible = true;
                         balloon.anim1.play(0, true);
                         Laya.timer.frameLoop(1, balloon, balloon.balloon_Float, [candy.arr_Sp[0], candy.arr_Body]);
                         balloon.sp.on(Laya.Event.MOUSE_DOWN, balloon, balloon.balloon_ClickBoom, [candy]);
+                        }
                     }
                 }
-            }
-        });
+        }
     }
 
     /**与魔法帽的检测 **/
@@ -1813,7 +1822,7 @@ export default class GamePage extends Laya.Scene{
         if(!this.arr_ForceBall) return;
         //检测糖果是否进入推力球检测区域，若在区域内点击推力球触发推力功能
         this.testPublicForceBall(this.candy);
-        this.testPublicForceBall(this.candy2);
+        if(this.candy2) this.testPublicForceBall(this.candy2);
     }
 
     private testPublicForceBall(candy) {

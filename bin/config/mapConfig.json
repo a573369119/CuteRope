@@ -11,9 +11,9 @@
                 ],
                 "candy":{"style":"candy","x":245,"y":250},
                 "star":[
-                    {"style":"star1","x":240,"y":400,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":500,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":600,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[
@@ -35,9 +35,9 @@
                 ],
                 "candy":{"style":"candy","x":120,"y":200},
                 "star":[
-                    {"style":"star1","x":100,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":100,"y":500,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":350,"interval":30,"move":[]}
+                    {"style":"star1","x":100,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":100,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":380,"y":600,"skin":""},
                 "hook":[
@@ -62,9 +62,9 @@
                 ],
                 "candy":{"style":"candy","x":360,"y":300},
                 "star":[
-                    {"style":"star1","x":140,"y":330,"interval":30,"move":[]},
-                    {"style":"star1","x":100,"y":450,"interval":30,"move":[]},
-                    {"style":"star1","x":200,"y":600,"interval":30,"move":[]}
+                    {"style":"star1","x":140,"y":330,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":100,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":200,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":380,"y":600,"skin":""},
                 "hook":[
@@ -88,9 +88,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":230},
                 "star":[
-                    {"style":"star1","x":240,"y":330,"interval":30,"move":[]},
-                    {"style":"star1","x":60,"y":410,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":620,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":330,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":60,"y":410,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":620,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":360,"y":700,"skin":""},
                 "hook":[
@@ -115,9 +115,9 @@
                 ],
                 "candy":{"style":"candy","x":150,"y":450},
                 "star":[
-                    {"style":"star1","x":150,"y":600,"interval":30,"move":[]},
-                    {"style":"star1","x":360,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":360,"y":150,"interval":30,"move":[]}
+                    {"style":"star1","x":150,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":360,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":360,"y":150,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":360,"y":700,"skin":""},
                 "hook":[
@@ -143,9 +143,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":350},
                 "star":[
-                    {"style":"star1","x":240,"y":150,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":500,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":600,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":150,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[
@@ -172,9 +172,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":250},
                 "star":[
-                    {"style":"star1","x":380,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":100,"y":550,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":550,"interval":30,"move":[]}
+                    {"style":"star1","x":380,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":100,"y":550,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":550,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":380,"y":650,"skin":""},
                 "hook":[
@@ -202,9 +202,9 @@
                 ],
                 "candy":{"style":"candy","x":360,"y":280},
                 "star":[
-                    {"style":"star1","x":240,"y":100,"interval":30,"move":[]},
-                    {"style":"star1","x":90,"y":400,"interval":30,"move":[]},
-                    {"style":"star1","x":390,"y":400,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":100,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":90,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":390,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[
@@ -230,9 +230,9 @@
                 ],
                 "candy":{"style":"candy","x":245,"y":525},
                 "star":[
-                    {"style":"star1","x":120,"y":320,"interval":30,"move":[]},
-                    {"style":"star1","x":120,"y":450,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":670,"interval":30,"move":[]}
+                    {"style":"star1","x":120,"y":320,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":120,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":670,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":100,"skin":""},
                 "hook":[
@@ -261,9 +261,9 @@
                 ],
                 "candy":{"style":"candy","x":101,"y":150},
                 "star":[
-                    {"style":"star1","x":160,"y":390,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":510,"interval":30,"move":[]},
-                    {"style":"star1","x":320,"y":630,"interval":30,"move":[]}
+                    {"style":"star1","x":160,"y":390,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":510,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":320,"y":630,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":400,"y":700,"skin":""},
                 "hook":[
@@ -288,9 +288,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":200},
                 "star":[
-                    {"style":"star1","x":50,"y":430,"interval":30,"move":[]},
-                    {"style":"star1","x":140,"y":550,"interval":30,"move":[]},
-                    {"style":"star1","x":340,"y":550,"interval":30,"move":[]}
+                    {"style":"star1","x":50,"y":430,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":140,"y":550,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":340,"y":550,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[
@@ -319,9 +319,9 @@
                 ],
                 "candy":{"style":"candy","x":140,"y":520},
                 "star":[
-                    {"style":"star1","x":240,"y":280,"interval":30,"move":[]},
-                    {"style":"star1","x":260,"y":570,"interval":30,"move":[]},
-                    {"style":"star1","x":370,"y":530,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":280,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":260,"y":570,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":370,"y":530,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":220,"y":700,"skin":""},
                 "hook":[
@@ -347,9 +347,9 @@
                 ],
                 "candy":{"style":"candy","x":400,"y":500},
                 "star":[
-                    {"style":"star1","x":250,"y":700,"interval":30,"move":[]},
-                    {"style":"star1","x":100,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":300,"y":400,"interval":30,"move":[]}
+                    {"style":"star1","x":250,"y":700,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":100,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":300,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":100,"y":150,"skin":""},
                 "hook":[
@@ -377,9 +377,9 @@
                 ],
                 "candy":{"style":"candy","x":101,"y":600},
                 "star":[
-                    {"style":"star1","x":100,"y":340,"interval":30,"move":[]},
-                    {"style":"star1","x":400,"y":340,"interval":30,"move":[]},
-                    {"style":"star1","x":100,"y":700,"interval":30,"move":[]}
+                    {"style":"star1","x":100,"y":340,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":400,"y":340,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":100,"y":700,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":400,"y":150,"skin":""},
                 "hook":[
@@ -409,9 +409,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":1200},
                 "star":[
-                    {"style":"star1","x":240,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":600,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":900,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":900,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":200,"skin":""},
                 "hook":[
@@ -441,9 +441,9 @@
                 ],
                 "candy":{"style":"candy","x":101,"y":270},
                 "star":[
-                    {"style":"star1","x":100,"y":480,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":280,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":480,"interval":30,"move":[]}
+                    {"style":"star1","x":100,"y":480,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":280,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":480,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":720,"skin":""},
                 "hook":[
@@ -472,9 +472,9 @@
                 ],
                 "candy":{"style":"candy","x":90,"y":250},
                 "star":[
-                    {"style":"star1","x":180,"y":370,"interval":30,"move":[]},
-                    {"style":"star1","x":370,"y":390,"interval":30,"move":[]},
-                    {"style":"star1","x":180,"y":620,"interval":30,"move":[]}
+                    {"style":"star1","x":180,"y":370,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":370,"y":390,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":180,"y":620,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":400,"y":700,"skin":""},
                 "hook":[
@@ -503,9 +503,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":255},
                 "star":[
-                    {"style":"star1","x":400,"y":360,"interval":30,"move":[]},
-                    {"style":"star1","x":400,"y":560,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":680,"interval":30,"move":[]}
+                    {"style":"star1","x":400,"y":360,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":400,"y":560,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":680,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":410,"y":700,"skin":""},
                 "hook":[
@@ -535,9 +535,9 @@
                 ],
                 "candy":{"style":"candy","x":421,"y":200},
                 "star":[
-                    {"style":"star1","x":200,"y":200,"interval":30,"move":[]},
-                    {"style":"star1","x":100,"y":480,"interval":30,"move":[]},
-                    {"style":"star1","x":420,"y":400,"interval":30,"move":[]}
+                    {"style":"star1","x":200,"y":200,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":100,"y":480,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":420,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":110,"y":600,"skin":""},
                 "hook":[
@@ -568,9 +568,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":250},
                 "star":[
-                    {"style":"star1","x":240,"y":400,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":500,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":600,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[
@@ -599,9 +599,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":450},
                 "star":[
-                    {"style":"star1","x":280,"y":200,"interval":30,"move":[]},
-                    {"style":"star1","x":300,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":270,"y":700,"interval":30,"move":[]}
+                    {"style":"star1","x":280,"y":200,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":300,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":270,"y":700,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":280,"y":100,"skin":""},
                 "hook":[
@@ -630,9 +630,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":200},
                 "star":[
-                    {"style":"star1","x":240,"y":70,"interval":30,"move":[]},
-                    {"style":"star1","x":65,"y":420,"interval":30,"move":[]},
-                    {"style":"star1","x":400,"y":385,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":70,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":65,"y":420,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":400,"y":385,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[    
@@ -664,9 +664,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":320},
                 "star":[
-                    {"style":"star1","x":240,"y":500,"interval":30,"move":[]},
-                    {"style":"star1","x":130,"y":570,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":670,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":130,"y":570,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":670,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":100,"skin":""},
                 "hook":[
@@ -700,9 +700,9 @@
                 ],
                 "candy":{"style":"candy","x":351,"y":564},
                 "star":[
-                    {"style":"star1","x":252,"y":334,"interval":30,"move":[]},
-                    {"style":"star1","x":227,"y":291,"interval":30,"move":[]},
-                    {"style":"star1","x":170,"y":226,"interval":30,"move":[]}
+                    {"style":"star1","x":252,"y":334,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":227,"y":291,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":170,"y":226,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":134,"y":226,"skin":""},
                 "hook":[
@@ -725,9 +725,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":150},
                 "star":[
-                    {"style":"star1","x":240,"y":50,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":400,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":500,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":50,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[
@@ -766,9 +766,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":400},
                 "star":[
-                    {"style":"star1","x":70,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":410,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":300,"interval":30,"move":[]}
+                    {"style":"star1","x":70,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":410,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":370,"y":700,"skin":""},
                 "hook":[
@@ -795,9 +795,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":497},
                 "star":[
-                    {"style":"star1","x":125,"y":240,"interval":30,"move":[]},
-                    {"style":"star1","x":312,"y":323,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":606,"interval":30,"move":[]}
+                    {"style":"star1","x":125,"y":240,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":312,"y":323,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":606,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":125,"y":147,"skin":""},
                 "hook":[
@@ -826,9 +826,9 @@
                 ],
                 "candy":{"style":"candy","x":320,"y":300},
                 "star":[
-                    {"style":"star1","x":174,"y":206,"interval":30,"move":[]},
-                    {"style":"star1","x":174,"y":387,"interval":30,"move":[]},
-                    {"style":"star1","x":174,"y":481,"interval":30,"move":[]}
+                    {"style":"star1","x":174,"y":206,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":174,"y":387,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":174,"y":481,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":300,"y":500,"skin":""},
                 "hook":[
@@ -863,9 +863,9 @@
                 ],
                 "candy":{"style":"candy","x":172,"y":323},
                 "star":[
-                    {"style":"star1","x":66,"y":413,"interval":30,"move":[]},
-                    {"style":"star1","x":430,"y":413,"interval":30,"move":[]},
-                    {"style":"star1","x":385,"y":565,"interval":30,"move":[]}
+                    {"style":"star1","x":66,"y":413,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":430,"y":413,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":385,"y":565,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":385,"y":193,"skin":""},
                 "hook":[
@@ -899,9 +899,9 @@
                 "candy":{"style":"candy","x":130,"y":218},
                 "monster":{"x":95,"y":600,"skin":""},
                 "star":[
-                    {"style":"star1","x":295,"y":600,"interval":30,"move":[]},
-                    {"style":"star1","x":103,"y":456,"interval":30,"move":[]},
-                    {"style":"star1","x":365,"y":388,"interval":30,"move":[]}
+                    {"style":"star1","x":295,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":103,"y":456,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":365,"y":388,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "hook":[
 					{"style":"hook1","x":130,"y":100},
@@ -933,9 +933,9 @@
                 ],
                 "candy":{"style":"candy","x":238,"y":200},
                 "star":[
-                    {"style":"star1","x":163,"y":256,"interval":30,"move":[]},
-                    {"style":"star1","x":163,"y":600,"interval":30,"move":[]},
-                    {"style":"star1","x":313,"y":426,"interval":30,"move":[]}
+                    {"style":"star1","x":163,"y":256,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":163,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":313,"y":426,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":324,"y":710,"skin":""},
                 "hook":[
@@ -969,9 +969,9 @@
                 ],
                 "candy":{"style":"candy","x":242,"y":380},
                 "star":[
-                    {"style":"star1","x":345,"y":289,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":481,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":624,"interval":30,"move":[]}
+                    {"style":"star1","x":345,"y":289,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":481,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":624,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":388,"y":650,"skin":""},
                 "hook":[
@@ -1002,9 +1002,9 @@
                 ],
                 "candy":{"style":"candy","x":174,"y":532},
                 "star":[
-                    {"style":"star1","x":368,"y":507,"interval":30,"move":[]},
-                    {"style":"star1","x":169,"y":268,"interval":30,"move":[]},
-                    {"style":"star1","x":368,"y":160,"interval":30,"move":[]}
+                    {"style":"star1","x":368,"y":507,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":169,"y":268,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":368,"y":160,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":350,"y":584,"skin":""},
                 "hook":[
@@ -1036,9 +1036,9 @@
                 ],
                 "candy":{"style":"candy","x":169,"y":200},
                 "star":[
-                    {"style":"star1","x":169,"y":276,"interval":30,"move":[]},
-                    {"style":"star1","x":384,"y":461,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":554,"interval":30,"move":[]}
+                    {"style":"star1","x":169,"y":276,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":384,"y":461,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":554,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":720,"skin":""},
                 "hook":[
@@ -1068,9 +1068,9 @@
                 ],
                 "candy":{"style":"candy","x":77,"y":319},
                 "star":[
-                    {"style":"star1","x":378,"y":532,"interval":30,"move":[]},
-                    {"style":"star1","x":85,"y":460,"interval":30,"move":[]},
-                    {"style":"star1","x":169,"y":207,"interval":30,"move":[]}
+                    {"style":"star1","x":378,"y":532,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":85,"y":460,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":169,"y":207,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":384,"y":630,"skin":""},
                 "hook":[
@@ -1103,9 +1103,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":450},
                 "star":[
-                    {"style":"star1","x":381,"y":450,"interval":30,"move":[]},
-                    {"style":"star1","x":112,"y":450,"interval":30,"move":[]},
-                    {"style":"star1","x":381,"y":276,"interval":30,"move":[]}
+                    {"style":"star1","x":381,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":112,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":381,"y":276,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":104,"y":670,"skin":""},
                 "hook":[
@@ -1144,9 +1144,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":287},
                 "star":[
-                    {"style":"star1","x":421,"y":276,"interval":30,"move":[]},
-                    {"style":"star1","x":550,"y":276,"interval":30,"move":[]},
-                    {"style":"star1","x":640,"y":325,"interval":30,"move":[]}
+                    {"style":"star1","x":421,"y":276,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":550,"y":276,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":640,"y":325,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":645,"y":600,"skin":""},
                 "hook":[
@@ -1186,9 +1186,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":290},
                 "star":[
-                    {"style":"star1","x":396,"y":281,"interval":30,"move":[]},
-                    {"style":"star1","x":327,"y":496,"interval":30,"move":[]},
-                    {"style":"star1","x":231,"y":388,"interval":30,"move":[]}
+                    {"style":"star1","x":396,"y":281,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":327,"y":496,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":231,"y":388,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":200,"skin":""},
                 "hook":[
@@ -1223,9 +1223,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":389},
                 "star":[
-                    {"style":"star1","x":77,"y":464,"interval":30,"move":[]},
-                    {"style":"star1","x":329,"y":254,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":270,"interval":30,"move":[]}
+                    {"style":"star1","x":77,"y":464,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":329,"y":254,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":270,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":244,"y":691,"skin":""},
                 "hook":[
@@ -1257,9 +1257,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":318},
                 "star":[
-                    {"style":"star1","x":169,"y":318,"interval":30,"move":[]},
-                    {"style":"star1","x":310,"y":318,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":545,"interval":30,"move":[]}
+                    {"style":"star1","x":169,"y":318,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":310,"y":318,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":545,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":244,"y":691,"skin":""},
                 "hook":[
@@ -1292,9 +1292,9 @@
                 ],
                 "candy":{"style":"candy","x":325,"y":530},
                 "star":[
-                    {"style":"star1","x":368,"y":454,"interval":30,"move":[]},
-                    {"style":"star1","x":134,"y":474,"interval":30,"move":[]},
-                    {"style":"star1","x":203,"y":200,"interval":30,"move":[]}
+                    {"style":"star1","x":368,"y":454,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":134,"y":474,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":203,"y":200,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":319,"y":365,"skin":""},
                 "hook":[
@@ -1332,9 +1332,9 @@
                 ],
                 "candy":{"style":"candy","x":151,"y":362},
                 "star":[
-                    {"style":"star2","x":151,"y":160,"interval":50,"move":[]},
-                    {"style":"star2","x":384,"y":230,"interval":80,"move":[]},
-                    {"style":"star2","x":277,"y":520,"interval":100,"move":[]}
+                    {"style":"star2","x":151,"y":160,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":384,"y":230,"interval":80,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":277,"y":520,"interval":100,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":277,"y":689,"skin":""},
                 "hook":[
@@ -1366,9 +1366,9 @@
                 ],
                 "candy":{"style":"candy","x":121,"y":245},
                 "star":[
-                    {"style":"star2","x":380,"y":560,"interval":40,"move":[]},
-                    {"style":"star2","x":84,"y":734,"interval":60,"move":[]},
-                    {"style":"star2","x":100,"y":1050,"interval":120,"move":[]}
+                    {"style":"star2","x":380,"y":560,"interval":40,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":84,"y":734,"interval":60,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":100,"y":1050,"interval":120,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":368,"y":1383,"skin":""},
                 "hook":[
@@ -1391,9 +1391,9 @@
                     {"x":240,"y":1096}                    
                 ],   				
 				"knife":[
-					{"x":240,"y":550,"style":"knife1","rotation":90,"v":0,"move":[]},
-					{"x":240,"y":858,"style":"knife1","rotation":90,"v":0,"move":[]},
-					{"x":240,"y":1173,"style":"knife1","rotation":90,"v":0,"move":[]}
+					{"x":240,"y":550,"style":"knife1","rotation":90,"v":0,"move":[],"rotateLength":0,"v":0},
+					{"x":240,"y":858,"style":"knife1","rotation":90,"v":0,"move":[],"rotateLength":0,"v":0},
+					{"x":240,"y":1173,"style":"knife1","rotation":90,"v":0,"move":[],"rotateLength":0,"v":0}
                 ]
             },
 			{
@@ -1405,9 +1405,9 @@
                 ],
                 "candy":{"style":"candy","x":286,"y":581},
                 "star":[
-                    {"style":"star2","x":286,"y":245,"interval":40,"move":[]},
-                    {"style":"star2","x":87,"y":245,"interval":60,"move":[]},
-                    {"style":"star2","x":87,"y":487,"interval":120,"move":[]}
+                    {"style":"star2","x":286,"y":245,"interval":40,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":87,"y":245,"interval":60,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":87,"y":487,"interval":120,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":84,"y":681,"skin":""},
                 "hook":[
@@ -1448,9 +1448,9 @@
                 ],
                 "candy":{"style":"candy","x":281,"y":162},
                 "star":[
-                    {"style":"star2","x":109,"y":209,"interval":30,"move":[]},
-                    {"style":"star1","x":109,"y":528,"interval":200,"move":[]},
-                    {"style":"star2","x":317,"y":534,"interval":200,"move":[]}
+                    {"style":"star2","x":109,"y":209,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":109,"y":528,"interval":200,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":317,"y":534,"interval":200,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":352,"y":442,"skin":""},
                 "hook":[
@@ -1478,9 +1478,9 @@
                 ],
                 "candy":{"style":"candy","x":257,"y":370},
                 "star":[
-                    {"style":"star1","x":432,"y":489,"interval":30,"move":[]},
-                    {"style":"star1","x":160,"y":625,"interval":30,"move":[]},
-                    {"style":"star2","x":160,"y":383,"interval":50,"move":[]}
+                    {"style":"star1","x":432,"y":489,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":160,"y":625,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":160,"y":383,"interval":50,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":290,"y":226,"skin":""},
                 "hook":[
@@ -1508,9 +1508,9 @@
                 ],
                 "candy":{"style":"candy","x":300,"y":250},
                 "star":[
-                    {"style":"star1","x":368,"y":192,"interval":30,"move":[]},
-                    {"style":"star1","x":107,"y":347,"interval":30,"move":[]},
-                    {"style":"star2","x":300,"y":546,"interval":50,"move":[]}
+                    {"style":"star1","x":368,"y":192,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":107,"y":347,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":300,"y":546,"interval":50,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":107,"y":481,"skin":""},
                 "hook":[
@@ -1544,9 +1544,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":430},
                 "star":[
-                    {"style":"star1","x":240,"y":150,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":250,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":600,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":150,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":250,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":107,"y":481,"skin":""},
                 "hook":[
@@ -1580,9 +1580,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":236},
                 "star":[
-                    {"style":"star1","x":71,"y":351,"interval":30,"move":[]},
-                    {"style":"star1","x":410,"y":351,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":530,"interval":30,"move":[]}
+                    {"style":"star1","x":71,"y":351,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":410,"y":351,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":530,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":244,"y":670,"skin":""},
                 "hook":[
@@ -1613,9 +1613,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":228},
                 "star":[
-                    {"style":"star2","x":178,"y":267,"interval":30,"move":[]},
-                    {"style":"star1","x":84,"y":460,"interval":30,"move":[]},
-                    {"style":"star1","x":360,"y":415,"interval":30,"move":[]}
+                    {"style":"star2","x":178,"y":267,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":84,"y":460,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":360,"y":415,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":247,"y":456,"skin":""},
                 "hook":[
@@ -1650,9 +1650,9 @@
                 ],
                 "candy":{"style":"candy","x":121,"y":550},
                 "star":[
-                    {"style":"star1","x":400,"y":200,"interval":30,"move":[]},
-                    {"style":"star1","x":260,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":550,"interval":30,"move":[]}
+                    {"style":"star1","x":400,"y":200,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":260,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":550,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":120,"y":150,"skin":""},
                 "hook":[
@@ -1677,9 +1677,9 @@
                 ],
                 "candy":{"style":"candy","x":341,"y":200},
                 "star":[
-                    {"style":"star1","x":240,"y":630,"interval":30,"move":[]},
-                    {"style":"star1","x":260,"y":630,"interval":30,"move":[]},
-                    {"style":"star1","x":280,"y":630,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":630,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":260,"y":630,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":280,"y":630,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":120,"y":600,"skin":""},
                 "hook":[
@@ -1706,9 +1706,9 @@
                 ],
                 "candy":{"style":"candy","x":380,"y":500},
                 "star":[
-                    {"style":"star1","x":300,"y":180,"interval":30,"move":[]},
-                    {"style":"star1","x":250,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":130,"y":450,"interval":30,"move":[]}
+                    {"style":"star1","x":300,"y":180,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":250,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":130,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":400,"y":150,"skin":""},
                 "hook":[
@@ -1739,9 +1739,9 @@
                 ],
                 "candy":{"style":"candy","x":101,"y":650},
                 "star":[
-                    {"style":"star1","x":200,"y":370,"interval":30,"move":[]},
-                    {"style":"star1","x":300,"y":330,"interval":30,"move":[]},
-                    {"style":"star1","x":400,"y":290,"interval":30,"move":[]}
+                    {"style":"star1","x":200,"y":370,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":300,"y":330,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":400,"y":290,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":100,"y":100,"skin":""},
                 "hook":[
@@ -1770,9 +1770,9 @@
                 ],
                 "candy":{"style":"candy","x":145,"y":300},
                 "star":[
-                    {"style":"star1","x":50,"y":400,"interval":30,"move":[]},
-                    {"style":"star1","x":200,"y":400,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":570,"interval":30,"move":[]}
+                    {"style":"star1","x":50,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":200,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":570,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[
@@ -1800,9 +1800,9 @@
                 ],
                 "candy":{"style":"candy","x":101,"y":250},
                 "star":[
-                    {"style":"star2","x":240,"y":250,"interval":30,"move":[]},
-                    {"style":"star2","x":240,"y":450,"interval":70,"move":[]},
-                    {"style":"star2","x":240,"y":650,"interval":120,"move":[]}
+                    {"style":"star2","x":240,"y":250,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":240,"y":450,"interval":70,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":240,"y":650,"interval":120,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":400,"y":700,"skin":""},
                 "hook":[
@@ -1834,9 +1834,9 @@
                 ],
                 "candy":{"style":"candy","x":251,"y":1100},
                 "star":[
-                    {"style":"star1","x":218,"y":778,"interval":30,"move":[]},
-                    {"style":"star1","x":282,"y":433,"interval":30,"move":[]},
-                    {"style":"star1","x":369,"y":433,"interval":30,"move":[]}
+                    {"style":"star1","x":218,"y":778,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":282,"y":433,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":369,"y":433,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":381.5,"y":1296,"skin":""},
                 "hook":[
@@ -1878,9 +1878,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":300},
                 "star":[
-                    {"style":"star1","x":140,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":340,"y":300,"interval":30,"move":[]},
-                    {"style":"star2","x":240,"y":570,"interval":70,"move":[]}
+                    {"style":"star1","x":140,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":340,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":240,"y":570,"interval":70,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[
@@ -1911,9 +1911,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":750},
                 "star":[
-                    {"style":"star2","x":240,"y":50,"interval":60,"move":[]},
-                    {"style":"star1","x":420,"y":230,"interval":30,"move":[]},
-                    {"style":"star1","x":80,"y":530,"interval":30,"move":[]}
+                    {"style":"star2","x":240,"y":50,"interval":60,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":420,"y":230,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":80,"y":530,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":400,"y":700,"skin":""},
                 "hook":[
@@ -1941,9 +1941,9 @@
                 ],
                 "candy":{"style":"candy","x":245,"y":500},
                 "star":[
-                    {"style":"star1","x":380,"y":250,"interval":50,"move":[]},
-                    {"style":"star1","x":350,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":410,"y":300,"interval":70,"move":[]}
+                    {"style":"star1","x":380,"y":250,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":350,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":410,"y":300,"interval":70,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":100,"y":300,"skin":""},
                 "hook":[
@@ -1974,9 +1974,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":273},
                 "star":[
-                    {"style":"star1","x":206,"y":520,"interval":30,"move":[]},
-                    {"style":"star1","x":325,"y":700,"interval":30,"move":[]},
-                    {"style":"star1","x":210,"y":924,"interval":30,"move":[]}
+                    {"style":"star1","x":206,"y":520,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":325,"y":700,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":210,"y":924,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":381.5,"y":1296,"skin":""},
                 "hook":[
@@ -2003,9 +2003,9 @@
                 ],
                 "candy":{"style":"candy","x":121,"y":600},
                 "star":[
-                    {"style":"star1","x":120,"y":400,"interval":50,"move":[]},
-                    {"style":"star1","x":240,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":360,"y":400,"interval":70,"move":[]}
+                    {"style":"star1","x":120,"y":400,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":360,"y":400,"interval":70,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":340,"y":700,"skin":""},
                 "hook":[
@@ -2033,9 +2033,9 @@
                 ],
                 "candy":{"style":"candy","x":201,"y":450},
                 "star":[
-                    {"style":"star1","x":320,"y":250,"interval":50,"move":[]},
-                    {"style":"star1","x":320,"y":330,"interval":30,"move":[]},
-                    {"style":"star1","x":320,"y":480,"interval":70,"move":[]}
+                    {"style":"star1","x":320,"y":250,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":320,"y":330,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":320,"y":480,"interval":70,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":200,"y":150,"skin":""},
                 "hook":[
@@ -2067,9 +2067,9 @@
                 ],
                 "candy":{"style":"candy","x":81,"y":220},
                 "star":[
-                    {"style":"star1","x":50,"y":350,"interval":50,"move":[]},
-                    {"style":"star1","x":240,"y":450,"interval":30,"move":[]},
-                    {"style":"star1","x":400,"y":480,"interval":70,"move":[]}
+                    {"style":"star1","x":50,"y":350,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":400,"y":480,"interval":70,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":360,"y":680,"skin":""},
                 "hook":[
@@ -2100,9 +2100,9 @@
                 ],
                 "candy":{"style":"candy","x":201,"y":550},
                 "star":[
-                    {"style":"star1","x":200,"y":350,"interval":50,"move":[]},
-                    {"style":"star1","x":380,"y":280,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":520,"interval":70,"move":[]}
+                    {"style":"star1","x":200,"y":350,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":280,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":520,"interval":70,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":380,"y":680,"skin":""},
                 "hook":[
@@ -2135,9 +2135,9 @@
                 ],
                 "candy":{"style":"candy","x":251,"y":500},
                 "star":[
-                    {"style":"star1","x":70,"y":340,"interval":50,"move":[]},
-                    {"style":"star1","x":420,"y":340,"interval":30,"move":[]},
-                    {"style":"star1","x":250,"y":630,"interval":70,"move":[]}
+                    {"style":"star1","x":70,"y":340,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":420,"y":340,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":250,"y":630,"interval":70,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":260,"y":730,"skin":""},
                 "hook":[
@@ -2175,9 +2175,9 @@
                 ],
                 "candy":{"style":"candy","x":265,"y":306},
                 "star":[
-                    {"style":"star1","x":762,"y":445,"interval":30,"move":[]},
-                    {"style":"star1","x":680,"y":250,"interval":30,"move":[]},
-                    {"style":"star1","x":306,"y":532,"interval":30,"move":[]}
+                    {"style":"star1","x":762,"y":445,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":680,"y":250,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":306,"y":532,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":100,"y":658,"skin":""},
                 "hook":[
@@ -2227,9 +2227,9 @@
                 ],
                 "candy":{"style":"candy","x":261,"y":400},
                 "star":[
-                    {"style":"star1","x":380,"y":280,"interval":50,"move":[]},
-                    {"style":"star1","x":250,"y":580,"interval":30,"move":[]},
-                    {"style":"star2","x":250,"y":720,"interval":100,"move":[]}
+                    {"style":"star1","x":380,"y":280,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":250,"y":580,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":250,"y":720,"interval":100,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":260,"y":150,"skin":""},
                 "hook":[
@@ -2263,9 +2263,9 @@
                 ],
                 "candy":{"style":"candy","x":341,"y":180},
                 "star":[
-                    {"style":"star1","x":220,"y":100,"interval":50,"move":[]},
-                    {"style":"star1","x":220,"y":400,"interval":30,"move":[]},
-                    {"style":"star1","x":220,"y":530,"interval":100,"move":[]}  
+                    {"style":"star1","x":220,"y":100,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":220,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":220,"y":530,"interval":100,"move":[],"rotateLength":0,"v":0}  
                 ],
                 "monster":{"x":280,"y":700,"skin":""},
                 "hook":[
@@ -2300,9 +2300,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":200},
                 "star":[
-                    {"style":"star1","x":240,"y":350,"interval":50,"move":[]},
-                    {"style":"star1","x":240,"y":450,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":550,"interval":100,"move":[]}
+                    {"style":"star1","x":240,"y":350,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":550,"interval":100,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":700,"skin":""},
                 "hook":[
@@ -2334,9 +2334,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":464},
                 "star":[
-                    {"style":"star1","x":510,"y":234,"interval":30,"move":[]},
-                    {"style":"star1","x":330,"y":313,"interval":30,"move":[]},
-                    {"style":"star1","x":870,"y":468,"interval":30,"move":[]}
+                    {"style":"star1","x":510,"y":234,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":330,"y":313,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":870,"y":468,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":900,"y":658,"skin":""},
                 "hook":[
@@ -2372,9 +2372,9 @@
                 ],
                 "candy":{"style":"candy","x":101,"y":265},
                 "star":[
-                    {"style":"star1","x":220,"y":265,"interval":50,"move":[]},
-                    {"style":"star1","x":390,"y":325,"interval":30,"move":[]},
-                    {"style":"star1","x":220,"y":510,"interval":100,"move":[]}
+                    {"style":"star1","x":220,"y":265,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":390,"y":325,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":220,"y":510,"interval":100,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":400,"y":150,"skin":""},
                 "hook":[
@@ -2411,9 +2411,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":750},
                 "star":[
-                    {"style":"star1","x":125,"y":265,"interval":50,"move":[]},
-                    {"style":"star1","x":350,"y":265,"interval":30,"move":[]},
-                    {"style":"star1","x":125,"y":425,"interval":100,"move":[]}
+                    {"style":"star1","x":125,"y":265,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":350,"y":265,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":125,"y":425,"interval":100,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":330,"y":80,"skin":""},
                 "hook":[
@@ -2450,9 +2450,9 @@
                 ],
                 "candy":{"style":"candy","x":89,"y":220},
                 "star":[
-                    {"style":"star1","x":210,"y":350,"interval":50,"move":[]},
-                    {"style":"star1","x":410,"y":270,"interval":30,"move":[]},
-                    {"style":"star1","x":280,"y":450,"interval":30,"move":[]}
+                    {"style":"star1","x":210,"y":350,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":410,"y":270,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":280,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":410,"y":700,"skin":""},
                 "hook":[
@@ -2487,9 +2487,9 @@
                 ],
                 "candy":{"style":"candy","x":251,"y":367},
                 "star":[
-                    {"style":"star1","x":251,"y":1098,"interval":30,"move":[]},
-                    {"style":"star1","x":251,"y":708,"interval":30,"move":[]},
-                    {"style":"star1","x":121,"y":224,"interval":30,"move":[]}
+                    {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":121,"y":517,"skin":""},
                 "hook":[
@@ -2530,15 +2530,16 @@
                 ],
                 "candy":{"style":"candy","x":121,"y":320},
                 "star":[
-                    {"style":"star1","x":120,"y":500,"interval":30,"move":[]},
-                    {"style":"star1","x":350,"y":320,"interval":30,"move":[]},
-                    {"style":"star1","x":350,"y":500,"interval":30,"move":[]}
+                    {"style":"star1","x":120,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":350,"y":320,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":350,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":360,"y":630,"skin":""},
                 "hook":[
 					{"style":"hook1","x":120,"y":180}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						150
 					]
@@ -2558,9 +2559,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":360},
                 "star":[
-                    {"style":"star1","x":330,"y":450,"interval":30,"move":[]},
-                    {"style":"star1","x":110,"y":550,"interval":30,"move":[]},
-                    {"style":"star1","x":110,"y":640,"interval":30,"move":[]}
+                    {"style":"star1","x":330,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":110,"y":550,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":110,"y":640,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":250,"skin":""},
                 "hook":[
@@ -2569,6 +2570,7 @@
 					{"style":"hook1","x":340,"y":300}
                 ],
 				"rope":{
+					"hookIndex":[0,1,2],
 					"length":[
 						130,130,140
 					]
@@ -2588,17 +2590,18 @@
                 ],
                 "candy":{"style":"candy","x":310,"y":590},
                 "star":[
-                    {"style":"star1","x":330,"y":450,"interval":30,"move":[]},
-                    {"style":"star1","x":130,"y":550,"interval":30,"move":[]},
-                    {"style":"star1","x":130,"y":640,"interval":30,"move":[]}
+                    {"style":"star1","x":200,"y":300,"interval":40,"move":[],"rotateLength":30,"v":3},
+                    {"style":"star1","x":210,"y":300,"interval":50,"move":[],"rotateLength":50,"v":3},
+                    {"style":"star1","x":180,"y":320,"interval":30,"move":[],"rotateLength":70,"v":-1.5}
                 ],
-                "monster":{"x":380,"y":350,"skin":""},
+                "monster":{"x":380,"y":320,"skin":""},
                 "hook":[
 					{"style":"hook1","x":370,"y":500},
 					{"style":"hook1","x":370,"y":710},
 					{"style":"hook1","x":70,"y":600,"rotation":0,"length":175,"percent":1}
                 ],
 				"rope":{
+					"hookIndex":[0,1,2],
 					"length":[
 						100,100,100
 					]
@@ -2618,9 +2621,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":150},
                 "star":[
-                    {"style":"star1","x":130,"y":260,"interval":30,"move":[]},
-                    {"style":"star1","x":410,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":630,"interval":30,"move":[]}
+                    {"style":"star1","x":130,"y":260,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":410,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":630,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":410,"y":420,"skin":""},
                 "hook":[
@@ -2630,6 +2633,7 @@
 					{"style":"hook2","x":310,"y":500,"size":120}
                 ],
 				"rope":{
+					"hookIndex":[0,1],
 					"length":[
 						130,130
 					]
@@ -2638,7 +2642,7 @@
 					{"x1":50,"y1":240,"rotation1":92,"move1":[],"rotate1":0,"v1":0,
 					 "x2":430,"y2":580,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"},
-					{"x1":50,"y1":580,"rotation1":90,"move1":[],"rotate1":0,"v1":0,
+					{"x1":50,"y1":580,"rotation1":92,"move1":[],"rotate1":0,"v1":0,
 					 "x2":430,"y2":240,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_green"}
 				],
@@ -2658,9 +2662,9 @@
                 ],
                 "candy":{"style":"candy","x":121,"y":350},
                 "star":[
-                    {"style":"star1","x":120,"y":150,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":620,"interval":30,"move":[]},
-                    {"style":"star1","x":360,"y":1200,"interval":30,"move":[]}
+                    {"style":"star1","x":120,"y":150,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":620,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":360,"y":1200,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":370,"y":1350,"skin":""},
                 "hook":[
@@ -2668,6 +2672,7 @@
 					{"style":"hook2","x":360,"y":1000,"size":110}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -2693,9 +2698,9 @@
                 ],
                 "candy":{"style":"candy","x":170,"y":570},
                 "star":[
-                    {"style":"star1","x":80,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":260,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":260,"y":620,"interval":30,"move":[]}
+                    {"style":"star1","x":80,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":260,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":260,"y":620,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":390,"y":200,"skin":""},
                 "hook":[
@@ -2704,6 +2709,7 @@
 					{"style":"hook2","x":170,"y":290,"size":100}
                 ],
 				"rope":{
+					"hookIndex":[0,1],
 					"length":[
 						120,120
 					]
@@ -2730,15 +2736,16 @@
                 ],
                 "candy":{"style":"candy","x":160,"y":450},
                 "star":[
-                    {"style":"star1","x":400,"y":100,"interval":30,"move":[]},
-                    {"style":"star1","x":400,"y":200,"interval":30,"move":[]},
-                    {"style":"star1","x":400,"y":300,"interval":30,"move":[]}
+                    {"style":"star1","x":400,"y":100,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":400,"y":200,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":400,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":160,"y":200,"skin":""},
                 "hook":[
 					{"style":"hook1","x":160,"y":350}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -2770,15 +2777,16 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":300},
                 "star":[
-                    {"style":"star1","x":150,"y":530,"interval":30,"move":[]},
-                    {"style":"star1","x":330,"y":530,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":150,"interval":30,"move":[]}
+                    {"style":"star1","x":150,"y":530,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":330,"y":530,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":150,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":250,"y":710,"skin":""},
                 "hook":[
 					{"style":"hook1","x":240,"y":200}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -2809,23 +2817,24 @@
                 ],
                 "candy":{"style":"candy","x":81,"y":240},
                 "star":[
-                    {"style":"star1","x":80,"y":590,"interval":30,"move":[]},
-                    {"style":"star1","x":140,"y":560,"interval":30,"move":[]},
-                    {"style":"star1","x":300,"y":580,"interval":30,"move":[]}
+                    {"style":"star1","x":80,"y":590,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":140,"y":560,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":300,"y":580,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
-                "monster":{"x":400,"y":400,"skin":""},
+                "monster":{"x":420,"y":400,"skin":""},
                 "hook":[
 					{"style":"hook1","x":80,"y":80},
-					{"style":"hook2","x":240,"y":500,"size":110}
+					{"style":"hook2","x":250,"y":480,"size":110}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						140
 					]
 				},
 				"magicHat":[
 					{"x1":115,"y1":720,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
-					 "x2":170,"y2":330,"rotation2":90,"move2":[],"rotate2":0,"v2":0,
+					 "x2":170,"y2":275,"rotation2":120,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"}
 				],
 				"balloon":[
@@ -2848,9 +2857,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":1000},
                 "star":[
-                    {"style":"star1","x":120,"y":600,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":1200,"interval":30,"move":[]},
-                    {"style":"star1","x":300,"y":300,"interval":30,"move":[]}
+                    {"style":"star1","x":120,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":1200,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":300,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":320,"y":170,"skin":""},
                 "hook":[
@@ -2859,6 +2868,7 @@
 					{"style":"hook2","x":340,"y":500,"size":110}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -2894,9 +2904,9 @@
                 ],
                 "candy":{"style":"candy","x":351,"y":480},
                 "star":[
-                    {"style":"star1","x":172,"y":436,"interval":30,"move":[]},
-                    {"style":"star1","x":160,"y":216,"interval":30,"move":[]},
-                    {"style":"star1","x":273,"y":555,"interval":30,"move":[]}
+                    {"style":"star1","x":172,"y":436,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":160,"y":216,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":273,"y":555,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":111,"y":708,"skin":""},
                 "hook":[
@@ -2905,6 +2915,7 @@
 					{"style":"hook2","x":190,"y":555,"size":100}
                 ],
 				"rope":{
+					"hookIndex":[0,1],
 					"length":[
 						35,15
 					]
@@ -2924,9 +2935,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":200},
                 "star":[
-                    {"style":"star1","x":110,"y":250,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":470,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":670,"interval":30,"move":[]}
+                    {"style":"star1","x":130,"y":270,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":470,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":670,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":260,"y":380,"skin":""},
                 "hook":[
@@ -2938,6 +2949,7 @@
 					{"style":"hook2","x":240,"y":540,"size":120}
                 ],
 				"rope":{
+					"hookIndex":[0,1,2,3,4],
 					"length":[
 						160,100,160,230,230
 					]
@@ -2965,9 +2977,9 @@
                 ],
                 "candy":{"style":"candy","x":121,"y":300},
                 "star":[
-                    {"style":"star1","x":120,"y":100,"interval":30,"move":[]},
-                    {"style":"star1","x":120,"y":520,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":200,"interval":30,"move":[]}
+                    {"style":"star1","x":120,"y":100,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":120,"y":520,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":200,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":400,"y":300,"skin":""},
                 "hook":[
@@ -2976,6 +2988,7 @@
 					{"style":"hook2","x":350,"y":100,"size":100}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -2999,31 +3012,32 @@
 					{"skin":"gameView/gameBg/boxBg_4_3.png","x":430,"y":0,"width":600},
                     {"skin":"gameView/gameBg/boxBg_4.png","x":900,"y":0}
                 ],
-                "candy":{"style":"candy","x":261,"y":750},
+                "candy":{"style":"candy","x":261,"y":800},
                 "star":[
-                    {"style":"star1","x":160,"y":200,"interval":30,"move":[]},
-                    {"style":"star1","x":160,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":160,"y":500,"interval":30,"move":[]}
+                    {"style":"star1","x":160,"y":200,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":160,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":160,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":610,"y":220,"skin":""},
                 "hook":[
-					{"style":"hook1","x":260,"y":650}
+					{"style":"hook1","x":260,"y":700}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
 				},
 				"magicHat":[
-					{"x1":120,"y1":200,"rotation1":90,"move1":[],"rotate1":0,"v1":0,
+					{"x1":120,"y1":200,"rotation1":91,"move1":[],"rotate1":0,"v1":0,
 					 "x2":600,"y2":700,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"},
-					{"x1":120,"y1":350,"rotation1":90,"move1":[],"rotate1":0,"v1":0,
-					 "x2":120,"y2":500,"rotation2":90,"move2":[],"rotate2":0,"v2":0,
+					{"x1":120,"y1":350,"rotation1":91,"move1":[],"rotate1":0,"v1":0,
+					 "x2":120,"y2":500,"rotation2":91,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_green"}
 				],
 				"balloon":[
-                    {"x":260,"y":750}
+                    {"x":260,"y":800}
                 ],
 				"forceball":[
 					{"x":340,"y":200,"rotation":-90},
@@ -3044,9 +3058,9 @@
                 ],
                 "candy":{"style":"candy","x":240,"y":230},
                 "star":[
-                    {"style":"star2","x":240,"y":100,"interval":50,"move":[]},
-                    {"style":"star1","x":100,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":620,"interval":30,"move":[]}
+                    {"style":"star2","x":240,"y":100,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":100,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":620,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":110,"y":650,"skin":""},
                 "hook":[
@@ -3055,6 +3069,7 @@
 					{"style":"hook2","x":120,"y":480,"size":130,"rotation":0,"length":280,"percent":0.5}
                 ],
 				"rope":{
+					"hookIndex":[0,1],
 					"length":[
 						150,150
 					]
@@ -3076,15 +3091,16 @@
                 ],
                 "candy":{"style":"candy","x":381,"y":550},
                 "star":[
-                    {"style":"star1","x":240,"y":200,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":300,"interval":30,"move":[240,600]},
-                    {"style":"star1","x":380,"y":450,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":200,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":300,"interval":30,"move":[240,600],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":390,"y":350,"skin":""},
                 "hook":[
 					{"style":"hook1","x":380,"y":480}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -3110,9 +3126,9 @@
                 ],
                 "candy":{"style":"candy","x":101,"y":370},
                 "star":[
-                    {"style":"star1","x":110,"y":550,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":90,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":400,"interval":30,"move":[]}
+                    {"style":"star1","x":110,"y":550,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":90,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":250,"y":650,"skin":""},
                 "hook":[
@@ -3120,6 +3136,7 @@
 					{"style":"hook2","x":320,"y":400,"size":120}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -3151,11 +3168,11 @@
                 "mapSkins":[
                     "gameView/gameBg/boxBg_4.png"
                 ],
-                "candy":{"style":"candy","x":241,"y":380},
+                "candy":{"style":"candy","x":245,"y":380},
                 "star":[
-                    {"style":"star1","x":120,"y":180,"interval":30,"move":[]},
-                    {"style":"star1","x":120,"y":580,"interval":30,"move":[]},
-                    {"style":"star1","x":380,"y":580,"interval":30,"move":[]}
+                    {"style":"star1","x":120,"y":180,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":120,"y":580,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":580,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":390,"y":490,"skin":""},
                 "hook":[
@@ -3165,6 +3182,7 @@
 					{"style":"hook1","x":240,"y":600,"rotation":-90,"length":180,"percent":0.4}
                 ],
 				"rope":{
+					"hookIndex":[0,1,2,3],
 					"length":[
 						150,150,150,150
 					]
@@ -3188,25 +3206,26 @@
 					{"skin":"gameView/gameBg/boxBg_4_2.png","x":0,"y":700,"height":500},
                     {"skin":"gameView/gameBg/boxBg_4.png","x":0,"y":1100}
                 ],
-                "candy":{"style":"candy","x":241,"y":1280},
+                "candy":{"style":"candy","x":241,"y":1310},
                 "star":[
-                    {"style":"star1","x":240,"y":300,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":600,"interval":30,"move":[]},
-                    {"style":"star1","x":240,"y":900,"interval":30,"move":[]}
+                    {"style":"star1","x":240,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":600,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":900,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
-                "monster":{"x":90,"y":1400,"skin":""},
+                "monster":{"x":70,"y":1400,"skin":""},
                 "hook":[
-					{"style":"hook1","x":240,"y":1150},
-					{"style":"hook1","x":160,"y":1400,"rotation":0,"length":200,"percent":0.5}
+					{"style":"hook1","x":240,"y":1200},
+					{"style":"hook1","x":160,"y":1420,"rotation":0,"length":240,"percent":0.5}
                 ],
 				"rope":{
+					"hookIndex":[0,1],
 					"length":[
-						150,80
+						105,90
 					]
 				},
 				"magicHat":[
 					{"x1":240,"y1":1100,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
-					 "x2":350,"y2":1320,"rotation2":-90,"move2":[],"rotate2":0,"v2":0,
+					 "x2":340,"y2":1320,"rotation2":-92,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_green"}
 				],
 				"knife":[
@@ -3232,9 +3251,9 @@
                 ],
                 "candy":{"style":"candy","x":101,"y":480},
                 "star":[
-                    {"style":"star2","x":100,"y":200,"interval":70,"move":[]},
-                    {"style":"star2","x":380,"y":180,"interval":50,"move":[]},
-                    {"style":"star2","x":240,"y":500,"interval":100,"move":[]}
+                    {"style":"star2","x":100,"y":200,"interval":70,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":380,"y":180,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star2","x":240,"y":500,"interval":100,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":240,"y":100,"skin":""},
                 "hook":[
@@ -3242,6 +3261,7 @@
 					{"style":"hook2","x":160,"y":380,"size":100,"rotation":0,"length":250,"percent":0.5}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -3269,9 +3289,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":250},
                 "star":[
-                    {"style":"star1","x":100,"y":590,"interval":70,"move":[]},
-                    {"style":"star1","x":380,"y":590,"interval":50,"move":[]},
-                    {"style":"star1","x":240,"y":590,"interval":100,"move":[]}
+                    {"style":"star1","x":100,"y":590,"interval":70,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":380,"y":590,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":590,"interval":100,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":250,"y":700,"skin":""},
                 "hook":[
@@ -3279,13 +3299,14 @@
 					{"style":"hook2","x":130,"y":100,"size":100,"rotation":0,"length":280,"percent":0.5}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						90
 					]
 				},
 				"magicHat":[
-					{"x1":120,"y1":370,"rotation1":180,"move1":[410,400],"rotate1":0,"v1":0,
-					 "x2":400,"y2":510,"rotation2":180,"move2":[110,540],"rotate2":0,"v2":0,
+					{"x1":120,"y1":370,"rotation1":180,"move1":[410,370],"rotate1":0,"v1":0,
+					 "x2":400,"y2":510,"rotation2":180,"move2":[110,510],"rotate2":0,"v2":0,
 					 "color":"hat_red"}
 				],
 				"balloon":[
@@ -3302,9 +3323,9 @@
                 ],
                 "candy":{"style":"candy","x":341,"y":550},
                 "star":[
-                    {"style":"star1","x":240,"y":200,"interval":70,"move":[]},
-                    {"style":"star1","x":240,"y":450,"interval":50,"move":[]},
-                    {"style":"star1","x":420,"y":120,"interval":100,"move":[]}
+                    {"style":"star1","x":240,"y":200,"interval":70,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":450,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":420,"y":120,"interval":100,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":100,"y":100,"skin":""},
                 "hook":[
@@ -3313,6 +3334,7 @@
 					{"style":"hook2","x":240,"y":350,"size":120}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -3346,17 +3368,18 @@
                 ],
                 "candy":{"style":"candy","x":180,"y":430},
                 "star":[
-                    {"style":"star1","x":580,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":780,"y":350,"interval":30,"move":[]},
-                    {"style":"star1","x":680,"y":230,"interval":30,"move":[]}
+                    {"style":"star1","x":580,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":780,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":680,"y":450,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
-                "monster":{"x":670,"y":500,"skin":""},
+                "monster":{"x":700,"y":620,"skin":""},
                 "hook":[
 					{"style":"hook1","x":120,"y":350},
 					{"style":"hook1","x":240,"y":350},
-					{"style":"hook2","x":680,"y":350,"size":110}
+					{"style":"hook2","x":680,"y":300,"size":110}
                 ],
 				"rope":{
+					"hookIndex":[0,1],
 					"length":[
 						80,80
 					]
@@ -3377,6 +3400,44 @@
 				]	
             },
 			{
+                "mapId":23,
+                "width":750,
+                "height":1334,
+                "mapSkins":[
+                    "gameView/gameBg/boxBg_4.png"
+                ],
+                "candy":{"style":"candy","x":241,"y":250},
+                "star":[
+                    {"style":"star1","x":290,"y":620,"interval":70,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":190,"y":620,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":580,"interval":80,"move":[],"rotateLength":0,"v":0}
+                ],
+                "monster":{"x":80,"y":550,"skin":""},
+                "hook":[
+					{"style":"hook3","x":100,"y":150},
+					{"style":"hook3","x":100,"y":350},
+					{"style":"hook3","x":380,"y":150},
+					{"style":"hook3","x":380,"y":350}
+                ],
+				"rope":{
+					"hookIndex":[0,1,2,3],
+					"length":[
+						24,24,24,24
+					]
+				},
+				"magicHat":[
+					{"x1":100,"y1":250,"rotation1":91,"move1":[],"rotate1":0,"v1":0,
+					 "x2":350,"y2":670,"rotation2":-45,"move2":[],"rotate2":0,"v2":0,
+					 "color":"hat_red"},
+					 {"x1":380,"y1":250,"rotation1":-91,"move1":[],"rotate1":0,"v1":0,
+					 "x2":170,"y2":670,"rotation2":45,"move2":[],"rotate2":0,"v2":0,
+					 "color":"hat_green"}
+				],
+				"balloon":[
+                    {"x":240,"y":580}
+                ]
+            },
+			{
                 "mapId":24,
                 "width":750,
                 "height":1334,
@@ -3385,9 +3446,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":280},
                 "star":[
-                    {"style":"star1","x":70,"y":570,"interval":70,"move":[]},
-                    {"style":"star1","x":130,"y":570,"interval":50,"move":[]},
-                    {"style":"star1","x":240,"y":380,"interval":100,"move":[]}
+                    {"style":"star1","x":70,"y":570,"interval":70,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":130,"y":570,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":380,"interval":100,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":380,"y":550,"skin":""},
                 "hook":[
@@ -3395,6 +3456,7 @@
 					{"style":"hook2","x":100,"y":490,"size":80}
                 ],
 				"rope":{
+					"hookIndex":[0],
 					"length":[
 						80
 					]
@@ -3423,9 +3485,9 @@
                     "candy":{"style":"candyOne","x":150,"y":350},
                     "candy2":{"style":"candyTwo","x":330,"y":350},
                     "star":[
-                        {"style":"star1","x":240,"y":200,"interval":70,"move":[]},
-                        {"style":"star1","x":240,"y":450,"interval":50,"move":[]},
-                        {"style":"star1","x":420,"y":120,"interval":100,"move":[]}
+                        {"style":"star1","x":240,"y":200,"interval":70,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":240,"y":450,"interval":50,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":420,"y":120,"interval":100,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":233,"y":735,"skin":""},
                     "hook":[
@@ -3456,9 +3518,9 @@
                     "candy":{"style":"candyOne","x":90,"y":499},
                     "candy2":{"style":"candyTwo","x":399,"y":499},
                     "star":[
-                        {"style":"star1","x":240,"y":272,"interval":70,"move":[]},
-                        {"style":"star1","x":240,"y":339,"interval":50,"move":[]},
-                        {"style":"star1","x":240,"y":592,"interval":100,"move":[]}
+                        {"style":"star1","x":240,"y":272,"interval":70,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":240,"y":339,"interval":50,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":240,"y":592,"interval":100,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":240,"y":209.5,"skin":""},
                     "hook":[

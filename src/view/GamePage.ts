@@ -286,6 +286,7 @@ export default class GamePage extends Laya.Scene{
         Laya.timer.clear(this,this.mouseCute);
         Laya.timer.clear(this,this.candyTest);
         Laya.timer.clear(this,this.star_MoveBySelf);//清除星星的定时器
+        Laya.timer.clear(this,this.star_RotateByOnePoint);//清除星星的定时器
         this.arr_Rope.forEach(rope => {//取消绳子中的定时器
             rope.clearTimer();
         });
@@ -1156,37 +1157,54 @@ export default class GamePage extends Laya.Scene{
         if(this.arr_Star === undefined)
             this.arr_Star = new Array<Star>();
             let moveArray:Array<Star>=new Array<Star>();
-            let configArray:Array<Star>=new Array<any>();
+            let rotateArray:Array<Star>=new Array<Star>();
+            let configArray1:Array<any>=new Array<any>();
+            let configArray2:Array<any>=new Array<any>();
             for(let i=0;i<3;i++)
             {
                 if(this.arr_Star[i])
                 {
                     this.arr_Star[i].update(starConfig[i]);
+                    //检查是否有移动星星
                     if(starConfig[i].move[0]){
                         starConfig[i].star_X=this.arr_Star[i].sp.x;
                         starConfig[i].star_Y=this.arr_Star[i].sp.y;
                         this.arr_Star[i].isGoing=true;
                         moveArray.push(this.arr_Star[i]);
-                        configArray.push(starConfig[i]);
+                        configArray1.push(starConfig[i]);
+                    }
+                    //检查是否有旋转星星
+                    if(starConfig[i].rotateLength!=0){
+                        rotateArray.push(this.arr_Star[i]);
+                        configArray2.push(starConfig[i]);
                     }
                 }
                 else
                 {
                     this.arr_Star[i] = new Star(this.scene.panel_GameWorld);
                     this.arr_Star[i].init(starConfig[i]); 
+                    //检查是否有移动星星
                     if(starConfig[i].move[0]){
                         starConfig[i].star_X=this.arr_Star[i].sp.x;
                         starConfig[i].star_Y=this.arr_Star[i].sp.y;
                         this.arr_Star[i].isGoing=true;
-                        moveArray.push(this.arr_Star[i]);
-                        configArray.push(starConfig[i]);
-                    }               
+                        moveArray.push(this.arr_Star[i]);  
+                        configArray1.push(starConfig[i]);                      
+                    }
+                    //检查是否有旋转星星
+                    if(starConfig[i].rotateLength!=0){
+                        rotateArray.push(this.arr_Star[i]);
+                        configArray2.push(starConfig[i]);
+                    }           
                 }
+                
             }
             if(moveArray[0]){
-                Laya.timer.frameLoop(1,this,this.star_MoveBySelf,[moveArray,configArray]);
+                Laya.timer.frameLoop(1,this,this.star_MoveBySelf,[moveArray,configArray1]);
             }
-            
+            if(rotateArray[0]){
+                Laya.timer.frameLoop(1,this,this.star_RotateByOnePoint,[rotateArray,configArray2]);
+            }
     }
 
     /**怪物数据初始化 */
@@ -1714,8 +1732,8 @@ export default class GamePage extends Laya.Scene{
                     //检测帽子碰撞的方向，若与帽子口相反，则不进行糖果位移
                     if (((Math.cos(magicHat.sp1.rotation / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && magicHat.rotate1 == 0) ||
                         (Math.cos(magicHat.sp1.rotation / 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && magicHat.rotate1 == 0))
-                        || ((Math.cos(magicHat.sp1.rotation / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && magicHat.rotate1 != 0) ||
-                            (Math.cos(magicHat.sp1.rotation / 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && magicHat.rotate1 != 0))) {
+                        || ((Math.cos((magicHat.sp1.rotation+90) / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && magicHat.rotate1 != 0) ||
+                            (Math.cos((magicHat.sp1.rotation+90 )/ 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && magicHat.rotate1 != 0))) {
                         //断开joint
                         candy.candyDestroyJoint();
                         this.arr_Rope.forEach(rope => {
@@ -2188,6 +2206,15 @@ export default class GamePage extends Laya.Scene{
             }
             } 
         
+    }
+
+    //星星来回旋转
+    private star_RotateByOnePoint(rotateArray:Array<Star>,configArray:Array<any>):void{
+        for(let i=0;i<rotateArray.length;i++){
+            rotateArray[i].rotation+=configArray[i].v;
+            rotateArray[i].sp.pos(configArray[i].star_X+configArray[i].rotateLength*Math.sin(rotateArray[i].rotation/180*Math.PI),
+                                  configArray[i].star_Y+configArray[i].rotateLength*Math.cos(rotateArray[i].rotation/180*Math.PI));
+        }
     }
 }
 

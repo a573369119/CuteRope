@@ -252,6 +252,8 @@ export module Config {
                 starConfig.star_Y = obj.y;
                 starConfig.interval = obj.interval;
                 starConfig.move = obj.move;
+                starConfig.rotateLength = obj.rotateLength;
+                starConfig.v = obj.v;
                 this.arr_Star.push(starConfig);
             });
             console.log("star -解析");
@@ -382,6 +384,10 @@ export module Config {
         public interval:number;
         /**移动到某点 */
         public move:Array<number>;
+        /**绕某点做圆周运动的半径长 */
+        public rotateLength:number;
+        /**绕某点做圆周运动的速度 */
+        public v:number;
         /**星星初始x位置**/
         public star_X : number;
         /**星星初始y位置**/

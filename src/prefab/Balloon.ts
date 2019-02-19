@@ -15,12 +15,18 @@ export default class Balloon{
     public isSlow:boolean;
     /**加入的层 */
     public view : Laya.Panel;
+    /**合并第一次 */
+    public isFirst : Boolean;
+    /**是否合并 */
+    public isToOne : Boolean;
     constructor(view){
         this.view=view;
     }
 
     //初始化泡泡
     init(data):void{
+        this.isToOne = false;
+        this.isFirst = false;
         this.isCollision=false;
         this.isSlow=false;
         this.balloon_CreateSprite(data.balloon_X,data.balloon_Y);
@@ -30,6 +36,8 @@ export default class Balloon{
     
     //更新状态
     update(data):void{
+        this.isToOne = false;        
+        this.isFirst = false;
         this.isCollision=false;
         this.isSlow=false;
         let randNum=Math.ceil(Math.random()*3);
@@ -93,7 +101,7 @@ export default class Balloon{
 
     
     //漂浮功能
-    balloon_Float(candySp:Laya.Sprite,arr_Body:Array<Laya.RigidBody>):void{
+    balloon_Float(candySp:Laya.Sprite,arr_Body:Array<Laya.RigidBody>,candy2,isToOne):void{///@TO DO 优化
         //追踪糖果位置
         this.sp.pos(candySp.x,candySp.y);
         this.anim1.pos(candySp.x,candySp.y);
@@ -106,16 +114,28 @@ export default class Balloon{
                 continue;
             }
         }
+        //如果碎糖果2
+        if(candy2)
+        {
+            if(this.isFirst == true)
+            {
+                this.isFirst = false;
+                this.isSlow = false;
+            }
+        }
         if(!this.isSlow){
             for(let i=0;i<arr_Body.length;i++){               
                 if(Math.abs(arr_Body[i].linearVelocity.y)<=1){
                     this.isSlow=true;
                     arr_Body[i].linearDamping=0.03;
+                    this.candy2NeedGo(candy2,isToOne,0.03);                    
                     // console.log("中立");
                 }else if(Math.abs(arr_Body[i].linearVelocity.y)>1&&Math.abs(arr_Body[i].linearVelocity.y)<=4.5){
                     arr_Body[i].linearDamping=25;
+                    this.candy2NeedGo(candy2,isToOne,25);
                 }else{
                     arr_Body[i].linearDamping=18;
+                    this.candy2NeedGo(candy2,isToOne,18);
                 }
             }
         }
@@ -125,11 +145,32 @@ export default class Balloon{
                 {
                     if(arr_Body[i].owner) arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.9,y:-3});
                     // console.log("失败");
+                    if(candy2 && this.isToOne == true)
+                    {
+                        let arr_Body = candy2.arr_Body;
+                        for(let i =0 ;i<arr_Body.length;i++)
+                        {
+                            arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.9,y:-3});
+                        }
+                    }
                 }
             
         }    
            
         
+    }
+
+    /**判断是否是融合之后的candy 进入气泡 */
+    private candy2NeedGo(candy2,isToOne,num) : void
+    {
+        if(candy2 && this.isToOne == true)
+        {
+            let arr_Body = candy2.arr_Body;
+            for(let i =0 ;i<arr_Body.length;i++)
+            {
+                arr_Body[i].linearDamping=num;
+            }
+        }
     }
 
     //为泡泡添加点击事件，点击到则泡泡爆炸
@@ -150,6 +191,8 @@ export default class Balloon{
         this.anim2.on(Laya.Event.COMPLETE,this,this.completeBoom);
         this.sp.x=-10;
         this.sp.y=-10;
+        this.isSlow = false;
+        this.isToOne = false;
         candy.isExistBalloon=false;
         console.log("出现了几次泡泡爆炸")
     }

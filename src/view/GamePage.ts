@@ -123,7 +123,7 @@ export default class GamePage extends Laya.Scene{
     private init() : void
     {
         ///物理线
-        // Laya.PhysicsDebugDraw.enable();
+        Laya.PhysicsDebugDraw.enable();
         //舞台尺寸
         Laya.stage.width = 480;
         Laya.stage.height = 800;
@@ -1212,6 +1212,7 @@ export default class GamePage extends Laya.Scene{
         {
             this.candy = new Candy(this.scene.panel_GameWorld);
             this.candy.init({"x":candyConfig.candy_X,"y":candyConfig.candy_Y,"style":candyConfig.style},num);
+            this.candy.ToOneAnimation();
             /**-------是否初始化糖果碎片----- */
             if(arr_Knife[0]||arr_Laser[0]){
                 this.candy.createCandyApart();
@@ -1290,6 +1291,7 @@ export default class GamePage extends Laya.Scene{
             else
             {
                 //TO DO
+                rope.setHookIndex(arr_Rope[i].hookIndex);//铆钉节点                
                 rope.rePlay(this.arr_RemRope[i],arr_Hook[arr_Rope[i].hookIndex].style);
             }
             this.arr_Rope.push(rope);
@@ -1309,25 +1311,24 @@ export default class GamePage extends Laya.Scene{
             }
             else
             {
+                rope.setHookIndex(arr_Rope2[i].hookIndex);                
                 rope.rePlay(this.arr_RemRope2[i],arr_Hook[arr_Rope2[i].hookIndex].style);
             }
             this.arr_Rope2.push(rope);
             }
         }
         //滑动条需要绑定绳子
-        for(let i = 0; i< arr_Rope.length;i++)
+        for(let i = 0; i< this.arr_Hook.length;i++)
         {
-            
-            if(this.arr_Hook[i].length)
+            for(let h=0;h<this.arr_Rope.length;h++)
             {
-                this.arr_Hook[i].setRopePoint(this.arr_Rope[i].ropePointsArray[0]);
+                if(this.arr_Rope[h].hookIndex == i && this.arr_Hook[i].length)
+                this.arr_Hook[i].setRopePoint(this.arr_Rope[h].ropePointsArray[0]);
             }
-        }
-        for(let i = 0; i< arr_Rope2.length;i++)
-        {
-            if(this.arr_Hook[i].length)
+            for(let h=0;h<this.arr_Rope2.length;h++)
             {
-                this.arr_Hook[i].setRopePoint(this.arr_Rope2[i].ropePointsArray[0]);
+                if(this.arr_Rope2[h].hookIndex == i && this.arr_Hook[i].length)                
+                this.arr_Hook[i].setRopePoint(this.arr_Rope2[h].ropePointsArray[0]);
             }
         }
         
@@ -1514,14 +1515,27 @@ export default class GamePage extends Laya.Scene{
         let candyTwoX = this.candy2.arr_Sp[0].x + this.scene.panel_GameWorld.x;
         let candyTwoY = this.candy2.arr_Sp[0].y + this.scene.panel_GameWorld.y;
         let dic = this.countDic_Object({x:candyOneX,y:candyOneY},{x:candyTwoX,y:candyTwoY});
-        if(dic < 25 && this.isToOne == false)
+        if(dic < 40 && this.isToOne == false)
         {//合并
             this.candy2.CandytoOne(this.candy.arr_Sp[0]);
+            this.candy.playAni(this.candy.arr_Sp[0].x,this.candy.arr_Sp[0].y);
             if(this.arr_Balloon) 
             {
                 if(this.arr_Balloon[this.candy2.balloonIndex]) this.arr_Balloon[this.candy2.balloonIndex].balloon_ClickBoom(this.candy2);
             }
-            this.isToOne = true;        
+            this.isToOne = true;    
+            //判断是否有再泡泡中,参数重置
+            if(!this.arr_Balloon) return;
+            this.arr_Balloon.forEach(Balloon => {
+                if(this.candy.isExistBalloon)
+                {
+                    this.candy.arr_Body.forEach(body => {
+                        body.linearVelocity = this.candy2.arr_Body[0].linearVelocity;
+                    });
+                    Balloon.isFirst = true;
+                }
+                Balloon.isToOne = true;
+            });    
         }
     }
 
@@ -1690,7 +1704,7 @@ export default class GamePage extends Laya.Scene{
                         balloon.sp.alpha = 0;
                         balloon.anim1.visible = true;
                         balloon.anim1.play(0, true);
-                        Laya.timer.frameLoop(1, balloon, balloon.balloon_Float, [candy.arr_Sp[0], candy.arr_Body]);
+                        Laya.timer.frameLoop(1, balloon, balloon.balloon_Float, [candy.arr_Sp[0], candy.arr_Body,this.candy2,this.isToOne]);
                         balloon.sp.on(Laya.Event.MOUSE_DOWN, balloon, balloon.balloon_ClickBoom, [candy]);
                         }
                     }

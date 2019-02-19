@@ -30,6 +30,8 @@ export default class Candy{
     public isExistBalloon:boolean;
     /**碎糖果记录所在泡泡 */
     public balloonIndex : number;
+    /**动画 */
+    private aniToOne : Laya.Animation;
 
     constructor(view){
         this.view = view;
@@ -49,6 +51,7 @@ export default class Candy{
         this.candy_X=data.x;
         this.candy_Y=data.y;
         this.style = data.style;
+        this.balloonIndex = -1;
         this.candy_CreateSprite(data.x,data.y,data.style);
         this.candy_AddBody();
         this.candy_AddCom();
@@ -62,6 +65,7 @@ export default class Candy{
         this.count = count;
         this.candy_X=data.x;
         this.candy_Y=data.y;
+        this.balloonIndex = -1;
         this.style=data.style;
         this.candy_CreateSprite(data.x,data.y,data.style);
         this.arr_Sp[0].visible = true;
@@ -225,6 +229,38 @@ export default class Candy{
 			}
         });
         ////
+    }
+
+    /**糖果合并 动画 */
+    public ToOneAnimation() : void
+    {
+        this.aniToOne = new Laya.Animation();
+        let url = [];
+        for(let i=0;i<6;i++)
+        {
+            url.push("gameView/toOne/"+ (i+1) + ".png");
+        }
+        this.aniToOne.pivot(313/2,298/2);
+        this.aniToOne.loadImages(url);
+        this.aniToOne.interval = 60;
+        this.aniToOne.x = -500;
+        this.aniToOne.y = -500;
+        this.view.addChild(this.aniToOne);
+    }
+
+    public playAni(x,y) : void
+    {
+
+        this.aniToOne.x = x;
+        this.aniToOne.y = y;
+        this.aniToOne.play(0,false);
+        this.aniToOne.on(Laya.Event.COMPLETE,this,this.aniOver);
+    }
+
+    private aniOver() : void
+    {
+        this.aniToOne.x = -500;
+        this.aniToOne.y = -500;
     }
 
     /** 糖果 被吃*/

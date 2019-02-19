@@ -257,7 +257,7 @@ import Dic from "../Tool/dic";
             return;
         }
         this.ropePointsArray[0].ropeJoint_Last(candy,(this.ropePointsArray.length-3)*(GameConfig.ROPE_DIC+3));
-        console.log(this.ropePointsArray[0].sp);
+        // console.log(this.ropePointsArray[0].sp);
     }
     
     /**角度处理函数
@@ -320,7 +320,7 @@ import Dic from "../Tool/dic";
     public pointDestroy() : void
     {
         this.ropePointsArray.forEach(point => {
-            point.sp.alpha -=0.01;
+            point.sp.alpha -=0.03;
         });
         if(this.ropePointsArray[0].sp.alpha <= 0)
         {

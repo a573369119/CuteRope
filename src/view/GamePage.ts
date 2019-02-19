@@ -286,6 +286,7 @@ export default class GamePage extends Laya.Scene{
         Laya.timer.clear(this,this.mouseCute);
         Laya.timer.clear(this,this.candyTest);
         Laya.timer.clear(this,this.star_MoveBySelf);//清除星星的定时器
+        Laya.timer.clear(this,this.star_RotateByOnePoint);//清除星星的定时器
         this.arr_Rope.forEach(rope => {//取消绳子中的定时器
             rope.clearTimer();
         });
@@ -1156,37 +1157,54 @@ export default class GamePage extends Laya.Scene{
         if(this.arr_Star === undefined)
             this.arr_Star = new Array<Star>();
             let moveArray:Array<Star>=new Array<Star>();
-            let configArray:Array<Star>=new Array<any>();
+            let rotateArray:Array<Star>=new Array<Star>();
+            let configArray1:Array<any>=new Array<any>();
+            let configArray2:Array<any>=new Array<any>();
             for(let i=0;i<3;i++)
             {
                 if(this.arr_Star[i])
                 {
                     this.arr_Star[i].update(starConfig[i]);
+                    //检查是否有移动星星
                     if(starConfig[i].move[0]){
                         starConfig[i].star_X=this.arr_Star[i].sp.x;
                         starConfig[i].star_Y=this.arr_Star[i].sp.y;
                         this.arr_Star[i].isGoing=true;
                         moveArray.push(this.arr_Star[i]);
-                        configArray.push(starConfig[i]);
+                        configArray1.push(starConfig[i]);
+                    }
+                    //检查是否有旋转星星
+                    if(starConfig[i].rotateLength!=0){
+                        rotateArray.push(this.arr_Star[i]);
+                        configArray2.push(starConfig[i]);
                     }
                 }
                 else
                 {
                     this.arr_Star[i] = new Star(this.scene.panel_GameWorld);
                     this.arr_Star[i].init(starConfig[i]); 
+                    //检查是否有移动星星
                     if(starConfig[i].move[0]){
                         starConfig[i].star_X=this.arr_Star[i].sp.x;
                         starConfig[i].star_Y=this.arr_Star[i].sp.y;
                         this.arr_Star[i].isGoing=true;
-                        moveArray.push(this.arr_Star[i]);
-                        configArray.push(starConfig[i]);
-                    }               
+                        moveArray.push(this.arr_Star[i]);  
+                        configArray1.push(starConfig[i]);                      
+                    }
+                    //检查是否有旋转星星
+                    if(starConfig[i].rotateLength!=0){
+                        rotateArray.push(this.arr_Star[i]);
+                        configArray2.push(starConfig[i]);
+                    }           
                 }
+                
             }
             if(moveArray[0]){
-                Laya.timer.frameLoop(1,this,this.star_MoveBySelf,[moveArray,configArray]);
+                Laya.timer.frameLoop(1,this,this.star_MoveBySelf,[moveArray,configArray1]);
             }
-            
+            if(rotateArray[0]){
+                Laya.timer.frameLoop(1,this,this.star_RotateByOnePoint,[rotateArray,configArray2]);
+            }
     }
 
     /**怪物数据初始化 */
@@ -1389,26 +1407,21 @@ export default class GamePage extends Laya.Scene{
             if(this.arr_ForceBall[i])
             {
                 this.arr_ForceBall[i].update({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
-                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
+                //碎糖果的推力球注册
+                if(!this.candy2)
+                    this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
+                else
+                    this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon,this.candy2]);
             }
             else
             {
                 this.arr_ForceBall[i] = new ForceBall(this.scene.panel_GameWorld);
                 this.arr_ForceBall[i].init({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
-                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
-            }
-            //碎糖果的推力球注册
-            if(!this.candy2) continue;
-            if(this.arr_ForceBall[i])
-            {
-                this.arr_ForceBall[i].update({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
-                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy2,this.arr_Balloon]);
-            }
-            else
-            {
-                this.arr_ForceBall[i] = new ForceBall(this.scene.panel_GameWorld);
-                this.arr_ForceBall[i].init({"forceball_X":arr_ForceBall[i].forceball_X,"forceball_Y":arr_ForceBall[i].forceball_Y,"rotation":arr_ForceBall[i].rotation});
-                this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy2,this.arr_Balloon]);
+                 //碎糖果的推力球注册
+                if(!this.candy2)
+                    this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon]);
+                else
+                    this.arr_ForceBall[i].sp.on(Laya.Event.MOUSE_DOWN,this.arr_ForceBall[i],this.arr_ForceBall[i].forceball_applyForce,[this.candy,this.arr_Balloon,this.candy2]);
             }
         }
         console.log(this.arr_ForceBall);
@@ -1737,8 +1750,8 @@ export default class GamePage extends Laya.Scene{
                     //检测帽子碰撞的方向，若与帽子口相反，则不进行糖果位移
                     if (((Math.cos(magicHat.sp1.rotation / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && magicHat.rotate1 == 0) ||
                         (Math.cos(magicHat.sp1.rotation / 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && magicHat.rotate1 == 0))
-                        || ((Math.cos(magicHat.sp1.rotation / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && magicHat.rotate1 != 0) ||
-                            (Math.cos(magicHat.sp1.rotation / 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && magicHat.rotate1 != 0))) {
+                        || ((Math.cos((magicHat.sp1.rotation+90) / 180 * Math.PI) >= 0 && candy.arr_Body[0].linearVelocity.y >= 0 && magicHat.rotate1 != 0) ||
+                            (Math.cos((magicHat.sp1.rotation+90 )/ 180 * Math.PI) <= 0 && candy.arr_Body[0].linearVelocity.y <= 0 && magicHat.rotate1 != 0))) {
                         //断开joint
                         candy.candyDestroyJoint();
                         this.arr_Rope.forEach(rope => {
@@ -1835,21 +1848,28 @@ export default class GamePage extends Laya.Scene{
     private testForceBall(x,y){
         if(!this.arr_ForceBall) return;
         //检测糖果是否进入推力球检测区域，若在区域内点击推力球触发推力功能
-        this.testPublicForceBall(this.candy);
-        if(this.candy2) this.testPublicForceBall(this.candy2);
+        this.testPublicForceBall(this.candy,1);
+        if(this.candy2) this.testPublicForceBall(this.candy2,2);
     }
-
-    private testPublicForceBall(candy) {
+    /**1是 主糖果  2是 副糖果 */
+    private testPublicForceBall(candy,index) {
         let collide;
         this.arr_ForceBall.forEach(forceball => {
-            // console.log(this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x);
+            // console.log(candy.arr_Sp[0].x + "   " + candy.arr_Sp[0].y);
+            console.log(forceball.spRect.x + "   -    " +  forceball.spRect.y);
             collide = forceball.spRect.hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x, candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
             if (collide) {
-                forceball.isApplyForce = true;
+                if(index == 1)  
+                    forceball.isApplyForce = true;
+                else
+                    forceball.isApplyForce_candy2 = true;
                 // console.log(forceball.clickCount);
             }
             else {
-                forceball.isApplyForce = false;
+                if(index == 1)  
+                    forceball.isApplyForce = false;
+                else
+                    forceball.isApplyForce_candy2 = false;
                 forceball.clickCount = 0;
             }
         });
@@ -1859,7 +1879,7 @@ export default class GamePage extends Laya.Scene{
         if(!this.arr_Laser) return;
         //检测糖果是否进入激光检测区域，若在区域内则糖果破裂
         this.testPublicLaser(this.candy);
-        this.testPublicLaser(this.candy2);
+        if(this.candy2) this.testPublicLaser(this.candy2);
     }
 
     private testPublicLaser(candy) {
@@ -2211,6 +2231,15 @@ export default class GamePage extends Laya.Scene{
             }
             } 
         
+    }
+
+    //星星来回旋转
+    private star_RotateByOnePoint(rotateArray:Array<Star>,configArray:Array<any>):void{
+        for(let i=0;i<rotateArray.length;i++){
+            rotateArray[i].rotation+=configArray[i].v;
+            rotateArray[i].sp.pos(configArray[i].star_X+configArray[i].rotateLength*Math.sin(rotateArray[i].rotation/180*Math.PI),
+                                  configArray[i].star_Y+configArray[i].rotateLength*Math.cos(rotateArray[i].rotation/180*Math.PI));
+        }
     }
 }
 

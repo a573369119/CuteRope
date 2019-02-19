@@ -16,6 +16,8 @@ import Balloon from "./Balloon";
     public view : Laya.Panel;
     /**是否可推力 */
     public isApplyForce:boolean;
+    /**是否可推力 */
+    public isApplyForce_candy2:boolean;
     /**旋转的角度 */
     public Rotation:number;
     /**点击次数 */
@@ -28,6 +30,7 @@ import Balloon from "./Balloon";
 
     //初始化推力球,根据当前关调整旋转得角度
     init(data):void{
+        this.isApplyForce_candy2 = false;
         this.isApplyForce=false;
         this.forceball_CreateSprite(data.forceball_X,data.forceball_Y,data.rotation);
         this.forceball_ApplyForceAnim(data.forceball_X,data.forceball_Y,data.rotation);
@@ -38,6 +41,7 @@ import Balloon from "./Balloon";
 
     //更新状态
     update(data):void{
+        this.isApplyForce_candy2 = false;
         this.isApplyForce=false;
         this.sp.visible=true;
         this.sp.rotation=data.rotation;
@@ -85,7 +89,7 @@ import Balloon from "./Balloon";
     }
 
     //发动推力功能，给糖果施加一个力
-    forceball_applyForce(candy:Candy,balloonArray:Array<Balloon>):void{        
+    forceball_applyForce(candy:Candy,balloonArray:Array<Balloon>,candy2?):void{        
         this.anim1.play(0,false);
         if(this.isPlayAnim2_1){
             this.anim2_1.play(0,false);
@@ -94,7 +98,17 @@ import Balloon from "./Balloon";
             this.anim2_2.play(0,false);
             this.isPlayAnim2_1=true;
         }
-        if(this.isApplyForce){
+        this.publicApplyForce(candy,balloonArray,1);
+        if(candy2) this.publicApplyForce(candy2,balloonArray,2);
+    }
+
+    //**施加力 1 是主糖果 2是副糖果*/
+    private publicApplyForce(candy,balloonArray,index) : void
+    {
+
+        let isApplyForce = this.isApplyForce;
+        if(index == 2) isApplyForce = this.isApplyForce_candy2;
+        if(isApplyForce){
             for(let i=0;i<candy.arr_Body.length;i++){
                 if(this.clickCount>2){
                     this.clickCount=2;
@@ -112,7 +126,6 @@ import Balloon from "./Balloon";
             this.clickCount++;
             
         }
-        
     }
     
     //移除事件

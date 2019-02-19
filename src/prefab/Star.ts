@@ -23,12 +23,15 @@ import Tool from "../Tool/Tool";
     public isDestroy : boolean;
     /**帧率 */
     public interval : number;
+    /**旋转角度 */
+    public rotation;
     constructor(view){
         this.view = view;
     }
 
     //初始化,"star1"为普通星星，"star2"为有时间寿命得星星
     init(data):void{
+        this.rotation=0;
         this.isDestroy = false;     
         this.sp = new Laya.Sprite();
         this.sp.width=40;
@@ -41,7 +44,6 @@ import Tool from "../Tool/Tool";
         this.sp.y=data.star_Y;
         this.sp.zOrder = 100;
         this.style=data.style;
-        
        /* if(data.move[0]){
             this.star_X=this.sp.x;
             this.star_Y=this.sp.y;
@@ -51,6 +53,7 @@ import Tool from "../Tool/Tool";
     }
     //更新状态
     update(data):void{
+        this.rotation=0;
         this.isDestroy = false;        
         this.sp.visible = true;
         this.sp.x=data.star_X;

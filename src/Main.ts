@@ -41,16 +41,6 @@ class Main {
 			
 		];
 		Laya.loader.load(src,Laya.Handler.create(this,this.onLoad));
-
-		// Laya.loader.load([{url:"http://148.70.209.170/can.json"}],Laya.Handler.create(this,Load));
-		// function Load()
-		// {
-		// 	let obj= Laya.loader.getRes("http://148.70.209.170/can.json");
-		// 	if(obj.can == "1")
-		// 	{
-		// 		console.log("死循环");
-		// 	}
-		// }
 	}
 	
 	private onLoad() : void

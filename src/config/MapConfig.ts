@@ -77,6 +77,8 @@ export module Config {
         public arr_Laser : Array<LaserConfig>;
         /**蜘蛛 */
         public arr_Spider : Array<SpiderConfig>;
+        /**弹力鼓 */
+        public arr_bounceDrum : Array<BounceDrumConfig>;
         
         constructor(data){
             this.screenRoad = [];
@@ -93,6 +95,7 @@ export module Config {
             this.arr_Forceball=[];
             this.arr_Laser=[];
             this.arr_Spider=[];
+            this.arr_bounceDrum=[];
             this.parseConfigData(data);
         }
 
@@ -133,6 +136,8 @@ export module Config {
             this.parseLaser(data.laser);
             /**蜘蛛解析 */
             this.parseSpider(data.spider);
+            /**弹力鼓解析 */
+            this.parseBounceDrum(data.bounceDrum);
         }
 
         /**蜘蛛 */
@@ -150,6 +155,27 @@ export module Config {
                         });
                 console.log("spider -解析");    
                 
+            }
+        }
+
+        /**弹力鼓解析 */
+        private parseBounceDrum(bounceDrumObject) : void
+        {
+            if(!bounceDrumObject) return;
+            let bounceDrumConfig : BounceDrumConfig;
+            for(let i=0; i<bounceDrumObject.length; i++)
+            {
+                bounceDrumConfig = new BounceDrumConfig();
+                bounceDrumConfig.bounceDrum_X = bounceDrumObject[i].x;
+                bounceDrumConfig.bounceDrum_Y = bounceDrumObject[i].y;    
+                bounceDrumConfig.rotation = bounceDrumObject[i].rotation;
+                bounceDrumConfig.size = bounceDrumObject[i].size; 
+
+                if(bounceDrumObject[i].moveTo) bounceDrumConfig.moveTo = bounceDrumObject[i].moveTo;
+                if(bounceDrumObject[i].rotationV) bounceDrumConfig.rotationV = bounceDrumObject[i].rotationV;
+                if(bounceDrumObject[i].power) bounceDrumConfig.power = bounceDrumObject[i].power;        
+
+                this.arr_bounceDrum.push(bounceDrumConfig);
             }
         }
 
@@ -529,4 +555,22 @@ export module Config {
         /**所在绳子的下标 */
         public ropeIndex : number;
     } 
+
+    /**弹力鼓 */
+    export class BounceDrumConfig{
+        /**横坐标 */
+        public bounceDrum_X: number ;
+        /**纵坐标 */
+        public bounceDrum_Y: number;
+        /**方向 */
+        public rotation : number;
+        /**缩放倍数 正常大小 1**/
+        public size : number;
+        /**弹力系数 */
+        public power : number;
+        /**旋转速度 */
+        public rotationV : number;
+        /**移动到 */
+        public moveTo : Array<any>;
+    }
 }

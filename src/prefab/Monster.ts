@@ -62,7 +62,7 @@ export default class Monster{
         if(!isLoop) isLoop=false;
         this.aniStr = aName;
         this.ani.loadImages(this.aniUrls(aName,this.getAniLength(aName)));
-        this.ani.interval = 60;
+        this.ani.interval = 50;
         this.ani.play(0,isLoop);
     } 
     /**

@@ -16,6 +16,7 @@ import { PlayerData } from "./Config/PlayerData";
 import ForceBall from "../prefab/ForceBall";
 import Laser from "../prefab/Laser";
 import Spider from "../prefab/Spider";
+import { BouceDrum } from "../prefab/bounceDrum";
  /**
  * 游戏界面 ani  1：开门动画 2： 
  */
@@ -79,6 +80,8 @@ export default class GamePage extends Laya.Scene{
     public arr_Laser:Array<Laser>;
     /**蜘蛛 */
     public arr_Spider:Array<Spider>;
+    /**弹力鼓 */
+    public arr_bounceDrum : Array<BouceDrum>;
     //-------------------------------------------
     /**透明度转折变量 */
     private alphaZ : number = 0;
@@ -342,6 +345,12 @@ export default class GamePage extends Laya.Scene{
         {
             this.arr_Spider.forEach(spider =>{
                 spider.clearTimer();
+            });
+        }
+        if(this.arr_bounceDrum)
+        {
+            this.arr_bounceDrum.forEach(bounceDrum =>{
+                bounceDrum.clearTimer();
             });
         }
    }
@@ -706,6 +715,9 @@ export default class GamePage extends Laya.Scene{
         this.openDoorInit(this.mapConfig.arr_Rope,this.mapConfig.arr_Rope2);
         //激光数据初始化
         this.laserInit(this.mapConfig.arr_Laser);
+        //弹力鼓数据初始化
+        this.bounceDrumInit(this.mapConfig.arr_bounceDrum);
+
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
         //绳子寻找破碎糖果
@@ -1128,6 +1140,26 @@ export default class GamePage extends Laya.Scene{
         }    
     }
 
+    /**弹力鼓初始化 */
+    private bounceDrumInit(arr_bounceDrum) : void
+    {
+        if(!arr_bounceDrum) return;
+        if(!this.arr_bounceDrum)
+        {
+            this.arr_bounceDrum = new Array<BouceDrum>();
+        }
+        let bounceDrum;
+        for(let i=0; i < arr_bounceDrum.length; i++)
+        {
+            if(this.arr_bounceDrum[i] === undefined)
+            {
+                bounceDrum  = new BouceDrum(this.scene.panel_GameWorld);
+                this.arr_bounceDrum.push(bounceDrum);
+            }
+            this.arr_bounceDrum[i].init(arr_bounceDrum[i]);
+        }
+    }
+
   /**蜘蛛数据初始化 */
   private spiderInit(arr_Spider) : void
   {
@@ -1492,8 +1524,8 @@ export default class GamePage extends Laya.Scene{
     private candyTest() : void
     {
         //x 
-        let x = this.candy.arr_Sp[0].x;
-        let y = this.candy.arr_Sp[0].y;
+        let x = this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x;
+        let y = this.candy.arr_Sp[0].y - this.scene.panel_GameWorld.y;
         // console.log(x + "," + y);
         //与怪物的距离检测 - 碎糖果已处理 没测试
         this.testMonster(x,y);
@@ -1513,11 +1545,23 @@ export default class GamePage extends Laya.Scene{
         this.testForceBall(x,y);
         //与激光的距离检测  - 碎糖果已处理 没测试
         this.testLaser(x,y);
+        //与弹力鼓的距离检测 - 碎糖果已处理 没测试 -注册
+        this.testBounceDrum(x,y);
         //与鼠标的距离检测 - 超能力 - 碎糖果已处理
         this.testSuper(x,y);
         //碎糖果与碎糖果的距离检测 
         if(this.candy2) this.testCandyAndCandy(x,y);
         // console.log(this.candy.isExistBalloon);
+    }
+
+    /**弹力鼓与弹力鼓的距离检测 */
+    private testBounceDrum(x,y) : void
+    {
+        if(!this.arr_bounceDrum) return;
+        for(let i = 0; i< this.arr_bounceDrum.length; i++)
+        {
+            this.arr_bounceDrum[i].testBounceDrum(this.candy,this.candy2,this.scene.panel_GameWorld.x,this.scene.panel_GameWorld.y);
+        }
     }
 
     /**碎糖果与碎糖果的距离检测 */
@@ -1736,6 +1780,7 @@ export default class GamePage extends Laya.Scene{
     }
     /**魔法帽的检测  通用*/
     private testPublicTest(candy) {
+        if(!this.isToOne) return;
         this.arr_MagicHat.forEach(magicHat => {
             let collide1 = magicHat.sp1.hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x, candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
             let collide2 = magicHat.sp2.hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x, candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
@@ -1856,7 +1901,7 @@ export default class GamePage extends Laya.Scene{
         let collide;
         this.arr_ForceBall.forEach(forceball => {
             // console.log(candy.arr_Sp[0].x + "   " + candy.arr_Sp[0].y);
-            console.log(forceball.spRect.x + "   -    " +  forceball.spRect.y);
+            // console.log(forceball.spRect.x + "   -    " +  forceball.spRect.y);
             collide = forceball.spRect.hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x, candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
             if (collide) {
                 if(index == 1)  
@@ -1918,8 +1963,11 @@ export default class GamePage extends Laya.Scene{
         {
             let candy = this.candy.arr_Sp[0].getComponents(Laya.RigidBody)[0] as Laya.RigidBody;
             this.superPower(y, candy, x);
-            let candy2 = this.candy2.arr_Sp[0];          
-            this.superPower(candy2.y,candy2.getComponents(Laya.RigidBody)[0],candy2.x);
+            if(this.candy2)
+            {
+                let candy2 = this.candy2.arr_Sp[0];          
+                this.superPower(candy2.y,candy2.getComponents(Laya.RigidBody)[0],candy2.x);
+            }
         }
         else if(y<-200||y>this.mapHight)
         {

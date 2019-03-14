@@ -94,6 +94,8 @@ export default class Candy{
             if(i!=0) this.arr_Sp[i].visible = false; 
             this.view.addChild(this.arr_Sp[i]);
         }
+        //
+        this.mouseJoint();
     }
 
     //添加RigidBody组件,设置刚体属性
@@ -175,6 +177,15 @@ export default class Candy{
         let body = this.arr_Body[index] ;
         return body;
 
+    }
+
+    /**给糖果添加mouseJoint */
+    private mouseJoint() : void
+    {
+        let mouseJoint = new Laya.MouseJoint();
+        mouseJoint.selfBody = this.arr_Body[0];
+        mouseJoint.maxForce = 2000000;
+        this.arr_Sp[0].addComponentIntance(mouseJoint);
     }
 
     /**临时创建结合体 */
@@ -434,5 +445,21 @@ export default class Candy{
         this.arr_Sp[0].pos(candyOneSp.x,candyOneSp.y);
         this.arr_Sp[0].visible = false;
         this.arr_Sp[0].addComponentIntance(weldJoint);
+    }
+
+    /**给糖果赋值速度 */
+    public setApplyForce(obj1,obj2) : void
+    {
+        console.log(this.arr_Body.length);
+        this.arr_Body.forEach(body => {
+            body.applyForce(obj1,obj2);
+        });
+    }    
+    /**给糖果赋值速度 */
+    public setApplyV(obj2) : void
+    {
+        this.arr_Body.forEach(body => {
+            body.applyLinearImpulseToCenter(obj2);
+        });
     }
 }

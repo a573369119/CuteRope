@@ -61,8 +61,8 @@ export default class RopePoint{
 		}
 		if(this.index == 0)
 		{
-			this.sp.width = 60;
-			this.sp.height = 60;
+			this.sp.width = 5;
+			this.sp.height = 5;
 		}
 		else if(this.index < 2)
 		{
@@ -112,7 +112,13 @@ export default class RopePoint{
 		colider.width = this.sp.width;
 		colider.height = this.sp.height;
 		colider.density = density;
-		colider.isSensor = true;
+		colider.isSensor = false;
+		if(this.index == 0) 
+		{
+			colider.width = 2;
+			colider.height = 2;
+			colider.isSensor = false;
+		}
 		this.sp.addComponentIntance(colider);
     }
 

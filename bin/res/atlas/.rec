@@ -256,6 +256,13 @@ R 8E5AB106 jiaodao_l.png
 R 59B2E47F lamp.png
 R 086E2414 loadingBg.jpg
 R C5973349 startGameBg.jpg
+D gameView/bounceDrum
+P CD3F4BCF 1.png
+P 89D151BF 2.png
+P 1B3864C5 3.png
+P AB423C88 4.png
+P 89D151BF 5.png
+P 07ED1C40 bounceDrum.png
 D gameView/gameBg
 P 252A75DC boxBg_1.png
 P 7EA643A1 boxBg_10.png
@@ -324,6 +331,7 @@ P B145F492 boxDoor_2.png
 P 4F25C8B6 boxDoor_3.png
 P 3F8B0FC8 boxDoor_4.png
 P 1A9F3877 boxDoor_5.png
+R 83C9D1CE boxDoor_6.png
 P 33E02D0C boxDoor_7.png
 P CCA88F5B boxDoor_8.png
 P B68D78F2 boxDoor_9.png

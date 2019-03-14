@@ -380,13 +380,23 @@ import Dic from "../Tool/dic";
     //         this.arr_ImgRope[i].y = 0 + dic*this.rotationDeal(lastPoint.sp.x,lastPoint.y,nextPoint.x,nextPoint.y,"sin");
     //     }
     // }
-     /**绳子同步移动 */
-     public moveTogether() : void
-     {
-         this.ropePointsArray.forEach(RopePoint => {
-             RopePoint.sp.x += 0;
-             RopePoint.sp.y += 0;
-         });
-     }
+    
+    /**绳子同步移动 */
+    public moveTogether() : void
+    {
+        this.ropePointsArray.forEach(RopePoint => {
+            RopePoint.sp.x += 0;
+            RopePoint.sp.y += 0;
+        });
+    }
+    /***旋转变长逻辑*/
+    private toLong() : void
+    {
+
+    }
+
+    /**绳子变短逻辑 */
+
+
 }
 

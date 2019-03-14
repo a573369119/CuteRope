@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2019/03/09-20:34:34.178 8a4 Reusing MANIFEST D:\git\cuteRope\CuteRope\.laya\chrome\Default\Session Storage/MANIFEST-000001
 2019/03/09-20:34:34.194 8a4 Recovering log #10
 2019/03/09-20:34:34.241 8a4 Reusing old log D:\git\cuteRope\CuteRope\.laya\chrome\Default\Session Storage/000010.log 
+=======
+2019/02/21-12:16:27.892 4132 Reusing MANIFEST F:\mb\gitGame\CuteRope\CuteRope\.laya\chrome\Default\Session Storage/MANIFEST-000001
+2019/02/21-12:16:27.892 4132 Recovering log #3
+2019/02/21-12:16:27.893 4132 Reusing old log F:\mb\gitGame\CuteRope\CuteRope\.laya\chrome\Default\Session Storage/000003.log 
+>>>>>>> mbfetch

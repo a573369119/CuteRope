@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2019/03/09-20:33:41.942 1db4 Reusing MANIFEST leveldb/MANIFEST-000001
 2019/03/09-20:33:41.943 1db4 Recovering log #1096
 2019/03/09-20:33:41.957 1db4 Reusing old log leveldb/001096.log 
+=======
+2019/02/21-14:32:34.146 8520 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/02/21-14:32:34.146 8520 Recovering log #3
+2019/02/21-14:32:34.147 8520 Reusing old log leveldb/000003.log 
+>>>>>>> mbfetch

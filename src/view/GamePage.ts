@@ -1870,7 +1870,6 @@ export default class GamePage extends Laya.Scene{
                     forceball.isApplyForce = false;
                 else
                     forceball.isApplyForce_candy2 = false;
-                forceball.clickCount = 0;
             }
         });
     }

@@ -20,8 +20,6 @@ import Balloon from "./Balloon";
     public isApplyForce_candy2:boolean;
     /**旋转的角度 */
     public Rotation:number;
-    /**点击次数 */
-    public clickCount:number;
     /**是否播放动画2_1 */
     public isPlayAnim2_1:boolean;
     constructor(view){
@@ -35,7 +33,6 @@ import Balloon from "./Balloon";
         this.forceball_CreateSprite(data.forceball_X,data.forceball_Y,data.rotation);
         this.forceball_ApplyForceAnim(data.forceball_X,data.forceball_Y,data.rotation);
         this.Rotation=data.rotation; 
-        this.clickCount=0;
         this.isPlayAnim2_1=true;
     }
 
@@ -50,7 +47,6 @@ import Balloon from "./Balloon";
         this.Rotation=data.rotation;
         this.anim1.visible=true;
         this.anim1.pos(data.forceball_X,data.forceball_Y);
-        this.clickCount=0;
         this.isPlayAnim2_1=true;
     }
 
@@ -64,7 +60,7 @@ import Balloon from "./Balloon";
         this.view.addChild(this.sp);
 
         this.spRect = new Laya.Sprite();
-        this.spRect.graphics.drawRect(0,-400,this.sp.width,400,"#a24");
+        this.spRect.graphics.drawRect(0,-250,this.sp.width,250,"#a24");
         this.spRect.alpha = 0.2;
         this.sp.addChild(this.spRect);
         this.sp.rotation=rotation;
@@ -103,17 +99,18 @@ import Balloon from "./Balloon";
     }
 
     //**施加力 1 是主糖果 2是副糖果*/
-    private publicApplyForce(candy,balloonArray,index) : void
+    private publicApplyForce(candy:Candy,balloonArray,index) : void
     {
 
         let isApplyForce = this.isApplyForce;
         if(index == 2) isApplyForce = this.isApplyForce_candy2;
         if(isApplyForce){
             for(let i=0;i<candy.arr_Body.length;i++){
-                if(this.clickCount>2){
-                    this.clickCount=2;
-                }
-                candy.arr_Body[i].setVelocity({x:(10+(this.clickCount)*5)*Math.sin(this.Rotation/180*Math.PI),y:-(10+(this.clickCount)*5)*Math.cos(this.Rotation/180*Math.PI)});
+                let Vx=Math.sin(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].x-this.sp.x)*1200;
+                let Vy=-Math.cos(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].y-this.sp.y)*1200;
+                let currVx=candy.arr_Body[0].linearVelocity.x;
+                let currVy=candy.arr_Body[0].linearVelocity.y;
+                candy.arr_Body[i].setVelocity({x:Vx+currVx,y:Vy+currVy});
                 if(candy.isExistBalloon){
                     for(let i=0;i<balloonArray.length;i++){
                         if(balloonArray[i].isCollision){
@@ -123,8 +120,6 @@ import Balloon from "./Balloon";
                     
                 }
             }
-            this.clickCount++;
-            
         }
     }
     

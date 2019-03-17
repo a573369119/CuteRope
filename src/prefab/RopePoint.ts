@@ -112,7 +112,7 @@ export default class RopePoint{
 		colider.width = this.sp.width;
 		colider.height = this.sp.height;
 		colider.density = density;
-		colider.isSensor = false;
+		colider.isSensor = true;
 		if(this.index == 0) 
 		{
 			colider.width = 2;

@@ -256,6 +256,9 @@ R 8E5AB106 jiaodao_l.png
 R 59B2E47F lamp.png
 R 086E2414 loadingBg.jpg
 R C5973349 startGameBg.jpg
+D gameView/antiGravity
+P F7DAF320 anti_down.png
+P 2C0B408A anti_up.png
 D gameView/bounceDrum
 P CD3F4BCF 1.png
 P 89D151BF 2.png

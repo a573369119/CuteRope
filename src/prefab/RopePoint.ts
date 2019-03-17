@@ -98,6 +98,10 @@ export default class RopePoint{
 		this.body.allowRotation = true;
 		this.body.angularDamping = ropePoint_A;
 		this.body.linearDamping = ropePoint_L;
+		if(this.index == 0)
+		{
+			this.body.allowRotation = false;			
+		}
 		this.sp.addComponentIntance(this.body);
     }
     
@@ -111,13 +115,17 @@ export default class RopePoint{
 		let colider = new Laya.BoxCollider();
 		colider.width = this.sp.width;
 		colider.height = this.sp.height;
-		colider.density = density;
+		colider.density = density*100;
 		colider.isSensor = false;
 		if(this.index == 0) 
 		{
-			colider.width = 2;
-			colider.height = 2;
+			colider.width = this.sp.width*2;
+			colider.height = this.sp.height*2;
 			colider.isSensor = false;
+		}
+		if(this.index == 1)
+		{
+			colider.density = 10000000;
 		}
 		this.sp.addComponentIntance(colider);
     }
@@ -129,6 +137,12 @@ export default class RopePoint{
 		joint.otherBody = lastRopePoint.sp.getComponent(Laya.RigidBody);
 		joint.anchor = [this.sp.width/2,this.sp.height/2];
 		joint.collideConnected = false;
+		if(this.index == 1)
+		{
+			joint.motorSpeed = 5;
+			joint.maxMotorTorque = 300000000000;
+			joint.enableMotor = true;
+		}
 		this.sp.addComponentIntance(joint);
 	}
 
@@ -150,7 +164,7 @@ export default class RopePoint{
         joint.otherAnchor = [candys.arr_Sp[index].width/2,candys.arr_Sp[index].height/2];
         joint.selfBody = this.body;
         joint.selfAnchor = [this.sp.width/2,this.sp.height/2];
-        joint.maxLength = maxLeng;
+		joint.maxLength = maxLeng;
         this.sp.addComponentIntance(joint);
     }
 
@@ -188,5 +202,6 @@ export default class RopePoint{
 	{
 		this.body.type = "dynamic";
 	}
+
 		
 }

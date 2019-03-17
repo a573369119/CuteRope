@@ -179,7 +179,7 @@ export default class GamePage extends Laya.Scene{
 
     private initBgSkin() : void
     {
-        this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(this.boxIndex+1)+".png";
+        this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(5*this.quarterIndex + this.boxIndex+1)+".png";
     }
 
     private newShopUi() {
@@ -746,7 +746,7 @@ export default class GamePage extends Laya.Scene{
         for(let i=0;i<arr_MapSkin.length;i++)
         {
             if(i == 0) {
-                this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(this.boxIndex+1)+".png"; 
+                this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+ (5*this.quarterIndex + this.boxIndex+1) +".png"; 
                 continue;
             }        
             if(arr_MapSkinPos[i].height)
@@ -1252,7 +1252,7 @@ export default class GamePage extends Laya.Scene{
         }
         this.scene.gamePos.x =  this.monster.sp.x;
         this.scene.gamePos.y =  this.monster.sp.y;
-        this.scene.gamePos.skin = "gameView/gamePos/pos" +(this.boxIndex + 1)+ ".png";
+        this.scene.gamePos.skin = "gameView/gamePos/pos" +(5*this.quarterIndex + this.boxIndex+1)+ ".png";
     }
     
     /**糖果数据初始化 */
@@ -1311,12 +1311,12 @@ export default class GamePage extends Laya.Scene{
         {
             if(this.arr_Hook[i])
             {
-                this.arr_Hook[i].update({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style,"rotation":arr_Hook[i].rotation,"length":arr_Hook[i].length,"percent":arr_Hook[i].percent},arr_Hook[i].size);
+                this.arr_Hook[i].update({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style,"rotation":arr_Hook[i].rotation,"length":arr_Hook[i].length,"percent":arr_Hook[i].percent},arr_Hook[i].canRotate,arr_Hook[i].size);
             }
             else
             {
                 this.arr_Hook[i] = new Hook(this.scene.panel_GameWorld);
-                this.arr_Hook[i].init({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style,"rotation":arr_Hook[i].rotation,"length":arr_Hook[i].length,"percent":arr_Hook[i].percent},arr_Hook[i].size);
+                this.arr_Hook[i].init({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style,"rotation":arr_Hook[i].rotation,"length":arr_Hook[i].length,"percent":arr_Hook[i].percent},arr_Hook[i].canRotate,arr_Hook[i].size);
             }
         }
         console.log(this.arr_Hook);
@@ -1335,13 +1335,13 @@ export default class GamePage extends Laya.Scene{
             rope = new Rope(this.scene.panel_GameWorld);
             if(this.arr_RemRope === undefined || this.arr_Hook[arr_Rope[i].hookIndex].style == "hook3")
             {
-                rope.setHookIndex(arr_Rope[i].hookIndex);//铆钉节点
+                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate);//铆钉节点
                 rope.init(arr_Hook[rope.hookIndex].hook_X,arr_Hook[rope.hookIndex].hook_Y,arr_Rope[i].num,arr_Hook[rope.hookIndex].style);
             }
             else
             {
                 //TO DO
-                rope.setHookIndex(arr_Rope[i].hookIndex);//铆钉节点                
+                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate);//铆钉节点        
                 rope.rePlay(this.arr_RemRope[i],arr_Hook[arr_Rope[i].hookIndex].style);
             }
             this.arr_Rope.push(rope);
@@ -1356,12 +1356,12 @@ export default class GamePage extends Laya.Scene{
             rope = new Rope(this.scene.panel_GameWorld);
             if(this.arr_RemRope2 === undefined|| this.arr_Hook[arr_Rope2[i].hookIndex].style == "hook3")
             {
-                rope.setHookIndex(arr_Rope2[i].hookIndex);
+                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate);//铆钉节点
                 rope.init(arr_Hook[rope.hookIndex].hook_X,arr_Hook[rope.hookIndex].hook_Y,arr_Rope2[i].num,arr_Hook[rope.hookIndex].style);
             }
             else
             {
-                rope.setHookIndex(arr_Rope2[i].hookIndex);                
+                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate);//铆钉节点          
                 rope.rePlay(this.arr_RemRope2[i],arr_Hook[arr_Rope2[i].hookIndex].style);
             }
             this.arr_Rope2.push(rope);

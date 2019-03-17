@@ -40,13 +40,15 @@ export default class Hook{
     /**屏幕长宽 */
     private screenX : number;
     private screenY : number;
+    public canRotate : boolean;
 
     constructor(view){
         this.view = view;
     }
 
     //初始化,"hook1"为钩子风格1，"hook2"为钩子风格2，检测糖果是否在设定范围内，如果在就生成新的绳子
-    init(data,size?):void{
+    init(data,canRotate,size?):void{
+        this.canRotate = canRotate;
         this.isDown = false;
         this.isCreate = false;     
         this.setValue(data,size);
@@ -59,7 +61,8 @@ export default class Hook{
     }
     
     //更新状态
-    update(data,size?):void{
+    update(data,canRotate,size?):void{
+        this.canRotate = canRotate;
         this.isCreate = false; 
         this.sp.visible = true;
         this.imgTop.visible = true;

@@ -4,7 +4,9 @@ import GameConfig from "../config/GameConfig";
 import Tool from "../Tool/Tool";
 import Dic from "../Tool/dic";
     
-    export default class Rope{
+export default class Rope{
+    /**是否可旋转**/    
+    canRotate: any;
     /**绳子节点数组 */
     public ropePointsArray:Array<RopePoint>;
     /**绳子关节数组 */
@@ -25,6 +27,12 @@ import Dic from "../Tool/dic";
     public hookStyle : string;
     /**hookIndex */
     public hookIndex : number;
+    /**旋转HOOK绳子 ，收缩下标 */
+    public ropeIndex : number;
+    /**缩短多少个ropepoint 从2 开始 */
+    public shortNumber : number;
+    /**motorJoint */
+    public motorSp : Laya.Sprite;
 
     constructor(view){
         this.isCuted = false;
@@ -62,21 +70,24 @@ import Dic from "../Tool/dic";
     }
 
     /**碎开的糖果才需要 */
-    public setHookIndex(arr) : void
+    public setHookIndex(arr,canRotate) : void
     {
-        this.hookIndex = arr;
+        this.canRotate = canRotate;
+        this.hookIndex = arr.hookIndex;
+        this.shortNumber = arr.shortNumber;
+        this.ropeIndex = 2;
     }
 
     private createRopeHook2(hookX,hookY,candyX,candyY) : void
     {
         let dic = Dic.countDic_Object({"x":hookX,"y":hookY},{"x":candyX,"y":candyY});
         let count = Math.floor(dic / GameConfig.ROPE_DIC);
+        let h = 0;
         let x_Add = GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,candyX,candyY,"cos"); 
         let y_Add = GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,candyX,candyY,"sin"); 
         for(let i=0;i<count+1;i++){
             let ropePoint : RopePoint ;
-            
-            if(i==0){
+            if(i<=0){
                 ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
                 // this.rotateRopePoint_2(ropePoint);
                 ropePoint.addView(this.ropeView);
@@ -114,6 +125,7 @@ import Dic from "../Tool/dic";
 
     createMultiRopePoint(hookX,hookY,ropeLength,hookStyle?):void{
         let ropeDic : number;
+        let h : number = 0;
         if(hookStyle == "hook3")
         {   //弹力剩
             ropeDic = GameConfig.ROPE_JUMP_DIC;
@@ -122,7 +134,6 @@ import Dic from "../Tool/dic";
         {
             ropeDic = GameConfig.ROPE_DIC;
         }
-        //第一个节点与最后 一个节点的距离
         //创建多少个节点 30个像素一个间隔
         let disPer:number=ropeLength/ropeDic;
         //每一个节点水平方向偏移量
@@ -132,9 +143,36 @@ import Dic from "../Tool/dic";
         // if(disPer >= 60) {console.log("距离不够");}   
         for(let i=0;i<disPer+1;i++){
             let ropePoint : RopePoint ;
-            if(i==0){
-                ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,hookStyle);
+            if(i<=0){
+                ropePoint=new RopePoint(hookX,hookY,"kinematic",i,hookStyle);
                 ropePoint.addView(this.ropeView);
+                // if(this.canRotate)
+                // {
+                //     this.motorSp = new Laya.Sprite();
+                //     this.motorSp.width = 20;
+                //     this.motorSp.height = 20;
+                //     this.motorSp.pivot(10,10);
+                //     this.motorSp.x = hookX;
+                //     this.motorSp.y = hookY;
+                //     let body = new Laya.RigidBody();
+                //     body.type="kinematic";
+                //     // ropePoint.body.type = "dynamic";
+                //     // body.angularVelocity = 2;
+                //     body.allowSleep = false; 
+                //     body.allowRotation = true;
+                //     this.motorSp.addComponentIntance(body);
+                //     let colider = new Laya.CircleCollider();
+                //     colider.isSensor = false;
+                //     colider.radius = 15;
+                //     this.motorSp.addComponentIntance(colider);
+                //     let motorJoint = new Laya.RevoluteJoint();
+                //     // motorJoint.collideConnected = true;
+                //     motorJoint.otherBody = ropePoint.body;
+                //     motorJoint.selfBody = body;
+                //     motorJoint.collideConnected = false;
+                //     this.motorSp.addComponentIntance(motorJoint);
+                //     this.ropeView.addChild(this.motorSp);
+                // }
             }
             else
             {
@@ -149,6 +187,8 @@ import Dic from "../Tool/dic";
             }
             this.ropePointsArray.push(ropePoint);
         }
+        Laya.timer.loop(16,this,this.toShort);
+        
     }
 
     rotateRopePoint():void{
@@ -389,13 +429,44 @@ import Dic from "../Tool/dic";
             RopePoint.sp.y += 0;
         });
     }
-    /***旋转变长逻辑*/
+
+//////////////////////////////////////旋转hook
+    /**旋转hook逻辑入口 */
+    private ifHook() : void
+    {
+        if(this.hookStyle == "rotateHook")
+        {
+            //初始化
+        }
+    }
+
+
+    /***旋转变长逻辑*/  
     private toLong() : void
     {
-
+        
     }
 
     /**绳子变短逻辑 */
+    private toShort() : void
+    {
+        // let obj : any = {};
+        // obj.x = 20*-1*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"cos");
+        // obj.y = 20*-1*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"sin");
+        // console.log(this.ropePointsArray[this.ropeIndex] );
+        // console.log("   " + this.ropeIndex);
+        // console.log(Dic.countDic_Object({x:this.ropePointsArray[0].x,y:this.ropePointsArray[0].y},{x:this.ropePointsArray[this.ropeIndex].sp.x,y:this.ropePointsArray[this.ropeIndex].sp.y}));
+        // if(Dic.countDic_Object({x:this.ropePointsArray[0].x,y:this.ropePointsArray[0].y},{x:this.ropePointsArray[this.ropeIndex].sp.x,y:this.ropePointsArray[this.ropeIndex].sp.y}) < 10)
+        // {
+        //     this.ropePointsArray[this.ropeIndex].body.setVelocity({x:0,y:0});       
+        //     this.ropePointsArray[this.ropeIndex].body.setAngle(0);     
+        //     this.ropePointsArray[this.ropeIndex].body.type = "kinematic";
+        //     this.ropeIndex++;
+        //     return;
+        // }        
+        // if(this.ropeIndex < this.ropePointsArray.length-3)
+        // this.ropePointsArray[this.ropeIndex].body.applyLinearImpulseToCenter(obj);
+    }
 
 
 }

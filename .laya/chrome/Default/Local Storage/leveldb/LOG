@@ -1,9 +1,15 @@
-<<<<<<< HEAD
-2019/03/09-20:33:41.942 1db4 Reusing MANIFEST leveldb/MANIFEST-000001
-2019/03/09-20:33:41.943 1db4 Recovering log #1096
-2019/03/09-20:33:41.957 1db4 Reusing old log leveldb/001096.log 
-=======
-2019/02/21-14:32:34.146 8520 Reusing MANIFEST leveldb/MANIFEST-000001
-2019/02/21-14:32:34.146 8520 Recovering log #3
-2019/02/21-14:32:34.147 8520 Reusing old log leveldb/000003.log 
->>>>>>> mbfetch
+2019/03/17-19:38:15.585 1840 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/03/17-19:38:15.588 1840 Recovering log #1142
+2019/03/17-19:38:15.590 1840 Reusing old log leveldb/001142.log 
+2019/03/17-20:08:39.624 1170 Level-0 table #1146: started
+2019/03/17-20:08:39.793 1170 Level-0 table #1146: 12991 bytes OK
+2019/03/17-20:08:39.882 1170 Delete type=0 #1142
+2019/03/17-20:08:39.883 1170 Compacting 4@0 + 1@1 files
+2019/03/17-20:08:39.993 1170 Generated table #1147@0: 82 keys, 44445 bytes
+2019/03/17-20:08:39.993 1170 Compacted 4@0 + 1@1 files => 44445 bytes
+2019/03/17-20:08:40.018 1170 compacted to: files[ 0 1 0 0 0 0 0 ]
+2019/03/17-20:08:40.019 1170 Delete type=2 #1134
+2019/03/17-20:08:40.020 1170 Delete type=2 #1136
+2019/03/17-20:08:40.021 1170 Delete type=2 #1140
+2019/03/17-20:08:40.022 1170 Delete type=2 #1143
+2019/03/17-20:08:40.022 1170 Delete type=2 #1146

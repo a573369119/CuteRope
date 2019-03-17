@@ -212,6 +212,13 @@ export module Config {
                     if(rope.hookIndex[i] || rope.hookIndex[i] == 0)
                     ropeConfig.hookIndex = rope.hookIndex[i];
                 }
+                if(rope.shortNumber)
+                {
+                    if(rope.shortNumber[i] || rope.shortNumber[i] == 0)
+                    {
+                        ropeConfig.shortNumber = rope.shortNumber[i];
+                    }
+                }
                 this.arr_Rope.push(ropeConfig);
             }
             console.log("rope -解析");
@@ -234,6 +241,14 @@ export module Config {
                     hookConfig.rotation=obj.rotation;
                     hookConfig.length=obj.length;
                     hookConfig.percent=obj.percent;                    
+                }
+                if(obj.canRotate)
+                {
+                    hookConfig.canRotate = obj.canRotate;
+                }
+                else
+                {
+                    hookConfig.canRotate = false;
                 }
                 this.arr_Hook.push(hookConfig);
             });
@@ -452,6 +467,8 @@ export module Config {
         public length : number;
         /**点在的位置 */
         public percent : number;
+        /**是否可旋转 */
+        public canRotate : boolean;
         constructor(){
 
         }
@@ -463,6 +480,8 @@ export module Config {
         public num : number;  
         /** 绳子所属 hook**/
         public hookIndex : number;      
+        /** 绳子缩短多少个ropepoint */
+        public shortNumber : number;
     }
 
     /**泡泡 balloon*/

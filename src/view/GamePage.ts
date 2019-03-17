@@ -17,6 +17,7 @@ import ForceBall from "../prefab/ForceBall";
 import Laser from "../prefab/Laser";
 import Spider from "../prefab/Spider";
 import { BouceDrum } from "../prefab/bounceDrum";
+import AntiGravity from "../prefab/AntiGravity";
  /**
  * 游戏界面 ani  1：开门动画 2： 
  */
@@ -66,6 +67,8 @@ export default class GamePage extends Laya.Scene{
     public candy2 : Candy;
     //*怪物 */
     public monster : Monster;
+    /**反重力按钮 */
+    public antiGravity:AntiGravity;
     /**星星 */
     private arr_Star : Array<Star>;
     /**泡泡 */
@@ -179,7 +182,11 @@ export default class GamePage extends Laya.Scene{
 
     private initBgSkin() : void
     {
+<<<<<<< HEAD
         this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(5*this.quarterIndex + this.boxIndex+1)+".png";
+=======
+        this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(5*this.quarterIndex+this.boxIndex+1)+".png";
+>>>>>>> mbfetch
     }
 
     private newShopUi() {
@@ -352,6 +359,10 @@ export default class GamePage extends Laya.Scene{
             this.arr_bounceDrum.forEach(bounceDrum =>{
                 bounceDrum.clearTimer();
             });
+        }
+        if(this.antiGravity){
+            this.antiGravity.destroy();
+            this.antiGravity.removeEvent();
         }
    }
 
@@ -693,6 +704,8 @@ export default class GamePage extends Laya.Scene{
         this.setBackground(this.mapConfig.arr_MapSkin,this.mapConfig.arr_MapSkinPos,this.mapConfig.screenRoad);
         //怪物初始化
         this.monsterInit(this.mapConfig.monster);
+        //反重力按钮初始化
+        this.antiGravityInit(this.mapConfig.antiGravity);
         //钩子
         this.hookInit(this.mapConfig.arr_Hook);
         //绳子数据初始化
@@ -746,7 +759,11 @@ export default class GamePage extends Laya.Scene{
         for(let i=0;i<arr_MapSkin.length;i++)
         {
             if(i == 0) {
+<<<<<<< HEAD
                 this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+ (5*this.quarterIndex + this.boxIndex+1) +".png"; 
+=======
+                this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(5*this.quarterIndex+this.boxIndex+1)+".png"; 
+>>>>>>> mbfetch
                 continue;
             }        
             if(arr_MapSkinPos[i].height)
@@ -871,7 +888,7 @@ export default class GamePage extends Laya.Scene{
         }
         //同步移动
         this.moveTogether();
-
+        
     }
     private spiderMove() {
         if(this.mapConfig.arr_Spider.length == 0) return;
@@ -1510,6 +1527,22 @@ export default class GamePage extends Laya.Scene{
             }
         }
         console.log(this.arr_MagicHat);
+    }
+    
+    /**反重力按钮初始化 */
+    private antiGravityInit(antiGravityConfig) : void
+    {
+        if(!antiGravityConfig) return;
+        if(this.antiGravity)
+        {
+            this.antiGravity.update({"x":antiGravityConfig.antiGravity_X,"y":antiGravityConfig.antiGravity_Y});
+        }
+        else
+        {
+            this.antiGravity = new AntiGravity(this.scene.panel_GameWorld);
+            this.antiGravity.init({"x":antiGravityConfig.antiGravity_X,"y":antiGravityConfig.antiGravity_Y});
+            
+        }     
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////游戏逻辑↓
 

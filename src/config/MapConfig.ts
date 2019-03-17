@@ -59,6 +59,8 @@ export module Config {
         public arr_Star : Array<StarConfig>;
         /**怪物配置 */
         public monster : MonsterConfig;
+        /**反重力按钮配置 */
+        public antiGravity:AntiGravityConfig;
         /**hook配置 */
         public arr_Hook : Array<HookConfig>;
         /**rope配置 数组*/
@@ -138,6 +140,8 @@ export module Config {
             this.parseSpider(data.spider);
             /**弹力鼓解析 */
             this.parseBounceDrum(data.bounceDrum);
+            /**反重力按钮解析 */
+            this.parseAntiGravity(data.antiGravity);
         }
 
         /**蜘蛛 */
@@ -402,6 +406,17 @@ export module Config {
                 
             }
         }
+
+        /**反重力按钮 */
+        private parseAntiGravity(antiGravity) : void
+        {
+            if(antiGravity){
+                this.antiGravity = new AntiGravityConfig();
+                this.antiGravity.antiGravity_X = antiGravity.x;
+                this.antiGravity.antiGravity_Y = antiGravity.y;
+                console.log("antiGravity-解析");
+            }  
+        }
     }
 
     /**candy */
@@ -591,5 +606,13 @@ export module Config {
         public rotationV : number;
         /**移动到 */
         public moveTo : Array<any>;
+    }
+
+    /**反重力按钮 antiGravity*/
+    export class AntiGravityConfig{
+        /**横坐标 */
+        public antiGravity_X : number;
+        /**纵坐标 */
+        public antiGravity_Y : number;
     }
 }

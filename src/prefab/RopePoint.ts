@@ -115,8 +115,8 @@ export default class RopePoint{
 		let colider = new Laya.BoxCollider();
 		colider.width = this.sp.width;
 		colider.height = this.sp.height;
-		colider.density = density*100;
-		colider.isSensor = false;
+		colider.density = density;
+		colider.isSensor = true;
 		if(this.index == 0) 
 		{
 			colider.width = this.sp.width*2;

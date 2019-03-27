@@ -450,8 +450,9 @@ export default class Candy{
     /**给糖果赋值速度 */
     public setApplyForce(obj1,obj2) : void
     {
-        console.log(this.arr_Body.length);
+        // console.log(this.arr_Body.length);
         this.arr_Body.forEach(body => {
+            if(body)
             body.applyForce(obj1,obj2);
         });
     }    
@@ -459,7 +460,24 @@ export default class Candy{
     public setApplyV(obj2) : void
     {
         this.arr_Body.forEach(body => {
+            if(body)
             body.applyLinearImpulseToCenter(obj2);
         });
+    }
+    /**糖果反向减速 */
+    public addApplyV(cos,sin) : void
+    {
+        if(this.arr_Body.length > 0) 
+        {
+            let obj2 : any = {};
+            let allSpeed = this.arr_Body[0].linearVelocity.x * sin + this.arr_Body[0].linearVelocity.y * cos;
+            obj2.x = -allSpeed * cos;
+            obj2.y = -allSpeed * sin;
+            // this.arr_Body[0].linearVelocity.x = this.arr_Body[0].linearVelocity.x * cos;
+            this.arr_Body.forEach(body => {
+                body.linearVelocity.y += obj2.y;
+                body.linearVelocity.x += obj2.x;
+            });
+        }
     }
 }

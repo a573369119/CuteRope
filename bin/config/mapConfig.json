@@ -4479,8 +4479,7 @@
                 }
                 
             ]
-        }
-        ,
+        },
         {
             "mapWhere":"1-0",
             "mapList":[
@@ -5394,6 +5393,38 @@
                     ]
                 
                 }      
+            ]
+        },
+        {
+            "mapWhere":"1-1",
+            "mapList":[
+                {
+                    "mapId":0,
+                    "width":750,
+                    "height":1334,
+                    "mapSkins":[
+                        "gameView/gameBg/boxBg_7.png"
+                    ],
+                    "candy":{"style":"candy","x":341,"y":198},
+                    "star":[
+                        {"style":"star1","x":144,"y":580,"interval":100,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star1","x":215,"y":561,"interval":100,"move":[],"rotateLength":0,"v":1},
+                        {"style":"star1","x":284,"y":580 ,"interval":100,"move":[],"rotateLength":0,"v":3}
+                    ],
+                    "monster":{"x":336,"y":632,"skin":""},
+                    "hook":[
+                        {"style":"hook1","x":193,"y":198,"canRotate":true}                                                
+                    ],
+                    "rope":{
+                        "hookIndex":[0],                        
+                        "length":[
+                            120
+                        ]
+                    },
+                    "bounceDrum":[
+                        {"x":91,"y":634,"size":1,"rotation":45}
+                    ]
+                }    
             ]
         },
 		{

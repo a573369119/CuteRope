@@ -10,6 +10,8 @@ export default class Hook{
     public style : string;
     /**精灵 */
     public sp:Laya.Sprite;
+    /**旋转精灵 */
+    public rotateSp : Laya.Sprite;
     /**画圈 */
     public spp:Laya.Sprite;
     /**滑动条 */
@@ -24,6 +26,8 @@ export default class Hook{
     public size : number;
     /**Top */
     public imgTop : Laya.Image;
+    /**旋转hookImg */
+    public imgTopRotate : Laya.Image;
     /**角度 */
     public rotation : number;
     /**长度 */
@@ -41,6 +45,10 @@ export default class Hook{
     private screenX : number;
     private screenY : number;
     public canRotate : boolean;
+    /**旧的坐标点 */
+    public oldPos : any;
+    /**计数点 */
+    public countRotation : number;
 
     constructor(view){
         this.view = view;
@@ -121,8 +129,8 @@ export default class Hook{
         //hook图片
         this.setHookBottom();
         //Hook顶部
-        this.setHookTop(x, y);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
+        this.setHookTop(x, y);
         // this.sp.loadImage("gameView/"+"hook1"+".png");
         // this.sp.loadImage("gameView/"+style+".png");
         this.sp.zOrder = GameConfig.ZORDER_ROPEPOINT;
@@ -147,12 +155,42 @@ export default class Hook{
             this.imgTop = new Laya.Image();
             this.view.addChild(this.imgTop);
         }        
+        this.imgTop.visible = true;
         this.imgTop.skin ="gameView/hookTop.png";
         this.imgTop.size(20,19);
         this.imgTop.pivot(20 / 2, 10 / 2);
-        this.imgTop.zOrder = GameConfig.ZORDER_HOOK_TOP;
-        this.imgTop.pos(0, 0);
         this.imgTop.pos(x + 2, y - 3);
+        // this.imgTop.pos(0, 0);
+        if(this.canRotate)
+        {
+            if(!this.imgTopRotate)
+            {
+                this.rotateSp = new Laya.Sprite();
+                this.sp.addChild(this.rotateSp);
+                this.oldPos = {};
+                this.imgTopRotate = new Laya.Image();
+                this.rotateSp.addChild(this.imgTopRotate);
+            }  
+            this.imgTop.visible = false;
+            ///rotatesp 设置
+            this.rotateSp.size(68,68);
+            this.rotateSp.pivot(this.imgTop.width/2,this.imgTop.height/2);
+            this.rotateSp.pos(2,2);
+            ///imgTop setting
+            this.imgTopRotate.visible = true;
+            this.imgTopRotate.skin = "gameView/rotateHook.png";
+            this.imgTopRotate.size(68,68);
+            this.imgTopRotate.pivot(this.imgTop.width/2,this.imgTop.height/2);
+            this.imgTopRotate.pos(-16,-15);
+            this.imgTopRotate.hitTestPrior = true;
+            this.imgTopRotate.zOrder = GameConfig.ZORDER_HOOK_TOP;
+            // Laya.timer.loop(50,this,this.rotateHook);
+        }
+        else
+        {
+            if(this.imgTopRotate) this.imgTopRotate.visible = false;
+        }
+        this.imgTop.zOrder = GameConfig.ZORDER_HOOK_TOP;
     }
 
     /**创建滑动条 */
@@ -377,13 +415,16 @@ export default class Hook{
     /**销毁处理 */
     public hookDestroy() : void
     {
+        this.oldPos = {};
         this.sp.visible = false;
         this.isCreate = false;
         this.sp.x = 10000;
+        if(this.rotateSp) this.rotateSp.rotation = 0;
         this.imgTop.visible = false;
         this.isDown = false;
         this.length = undefined;
         this.rotation = undefined;
+        this.canRotate = false;
         this.imgTop.skin = "gameView/hookTop.png";
         this.imgTop.size(20,19);
         // this.spp.pos(0,0);
@@ -395,4 +436,75 @@ export default class Hook{
         Laya.timer.clear(this,this.followHook);
     }
 
+    /**hook旋转逻辑 鼠标x y*/
+    public mouseRotateHook(x,y) : number
+    {
+        x = x - this.hook_X;
+        y = y - this.hook_Y;
+        if(this.oldPos.x == undefined || this.oldPos.y == undefined)
+        {
+            this.oldPos.x = x;
+            this.oldPos.y = y;
+            this.countRotation = 0;
+            return;
+        }
+        let fM = Math.sqrt(Math.pow(x,2)+Math.pow(y,2))*Math.sqrt(Math.pow(this.oldPos.x,2)+Math.pow(this.oldPos.y,2));
+        let fZ = x*this.oldPos.x + y*this.oldPos.y;
+        // console.log("[x]"　+ x + "[y]" + y + "[oldx]" + this.oldPos.x + " [oldy]" + this.oldPos.y + "[cos]" + fZ/fM);
+        let rotation = Math.acos(fZ/fM)*180/Math.PI;
+        // console.log(rotation +  " [rotation] " + this.rotateSp.rotation + "[fM]" + fM + "[fZ]" + fZ);
+        let num = this.judge(x,y,this.oldPos);
+        this.oldPos.x = x;
+        this.oldPos.y = y;
+        if(fM > fZ) 
+        {
+            this.rotateHook(num*rotation);
+            this.countRotation += num*rotation;
+        }
+        else 
+        {
+            x = x - this.hook_X;
+            y = y - this.hook_Y;
+        }
+        console.log(Math.abs(this.countRotation));
+        if(Math.abs(this.countRotation) > 30)
+        {
+            let count = this.countRotation;
+            this.countRotation = 0;
+            return count;
+        }
+        return ;
+    }
+
+    /**正负判断 */
+    private judge(x,y,oldPos) : number
+    {
+        let cZ : any = {};
+        let num;
+        cZ.x = 1/oldPos.x;
+        cZ.y = -1/oldPos.y;
+        if(oldPos.x == 0 || oldPos.y == 0)
+        {
+            cZ.x = 0;
+            cZ.y = 0;
+        }
+        num = cZ.x*x+cZ.y*y;
+        // console.log("[x]" + cZ.x*x + "[y]" + cZ.y*y);8
+        if((Laya.stage.mouseX - this.hook_X) > 0 && (Laya.stage.mouseY - this.hook_Y<0) || (Laya.stage.mouseX - this.hook_X) < 0 && (Laya.stage.mouseY - this.hook_Y) >0)
+        {
+           num = -num;
+        }
+        // console.log(num);
+        if(num*1000 > 0) return -1;
+        return 1;
+    }
+
+
+    /**hook旋转 */
+    private rotateHook(rotation) : void
+    {
+        this.rotateSp.rotation +=rotation;     
+    }
+
+    
 }

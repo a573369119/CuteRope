@@ -4,7 +4,7 @@
 export default class GameConfig{
     /////////////////////////////////绳子
     /**绳子生成像素间隔 */
-    public static ROPE_DIC : number = 8;
+    public static ROPE_DIC : number = 4;
     /**绳子节点转动阻力 */
     public static ROPE_POINT_ANGULARDAMPING : number = 100000;
     /**绳子线性阻力 */

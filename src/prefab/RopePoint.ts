@@ -16,6 +16,8 @@ export default class RopePoint{
 	public isConnectCandy : boolean;
 	/**下标 */
 	private index : number;
+	/**糖果 */
+	private candy : Candy;
 
     constructor(x,y,type:string,index,style,rotation?){	
 			this.style = style;
@@ -61,8 +63,8 @@ export default class RopePoint{
 		}
 		if(this.index == 0)
 		{
-			this.sp.width = 5;
 			this.sp.height = 5;
+			this.sp.width = 5;
 		}
 		else if(this.index < 2)
 		{
@@ -121,11 +123,7 @@ export default class RopePoint{
 		{
 			colider.width = this.sp.width*2;
 			colider.height = this.sp.height*2;
-			colider.isSensor = false;
-		}
-		if(this.index == 1)
-		{
-			colider.density = 10000000;
+			colider.isSensor = true;
 		}
 		this.sp.addComponentIntance(colider);
     }
@@ -133,16 +131,24 @@ export default class RopePoint{
     //添加Joint组件,设置关节属性
     ropePoint_AddJoint(lastRopePoint:RopePoint):void{     
 		if(!lastRopePoint) return;	
-		let joint : Laya.RevoluteJoint  = new Laya.RevoluteJoint();
+		let joint : Laya.RopeJoint  = new Laya.RopeJoint();
 		joint.otherBody = lastRopePoint.sp.getComponent(Laya.RigidBody);
-		joint.anchor = [this.sp.width/2,this.sp.height/2];
+		joint.selfBody = this.body;
+		joint.selfAnchor = [this.sp.width/2,this.sp.height/2];
+		joint.otherAnchor = [this.sp.width/2,this.sp.height/2];
 		joint.collideConnected = false;
-		if(this.index == 1)
-		{
-			joint.motorSpeed = 5;
-			joint.maxMotorTorque = 300000000000;
-			joint.enableMotor = true;
-		}
+		joint.maxLength = GameConfig.ROPE_DIC;
+		//马达
+		// if(this.index == 1)
+		// {
+		// 	joint.motorSpeed = 5;
+		// 	joint.maxMotorTorque = 300000000000;
+		// 	joint.enableMotor = true;
+		// 	joint.enableLimit = false;
+		// 	this.candy.arr_Colider.forEach(co => {
+		// 		co.density = 1;
+		// 	});	
+		// }
 		this.sp.addComponentIntance(joint);
 	}
 
@@ -203,5 +209,10 @@ export default class RopePoint{
 		this.body.type = "dynamic";
 	}
 
+	/**放入candy */
+	public setCandy(candy) : void
+	{
+		this.candy = candy;
+	}
 		
 }

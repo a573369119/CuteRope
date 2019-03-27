@@ -143,8 +143,8 @@ export default class Spider{
                 Laya.timer.clear(this,this.spider_FollowRope);
                 //偷取糖果
                     //绳子断裂
-                if(this.rope.ropePointsArray[this.rope.ropePointsArray.length - 1].sp.getComponents(Laya.RevoluteJoint))
-                    this.rope.ropePointsArray[this.rope.ropePointsArray.length - 1].sp.getComponents(Laya.RevoluteJoint)[0].destroy();
+                if(this.rope.ropePointsArray[this.rope.ropePointsArray.length - 1].sp.getComponents(Laya.RopeJoint))
+                    this.rope.ropePointsArray[this.rope.ropePointsArray.length - 1].sp.getComponents(Laya.RopeJoint)[0].destroy();
                 this.rope.ropeCuted();
                 let ropejoint = this.rope.ropePointsArray[0].sp.getComponents(Laya.RopeJoint);
                 if(ropejoint) ropejoint[0].destroy();

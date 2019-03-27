@@ -52,6 +52,8 @@ export default class GamePage extends Laya.Scene{
     private isEated : boolean;
     /**是否已经融合，糖果合并 */
     private isToOne : boolean;
+    /**是否点击到旋转hook */
+    private isMouseDownRotateHook : boolean;
     //----------------------------------------------
     /**地图配置 */
     private mapConfig : Config.MapConfig;
@@ -111,6 +113,10 @@ export default class GamePage extends Laya.Scene{
     private screenRoad : Array<number>;
     /**路径下标 */
     private roadIndex : number;
+    /**选取hook的下标 */
+    private rotateHookIndex : number;
+    /**hook旋转信息 */
+    private rotateInfo : number;
     constructor(){super();}
 
     onEnable() : void
@@ -129,7 +135,7 @@ export default class GamePage extends Laya.Scene{
     private init() : void
     {
         ///物理线
-        Laya.PhysicsDebugDraw.enable();
+        // Laya.PhysicsDebugDraw.enable();
         //舞台尺寸
         Laya.stage.width = 480;
         Laya.stage.height = 800;
@@ -154,6 +160,7 @@ export default class GamePage extends Laya.Scene{
         this.isReplay = false;
         this.isEated = false;
         this.isToOne = false;
+        this.isMouseDownRotateHook = false;
         Laya.Physics.I.gravity = {x:0,y:GameConfig.WOLDE_G};
         //界面 可视 初始化
         Laya.MouseManager.enabled = false;
@@ -182,11 +189,7 @@ export default class GamePage extends Laya.Scene{
 
     private initBgSkin() : void
     {
-<<<<<<< HEAD
-        this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(5*this.quarterIndex + this.boxIndex+1)+".png";
-=======
         this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(5*this.quarterIndex+this.boxIndex+1)+".png";
->>>>>>> mbfetch
     }
 
     private newShopUi() {
@@ -297,6 +300,9 @@ export default class GamePage extends Laya.Scene{
         Laya.timer.clear(this,this.candyTest);
         Laya.timer.clear(this,this.star_MoveBySelf);//清除星星的定时器
         Laya.timer.clear(this,this.star_RotateByOnePoint);//清除星星的定时器
+        this.arr_Hook.forEach(Hook => {//清除hook中的事件
+            Hook.sp.off(Laya.Event.MOUSE_DOWN,this,this.hookMouseDown);
+        });
         this.arr_Rope.forEach(rope => {//取消绳子中的定时器
             rope.clearTimer();
         });
@@ -365,9 +371,15 @@ export default class GamePage extends Laya.Scene{
             this.antiGravity.removeEvent();
         }
    }
+   /**hookhookMouseDown */
+   private hookMouseDown(index) : void
+   {
+       this.rotateHookIndex = index;
+       this.isMouseDownRotateHook = true;
+   }
 
     /**鼠标点下 */
-    private onMouseDown() : void
+    private onMouseDown(e) : void
     {
         this.isMouseDown = true;
     }
@@ -377,6 +389,7 @@ export default class GamePage extends Laya.Scene{
         this.isMouseDown = false;
         this.lastMousePos.x = null;
         this.lastMousePos.y = null;
+        this.isMouseDownRotateHook = false;
     }
 
    private onTeach() :void
@@ -708,12 +721,12 @@ export default class GamePage extends Laya.Scene{
         this.antiGravityInit(this.mapConfig.antiGravity);
         //钩子
         this.hookInit(this.mapConfig.arr_Hook);
+        //糖果数据初始化
+        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.candyConfig2,this.mapConfig.arr_Rope.length,this.mapConfig.arr_Rope2.length,this.mapConfig.arr_Knife,this.mapConfig.arr_Laser);
         //绳子数据初始化
         this.ropeInit(this.mapConfig.arr_Rope,this.mapConfig.arr_Rope2,this.arr_Hook);
         //星星数据初始化
         this.starInit(this.mapConfig.arr_Star);
-        //糖果数据初始化
-        this.candyInit(this.mapConfig.candyConfig,this.mapConfig.candyConfig2,this.mapConfig.arr_Rope.length,this.mapConfig.arr_Rope2.length,this.mapConfig.arr_Knife,this.mapConfig.arr_Laser);
         //泡泡数据初始化
         this.balloonInit(this.mapConfig.arr_Balloon);
         //帽子数据初始化
@@ -759,11 +772,7 @@ export default class GamePage extends Laya.Scene{
         for(let i=0;i<arr_MapSkin.length;i++)
         {
             if(i == 0) {
-<<<<<<< HEAD
-                this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+ (5*this.quarterIndex + this.boxIndex+1) +".png"; 
-=======
                 this.scene.img_gameBg.skin = "gameView/gameBg/boxBg_"+(5*this.quarterIndex+this.boxIndex+1)+".png"; 
->>>>>>> mbfetch
                 continue;
             }        
             if(arr_MapSkinPos[i].height)
@@ -1334,10 +1343,10 @@ export default class GamePage extends Laya.Scene{
             {
                 this.arr_Hook[i] = new Hook(this.scene.panel_GameWorld);
                 this.arr_Hook[i].init({"hook_X":arr_Hook[i].hook_X,"hook_Y":arr_Hook[i].hook_Y,"style":arr_Hook[i].style,"rotation":arr_Hook[i].rotation,"length":arr_Hook[i].length,"percent":arr_Hook[i].percent},arr_Hook[i].canRotate,arr_Hook[i].size);
+                if(this.arr_Hook[i].imgTopRotate) this.arr_Hook[i].imgTopRotate.on(Laya.Event.MOUSE_DOWN,this,this.hookMouseDown,[i]);
             }
         }
-        console.log(this.arr_Hook);
-        
+        console.log(this.arr_Hook);  
     }
     
     /**绳子数据初始化 */
@@ -1352,13 +1361,13 @@ export default class GamePage extends Laya.Scene{
             rope = new Rope(this.scene.panel_GameWorld);
             if(this.arr_RemRope === undefined || this.arr_Hook[arr_Rope[i].hookIndex].style == "hook3")
             {
-                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate);//铆钉节点
+                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate,this.candy);//铆钉节点
                 rope.init(arr_Hook[rope.hookIndex].hook_X,arr_Hook[rope.hookIndex].hook_Y,arr_Rope[i].num,arr_Hook[rope.hookIndex].style);
             }
             else
             {
                 //TO DO
-                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate);//铆钉节点        
+                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate,this.candy);//铆钉节点        
                 rope.rePlay(this.arr_RemRope[i],arr_Hook[arr_Rope[i].hookIndex].style);
             }
             this.arr_Rope.push(rope);
@@ -1373,12 +1382,12 @@ export default class GamePage extends Laya.Scene{
             rope = new Rope(this.scene.panel_GameWorld);
             if(this.arr_RemRope2 === undefined|| this.arr_Hook[arr_Rope2[i].hookIndex].style == "hook3")
             {
-                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate);//铆钉节点
+                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate,this.candy);//铆钉节点
                 rope.init(arr_Hook[rope.hookIndex].hook_X,arr_Hook[rope.hookIndex].hook_Y,arr_Rope2[i].num,arr_Hook[rope.hookIndex].style);
             }
             else
             {
-                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate);//铆钉节点          
+                rope.setHookIndex(arr_Rope[i],arr_Hook[arr_Rope[i].hookIndex].canRotate,this.candy);//铆钉节点          
                 rope.rePlay(this.arr_RemRope2[i],arr_Hook[arr_Rope2[i].hookIndex].style);
             }
             this.arr_Rope2.push(rope);
@@ -1582,9 +1591,92 @@ export default class GamePage extends Laya.Scene{
         this.testBounceDrum(x,y);
         //与鼠标的距离检测 - 超能力 - 碎糖果已处理
         this.testSuper(x,y);
+        //与旋转hook检测
+        this.testRotateHook();
         //碎糖果与碎糖果的距离检测 
         if(this.candy2) this.testCandyAndCandy(x,y);
         // console.log(this.candy.isExistBalloon);
+        //糖果轨迹优化
+        // this.candyOptimize(this.arr_Rope,this.candy);
+        // if(this.candy2) this.candyOptimize(this.arr_Rope2,this.candy2);
+    }
+
+    /***糖果轨迹优化 */
+    private candyOptimize(arr_Rope,candy) : void
+    {
+        for(let i=0;i<arr_Rope.length;i++)
+        {
+            if(!arr_Rope[i].isCuted)
+            {
+                for(let h=0;h<this.arr_Hook.length;h++)
+                {
+                    if(h != arr_Rope[i].hookIndex) continue;
+                    let dic = this.countDic_Object({x:this.arr_Hook[h].sp.x,y:this.arr_Hook[h].sp.y},{x:candy.arr_Sp[0].x,y:candy.arr_Sp[0].y});
+                    let cos = this.rotationDeal(this.arr_Hook[h].sp.x,this.arr_Hook[h].sp.y,candy.arr_Sp[0].x,candy.arr_Sp[0].y,"cos");
+                    let sin = this.rotationDeal(this.arr_Hook[h].sp.x,this.arr_Hook[h].sp.y,candy.arr_Sp[0].x,candy.arr_Sp[0].y,"sin");
+                    let len = (GameConfig.ROPE_DIC)*(arr_Rope[i].ropePointsArray.length+4);
+                    if(dic > len)
+                    {
+                        // candy.addApplyV(cos,sin); 
+                        if(candy.arr_Body[0])
+                        candy.setApplyForce({x:this.candy.arr_Sp[0].width/2,y:this.candy.arr_Sp[0].height/2},{x:-2*(dic-len)*cos,y:-2*(dic-len)*sin});
+                    }
+                }
+            }
+        }
+    }
+
+    /**与旋转hook的检测 */
+    private testRotateHook() : void
+    {
+        // for (let i = 0; i < this.arr_Hook.length; i++) 
+        // {
+        if(this.rotateHookIndex == undefined) return;
+        if(!this.arr_Hook[this.rotateHookIndex].canRotate) return;
+        if(this.isMouseDownRotateHook)
+        this.rotateInfo = this.arr_Hook[this.rotateHookIndex].mouseRotateHook(Laya.stage.mouseX - this.scene.panel_GameWorld.x,Laya.stage.mouseY - this.scene.panel_GameWorld.y);
+        else 
+        {
+            this.arr_Hook[this.rotateHookIndex].oldPos.x = undefined;
+            this.arr_Hook[this.rotateHookIndex].oldPos.y = undefined;
+            this.rotateHookIndex = undefined;
+        }
+        if(this.rotateInfo)
+        {
+            //旋转
+            //绳子1
+            this.arr_Rope.forEach(rope => {
+                if(rope.hookIndex == this.rotateHookIndex)
+                {
+                    if(this.rotateInfo>0)
+                    {
+                        rope.toShortOneTime();
+                    }
+                    else
+                    {
+                        rope.toLong();
+                    }
+                }
+            });
+            //绳子2
+            if(this.arr_Rope2)
+            {
+                this.arr_Rope2.forEach(rope => {
+                    if(rope.hookIndex == this.rotateHookIndex)
+                    {
+                        if(this.rotateInfo>0)
+                        {
+                            rope.toShortOneTime();
+                        }
+                        else
+                        {
+                            rope.toLong();
+                        }
+                    }
+                });    
+            }
+        }
+        
     }
 
     /**弹力鼓与弹力鼓的距离检测 */
@@ -2042,6 +2134,7 @@ export default class GamePage extends Laya.Scene{
     private mouseCute() : void
     {
         //检测是否正按下鼠标移动钩子，若未按下则可开启割绳子检测
+        if(this.isMouseDownRotateHook) return;//如果旋转hook被点击
         let isDown = true;
         for(let i=0;i<this.arr_Hook.length;i++){
            if(this.arr_Hook[i].isDown)
@@ -2130,9 +2223,9 @@ export default class GamePage extends Laya.Scene{
                                 });
                             }
                             //断开连接
-                            if(ropePoint.sp.getComponent(Laya.RevoluteJoint))
+                            if(ropePoint.sp.getComponent(Laya.RopeJoint))
                             {
-                                ropePoint.sp.getComponent(Laya.RevoluteJoint).destroy();
+                                ropePoint.sp.getComponent(Laya.RopeJoint).destroy();
                                 Rope.ropeCuted();
                                 this.ropeJonitCute(Rope);
                                 break;

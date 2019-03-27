@@ -18,6 +18,7 @@ import Laser from "../prefab/Laser";
 import Spider from "../prefab/Spider";
 import { BouceDrum } from "../prefab/bounceDrum";
 import AntiGravity from "../prefab/AntiGravity";
+import SawTooth from "../prefab/SawTooth";
  /**
  * 游戏界面 ani  1：开门动画 2： 
  */
@@ -85,6 +86,8 @@ export default class GamePage extends Laya.Scene{
     public arr_Spider:Array<Spider>;
     /**弹力鼓 */
     public arr_bounceDrum : Array<BouceDrum>;
+    /**锯齿 */
+    public arr_SawTooth : Array<SawTooth>;
     //-------------------------------------------
     /**透明度转折变量 */
     private alphaZ : number = 0;
@@ -356,9 +359,17 @@ export default class GamePage extends Laya.Scene{
                 bounceDrum.clearTimer();
             });
         }
-        if(this.antiGravity){
+        if(this.antiGravity)
+        {
             this.antiGravity.destroy();
             this.antiGravity.removeEvent();
+        }
+        if(this.arr_SawTooth)
+        {
+            this.arr_SawTooth.forEach(sawTooth =>{
+                sawTooth.clearTimer();
+                sawTooth.destroy();
+            });
         }
    }
 
@@ -726,6 +737,8 @@ export default class GamePage extends Laya.Scene{
         this.laserInit(this.mapConfig.arr_Laser);
         //弹力鼓数据初始化
         this.bounceDrumInit(this.mapConfig.arr_bounceDrum);
+        //锯齿数据初始化
+        this.sawToothInit(this.mapConfig.arr_SawTooth);
 
         //绳子寻找糖果
         Laya.timer.loop(1,this,this.ropeToCandy);
@@ -1536,6 +1549,32 @@ export default class GamePage extends Laya.Scene{
             
         }     
     }
+
+    /**锯齿初始化 */
+    private sawToothInit(arr_SawTooth) : void
+    {
+        if(!arr_SawTooth[0]) return;
+        if(this.arr_SawTooth==undefined)
+        {
+            this.arr_SawTooth = new Array<SawTooth>();
+        }
+
+        for(let i=0; i<arr_SawTooth.length; i++)
+        {   
+            if(this.arr_SawTooth[i])
+            {
+                this.arr_SawTooth[i].update(
+                    {"info":arr_SawTooth[i].info,"color":arr_SawTooth[i].color});
+            
+            }
+            else
+            { 
+                this.arr_SawTooth[i] = new SawTooth(this.scene.panel_GameWorld);
+                this.arr_SawTooth[i].init(
+                    {"info":arr_SawTooth[i].info,"color":arr_SawTooth[i].color});
+            }
+        }
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////////////游戏逻辑↓
 
 
@@ -1570,6 +1609,8 @@ export default class GamePage extends Laya.Scene{
         this.testForceBall(x,y);
         //与激光的距离检测  - 碎糖果已处理 没测试
         this.testLaser(x,y);
+        //与锯齿的距离检测  - 碎糖果已处理 没测试
+        this.testSawTooth(x,y);
         //与弹力鼓的距离检测 - 碎糖果已处理 没测试 -注册
         this.testBounceDrum(x,y);
         //与鼠标的距离检测 - 超能力 - 碎糖果已处理
@@ -1969,6 +2010,32 @@ export default class GamePage extends Laya.Scene{
         });
     }
 
+    /**与锯齿的距离检测 */
+    private testSawTooth(x,y){
+        if(!this.arr_SawTooth) return;
+        if(this.isOpenSuper) return;
+        //检测与锯齿得距离，碰撞到则播放哭泣动画结束游戏,在GamePage中开启此检测方法
+        this.testPublicSawTooth(this.candy);
+        if(this.candy2) this.testPublicSawTooth(this.candy2);
+
+    }
+    
+    private testPublicSawTooth(candy) {
+        let collide;
+        this.arr_SawTooth.forEach(sawTooth => {
+            if (!sawTooth.isCollision) {
+                for(let i=0;i<sawTooth.spArray.length;i++){
+                    collide = sawTooth.spArray[i].hitTestPoint(candy.arr_Sp[0].x + this.scene.panel_GameWorld.x,candy.arr_Sp[0].y + this.scene.panel_GameWorld.y);
+                    if (collide) {
+                        sawTooth.isCollision = true;
+                        //糖果破碎
+                        candy.becomeApart(candy.arr_Sp[0].x, candy.arr_Sp[0].y);
+                        this.failGame();
+                    }
+                }
+            }
+        });
+    }
     /**显示菜单 */
     private showMenu() : void
     {

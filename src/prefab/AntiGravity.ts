@@ -26,6 +26,7 @@ export default class AntiGravity
     {
         this.sp.visible=true;
         this.sp.loadImage("gameView/antiGravity/anti_down.png");
+        this.sp.pos(data.x,data.y);
         this.sp.on(Laya.Event.MOUSE_DOWN,this,this.anti_OnClick);
         Laya.Physics.I.gravity={x:0,y:10};
         this.isReverse=false;
@@ -36,13 +37,16 @@ export default class AntiGravity
     {
         //创建按钮
         this.sp=new Laya.Sprite();
-        this.sp.loadImage("gameView/antiGravity/anti_down.png");
+        this.sp.autoSize=true;
+        this.sp.loadImage("gameView/antiGravity/anti_down.png",Laya.Handler.create(this,this.CallBack));
         this.sp.pos(x,y);
-        this.sp.pivot(this.sp.width/2,this.sp.height/2);
         this.sp.visible=true;
         this.view.addChild(this.sp);
-        //创建旋转图
+    }
 
+    CallBack():void
+    {      
+        this.sp.pivot(this.sp.width/2,this.sp.height/2);
     }
 
     //按钮点击事件

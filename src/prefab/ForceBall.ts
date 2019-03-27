@@ -58,6 +58,7 @@ import Balloon from "./Balloon";
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
         this.sp.visible=true;
         this.view.addChild(this.sp);
+        console.log(this.sp.pivotX+"牛逼"+this.sp.height);
 
         this.spRect = new Laya.Sprite();
         this.spRect.graphics.drawRect(0,-250,this.sp.width,250,"#a24");

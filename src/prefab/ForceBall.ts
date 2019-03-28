@@ -1,6 +1,7 @@
 import Tool from "../Tool/Tool";
 import Candy from "./Candy";
 import Balloon from "./Balloon";
+import Dic from "../Tool/dic";
     export default class ForceBall{
     /**推力球精灵 */
     public sp:Laya.Sprite;
@@ -60,7 +61,7 @@ import Balloon from "./Balloon";
         this.view.addChild(this.sp);
 
         this.spRect = new Laya.Sprite();
-        this.spRect.graphics.drawRect(0,-250,this.sp.width,250,"#a24");
+        this.spRect.graphics.drawRect(0,-400,this.sp.width,400,"#a24");
         this.spRect.alpha = 0.2;
         this.sp.addChild(this.spRect);
         this.sp.rotation=rotation;
@@ -105,9 +106,11 @@ import Balloon from "./Balloon";
         let isApplyForce = this.isApplyForce;
         if(index == 2) isApplyForce = this.isApplyForce_candy2;
         if(isApplyForce){
+            let dic = Dic.countDic_Object({x:this.sp.x,y:this.sp.y},{x:candy.arr_Sp[0].x,y:candy.arr_Sp[0].y});
+            dic = dic / 400;
             for(let i=0;i<candy.arr_Body.length;i++){
-                let Vx=Math.sin(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].x-this.sp.x)*1200;
-                let Vy=-Math.cos(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].y-this.sp.y)*1200;
+                let Vx=Math.sin(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].x-this.sp.x)*(1200*(1-dic));
+                let Vy=-Math.cos(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].y-this.sp.y)*(1200*(1-dic));
                 let currVx=candy.arr_Body[0].linearVelocity.x;
                 let currVy=candy.arr_Body[0].linearVelocity.y;
                 candy.arr_Body[i].setVelocity({x:Vx+currVx,y:Vy+currVy});

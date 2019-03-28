@@ -2,7 +2,7 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":6,
+    "selecteID":52,
     "searchKey":"Scene",
     "props":{"width":480,"sceneColor":"#000000","height":800},
     "nodeParent":-1,
@@ -26,7 +26,8 @@
             "hasChild":false,
             "compId":3,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -48,7 +49,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":-79.5,"x":811,"width":313,"texture":"gameView/gameBg/boxBg_3_2.png","height":800},
+            "props":{"y":-10,"x":800,"width":313,"texture":"gameView/gameBg/boxBg_3_2.png","height":800},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -86,13 +87,14 @@
             "hasChild":false,
             "compId":4,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":190.5,"x":406,"width":130,"texture":"gameView/monster/ation1.png","pivotY":130,"pivotX":56,"height":130},
+            "props":{"y":383,"x":399.5,"width":130,"texture":"gameView/monster/ation1.png","pivotY":130,"pivotX":56,"height":130},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -100,13 +102,14 @@
             "hasChild":false,
             "compId":6,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":1171,"x":240,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
+            "props":{"y":1101.5,"x":366.5,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -121,7 +124,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":523,"x":-76.5,"width":94,"texture":"gameView/forceball4.png","rotation":90,"pivotY":47,"pivotX":47,"height":94},
+            "props":{"y":840.5,"x":570.5,"width":94,"texture":"gameView/forceball4.png","rotation":90,"pivotY":47,"pivotX":47,"height":94},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -129,13 +132,14 @@
             "hasChild":false,
             "compId":8,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":592,"x":142,"width":60,"texture":"gameView/candy.png","pivotY":-16,"pivotX":30,"height":60},
+            "props":{"y":854.5,"x":253,"width":60,"texture":"gameView/candy.png","pivotY":-16,"pivotX":30,"height":60},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -143,14 +147,18 @@
             "hasChild":false,
             "compId":9,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":658,"x":-180,"width":58,"texture":"gameView/rotate4.png","pivotY":27,"pivotX":29,"height":54},
+            "props":{"y":110,"x":588.5,"width":58,"texture":"gameView/rotate4.png","pivotY":27,"pivotX":29,"height":54},
+            "nodeParent":2,
+            "label":"Sprite",
             "isDirectory":false,
+            "isAniNode":true,
             "hasChild":false,
             "compId":11,
             "child":[
@@ -161,7 +169,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":815.5,"x":215,"width":25,"texture":"gameView/rotate4.png","pivotY":13,"pivotX":13,"height":25},
+            "props":{"y":950,"x":570.5,"width":25,"texture":"gameView/rotate4.png","pivotY":13,"pivotX":13,"height":25},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -176,7 +184,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":367,"x":411,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
+            "props":{"y":909,"x":83,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -191,7 +199,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":528,"x":146.5,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
+            "props":{"y":650.5,"x":343,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -199,7 +207,8 @@
             "hasChild":false,
             "compId":14,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -213,13 +222,14 @@
             "hasChild":false,
             "compId":15,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":254.5,"x":413,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
+            "props":{"y":1230,"x":244,"width":69,"texture":"gameView/paopao/balloon10.png","rotation":0,"pivotY":33,"pivotX":35,"height":66},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -227,13 +237,14 @@
             "hasChild":false,
             "compId":21,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":367,"x":309,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
+            "props":{"y":650.5,"x":166,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -241,13 +252,14 @@
             "hasChild":false,
             "compId":22,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":367,"x":87,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
+            "props":{"y":788.5,"x":343,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -255,13 +267,14 @@
             "hasChild":false,
             "compId":23,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":367,"x":201,"width":69,"texture":"gameView/paopao/balloon10.png","pivotY":33,"pivotX":35,"height":66},
+            "props":{"y":786,"x":166,"width":69,"texture":"gameView/paopao/balloon10.png","rotation":0,"pivotY":33,"pivotX":35,"height":66},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -269,13 +282,14 @@
             "hasChild":false,
             "compId":24,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":357,"x":704.5,"width":68,"scaleX":1,"height":66},
+            "props":{"y":312.5,"x":717,"width":68,"scaleX":1,"height":66},
             "nodeParent":2,
             "label":"Sprite",
             "isOpen":true,
@@ -284,7 +298,8 @@
             "hasChild":false,
             "compId":35,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -298,13 +313,14 @@
             "hasChild":false,
             "compId":36,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":1214,"x":446,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
+            "props":{"y":467,"x":116,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -327,13 +343,14 @@
             "hasChild":false,
             "compId":42,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":516,"x":87,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
+            "props":{"y":1101.5,"x":135,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -348,7 +365,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":601,"x":719.5,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
+            "props":{"y":164,"x":93,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -363,7 +380,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":644,"x":309,"width":44,"texture":"gameView/rotate4.png","pivotY":22,"pivotX":22,"height":44},
+            "props":{"y":476,"x":377.5,"width":44,"texture":"gameView/rotate4.png","pivotY":22,"pivotX":22,"height":44},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -378,7 +395,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":617,"x":-122,"width":256,"texture":"gameView/laser1.png","pivotY":21,"pivotX":128,"height":41},
+            "props":{"y":1102.5,"x":366.5,"width":256,"texture":"gameView/laser1.png","pivotY":21,"pivotX":128,"height":41},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -386,7 +403,8 @@
             "hasChild":false,
             "compId":49,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -400,13 +418,14 @@
             "hasChild":false,
             "compId":50,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":462,"x":-185.5,"width":256,"texture":"gameView/laser1.png","pivotY":21,"pivotX":128,"height":41},
+            "props":{"y":1101.5,"x":135,"width":256,"texture":"gameView/laser1.png","pivotY":21,"pivotX":128,"height":41},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -414,13 +433,14 @@
             "hasChild":false,
             "compId":52,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":807.5,"x":-125,"width":256,"texture":"gameView/laser1.png","rotation":90,"pivotY":21,"pivotX":128,"height":41},
+            "props":{"y":1014,"x":-104,"width":256,"texture":"gameView/laser1.png","rotation":90,"pivotY":21,"pivotX":128,"height":41},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -428,13 +448,14 @@
             "hasChild":false,
             "compId":53,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":644,"x":411,"width":44,"texture":"gameView/rotate4.png","pivotY":22,"pivotX":22,"height":44},
+            "props":{"y":909,"x":421.5,"width":44,"texture":"gameView/rotate4.png","pivotY":22,"pivotX":22,"height":44},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -449,7 +470,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":172,"x":171,"width":44,"texture":"gameView/rotate4.png","pivotY":22,"pivotX":22,"height":44},
+            "props":{"y":734,"x":-20,"width":44,"texture":"gameView/rotate4.png","pivotY":22,"pivotX":22,"height":44},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -464,7 +485,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":0,"x":471,"width":480,"texture":"gameView/gameBg/boxBg_2.png","height":800},
+            "props":{"y":7.5,"x":1270,"width":480,"texture":"gameView/gameBg/boxBg_2.png","height":800},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -472,13 +493,14 @@
             "hasChild":false,
             "compId":56,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":223,"x":-261.5,"width":227,"texture":"gameView/knife4.png","rotation":90,"pivotY":19,"pivotX":114,"height":38},
+            "props":{"y":650.5,"x":253,"width":227,"texture":"gameView/knife4.png","rotation":90,"pivotY":19,"pivotX":114,"height":38},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -486,13 +508,14 @@
             "hasChild":false,
             "compId":57,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":390,"x":-195.5,"width":227,"texture":"gameView/knife4.png","rotation":90,"pivotY":19,"pivotX":114,"height":38},
+            "props":{"y":743,"x":901.5,"width":227,"texture":"gameView/knife4.png","rotation":90,"pivotY":19,"pivotX":114,"height":38},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -500,7 +523,8 @@
             "hasChild":false,
             "compId":58,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -514,7 +538,8 @@
             "hasChild":false,
             "compId":59,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -528,13 +553,14 @@
             "hasChild":false,
             "compId":60,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":429,"x":-447,"width":227,"texture":"gameView/knife4.png","rotation":0,"pivotY":19,"pivotX":114,"height":38},
+            "props":{"y":448,"x":940,"width":227,"texture":"gameView/knife4.png","rotation":0,"pivotY":19,"pivotX":114,"height":38},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -542,13 +568,14 @@
             "hasChild":false,
             "compId":61,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":172,"x":48,"width":94,"texture":"gameView/forceball4.png","rotation":90,"pivotY":47,"pivotX":47,"height":94},
+            "props":{"y":533,"x":58,"width":94,"texture":"gameView/forceball4.png","rotation":90,"pivotY":47,"pivotX":47,"height":94},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -556,13 +583,14 @@
             "hasChild":false,
             "compId":62,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":52,"x":-96,"width":94,"texture":"gameView/forceball4.png","rotation":90,"pivotY":47,"pivotX":47,"height":94},
+            "props":{"y":807.5,"x":607,"width":94,"texture":"gameView/forceball4.png","rotation":90,"pivotY":47,"pivotX":47,"height":94},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -570,13 +598,14 @@
             "hasChild":false,
             "compId":63,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":268.5,"x":-57.5,"texture":"gameView/knife2.png","rotation":90},
+            "props":{"y":-139,"x":524.5,"texture":"gameView/knife2.png","rotation":90},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -584,13 +613,14 @@
             "hasChild":false,
             "compId":72,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":516,"x":201,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
+            "props":{"y":369,"x":258,"width":50,"texture":"gameView/hook1.png","pivotY":22,"pivotX":25,"height":43},
             "nodeParent":2,
             "label":"Sprite",
             "isDirectory":false,
@@ -609,5 +639,6 @@
             "id":1,
             "frameRate":24,
             "action":0
-        }]
+        }],
+    "$HIDDEN":false
 }

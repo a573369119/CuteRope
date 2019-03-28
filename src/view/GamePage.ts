@@ -146,13 +146,13 @@ export default class GamePage extends Laya.Scene{
         this.menuUI = new ui.GameView.GameMenuUI();
         this.scene.addChild(this.menuUI);
         this.newDoorUi();
-        this.doorOpen.alpha = 0.3;
+        // this.doorOpen.alpha = 0.3;
         //鼠标拖尾初始化
         this.initMouseTail();
 
         //界面数据 数值初始化
         this.scene.img_replay.alpha = 0;
-        this.alphaZ = 1;
+        this.alphaZ = 1;    
         this.score = 0;
         this.roadIndex = 0;
         this.lastMousePos = {};
@@ -709,6 +709,7 @@ export default class GamePage extends Laya.Scene{
             alert("关卡为配置，请配置后再调试");
             Laya.stage.height = 1334;
             Laya.stage.width = 750;
+            this.removeEvents();
             Laya.Scene.open("SelectRound/SelectRound.scene",true,[this.quarterIndex,this.boxIndex]); 
         }
         console.log(this.mapConfig);
@@ -1566,8 +1567,8 @@ export default class GamePage extends Laya.Scene{
     private candyTest() : void
     {
         //x 
-        let x = this.candy.arr_Sp[0].x - this.scene.panel_GameWorld.x;
-        let y = this.candy.arr_Sp[0].y - this.scene.panel_GameWorld.y;
+        let x = this.candy.arr_Sp[0].x;
+        let y = this.candy.arr_Sp[0].y;
         // console.log(x + "," + y);
         //与怪物的距离检测 - 碎糖果已处理 没测试
         this.testMonster(x,y);
@@ -2100,7 +2101,7 @@ export default class GamePage extends Laya.Scene{
         else if(this.candy2)
         {//碎糖果的边界检测
             if(this.candy2.arr_Sp[0].y<-200 || this.candy2.arr_Sp[0].y>this.mapHight)
-            {
+            {   
                 this.candyFall();
             }
         }

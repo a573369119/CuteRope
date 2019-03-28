@@ -1,14 +1,3 @@
 {
-   "OPNsOrnwsBE50o0foQfqgMgDAC7Ks0iO7lJhxvh5A1I=": {
-      "expiry": 1568575100.632967,
-      "mode": "force-https",
-      "sts_include_subdomains": false,
-      "sts_observed": 1552807100.632972
-   },
-   "cO+LXgmMDgbWJy2Fzodv20RLPl8QiSzx3dBWiHcbGPs=": {
-      "expiry": 1553836814.57032,
-      "mode": "force-https",
-      "sts_include_subdomains": false,
-      "sts_observed": 1553664014.570323
-   }
+
 }

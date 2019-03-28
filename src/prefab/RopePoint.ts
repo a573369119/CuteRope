@@ -138,17 +138,6 @@ export default class RopePoint{
 		joint.otherAnchor = [this.sp.width/2,this.sp.height/2];
 		joint.collideConnected = false;
 		joint.maxLength = GameConfig.ROPE_DIC;
-		//马达
-		// if(this.index == 1)
-		// {
-		// 	joint.motorSpeed = 5;
-		// 	joint.maxMotorTorque = 300000000000;
-		// 	joint.enableMotor = true;
-		// 	joint.enableLimit = false;
-		// 	this.candy.arr_Colider.forEach(co => {
-		// 		co.density = 1;
-		// 	});	
-		// }
 		this.sp.addComponentIntance(joint);
 	}
 
@@ -164,7 +153,7 @@ export default class RopePoint{
                 index = i;
                 break;
             }
-        }
+        }	
         let joint : Laya.RopeJoint = new Laya.RopeJoint();
         joint.otherBody = candys.arr_Sp[index].getComponents(Laya.RigidBody)[0];
         joint.otherAnchor = [candys.arr_Sp[index].width/2,candys.arr_Sp[index].height/2];
@@ -174,6 +163,15 @@ export default class RopePoint{
         this.sp.addComponentIntance(joint);
     }
 
+	//改变maxlength: void
+	public changeMaxLength(num) : void
+	{
+		let ropeJoint = this.sp.getComponents(Laya.RopeJoint)[0];
+		if(ropeJoint)
+		{
+			ropeJoint.maxLength += num; 
+		}
+	}
 
 	/**添加鼠标JOint */
 	private ropePoint_AddMouseJoint() : void
@@ -193,10 +191,6 @@ export default class RopePoint{
 		this.sp.on(Laya.Event.CLICK,this,function(e){
 			console.log(e);
 		});		
-		// Laya.stage.on(Laya.Event.MOUSE_UP,this,this.mouseUp);
-		// Laya.stage.on(Laya.Event.CLICK,this,function(e){
-		// 	console.log(e);
-		// });
 	}
 
 	private mouseUp() : void

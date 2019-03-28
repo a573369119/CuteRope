@@ -460,9 +460,13 @@ export default class Rope{
     /***旋转变长逻辑*/  
     public toLong() : void
     {
-        if(this.ropeIndex < 2) return;
-        this.ropePointsArray[this.ropeIndex--].body.type = "dynamic";
-        console.log("放下");
+        if(this.ropeIndex > 2)
+        {
+            this.ropePointsArray[this.ropeIndex--].body.type = "dynamic";
+            this.ropePointsArray[0].changeMaxLength(8);        
+
+        }
+        // console.log("放下");
     }
 
     /**绳子变短逻辑 */
@@ -472,9 +476,10 @@ export default class Rope{
             return;
         // console.log(this.ropeIndex + "  len" + this.ropePointsArray.length);
         let obj : any = {};
-        obj.x = -1*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"cos");
-        obj.y = -1*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"sin");
-        if(Dic.countDic_Object({x:this.ropePointsArray[0].x,y:this.ropePointsArray[0].y},{x:this.ropePointsArray[this.ropeIndex].sp.x,y:this.ropePointsArray[this.ropeIndex].sp.y}) < 10)
+        obj.x = -2*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"cos");
+        obj.y = -2*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"sin");
+        let dic = Dic.countDic_Object({x:this.ropePointsArray[0].x,y:this.ropePointsArray[0].y},{x:this.ropePointsArray[this.ropeIndex].sp.x,y:this.ropePointsArray[this.ropeIndex].sp.y});
+        if(dic < 10)
         {
             this.ropePointsArray[this.ropeIndex].body.setVelocity({x:0,y:0});       
             this.ropePointsArray[this.ropeIndex].body.setAngle(0);     
@@ -485,7 +490,9 @@ export default class Rope{
         }        
         if(this.ropeIndex < this.ropePointsArray.length-3)
         {
-            this.ropePointsArray[this.ropeIndex].body.applyLinearImpulseToCenter(obj);
+
+            this.ropePointsArray[0].changeMaxLength(-1);
+            this.ropePointsArray[this.ropeIndex].body.setVelocity(obj);
         }
     }
 
@@ -494,7 +501,7 @@ export default class Rope{
     {
         Laya.timer.loop(16,this,this.toShort);
         // Laya.timer.loop(16,this,this.directionChange);
-        console.log("拉起");        
+        // console.log("拉起");        
     }
 
     /**方向修正 */

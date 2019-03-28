@@ -123,39 +123,57 @@ export default class Balloon{
                 this.isSlow = false;
             }
         }
-        if(!this.isSlow){
-            for(let i=0;i<arr_Body.length;i++){               
-                if(Math.abs(arr_Body[i].linearVelocity.y)<=1){
-                    this.isSlow=true;
-                    arr_Body[i].linearDamping=0.03;
-                    this.candy2NeedGo(candy2,isToOne,0.03);                    
-                    // console.log("中立");
-                }else if(Math.abs(arr_Body[i].linearVelocity.y)>1&&Math.abs(arr_Body[i].linearVelocity.y)<=4.5){
-                    arr_Body[i].linearDamping=25;
-                    this.candy2NeedGo(candy2,isToOne,25);
-                }else{
-                    arr_Body[i].linearDamping=18;
-                    this.candy2NeedGo(candy2,isToOne,18);
+        for(let i=0;i<arr_Body.length;i++)
+        {
+            if(arr_Body[i].owner) 
+            {
+                arr_Body[i].applyForce({x:this.sp.width/2,y:this.sp.height/2},{x:0,y:-(22)});
+                arr_Body[i].linearDamping = 3;                
+            } 
+            // console.log("失败");
+            if(candy2 && this.isToOne == true)
+            {
+                let arr_Body = candy2.arr_Body;
+                arr_Body[i].linearDamping = 3;
+                for(let i =0 ;i<arr_Body.length;i++)
+                {
+                    arr_Body[i].applyForce({x:this.sp.width/2,y:this.sp.height/2},{x:0,y:-(22)});
                 }
             }
         }
-        else
-        {
-                for(let i=0;i<arr_Body.length;i++)
-                {
-                    if(arr_Body[i].owner) arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.9,y:-3});
-                    // console.log("失败");
-                    if(candy2 && this.isToOne == true)
-                    {
-                        let arr_Body = candy2.arr_Body;
-                        for(let i =0 ;i<arr_Body.length;i++)
-                        {
-                            arr_Body[i].setVelocity({x:arr_Body[i].linearVelocity.x*0.9,y:-3});
-                        }
-                    }
-                }
+        // if(!this.isSlow){
+        //     for(let i=0;i<arr_Body.length;i++){               
+        //         if(Math.abs(arr_Body[i].linearVelocity.y)<=1){
+        //             this.isSlow=true;
+        //             arr_Body[i].linearDamping=0.03;
+        //             this.candy2NeedGo(candy2,isToOne,0.03);                    
+        //             // console.log("中立");
+        //         }else if(Math.abs(arr_Body[i].linearVelocity.y)>1&&Math.abs(arr_Body[i].linearVelocity.y)<=4.5){
+        //             arr_Body[i].linearDamping=25;
+        //             this.candy2NeedGo(candy2,isToOne,25);
+        //         }else{
+        //             arr_Body[i].linearDamping=18;
+        //             this.candy2NeedGo(candy2,isToOne,18);
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //         for(let i=0;i<arr_Body.length;i++)
+        //         {
+        //             if(arr_Body[i].owner) arr_Body[i].applyForce({x:this.sp.width/2,y:this.sp.height/2},{x:0,y:10});
+        //             // console.log("失败");
+        //             if(candy2 && this.isToOne == true)
+        //             {
+        //                 let arr_Body = candy2.arr_Body;
+        //                 for(let i =0 ;i<arr_Body.length;i++)
+        //                 {
+        //                     arr_Body[i].applyForce({x:this.sp.width/2,y:this.sp.height/2},{x:0,y:10});
+        //                 }
+        //             }
+        //         }
             
-        }    
+        // }    
            
         
     }

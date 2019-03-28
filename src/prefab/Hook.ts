@@ -450,13 +450,14 @@ export default class Hook{
         }
         let fM = Math.sqrt(Math.pow(x,2)+Math.pow(y,2))*Math.sqrt(Math.pow(this.oldPos.x,2)+Math.pow(this.oldPos.y,2));
         let fZ = x*this.oldPos.x + y*this.oldPos.y;
-        // console.log("[x]"　+ x + "[y]" + y + "[oldx]" + this.oldPos.x + " [oldy]" + this.oldPos.y + "[cos]" + fZ/fM);
         let rotation = Math.acos(fZ/fM)*180/Math.PI;
         // console.log(rotation +  " [rotation] " + this.rotateSp.rotation + "[fM]" + fM + "[fZ]" + fZ);
+        console.log(this.rotateSp.rotation)
+        console.log("[x]"　+ x + "[y]" + y + "[oldx]" + this.oldPos.x + " [oldy]" + this.oldPos.y + "[cos]" + fZ/fM);
         let num = this.judge(x,y,this.oldPos);
         this.oldPos.x = x;
         this.oldPos.y = y;
-        if(fM > fZ) 
+        if(fM > fZ && num) 
         {
             this.rotateHook(num*rotation);
             this.countRotation += num*rotation;
@@ -466,7 +467,7 @@ export default class Hook{
             x = x - this.hook_X;
             y = y - this.hook_Y;
         }
-        console.log(Math.abs(this.countRotation));
+        // console.log(Math.abs(this.countRotation));
         if(Math.abs(this.countRotation) > 30)
         {
             let count = this.countRotation;
@@ -487,6 +488,7 @@ export default class Hook{
         {
             cZ.x = 0;
             cZ.y = 0;
+            return;
         }
         num = cZ.x*x+cZ.y*y;
         // console.log("[x]" + cZ.x*x + "[y]" + cZ.y*y);8
@@ -506,5 +508,5 @@ export default class Hook{
         this.rotateSp.rotation +=rotation;     
     }
 
-    
+
 }

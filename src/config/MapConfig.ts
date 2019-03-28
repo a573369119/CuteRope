@@ -81,6 +81,8 @@ export module Config {
         public arr_Spider : Array<SpiderConfig>;
         /**弹力鼓 */
         public arr_bounceDrum : Array<BounceDrumConfig>;
+        /**锯齿 */
+        public arr_SawTooth : Array<SawToothConfig>;
         
         constructor(data){
             this.screenRoad = [];
@@ -98,6 +100,7 @@ export module Config {
             this.arr_Laser=[];
             this.arr_Spider=[];
             this.arr_bounceDrum=[];
+            this.arr_SawTooth=[];
             this.parseConfigData(data);
         }
 
@@ -134,14 +137,17 @@ export module Config {
             this.parseKnife(data.knife);
             /**推力球解析 */
             this.parseForceBall(data.forceball);
+            /**反重力按钮解析 */
+            this.parseAntiGravity(data.antiGravity);
+            /**锯齿解析 */
+            this.parseSawTooth(data.sawTooth);
             /**激光解析 */
             this.parseLaser(data.laser);
             /**蜘蛛解析 */
             this.parseSpider(data.spider);
             /**弹力鼓解析 */
             this.parseBounceDrum(data.bounceDrum);
-            /**反重力按钮解析 */
-            this.parseAntiGravity(data.antiGravity);
+            
         }
 
         /**蜘蛛 */
@@ -417,6 +423,21 @@ export module Config {
                 console.log("antiGravity-解析");
             }  
         }
+
+        /**锯齿 */
+        private parseSawTooth(sawToothObject) : void
+        {
+            if(sawToothObject)
+            {
+                let sawToothConfig : SawToothConfig;
+                sawToothObject.forEach(sawTooth => {
+                    sawToothConfig = new SawToothConfig();
+                    sawToothConfig.info = sawTooth.info;
+                    sawToothConfig.color = sawTooth.color;
+                    this.arr_SawTooth.push(sawToothConfig);
+                });
+            }
+        }
     }
 
     /**candy */
@@ -615,4 +636,25 @@ export module Config {
         /**纵坐标 */
         public antiGravity_Y : number;
     }
+
+    /**锯齿 sawTooth*/
+    export class SawToothConfig{
+        /**颜色 */
+        public color:number;
+        /**锯齿信息 */
+        public info:Array<SawTooth>;
+    }
+
+    class SawTooth{
+         /**锯齿横坐标 */
+         public sawTooth_X : number;
+         /**锯齿纵坐标 */
+         public sawTooth_Y : number;
+         /**锯齿角度 */
+         public rotation : number;
+         /**锯齿旋转度 */
+         public clockwise : boolean;
+    }
+
+
 }

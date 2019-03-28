@@ -65,8 +65,7 @@ export default class Balloon{
         this.sp=new Laya.Sprite();
         this.sp.loadImage("gameView/paopao/balloon.png");
         this.sp.pos(x,y);
-        this.sp.pivot(this.sp.width/2,this.sp.height/2);        
-        this.view.addChild(this.sp);
+        this.sp.pivot(this.sp.width/2,this.sp.height/2);
 
         this.spBg=new Laya.Sprite();
         let randNum=Math.ceil(Math.random()*3);

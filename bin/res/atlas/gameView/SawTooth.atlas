@@ -1,0 +1,1 @@
+{"frames":{"sawtooth_blue.png":{"frame":{"h":240,"idx":0,"w":49,"x":0,"y":0},"sourceSize":{"h":240,"w":49},"spriteSourceSize":{"x":0,"y":0}},"sawtooth_red.png":{"frame":{"h":240,"idx":0,"w":49,"x":50,"y":0},"sourceSize":{"h":240,"w":49},"spriteSourceSize":{"x":0,"y":0}}},"meta":{"image":"SawTooth.png","prefix":"gameView/SawTooth/"}}

@@ -59,6 +59,7 @@ import Dic from "../Tool/dic";
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
         this.sp.visible=true;
         this.view.addChild(this.sp);
+        console.log(this.sp.pivotX+"牛逼"+this.sp.height);
 
         this.spRect = new Laya.Sprite();
         this.spRect.graphics.drawRect(0,-400,this.sp.width,400,"#a24");

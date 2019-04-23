@@ -145,22 +145,22 @@ export default class RopePoint{
     ///////////////测试
     ropeJoint_Last(candys : Candy,maxLeng) : void
     {
-        let index;
-        for(let i = 0;i<candys.arr_Sp.length; i++)
-        {
-            if(!candys.arr_Sp[i].getComponents(Laya.RopeJoint))
-            {
-                index = i;
-                break;
-            }
-        }	
-        let joint : Laya.RopeJoint = new Laya.RopeJoint();
-        joint.otherBody = candys.arr_Sp[index].getComponents(Laya.RigidBody)[0];
-        joint.otherAnchor = [candys.arr_Sp[index].width/2,candys.arr_Sp[index].height/2];
-        joint.selfBody = this.body;
-        joint.selfAnchor = [this.sp.width/2,this.sp.height/2];
-		joint.maxLength = maxLeng;
-        this.sp.addComponentIntance(joint);
+        // let index;
+        // for(let i = 0;i<candys.arr_Sp.length; i++)
+        // {
+        //     if(!candys.arr_Sp[i].getComponents(Laya.RopeJoint))
+        //     {
+        //         index = i;
+        //         break;
+        //     }
+        // }	
+        // let joint : Laya.RopeJoint = new Laya.RopeJoint();
+        // joint.otherBody = candys.arr_Sp[index].getComponents(Laya.RigidBody)[0];
+        // joint.otherAnchor = [candys.arr_Sp[index].width/2,candys.arr_Sp[index].height/2];
+        // joint.selfBody = this.body;
+        // joint.selfAnchor = [this.sp.width/2,this.sp.height/2];
+		// joint.maxLength = maxLeng;
+        // this.sp.addComponentIntance(joint);
     }
 
 	//改变maxlength: void

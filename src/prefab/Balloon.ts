@@ -66,7 +66,8 @@ export default class Balloon{
         this.sp.loadImage("gameView/paopao/balloon.png");
         this.sp.pos(x,y);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
-
+        this.sp.visible=true;
+        this.view.addChild(this.sp);        
         this.spBg=new Laya.Sprite();
         let randNum=Math.ceil(Math.random()*3);
         this.spBg.loadImage("gameView/paopao/balloonBg"+randNum+".png");
@@ -122,24 +123,24 @@ export default class Balloon{
                 this.isSlow = false;
             }
         }
-        for(let i=0;i<arr_Body.length;i++)
-        {
-            if(arr_Body[i].owner) 
+        // for(let i=0;i<arr_Body.length;i++)
+        // {
+            if(arr_Body[0].owner) 
             {
-                arr_Body[i].applyForce({x:this.sp.width/2,y:this.sp.height/2},{x:0,y:-(22)});
-                arr_Body[i].linearDamping = 3;                
+                arr_Body[0].applyForce({x:this.sp.width/2,y:this.sp.height/2},{x:0,y:-(22)*300});
+                arr_Body[0].linearDamping = 3.5;                
             } 
             // console.log("失败");
             if(candy2 && this.isToOne == true)
             {
                 let arr_Body = candy2.arr_Body;
-                arr_Body[i].linearDamping = 3;
-                for(let i =0 ;i<arr_Body.length;i++)
-                {
-                    arr_Body[i].applyForce({x:this.sp.width/2,y:this.sp.height/2},{x:0,y:-(22)});
-                }
+                arr_Body[0].linearDamping = 3.5;
+                // for(let i =0 ;i<arr_Body.length;i++)
+                // {
+                    arr_Body[0].applyForce({x:this.sp.width/2,y:this.sp.height/2},{x:0,y:-(22)*300});
+                // }
             }
-        }
+        // }
         // if(!this.isSlow){
         //     for(let i=0;i<arr_Body.length;i++){               
         //         if(Math.abs(arr_Body[i].linearVelocity.y)<=1){

@@ -5438,11 +5438,11 @@
                     ],
                     "candy":{"style":"candy","x":240,"y":376},
                     "star":[
-                        {"style":"star1","x":134,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":134,"y":376,"interval":100,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":340,"y":595 ,"interval":100,"move":[],"rotateLength":0,"v":3}
+                        {"style":"star1","x":116,"y":567,"interval":100,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star1","x":377.5,"y":567,"interval":100,"move":[],"rotateLength":0,"v":1},
+                        {"style":"star1","x":253,"y":725 ,"interval":100,"move":[],"rotateLength":0,"v":3}
                     ],
-                    "monster":{"x":225,"y":601,"skin":""},
+                    "monster":{"x":240,"y":601,"skin":""},
                     "hook":[
                         {"style":"hook1","x":99,"y":376},                                                
                         {"style":"hook1","x":378,"y":382},                                                
@@ -5451,7 +5451,7 @@
                     "rope":{
                         "hookIndex":[0,1,2],                        
                         "length":[
-                            100,100,300
+                            110,110,400
                         ]
                     }
                 },
@@ -5496,22 +5496,22 @@
                     "mapSkins":[
                         "gameView/gameBg/boxBg_7.png"
                     ],
-                    "candy":{"style":"candy","x":235,"y":287},
+                    "candy":{"style":"candy","x":290,"y":297},
                     "star":[
-                        {"style":"star1","x":134,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":134,"y":376,"interval":100,"move":[],"rotateLength":0,"v":1},
+                        {"style":"star1","x":399,"y":423,"interval":100,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star1","x":152,"y":421,"interval":100,"move":[],"rotateLength":0,"v":1},
                         {"style":"star1","x":340,"y":595 ,"interval":100,"move":[],"rotateLength":0,"v":3}
                     ],
-                    "monster":{"x":227,"y":670,"skin":""},
+                    "monster":{"x":366,"y":713,"skin":""},
                     "hook":[                                       
-                        {"style":"hook1","x":235,"y":507,"canRotate":true},                                                
-                        {"style":"hook1","x":340,"y":264,"canRotate":true},                                                
-                        {"style":"hook1","x":134,"y":264,"canRotate":true}                                                
+                        {"style":"hook1","x":58,"y":291,"canRotate":true},                                                
+                        {"style":"hook1","x":290,"y":176},                                                
+                        {"style":"hook1","x":290,"y":416}                                                
                     ],
                     "rope":{
                         "hookIndex":[0,1,2],                        
                         "length":[
-                            300,100,100
+                            180,85,85
                         ]
                     }
                 },
@@ -5522,34 +5522,34 @@
                     "screenRoad":[500,0],
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0},
-                        {"skin":"gameView/gameBg/boxBg_7_3.png","x":430,"y":0,"width":600},
+                        {"skin":"gameView/gameBg/boxBg_7_2.png","x":430,"y":0,"width":600},
                         {"skin":"gameView/gameBg/boxBg_7.png","x":900,"y":0}
                     ],
-                    "candy":{"style":"candy","x":106,"y":387},
+                    "candy":{"style":"candy","x":106,"y":367},
                     "star":[
-                        {"style":"star1","x":134,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":134,"y":376,"interval":100,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":340,"y":595 ,"interval":100,"move":[],"rotateLength":0,"v":3}
+                        {"style":"star1","x":241,"y":420,"interval":100,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star1","x":495,"y":240,"interval":100,"move":[],"rotateLength":0,"v":1},
+                        {"style":"star1","x":654,"y":180 ,"interval":100,"move":[],"rotateLength":0,"v":3}
                     ],
                     "monster":{"x":744,"y":158,"skin":""},
                     "hook":[                                       
                         {"style":"hook1","x":107,"y":507,"length":300,"percent":0,"rotation":0},                                                
                         {"style":"hook2","x":365,"y":374,"size":100,"length":300,"percent":0,"rotation":0},                                                
-                        {"style":"hook2","x":560,"y":253,"size":100,"length":300,"percent":0,"rotation":0}                                                
+                        {"style":"hook2","x":560,"y":253,"size":100,"length":350,"percent":0,"rotation":0}                                                
                     ],
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            100
+                            80
                         ]
                     },
                     "balloon":[
                         {"x":106,"y":459}
                     ],
                     "knife":[
-						{"x":241,"y":374,"style":"knife1","rotation":90,"v":0,"move":[]},
-						{"x":495,"y":176,"style":"knife3","rotation":90,"v":0,"move":[]},
-						{"x":654,"y":115,"style":"knife3","rotation":90,"v":0,"move":[]},
+						{"x":241,"y":354,"style":"knife1","rotation":90,"v":0,"move":[]},
+						{"x":495,"y":156,"style":"knife3","rotation":90,"v":0,"move":[]},
+						{"x":654,"y":95,"style":"knife3","rotation":90,"v":0,"move":[]},
 						{"x":654,"y":384,"style":"knife3","rotation":90,"v":0,"move":[]}
 					]
                 },
@@ -5560,7 +5560,7 @@
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0}
                     ],
-                    "candy":{"style":"candy","x":359,"y":340},
+                    "candy":{"style":"candy","x":359,"y":400},
                     "star":[
                         {"style":"star1","x":134,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
                         {"style":"star1","x":134,"y":376,"interval":100,"move":[],"rotateLength":0,"v":1},
@@ -5573,11 +5573,11 @@
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            150
+                            100
                         ]
                     },
                     "balloon":[
-                        {"x":359,"y":400}
+                        {"x":359,"y":450}
                     ],
                     "knife":[
 						{"x":14,"y":365,"style":"knife1","rotation":90,"v":0,"move":[]},
@@ -5596,39 +5596,37 @@
                     "mapId":6,
                     "width":750,
                     "height":1334,
-                    "screenRoad":[0,500],
+                    "screenRoad":[500,0],
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0},
-                        {"skin":"gameView/gameBg/boxBg_7_3.png","x":430,"y":0,"width":600},
+                        {"skin":"gameView/gameBg/boxBg_7_2.png","x":430,"y":0,"width":600},
                         {"skin":"gameView/gameBg/boxBg_7.png","x":900,"y":0}
                     ],
-                    "candy":{"style":"candy","x":215,"y":278},
+                    "candy":{"style":"candy","x":280,"y":250},
                     "star":[
                         {"style":"star1","x":134,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
                         {"style":"star1","x":134,"y":376,"interval":100,"move":[],"rotateLength":0,"v":1},
                         {"style":"star1","x":340,"y":595 ,"interval":100,"move":[],"rotateLength":0,"v":3}
                     ],
-                    "monster":{"x":97,"y":221,"skin":""},
-                    "hook":[                                       
-                        {"style":"hook3","x":88,"y":259},                                                
-                        {"style":"hook3","x":88,"y":370},                                                
-                        {"style":"hook3","x":324,"y":253},                                                
-                        {"style":"hook3","x":324,"y":376},                                                
-                        {"style":"hook2","x":162,"y":490,"size":100},                                                
+                    "monster":{"x":120,"y":221,"skin":""},
+                    "hook":[                                                                                     
+                        {"style":"hook1","x":200,"y":80,"canRotate":true},                                                
+                        {"style":"hook1","x":340,"y":200},                                                                                             
+                        {"style":"hook2","x":158,"y":490,"size":100},                                                
                         {"style":"hook2","x":325,"y":490,"size":100},                                                
                         {"style":"hook2","x":516,"y":533,"size":100},                                                
-                        {"style":"hook2","x":516,"y":154,"size":100},                                                
+                        {"style":"hook2","x":516,"y":165,"size":100},                                                
                         {"style":"hook2","x":670,"y":247,"size":100},                                                
                         {"style":"hook2","x":670,"y":401,"size":100}                                                
                     ],
                     "rope":{
-                        "hookIndex":[0,1,2,3],                        
+                        "hookIndex":[0,1],                        
                         "length":[
-                            10,10,10,10
+                            170,60
                         ]
                     },
                     "balloon":[
-                        {"x":83,"y":571},
+                        {"x":83,"y":581},
                         {"x":402,"y":571}
                     ],
 					"spider":[
@@ -5647,11 +5645,11 @@
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0}
                     ],
-                    "candy":{"style":"candy","x":215,"y":278},
+                    "candy":{"style":"candy","x":200,"y":400},
                     "star":[
-                        {"style":"star1","x":134,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star1","x":88,"y":280,"interval":100,"move":[],"rotateLength":0,"v":2},
                         {"style":"star1","x":134,"y":376,"interval":100,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":340,"y":595 ,"interval":100,"move":[],"rotateLength":0,"v":3}
+                        {"style":"star1","x":402,"y":300 ,"interval":100,"move":[],"rotateLength":0,"v":3}
                     ],
                     "monster":{"x":111,"y":710,"skin":""},
                     "hook":[                                       
@@ -5661,12 +5659,12 @@
                     "rope":{
                         "hookIndex":[0,1],                        
                         "length":[
-                            180,180
+                            400,300
                         ]
                     },
                     "knife":[
 						{"x":340,"y":363,"style":"knife4","rotation":0,"v":0,"move":[]},
-						{"x":180,"y":580,"style":"knife4","rotation":0,"v":0,"move":[]}
+						{"x":180,"y":580,"style":"knife3","rotation":0,"v":0,"move":[]}
                     ]
                 },
                 {
@@ -5678,9 +5676,9 @@
                     ],
                     "candy":{"style":"candy","x":215,"y":278},
                     "star":[
-                        {"style":"star1","x":134,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star1","x":330,"y":235,"interval":100,"move":[],"rotateLength":0,"v":2},
                         {"style":"star1","x":134,"y":376,"interval":100,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":340,"y":595 ,"interval":100,"move":[],"rotateLength":0,"v":3}
+                        {"style":"star1","x":300,"y":400 ,"interval":100,"move":[],"rotateLength":0,"v":3}
                     ],
                     "monster":{"x":111,"y":710,"skin":""},
                     "hook":[                                       
@@ -5706,10 +5704,10 @@
                     "screenRoad":[500,0],
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0},
-                        {"skin":"gameView/gameBg/boxBg_7_3.png","x":430,"y":0,"width":600},
+                        {"skin":"gameView/gameBg/boxBg_7_2.png","x":430,"y":0,"width":600},
                         {"skin":"gameView/gameBg/boxBg_7.png","x":900,"y":0}
                     ],
-                    "candy":{"style":"candy","x":181,"y":261},
+                    "candy":{"style":"candy","x":181,"y":280},
                     "star":[
                         {"style":"star1","x":134,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
                         {"style":"star1","x":134,"y":376,"interval":100,"move":[],"rotateLength":0,"v":1},
@@ -5723,7 +5721,7 @@
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            150
+                            130
                         ]
                     },
                     "knife":[
@@ -5756,13 +5754,13 @@
                     ],
                     "monster":{"x":381,"y":725,"skin":""},
                     "hook":[                                                                                     
-                        {"style":"hook1","x":65,"y":565,"length":400,"percent":0,"rotation":0},                                             
-                        {"style":"hook1","x":65,"y":197,"length":400,"percent":0,"rotation":0}                                             
+                        {"style":"hook3","x":65,"y":565,"length":400,"percent":0,"rotation":0},                                             
+                        {"style":"hook3","x":65,"y":197,"length":400,"percent":0,"rotation":0}                                             
                     ],
                     "rope":{
                         "hookIndex":[0,1],                        
                         "length":[
-                            160,160
+                            110,110
                         ]
                     },
                     "knife":[
@@ -5772,10 +5770,10 @@
 						{"x":324,"y":501,"style":"knife3","rotation":0,"v":0,"move":[]}
                     ],
 					"laser":[
-						{"x":123,"y":390,"rotation":90,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":215,"y":390,"rotation":90,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":304,"y":390,"rotation":90,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":392,"y":390,"rotation":90,"isAdvanceLaser":false,"time":3,"move":[]}
+						{"x":123,"y":390,"rotation":90,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":215,"y":390,"rotation":90,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":304,"y":390,"rotation":90,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":392,"y":390,"rotation":90,"isAdvanceLaser":false,"time":5,"move":[]}
 					]
                 },
                 {
@@ -5785,10 +5783,10 @@
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0}
                     ],
-                    "candy":{"style":"candy","x":254,"y":582},
+                    "candy":{"style":"candy","x":254,"y":600},
                     "star":[
-                        {"style":"star1","x":134,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":134,"y":376,"interval":100,"move":[],"rotateLength":0,"v":1},
+                        {"style":"star1","x":254,"y":210,"interval":100,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star1","x":184,"y":300,"interval":100,"move":[],"rotateLength":0,"v":1},
                         {"style":"star1","x":340,"y":595 ,"interval":100,"move":[],"rotateLength":0,"v":3}
                     ],
                     "monster":{"x":381,"y":243,"skin":""},
@@ -5798,7 +5796,7 @@
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            100
+                            80
                         ]
                     },
                     "knife":[
@@ -5808,7 +5806,7 @@
                     ],
                     "forceball":[
 						{"x":79,"y":570,"rotation":90},
-						{"x":79,"y":291,"rotation":90},
+						{"x":79,"y":251,"rotation":90},
 						{"x":436,"y":423,"rotation":270}
 					],
                     "balloon":[
@@ -5833,8 +5831,8 @@
                     ],
                     "monster":{"x":381,"y":243,"skin":""},
                     "hook":[
-                        {"style":"hook2","x":226,"y":329,"size":150},
-                        {"style":"hook2","x":70,"y":559,"size":80,"length":250,"percent":0.9,"rotation":0},
+                        {"style":"hook2","x":226,"y":289,"size":100},
+                        {"style":"hook2","x":70,"y":559,"size":50,"length":250,"percent":0.9,"rotation":0},
                         {"style":"hook1","x":243,"y":790,"canRotate":true}
                     ],
                     "rope":{
@@ -5847,11 +5845,11 @@
                         {"x":79,"y":1209,"rotation":90}
                     ],
                     "balloon":[
-                        {"x":391,"y":415},                 
+                        {"x":391,"y":400},                 
                         {"x":243,"y":1048}                 
                     ],
                     "spider":[
-                        {"x":226,"y":329}
+                        {"x":226,"y":289}
                     ],
                     "knife":[
                     		{"x":70,"y":509,"style":"knife1","rotation":0,"v":0,"move":[]},
@@ -5907,9 +5905,9 @@
                     ],
                     "candy":{"style":"candy","x":238,"y":356},
                     "star":[
-                        {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":147,"y":564,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":343,"y":564,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":241,"y":280,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":238,"y":658,"skin":""},
                     "hook":[
@@ -5920,7 +5918,7 @@
                     "rope":{
                         "hookIndex":[2],
                         "length":[
-                            130
+                            100
                         ]
                     },				
                     "forceball":[
@@ -5928,8 +5926,8 @@
                         {"x":455,"y":382,"rotation":270}
                     ],
 					"laser":[
-						{"x":121,"y":481,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":365,"y":481,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]}
+						{"x":121,"y":481,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":365,"y":481,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]}
                     ],
                     "balloon":[
                         {"x":147,"y":564},                 
@@ -5943,14 +5941,14 @@
                     "screenRoad":[500,0],
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0},
-                        {"skin":"gameView/gameBg/boxBg_7_3.png","x":430,"y":0,"width":600},
+                        {"skin":"gameView/gameBg/boxBg_7_2.png","x":430,"y":0,"width":600},
                         {"skin":"gameView/gameBg/boxBg_7.png","x":900,"y":0}
                     ],
                     "candy":{"style":"candy","x":679,"y":261},
                     "star":[
-                        {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":660,"y":406,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":533,"y":537,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":243,"y":451,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":243,"y":651,"skin":""},
                     "hook":[
@@ -5991,13 +5989,13 @@
                     "hook":[
                         {"style":"hook1","x":70,"y":169},
                         {"style":"hook1","x":214,"y":169},
-                        {"style":"hook2","x":141,"y":400,"size":100},
-                        {"style":"hook2","x":362,"y":630,"size":100}
+                        {"style":"hook2","x":141,"y":400,"size":90},
+                        {"style":"hook2","x":362,"y":630,"size":70}
                     ],
                     "rope":{
                         "hookIndex":[0,1],
                         "length":[
-                            120,120
+                            60,60
                         ]
                     },
                     "balloon":[
@@ -6011,15 +6009,15 @@
                         {"x":362,"y":1076,"rotation":0}
                     ],
 					"laser":[
-						{"x":352,"y":334,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":352,"y":407,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":352,"y":482,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":162,"y":576,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":162,"y":658,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":162,"y":747,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":352,"y":807,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":352,"y":896,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
-						{"x":352,"y":995,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]}
+						{"x":352,"y":334,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":352,"y":407,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":352,"y":482,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":162,"y":576,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":162,"y":658,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":162,"y":747,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":352,"y":807,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":352,"y":896,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]},
+						{"x":352,"y":995,"rotation":0,"isAdvanceLaser":false,"time":5,"move":[]}
                     ]
                 },
                 {
@@ -6029,7 +6027,7 @@
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0}
                     ],
-                    "candy":{"style":"candy","x":194,"y":291},
+                    "candy":{"style":"candy","x":194,"y":391},
                     "star":[
                         {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
                         {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
@@ -6039,19 +6037,19 @@
                     "hook":[
                         {"style":"hook1","x":169.5,"y":256.5},
  	                    {"style":"hook1","x":309,"y":405},
-                        {"style":"hook1","x":71,"y":269,"length":250,"percent":0,"rotation":90}
+                        {"style":"hook1","x":71,"y":700,"length":600,"percent":0.5,"rotation":-90}
                     ],
                     "rope":{
                         "hookIndex":[0,1,2],
                         "length":[
-                            100,150,150
+                            90,90,90
                         ]
                     },
                     "balloon":[
                         {"x":374.5,"y":543}               
                     ],			
                     "forceball":[
-                        {"x":150.5,"y":531,"rotation":270}
+                        {"x":150.5,"y":531,"rotation":90}
                     ],
                     "knife":[
 						{"x":309,"y":439.5,"style":"knife1","rotation":0,"v":0,"move":[]},
@@ -6067,9 +6065,9 @@
                     ],
                     "candy":{"style":"candy","x":224.5,"y":530},
                     "star":[
-                        {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":100,"y":46,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":61,"y":374,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":240,"y":374,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":372,"y":681.5,"skin":""},
                     "hook":[
@@ -6079,17 +6077,17 @@
                     "rope":{
                         "hookIndex":[0],
                         "length":[
-                            110
+                            80
                         ]
                     },
                     "balloon":[
                         {"x":224.5,"y":597}               
                     ],
                     "laser":[
-												{"x":224.5,"y":278,"rotation":0,"isAdvanceLaser":false,"time":2,"move":[]},
-												{"x":224.5,"y":461,"rotation":0,"isAdvanceLaser":false,"time":4,"move":[]},
-												{"x":131,"y":374,"rotation":90,"isAdvanceLaser":false,"time":6,"move":[]},
-												{"x":299,"y":374,"rotation":90,"isAdvanceLaser":false,"time":8,"move":[]}
+												{"x":224.5,"y":278,"rotation":0,"isAdvanceLaser":true,"time":2,"move":[]},
+												{"x":224.5,"y":461,"rotation":0,"isAdvanceLaser":true,"time":4,"move":[]},
+												{"x":131,"y":374,"rotation":90,"isAdvanceLaser":true,"time":6,"move":[]},
+												{"x":299,"y":374,"rotation":90,"isAdvanceLaser":true,"time":8,"move":[]}
                     ]
                 },
                 {
@@ -6101,9 +6099,9 @@
                     ],
                     "candy":{"style":"candy","x":75,"y":620},
                     "star":[
-                        {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":440,"y":75,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":75,"y":75,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":284,"y":663,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":384,"y":663,"skin":""},
                     "hook":[
@@ -6137,9 +6135,9 @@
                     ],
                     "candy":{"style":"candy","x":240,"y":252},
                     "star":[
-                        {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":241,"y":473,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":241,"y":670,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":364,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":364,"y":223,"skin":""},
                     "hook":[
@@ -6149,12 +6147,12 @@
                     "rope":{
                         "hookIndex":[0],
                         "length":[
-                            120
+                            80
                         ]
                     },
                     "forceball":[
                         {"x":120,"y":473,"rotation":90},
-                        {"x":120,"y":500,"rotation":90}
+                        {"x":120,"y":707,"rotation":90}
                     ],
                     "balloon":[
                         {"x":241,"y":1035},
@@ -6175,9 +6173,9 @@
                     ],
                     "candy":{"style":"candy","x":254,"y":432},
                     "star":[
-                        {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":254,"y":300,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":403,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":101,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":254,"y":697,"skin":""},
                     "hook":[
@@ -6186,7 +6184,7 @@
                     "rope":{
                         "hookIndex":[0],
                         "length":[
-                            260
+                            230
                         ]
                     },
                     "balloon":[
@@ -6217,16 +6215,16 @@
                     "screenRoad":[500,0],
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0},
-                        {"skin":"gameView/gameBg/boxBg_7_3.png","x":430,"y":0,"width":600},
+                        {"skin":"gameView/gameBg/boxBg_7_2.png","x":430,"y":0,"width":600},
                         {"skin":"gameView/gameBg/boxBg_7.png","x":900,"y":0}
                     ],
                     "candy":{"style":"candy","x":185,"y":191},
                     "star":[
-                        {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":176,"y":608,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":402.5,"y":608,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":636,"y":608,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
-                    "monster":{"x":717,"y":186,"skin":""},
+                    "monster":{"x":717,"y":100,"skin":""},
                     "hook":[
                         {"style":"hook2","x":588.5,"y":110,"size":100},
                         {"style":"hook2","x":369.5,"y":107.5,"size":100},
@@ -6235,7 +6233,7 @@
                     "rope":{
                         "hookIndex":[2],
                         "length":[
-                            120
+                            70
                         ]
                     },
                     "balloon":[
@@ -6247,8 +6245,9 @@
                         {"x":636.5,"y":658,"rotation":0},
                         {"x":402.5,"y":658,"rotation":0},
                         {"x":176,"y":658,"rotation":0},
-                        {"x":56.5,"y":233.5,"rotation":90},
-                        {"x":265,"y":233,"rotation":90}
+                        {"x":100.5,"y":233.5,"rotation":90},
+                        {"x":265,"y":233,"rotation":90},
+                        {"x":530,"y":233,"rotation":90}
                     ],
                     "laser":[
 						{"x":636.5,"y":467,"rotation":0,"isAdvanceLaser":false,"time":3,"move":[]},
@@ -6271,27 +6270,27 @@
                     "mapSkins":[
                         {"skin":"gameView/gameBg/boxBg_7.png","x":0,"y":0}
                     ],
-                    "candy":{"style":"candy","x":308,"y":444.5},
+                    "candy":{"style":"candy","x":308,"y":400},
                     "star":[
-                        {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":191,"y":407,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":304,"y":500,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":377.5,"y":150,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":90,"y":223,"skin":""},
                     "hook":[
-                        {"style":"hook1","x":170,"y":345,"percent":1,"rotation":0,"length":200},
-                        {"style":"hook2","x":430,"y":657,"size":100,"length":600,"rotation":-90,"percent":0},
-                        {"style":"hook2","x":166,"y":703,"size":100,"percent":0,"rotation":-90,"length":200}
+                        {"style":"hook1","x":170,"y":283,"percent":0.9,"rotation":0,"length":200},
+                        {"style":"hook2","x":430,"y":657,"size":80,"length":600,"rotation":-90,"percent":0},
+                        {"style":"hook2","x":80,"y":703,"size":60,"percent":0,"rotation":-90,"length":300}
                     ],
                     "rope":{
                         "hookIndex":[0],
                         "length":[
-                            100
+                            80
                         ]
                     },
                     "knife":[
                     		{"x":191,"y":183,"style":"knife3","rotation":-90,"v":0,"move":[]},
-												{"x":377.5,"y":353,"style":"knife4","rotation":-90,"v":0,"move":[]}
+												{"x":377.5,"y":383,"style":"knife4","rotation":-90,"v":0,"move":[]}
                     ]
                 },
                 {
@@ -6306,9 +6305,9 @@
                     ],
                     "candy":{"style":"candy","x":253,"y":854.5},
                     "star":[
-                        {"style":"star1","x":251,"y":1098,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":251,"y":708,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":121,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":343,"y":750,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":253,"y":1201,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":200,"y":224,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":399.5,"y":383,"skin":""},
                     "hook":[
@@ -6316,8 +6315,8 @@
                         {"style":"hook2","x":135,"y":1102.5,"size":110},
                         {"style":"hook1","x":363,"y":854},
                         {"style":"hook1","x":150,"y":854},
-                        {"style":"hook2","x":343,"y":650,"size":100},
-                        {"style":"hook2","x":166,"y":650,"size":100},
+                        {"style":"hook2","x":343,"y":690,"size":100},
+                        {"style":"hook2","x":166,"y":690,"size":100},
                         {"style":"hook2","x":258,"y":369,"size":100,"canRotate":true},
                         {"style":"hook2","x":93,"y":164,"size":100,"percent":1,"rotation":0,"length":400}
                     ],
@@ -7172,1006 +7171,6 @@
 					],
 					"antiGravity":{"x":210,"y":110}					
                 }
-			]
-		},
-		{
-            "mapWhere":"1-3",
-            "mapList":[
-                {
-                    "mapId":0,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":91,"y":260},
-                    "star":[
-                        {"style":"star1","x":240,"y":500,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":240,"y":500,"interval":50,"move":[],"rotateLength":80,"v":1},
-                        {"style":"star1","x":240,"y":500 ,"interval":50,"move":[],"rotateLength":160,"v":1}
-                    ],
-                    "monster":{"x":360,"y":580,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":90,"y":150},
-						{"style":"hook1","x":390,"y":150}	
-                    ],
-                    "rope":{
-                        "hookIndex":[0,1],                        
-                        "length":[
-                            100,300
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":160,"y":580,"rotation":10,"clockwise":true}
-							]
-						}
-					]
-					
-                },
-				{
-                    "mapId":1,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":241,"y":570},
-                    "star":[
-                        {"style":"star1","x":240,"y":280,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":240,"y":360,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":240,"y":440 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":240,"y":200,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":240,"y":700}	
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            100
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":160,"y":240,"rotation":0,"clockwise":true},
-							 {"x":300,"y":500,"rotation":90,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":240,"y":650}
-					]
-					
-                },
-				{
-                    "mapId":2,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":71,"y":560},
-                    "star":[
-                        {"style":"star1","x":70,"y":220,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":410,"y":220,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":410,"y":560 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":410,"y":680,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":70,"y":680},
-						{"style":"hook2","x":70,"y":350,"size":90,"rotation":0,"length":400,"percent":0.5}
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            100
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":240,"y":220,"rotation":90,"clockwise":true},
-							 {"x":120,"y":500,"rotation":90,"clockwise":true},
-							 {"x":360,"y":500,"rotation":90,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":70,"y":620}
-					]
-					
-                },
-				{
-                    "mapId":3,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":241,"y":600},
-                    "star":[
-                        {"style":"star1","x":210,"y":400,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":260,"y":360,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":250,"y":440 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":240,"y":200,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":240,"y":700}	
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            80
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":340,"y":280,"rotation":0,"clockwise":true},
-							 {"x":360,"y":500,"rotation":90,"clockwise":true}
-							]
-						},
-						{"color":"sawtooth_blue",
-						 "info":
-							[
-							 {"x":140,"y":280,"rotation":0,"clockwise":true},
-							 {"x":120,"y":500,"rotation":90,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":240,"y":670}
-					]
-					
-                },
-				{
-                    "mapId":4,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":245,"y":250},
-                    "star":[
-                        {"style":"star1","x":240,"y":380,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":80,"y":680,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":400,"y":680 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":250,"y":700,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":80,"y":450,"rotation":0,"length":380,"percent":0.5}	
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            170
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":140,"y":570,"rotation":0,"clockwise":true},
-							 {"x":380,"y":570,"rotation":90,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":245,"y":300},
-						{"x":400,"y":680}
-					]
-					
-                },
-				{
-                    "mapId":5,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":241,"y":500},
-                    "star":[
-                        {"style":"star1","x":250,"y":250,"interval":70,"move":[],"rotateLength":30,"v":-0.5},
-                        {"style":"star1","x":250,"y":250,"interval":60,"move":[],"rotateLength":50,"v":1},
-                        {"style":"star1","x":250,"y":250 ,"interval":50,"move":[],"rotateLength":100,"v":-1}
-                    ],
-                    "monster":{"x":380,"y":530,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":240,"y":420}	
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            60
-                        ]
-                    },
-					"antiGravity":{"x":60,"y":380},
-					"knife":[
-						{"x":240,"y":300,"style":"knife3","rotation":0,"v":0,"move":[240,100]},
-						{"x":240,"y":700,"style":"knife3","rotation":0,"v":0,"move":[240,500]}
-					],
-					"forceball":[
-						{"x":80,"y":500,"rotation":90}
-					],
-                    "bounceDrum":[
-                        {"x":240,"y":550,"size":1.2,"rotation":0},
-						{"x":240,"y":200,"size":1.2,"rotation":0}
-                    ]
-					
-                },
-				{
-                    "mapId":6,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":240,"y":300},
-                    "star":[
-                        {"style":"star2","x":240,"y":630,"interval":80,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":70,"y":400,"interval":50,"move":[70,700],"rotateLength":0,"v":1},
-                        {"style":"star1","x":410,"y":700 ,"interval":50,"move":[410,400],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":240,"y":180,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":140,"y":150},
-						{"style":"hook1","x":340,"y":150}	
-                    ],
-                    "rope":{
-                        "hookIndex":[0,1],                        
-                        "length":[
-                            170,170
-                        ]
-                    },
-					"magicHat":[
-						{"x1":50,"y1":560,"rotation1":30,"move1":[],"rotate1":0,"v1":0,
-						 "x2":340,"y2":600,"rotation2":-30,"move2":[],"rotate2":0,"v2":0,
-						 "color":"hat_red"},
-						{"x1":140,"y1":600,"rotation1":30,"move1":[],"rotate1":0,"v1":0,
-						 "x2":430,"y2":560,"rotation2":-30,"move2":[],"rotate2":0,"v2":0,
-						 "color":"hat_green"}
-					],
-					"balloon":[
-						{"x":240,"y":580}
-					]
-					
-                },
-				{
-                    "mapId":7,
-                    "width":750,
-                    "height":1334,
-                    "screenRoad":[0,500],
-					"mapSkins":[
-						{"skin":"gameView/gameBg/boxBg_9.png","x":0,"y":0},
-						{"skin":"gameView/gameBg/boxBg_9_2.png","x":430,"y":0,"width":600},
-						{"skin":"gameView/gameBg/boxBg_9.png","x":900,"y":0}
-					],
-                    "candy":{"style":"candy","x":741,"y":400},
-                    "star":[
-                        {"style":"star2","x":280,"y":450,"interval":80,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star2","x":480,"y":450,"interval":60,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":630,"y":400 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":80,"y":500,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":740,"y":200},
-						{"style":"hook2","x":230,"y":570,"size":90},
-						{"style":"hook2","x":430,"y":570,"size":90},
-						{"style":"hook2","x":630,"y":570,"size":90}
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            190
-                        ]
-                    },
-                    "bounceDrum":[
-                        {"x":180,"y":550,"size":0.8,"rotation":0},
-						{"x":280,"y":550,"size":0.8,"rotation":0},
-						{"x":380,"y":550,"size":0.8,"rotation":0},
-						{"x":480,"y":550,"size":0.8,"rotation":0},
-						{"x":580,"y":550,"size":0.8,"rotation":0},
-						{"x":680,"y":550,"size":0.8,"rotation":0},
-						{"x":780,"y":550,"size":0.8,"rotation":-10}
-                    ],
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":280,"y":350,"rotation":0,"clockwise":true},
-							 {"x":480,"y":350,"rotation":90,"clockwise":true},
-							 {"x":630,"y":350,"rotation":0,"clockwise":true}
-							]
-						}
-					]
-					
-                },
-				{
-                    "mapId":8,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":350,"y":300},
-                    "star":[
-                        {"style":"star1","x":240,"y":300,"interval":80,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":140,"y":450,"interval":50,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":340,"y":450 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":140,"y":400,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":240,"y":430}	
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            150
-                        ]
-                    },
-					"magicHat":[
-						{"x1":140,"y1":200,"rotation1":135,"move1":[],"rotate1":0,"v1":0,
-						 "x2":400,"y2":700,"rotation2":-45,"move2":[],"rotate2":0,"v2":0,
-						 "color":"hat_red"},
-						{"x1":380,"y1":200,"rotation1":225,"move1":[],"rotate1":0,"v1":0,
-						 "x2":80,"y2":700,"rotation2":45,"move2":[],"rotate2":0,"v2":0,
-						 "color":"hat_green"}
-					],
-					"balloon":[
-						{"x":240,"y":300}
-					],
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":420,"y":250,"rotation":0,"clockwise":true},
-							 {"x":430,"y":650,"rotation":90,"clockwise":true}
-							]
-						}
-					]
-					
-                },
-				{
-                    "mapId":9,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candyOne","x":201,"y":300},
-                    "candy2":{"style":"candyTwo","x":421,"y":300},
-                    "star":[
-                        {"style":"star1","x":180,"y":630,"interval":70,"move":[],"rotateLength":0,"v":-0.5},
-                        {"style":"star1","x":290,"y":530,"interval":60,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":420,"y":630 ,"interval":50,"move":[],"rotateLength":0,"v":-1}
-                    ],
-                    "monster":{"x":70,"y":610,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":200,"y":150},
-						{"style":"hook1","x":420,"y":150}	
-                    ],
-                    "rope":{
-                        "hookIndex":[0],
-                        "length":[
-                            150
-                        ]
-                    },
-                    "rope2":{
-                        "hookIndex":[1],                        
-                        "length":[
-                            150
-                        ]
-                    },
-                    "bounceDrum":[
-                        {"x":70,"y":690,"size":1.3,"rotation":0},
-						{"x":240,"y":690,"size":1.3,"rotation":0},
-						{"x":430,"y":690,"size":0.8,"rotation":-10}
-                    ],
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":110,"y":450,"rotation":0,"clockwise":true},
-							 {"x":360,"y":450,"rotation":90,"clockwise":true}
-							]
-						}
-					]
-                },
-				{
-                    "mapId":10,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":275,"y":360},
-                    "star":[
-                        {"style":"star1","x":220,"y":280,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":90,"y":410,"interval":50,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":290,"y":500 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":380,"y":680,"skin":""},
-                    "hook":[
-                        {"style":"hook3","x":30,"y":150},
-						{"style":"hook3","x":420,"y":150},
-						{"style":"hook3","x":270,"y":550},
-						{"style":"hook3","x":450,"y":460}
-                    ],
-                    "rope":{
-                        "hookIndex":[0,1,2,3],                        
-                        "length":[
-                            60,45,45,45
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":130,"y":500,"rotation":0,"clockwise":true}
-							]
-						}
-					]
-					
-                },
-				{
-                    "mapId":11,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candyOne","x":101,"y":300},
-                    "candy2":{"style":"candyTwo","x":381,"y":300},
-                    "star":[
-                        {"style":"star2","x":240,"y":230,"interval":80,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":240,"y":470,"interval":60,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":240,"y":540,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":250,"y":170,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":100,"y":450},
-						{"style":"hook1","x":380,"y":450}
-                    ],
-                    "rope":{
-                        "hookIndex":[0],
-                        "length":[
-                            120
-                        ]
-                    },
-                    "rope2":{
-                        "hookIndex":[1],                        
-                        "length":[
-                            120
-                        ]
-                    },
-                    "bounceDrum":[
-                        {"x":100,"y":200,"size":0.8,"rotation":0},
-						{"x":380,"y":200,"size":0.8,"rotation":0},
-						{"x":90,"y":500,"size":0.8,"rotation":10},
-						{"x":390,"y":500,"size":0.8,"rotation":-10}
-                    ],
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":200,"y":250,"rotation":0,"clockwise":true},
-							 {"x":300,"y":250,"rotation":0,"clockwise":true},
-							 {"x":160,"y":570,"rotation":90,"clockwise":true},
-							 {"x":340,"y":570,"rotation":90,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":100,"y":380},
-						{"x":380,"y":380},
-						{"x":240,"y":650}
-					]
-					
-                },
-				{
-                    "mapId":12,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":250,"y":230},
-                    "star":[
-                        {"style":"star1","x":150,"y":400,"interval":80,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":430,"y":400,"interval":50,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":200,"y":600,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":340,"y":700,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":70,"y":250},
-						{"style":"hook1","x":260,"y":120}
-                    ],
-                    "rope":{
-                        "hookIndex":[0,1],                        
-                        "length":[
-                            140,100
-                        ]
-                    },
-					"magicHat":[
-						{"x1":60,"y1":550,"rotation1":90,"move1":[],"rotate1":0,"v1":0,
-						 "x2":430,"y2":200,"rotation2":180,"move2":[430,350],"rotate2":0,"v2":0,
-						 "color":"hat_red"},
-						{"x1":70,"y1":400,"rotation1":90,"move1":[],"rotate1":0,"v1":0,
-						 "x2":430,"y2":580,"rotation2":0,"move2":[430,430],"rotate2":0,"v2":0,
-						 "color":"hat_green"}
-					],
-					"balloon":[
-						{"x":130,"y":550}
-					],
-					"knife":[
-						{"x":370,"y":300,"style":"knife4","rotation":90,"v":0,"move":[]},
-						{"x":370,"y":520,"style":"knife4","rotation":90,"v":0,"move":[]}
-					]
-					
-                },
-				{
-                    "mapId":13,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candyOne","x":51,"y":370},
-                    "candy2":{"style":"candyTwo","x":431,"y":370},
-                    "star":[
-                        {"style":"star1","x":50,"y":180,"interval":80,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":240,"y":300,"interval":60,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":430,"y":180,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":250,"y":680,"skin":""},
-                    "hook":[
-                        {"style":"hook3","x":50,"y":220},
-						{"style":"hook3","x":50,"y":600},
-						{"style":"hook3","x":430,"y":220},
-						{"style":"hook3","x":430,"y":600}
-                    ],
-                    "rope":{
-                        "hookIndex":[0,1],
-                        "length":[
-                            30,50
-                        ]
-                    },
-                    "rope2":{
-                        "hookIndex":[2,3],                        
-                        "length":[
-                            30,50
-                        ]
-                    },
-                    "bounceDrum":[
-                        {"x":50,"y":680,"size":0.8,"rotation":10},
-						{"x":430,"y":680,"size":0.8,"rotation":-10}
-                    ],
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":360,"y":400,"rotation":90,"clockwise":true}
-							]
-						},
-						{"color":"sawtooth_blue",
-						 "info":
-							[
-							 {"x":120,"y":400,"rotation":90,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":240,"y":530}
-					]
-					
-                },
-				{
-                    "mapId":14,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":121,"y":580},
-                    "star":[
-                        {"style":"star1","x":120,"y":300,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":160,"y":340,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":200,"y":380,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":400,"y":320,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":120,"y":680},
-						{"style":"hook2","x":240,"y":220,"size":125}	
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            80
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":200,"y":460,"rotation":-45,"clockwise":true},
-							 {"x":300,"y":460,"rotation":45,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":120,"y":650}
-					]
-					
-                },
-				{
-                    "mapId":15,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candyOne","x":141,"y":300},
-                    "candy2":{"style":"candyTwo","x":250,"y":500},
-                    "star":[
-                        {"style":"star2","x":250,"y":190,"interval":70,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star2","x":250,"y":290,"interval":60,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star2","x":250,"y":450,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":260,"y":720,"skin":""},
-                    "hook":[
-						{"style":"hook1","x":140,"y":220},
-                        {"style":"hook1","x":120,"y":630},
-						{"style":"hook1","x":380,"y":630}
-                    ],
-                    "rope":{
-                        "hookIndex":[0],
-                        "length":[
-                            80
-                        ]
-                    },
-                    "rope2":{
-                        "hookIndex":[1,2],                        
-                        "length":[
-                            130,130
-                        ]
-                    },
-                    "bounceDrum":[
-                        {"x":180,"y":150,"size":1.2,"rotation":-10},
-						{"x":340,"y":150,"size":1.2,"rotation":10},
-						{"x":120,"y":420,"size":0.8,"rotation":15},
-						{"x":380,"y":420,"size":0.8,"rotation":-15}
-                    ],
-					"balloon":[
-						{"x":250,"y":580}
-					]
-					
-                },
-				{
-                    "mapId":17,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":241,"y":350},
-                    "star":[
-                        {"style":"star1","x":300,"y":200,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":300,"y":260,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":180,"y":580 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":330,"y":680,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":240,"y":480}
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            110
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":300,"y":150,"rotation":90,"clockwise":true},
-							 {"x":210,"y":230,"rotation":0,"clockwise":true},
-							 {"x":390,"y":230,"rotation":0,"clockwise":true},
-							 {"x":180,"y":650,"rotation":0,"clockwise":true},
-							 {"x":110,"y":580,"rotation":90,"clockwise":true},
-							 {"x":250,"y":580,"rotation":90,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":240,"y":420},
-						{"x":180,"y":580}
-					],
-					"forceball":[
-						{"x":80,"y":350,"rotation":90},
-						{"x":400,"y":340,"rotation":270}
-					]
-					
-                },
-				{
-                    "mapId":18,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":251,"y":400},
-                    "star":[
-                        {"style":"star1","x":250,"y":220,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":120,"y":310,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":380,"y":310 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":250,"y":650,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":250,"y":280}
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            100
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":160,"y":250,"rotation":0,"clockwise":true},
-							 {"x":330,"y":250,"rotation":0,"clockwise":true}
-							]
-						}
-					],
-					"forceball":[
-						{"x":80,"y":400,"rotation":90},
-						{"x":400,"y":390,"rotation":270}
-					],
-					"magicHat":[
-						{"x1":250,"y1":100,"rotation1":180,"move1":[],"rotate1":0,"v1":0,
-						 "x2":70,"y2":700,"rotation2":0,"move2":[410,700],"rotate2":0,"v2":0,
-						 "color":"hat_red"}
-					]
-					
-                },
-				{
-                    "mapId":19,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":251,"y":325},
-                    "star":[
-                        {"style":"star1","x":250,"y":580,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":120,"y":540,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":380,"y":540 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":260,"y":150,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":100,"y":200},
-						{"style":"hook1","x":400,"y":200},
-						{"style":"hook1","x":250,"y":450}
-                    ],
-                    "rope":{
-                        "hookIndex":[0,1,2],                        
-                        "length":[
-                            170,170,110
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":80,"y":400,"rotation":0,"clockwise":true},
-							 {"x":315,"y":640,"rotation":0,"clockwise":true}
-							]
-						},
-						{"color":"sawtooth_blue",
-						 "info":
-							[
-							 {"x":400,"y":400,"rotation":0,"clockwise":true},
-							 {"x":185,"y":640,"rotation":0,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":250,"y":580}
-					]
-					
-                },
-				{
-                    "mapId":21,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":371,"y":740},
-                    "star":[
-                        {"style":"star1","x":150,"y":470,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":150,"y":540,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":150,"y":610 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":390,"y":220,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":370,"y":640}
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            80
-                        ]
-                    },
-					"sawTooth":[
-						{"x1":120,"y1":580,"rotation1":0,"rotate1":0,
-						 "x2":350,"y2":230,"rotation2":180,"rotate2":0,
-						 "color":"sawtooth_red"}
-					],
-					"forceball":[
-						{"x":70,"y":250,"rotation":90},
-						{"x":430,"y":330,"rotation":270}
-					],
-					"magicHat":[
-						{"x1":250,"y1":330,"rotation1":90,"move1":[],"rotate1":0,"v1":0,
-						 "x2":250,"y2":410,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
-						 "color":"hat_red"},
-						 {"x1":250,"y1":250,"rotation1":270,"move1":[],"rotate1":0,"v1":0,
-						 "x2":250,"y2":490,"rotation2":90,"move2":[],"rotate2":0,"v2":0,
-						 "color":"hat_green"}
-					],
-					"balloon":[
-						{"x":370,"y":740}
-					]
-					
-                },
-				{
-                    "mapId":22,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":271,"y":250},
-                    "star":[
-                        {"style":"star1","x":260,"y":380,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":260,"y":450,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":260,"y":520 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":280,"y":660,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":270,"y":150},
-						{"style":"hook1","x":270,"y":550},
-						{"style":"hook1","x":70,"y":250},
-						{"style":"hook1","x":400,"y":250}
-                    ],
-                    "rope":{
-                        "hookIndex":[0,1,2,3],                        
-                        "length":[
-                            90,280,180,120
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":330,"y":320,"rotation":90,"clockwise":true},
-							 {"x":350,"y":480,"rotation":0,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":85,"y":380}
-					]
-					
-                },
-				{
-                    "mapId":23,
-                    "width":750,
-                    "height":1334,
-                    "mapSkins":[
-                        "gameView/gameBg/boxBg_9.png"
-                    ],
-                    "candy":{"style":"candy","x":181,"y":160},
-                    "star":[
-                        {"style":"star1","x":180,"y":540,"interval":60,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":300,"y":320,"interval":70,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star1","x":360,"y":320 ,"interval":50,"move":[],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":60,"y":360,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":180,"y":380}
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            180
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":240,"y":280,"rotation":0,"clockwise":true},
-							 {"x":250,"y":490,"rotation":90,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":180,"y":220},
-						{"x":180,"y":330},
-						{"x":180,"y":440},
-						{"x":180,"y":540}
-					],
-					"magicHat":[
-						{"x1":180,"y1":620,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
-						 "x2":440,"y2":350,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
-						 "color":"hat_green"}
-					]
-					
-                },
-				{
-                    "mapId":24,
-                    "width":750,
-                    "height":1334,
-                    "screenRoad":[600,0],
-					"mapSkins":[
-						{"skin":"gameView/gameBg/boxBg_9.png","x":0,"y":0},
-						{"skin":"gameView/gameBg/boxBg_9_2.png","x":0,"y":700,"height":500},
-						{"skin":"gameView/gameBg/boxBg_9.png","x":0,"y":1100,"height":700}
-					],
-                    "candy":{"style":"candy","x":251,"y":200},
-                    "star":[
-                        {"style":"star2","x":380,"y":370,"interval":40,"move":[100,370],"rotateLength":0,"v":2},
-                        {"style":"star2","x":100,"y":650,"interval":70,"move":[380,650],"rotateLength":0,"v":1},
-                        {"style":"star2","x":380,"y":1000 ,"interval":90,"move":[100,1000],"rotateLength":0,"v":1}
-                    ],
-                    "monster":{"x":260,"y":1300,"skin":""},
-                    "hook":[
-                        {"style":"hook1","x":250,"y":100}
-                    ],
-                    "rope":{
-                        "hookIndex":[0],                        
-                        "length":[
-                            80
-                        ]
-                    },
-					"sawTooth":[
-						{"color":"sawtooth_red",
-						 "info":
-							[
-							 {"x":120,"y":500,"rotation":90,"clockwise":true},
-							 {"x":360,"y":800,"rotation":0,"clockwise":true},
-							 {"x":120,"y":1100,"rotation":90,"clockwise":true}
-							]
-						},
-						{"color":"sawtooth_blue",
-						 "info":
-							[
-							 {"x":360,"y":500,"rotation":90,"clockwise":true},
-							 {"x":120,"y":800,"rotation":0,"clockwise":true},
-							 {"x":360,"y":1100,"rotation":90,"clockwise":true}
-							]
-						}
-					],
-					"balloon":[
-						{"x":250,"y":260},
-						{"x":250,"y":400},
-						{"x":250,"y":680},
-						{"x":250,"y":930}
-					]
-					
-                }
-				
-				
 			]
 		}
 ]

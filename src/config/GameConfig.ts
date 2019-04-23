@@ -4,33 +4,33 @@
 export default class GameConfig{
     /////////////////////////////////绳子
     /**绳子生成像素间隔 */
-    public static ROPE_DIC : number = 8;
+    public static ROPE_DIC : number = 6;
     /**绳子节点转动阻力 */
     public static ROPE_POINT_ANGULARDAMPING : number = 100000;
     /**绳子线性阻力 */
     public static ROPE_POINT_LINEARDAMOING : number = 0.001;
     /**绳子密度 */
-    public static ROPE_POINT_DENSITY : number = 0.001;
+    public static ROPE_POINT_DENSITY : number = 0.01;
     /**绳子自动靠近糖果速度 */
-    public static ROPE_TO_CANDY_SPEED : number = 20;
+    public static ROPE_TO_CANDY_SPEED : number = 30;
     /**绳子粗细 */
-    public static ROPE_WIDTH : number = 7;
+    public static ROPE_WIDTH : number = 6;
     ////////////////////////////////弹力绳子
     /**绳子生成像素间隔*/
-    public static ROPE_JUMP_DIC : number = 1;
+    public static ROPE_JUMP_DIC : number = 8;
     /**绳子节点转动阻力 */
-    public static ROPE_JUMP__POINT_ANGULARDAMPING : number = 80;
+    public static ROPE_JUMP__POINT_ANGULARDAMPING : number = 100000;
     /**绳子线性阻力 */
     public static ROPE_JUMP__POINT_LINEARDAMOING : number = 0.001;
     /**绳子密度 */
-    public static ROPE_JUMP__POINT_DENSITY : number = 2;
+    public static ROPE_JUMP__POINT_DENSITY : number =  0.1;
     /**绳子自动靠近糖果速度 */
-    public static ROPE_JUMP__TO_CANDY_SPEED : number = 30;
+    public static ROPE_JUMP__TO_CANDY_SPEED : number = 400;
     ///////////////////////////////糖果
     /**糖果转动阻力 */
     public static CANDY_ANGULARDAMPING : number = 0;
     /**糖果线性转动阻力 */
-    public static CANDY_LINEARDAMPING : number = 0;
+    public static CANDY_LINEARDAMPING : number = 0.08;
     /**糖果密度 */
     public static CANDY_DENSITY : number = 200;
     /**糖果重力洗漱 */

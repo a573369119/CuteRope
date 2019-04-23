@@ -2,6 +2,7 @@ import GameConfig from "../config/GameConfig";
 import Dic from "../Tool/dic";
 import Balloon from "../prefab/Balloon";
 import RopePoint from "./RopePoint";
+import Tool from "../Tool/Tool";
 
 export default class Candy{
     /**横坐标 */
@@ -32,6 +33,8 @@ export default class Candy{
     public balloonIndex : number;
     /**动画 */
     private aniToOne : Laya.Animation;
+    /**记录糖果所在绳子节点 */
+    public atRopePoint : number;
 
     constructor(view){
         this.view = view;
@@ -54,9 +57,10 @@ export default class Candy{
         this.balloonIndex = -1;
         this.candy_CreateSprite(data.x,data.y,data.style);
         this.candy_AddBody();
+        this.candy_AddColider();        
         this.candy_AddCom();
         this.set("nog");
-        
+
     }
     
     //更新状态
@@ -70,7 +74,7 @@ export default class Candy{
         this.candy_CreateSprite(data.x,data.y,data.style);
         this.arr_Sp[0].visible = true;
         this.candy_AddBody();
-        // this.candy_AddColider();
+        this.candy_AddColider();
         this.candy_AddCom();
         this.set("nog");
         
@@ -95,7 +99,7 @@ export default class Candy{
             this.view.addChild(this.arr_Sp[i]);
         }
         //
-        this.mouseJoint();
+        // this.mouseJoint();
     }
 
     //添加RigidBody组件,设置刚体属性
@@ -106,7 +110,7 @@ export default class Candy{
             body=new Laya.RigidBody();
             body.type="kinematic";
             body.allowSleep = false;
-            body.allowRotation = true;
+            body.allowRotation = false;
             body.gravityScale = GameConfig.CANDY_GRAVITY;
             body.angularDamping = GameConfig.CANDY_ANGULARDAMPING;
             body.linearDamping = GameConfig.CANDY_LINEARDAMPING;
@@ -139,14 +143,22 @@ export default class Candy{
         let colider = Laya.BoxCollider;
         for(let i=0;i<this.count;i++)
         {
-            if(!this.arr_Colider[i]) this.arr_Colider[i] = new Laya.BoxCollider();
-            this.arr_Colider[i].width = this.arr_Sp[i].width;
-            this.arr_Colider[i].height = this.arr_Sp[i].height;
-            this.arr_Colider[i].isSensor=true;
-            this.arr_Colider[i].density = GameConfig.CANDY_DENSITY;
+            if(!this.arr_Colider[i]) 
+            {
+                this.arr_Colider[i] = new Laya.BoxCollider();
+                this.arr_Colider[i].width = this.arr_Sp[i].width;
+                this.arr_Colider[i].height = this.arr_Sp[i].height;
+                this.arr_Colider[i].isSensor=true;
+                this.arr_Colider[i].density = GameConfig.CANDY_DENSITY;
+                // if(i != 0)
+                // {
+                //     this.arr_Colider[i].density = 0.0001;
+                // }
+                this.arr_Sp[i].addComponentIntance(this.arr_Colider[i]);
+            }
             // this.arr_Colider[i].density = 1000000;
-            this.arr_Sp[i].addComponentIntance(this.arr_Colider[i]);
         }
+        this.coliderDensityAverage();
     }
 
     //**创建结合体 需要“销毁”*/
@@ -162,6 +174,16 @@ export default class Candy{
 			weldJoint.collideConnected = false;
 			this.arr_Sp[i].addComponentIntance(weldJoint);
 		}  
+    }
+
+    /**刚体密度平均 */
+    public coliderDensityAverage() : void
+    {
+        let number = GameConfig.CANDY_DENSITY/this.arr_Sp.length;
+        this.arr_Sp.forEach(sp => {
+            if(sp.getComponents(Laya.BoxCollider))
+            sp.getComponents(Laya.BoxCollider)[0].density = number;
+        });
     }
 
     /**得到糖果结合体 sprite*/
@@ -203,27 +225,34 @@ export default class Candy{
         //
         let body=new Laya.RigidBody();
         body.type="dynamic";
-        body.allowRotation = true;
+        body.allowRotation = false;
+        body.allowSleep = false;
         body.angularDamping = GameConfig.CANDY_ANGULARDAMPING;
         body.linearDamping = GameConfig.CANDY_LINEARDAMPING;
         sp.addComponentIntance(body);
         this.arr_Body.push(body);
-        //
-        let colider = new Laya.BoxCollider();
-        colider.width = this.arr_Sp[this.arr_Sp.length-1].width;
-        colider.height = this.arr_Sp[this.arr_Sp.length-1].height;
-        colider.isSensor=true;
-        colider.density = GameConfig.CANDY_DENSITY/10;
-        this.arr_Colider.push(colider);
-        this.arr_Sp[this.arr_Sp.length-1].addComponentIntance(colider);
-        //
+        // //
+        // let colider = new Laya.BoxCollider();
+        // colider.width = this.arr_Sp[this.arr_Sp.length-1].width;
+        // colider.height = this.arr_Sp[this.arr_Sp.length-1].height;
+        // colider.isSensor=true;
+        // colider.density = GameConfig.CANDY_DENSITY;
+        // this.arr_Colider.push(colider);
+        // this.arr_Sp[this.arr_Sp.length-1].addComponentIntance(colider);
+        // //
         let weldJoint = new Laya.WeldJoint();
         weldJoint.otherBody = this.arr_Body[this.arr_Body.length-2];
         weldJoint.selfBody = this.arr_Body[this.arr_Body.length-1];
         weldJoint.anchor = [this.arr_Sp[this.arr_Sp.length-1].width/2,this.arr_Sp[this.arr_Sp.length-1].height/2];
         weldJoint.collideConnected = false;
         this.arr_Sp[this.arr_Sp.length-1].addComponentIntance(weldJoint);
+        console.log(this.arr_Sp.length + " 【糖果刚体数量】 " + this.arr_Colider.length + "【colider数量】" );
+        for(let i=0;i<this.arr_Sp.length;i++)
+        {
+            console.log(this.arr_Sp[i]);
+        }
     }
+
 
     /**string= nog 表示无重力   string= useg 表示有重力*/
     public set(string) : void
@@ -294,12 +323,12 @@ export default class Candy{
     /**糖果断开 */
     public candyDestroyJoint() : void
     {
-        let rigidBody;
+        let RevoluteJoint;
         console.log(this.arr_Sp);
         this.arr_Sp.forEach(sp => {
-            rigidBody = sp.getComponents(Laya.RevoluteJoint);
-            if(rigidBody)           
-                rigidBody[0].destroy();
+            RevoluteJoint = sp.getComponents(Laya.RevoluteJoint);
+            if(RevoluteJoint)           
+                RevoluteJoint[0].destroy();
         });  
     }
 
@@ -348,6 +377,7 @@ export default class Candy{
         this.arr_Body = [];
         this.candy_JointArray = [];
         this.arr_Sp = [];
+        this.arr_Colider = [];
         /**----------------糖果碎片--------- */
         if(this.arr_ApartSp!=[]){
             this.arr_ApartSp.forEach(apartsp=>{
@@ -450,34 +480,129 @@ export default class Candy{
     /**给糖果赋值速度 */
     public setApplyForce(obj1,obj2) : void
     {
-        // console.log(this.arr_Body.length);
-        this.arr_Body.forEach(body => {
-            if(body)
-            body.applyForce(obj1,obj2);
-        });
+        // this.arr_Body[0].applyForce(obj1,obj2);
+        for(let i=0;i<this.arr_Sp.length;i++)
+        {
+            if(this.arr_Sp[i])
+            {
+                this.arr_Sp[i].getComponents(Laya.RigidBody)[0].applyForce(obj1,obj2);
+            }
+        }
     }    
     /**给糖果赋值速度 */
     public setApplyV(obj2) : void
     {
-        this.arr_Body.forEach(body => {
-            if(body)
-            body.applyLinearImpulseToCenter(obj2);
-        });
+        for(let i=0;i<this.arr_Body.length;i++)
+        {
+            if(this.arr_Body[i])
+            this.arr_Body[i].applyLinearImpulseToCenter(obj2);
+        }
     }
     /**糖果反向减速 */
-    public addApplyV(cos,sin) : void
+    public addApplyV(cos,sin,hookX,hookY) : void
     {
         if(this.arr_Body.length > 0) 
         {
             let obj2 : any = {};
-            let allSpeed = this.arr_Body[0].linearVelocity.x * sin + this.arr_Body[0].linearVelocity.y * cos;
-            obj2.x = -allSpeed * cos;
-            obj2.y = -allSpeed * sin;
-            // this.arr_Body[0].linearVelocity.x = this.arr_Body[0].linearVelocity.x * cos;
+            let totoleV = this.arr_Body[0].linearVelocity.x * cos + this.arr_Body[0].linearVelocity.y * sin;
+            if(totoleV < 0) return;
+            obj2.x = -totoleV *cos*50;
+            obj2.y = -totoleV *sin*50;
             this.arr_Body.forEach(body => {
-                body.linearVelocity.y += obj2.y;
-                body.linearVelocity.x += obj2.x;
+                body.applyLinearImpulseToCenter(obj2);
             });
         }
+    }
+////////////////////////////////////绳子伸长缩短
+    /**绳子操作 绳子变长变短，实际是糖果的连接节点发生改变  rotateInfo判断方向 rope绳子*/
+    public candyChangeRopePoint(rotateInfo,rope) : void
+    {
+        if(rotateInfo > 0)
+        {
+            //变短
+            //判断是否是可以变化
+            if(this.atRopePoint < 5) {this.atRopePoint = 4;return;}
+            //找位置
+            Laya.timer.loop(1,this,this.foundRopePoint,[rope,this.atRopePoint,--this.atRopePoint]);
+            //断开连接
+            this.cuteJoint(rope,this.atRopePoint + 1);
+            //连接连接
+            this.connectJoint(rope,this.atRopePoint);
+        }
+        else
+        {
+            //判断是否可以变化
+            if(this.atRopePoint > rope.ropePointsArray.length - 1) {this.atRopePoint = rope.ropePointsArray.length-1;return;}
+            //找位置
+            this.foundRopePoint(rope,this.atRopePoint,++this.atRopePoint);
+            //断开连接
+            this.cuteJoint(rope,this.atRopePoint - 1);
+            //连接连接
+            this.connectJoint(rope,this.atRopePoint);
+        }
+    }
+
+    /**找位置 */
+    private foundRopePoint(rope,currentPos,nextPos) : void
+    {
+        // this.arr_Sp.forEach(sp => {
+        //     sp.x = rope.ropePointsArray[nextPos].x;
+        //     sp.y = rope.ropePointsArray[nextPos].y;
+        // });
+        let current : any ={};
+        let next : any ={};
+        current.x = this.arr_Sp[0].x;
+        current.y = this.arr_Sp[0].y;
+        next.x = rope.ropePointsArray[nextPos].sp.x;
+        next.y = rope.ropePointsArray[nextPos].sp.y;
+
+        let sin = Tool.rotationDeal(current.x,current.y,next.x,next.y,"sin");
+        let cos = Tool.rotationDeal(current.x,current.y,next.x,next.y,"cos");
+        let dic = Dic.countDic_Object({x:rope.ropePointsArray[currentPos].sp.x,y:rope.ropePointsArray[currentPos].sp.y},{x:next.x,y:next.y});
+        let v : any = {};
+        v.x = dic * cos /10;
+        v.y = dic * sin /10;
+        this.setApplyV(v);
+        dic = Dic.countDic_Object({x:this.arr_Sp[0].x,y:this.arr_Sp[0].y},{x:next.x,y:next.y});
+        if(dic < 3)
+        {
+            console.log("到了");
+            // //连接连接
+            Laya.timer.clear(this,this.foundRopePoint);
+            this.connectJoint(rope,this.atRopePoint);
+        }
+    }
+
+    /**断开连接 */
+    private cuteJoint(rope,index) : void
+    {
+        this.candyDestroyJoint();
+    }
+
+    /**连接连接 index是需要连接的下标*/
+    private connectJoint(rope,index) : void
+    {
+        let joint = new Laya.RevoluteJoint();
+        joint.otherBody = rope.ropePointsArray[index].sp.getComponents(Laya.RigidBody)[0];//获取绳子的body
+        for (let i = 0; i < this.arr_Sp.length; i++)  
+        {
+            let candyJoint = this.arr_Sp[i].getComponents(Laya.RevoluteJoint);
+            if (!candyJoint) 
+            {
+                joint.selfBody = this.getCandyBody(i);//糖果的body
+                joint.anchor = [this.getCandySprite(i).width / 2, this.getCandySprite(i).height / 2];
+                this.getCandySprite(i).addComponentIntance(joint);
+                console.log(this.getCandyBody(i).getBody());
+                return ;
+            }
+        }
+        this.createBody();
+        index = this.arr_Sp.length - 1;//得到最后一个bmody的下标，也就是最新的
+        joint.selfBody = this.getCandyBody(index);
+        joint.anchor = [this.getCandySprite(index).width/2,this.getCandySprite(index).height/2];
+        this.getCandySprite(index).addComponentIntance(joint);
+        this.arr_Body.forEach(body => {
+            body.applyForce({x:0,y:0},{x:10000,y:-10});
+        });
     }
 }

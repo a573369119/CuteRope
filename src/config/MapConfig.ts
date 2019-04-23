@@ -12,6 +12,7 @@ export module Config {
         public getMapConfig(mapWhere:string,mapId:number) : MapConfig
         {   
             let object = Laya.loader.getRes("config/mapConfig.json");
+            let object2 = Laya.loader.getRes("config/mapConfig2.json");
             let objectMapConfig ;
             for(let i =0;i<object.length; i++)
             {
@@ -24,6 +25,18 @@ export module Config {
                         {
                             objectMapConfig =  object[i].mapList[h];
                             // Laya.loader.clearRes(x"config/mapConfig.json");
+                            return new MapConfig(objectMapConfig);
+                        }
+                    }
+                }
+                if(!object2[i]) continue;
+                if(object2[i].mapWhere == mapWhere)
+                {
+                    for(let h=0;h<object2[i].mapList.length;h++)
+                    {
+                        if(mapId == object2[i].mapList[h].mapId)
+                        {
+                            objectMapConfig = object2[i].mapList[h];
                             return new MapConfig(objectMapConfig);
                         }
                     }
@@ -83,6 +96,8 @@ export module Config {
         public arr_bounceDrum : Array<BounceDrumConfig>;
         /**锯齿 */
         public arr_SawTooth : Array<SawToothConfig>;
+        /**蜜蜂 */
+        public arr_Bee : Array<BeeConfig>;
         
         constructor(data){
             this.screenRoad = [];
@@ -101,6 +116,7 @@ export module Config {
             this.arr_Spider=[];
             this.arr_bounceDrum=[];
             this.arr_SawTooth=[];
+            this.arr_Bee = [];
             this.parseConfigData(data);
         }
 
@@ -147,6 +163,8 @@ export module Config {
             this.parseSpider(data.spider);
             /**弹力鼓解析 */
             this.parseBounceDrum(data.bounceDrum);
+            /**蜜蜂解析 */
+            this.parseBee(data.bee);
             
         }
 
@@ -436,9 +454,29 @@ export module Config {
                     sawToothConfig.color = sawTooth.color;
                     this.arr_SawTooth.push(sawToothConfig);
                 });
+                console.log("sawTooth-解析");                
             }
         }
+        
+        /**蜜蜂 */
+        private parseBee(BeeObject) : void
+        {
+            if(BeeObject)
+            {
+                let beeConfig : BeeConfig;
+                BeeObject.forEach(bee => {
+                    beeConfig = new BeeConfig();
+                    beeConfig.hookIndex = bee.hookIndex;
+                    beeConfig.road = bee.roadPos;
+                    beeConfig.speed = bee.speed; 
+                    this.arr_Bee.push(beeConfig);
+                });
+                console.log("bee-解析");                                
+            }
+
+        }
     }
+    
 
     /**candy */
     export class CandyConfig {
@@ -643,6 +681,17 @@ export module Config {
         public color:number;
         /**锯齿信息 */
         public info:Array<SawTooth>;
+    }
+
+    /**蜜蜂 */
+    export class BeeConfig
+    {
+        /**hook坐标*/
+        public hookIndex : number;
+        /**路径集合 */
+        public road : Array<any>;
+        /**speed */
+        public speed : number;
     }
 
     class SawTooth{

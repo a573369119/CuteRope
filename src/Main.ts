@@ -35,6 +35,7 @@ class Main {
 			{url:"config/selectConfig.json"},
             {url:"config/playerDataTest.json"},
 			{url:"config/mapConfig.json"},
+			{url:"config/mapConfig2.json"},
 			///
 			{url:"res/atlas/loadingView.atlas"},
 			{url:"unpackage/loadingBg.jpg"}

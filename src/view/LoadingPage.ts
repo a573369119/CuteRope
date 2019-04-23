@@ -26,6 +26,7 @@ export default class LoadingPage extends ui.LoadingUI{
             {url:"res/atlas/gameView/spider.atlas"},
             {url:"res/atlas/gameView/starTime.atlas"},
             {url:"res/atlas/gameView/monster.atlas"},
+            {url:"res/atlas/gameView/Bee.atlas"},
             //大图加载
             {url:"unpackage/startGameBg.jpg"},
             {url:"unpackage/cutRope.png"},

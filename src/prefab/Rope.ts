@@ -201,6 +201,7 @@ export default class Rope{
         }
         Laya.timer.loop(16,this,this.rotationChange);
         
+        
         ///////
         // Laya.timer.loop(100,this,this.toShort);
         
@@ -250,6 +251,8 @@ export default class Rope{
         }
 
         Laya.timer.loop(16,this,this.rotationChange);
+        
+        
     }
 
     public getRemRope() : any
@@ -289,6 +292,7 @@ export default class Rope{
     {
         let ropePoint : RopePoint = this.ropePointsArray[this.ropePointsArray.length-1];
         let joint = new Laya.RevoluteJoint();
+        candy.atRopePoint = this.ropePointsArray.length-1;
         joint.otherBody = ropePoint.sp.getComponents(Laya.RigidBody)[0];
         if(index == -1)
         {
@@ -298,6 +302,7 @@ export default class Rope{
         joint.selfBody = candy.getCandyBody(index);
         joint.anchor = [candy.getCandySprite(index).width/2,candy.getCandySprite(index).height/2];
         candy.getCandySprite(index).addComponentIntance(joint);
+        // candy.coliderDensityAverage();                
         //测试
         if(this.hookStyle == "hook3")
         {
@@ -306,6 +311,7 @@ export default class Rope{
         }
         this.ropePointsArray[0].ropeJoint_Last(candy,(this.ropePointsArray.length-3)*(GameConfig.ROPE_DIC+3));
         // console.log(this.ropePointsArray[0].sp);
+        // Laya.timer.loop(16,this,this.directionChange);
     }
     
     /**角度处理函数
@@ -357,6 +363,7 @@ export default class Rope{
     public ropeCuted() : void
     {
         Laya.timer.clear(this,this.rotationChange);
+        Laya.timer.clear(this,this.directionChange);
         this.isCuted = true;
         this.ropePointsArray.forEach(point => {
             point.sp.getComponents(Laya.BoxCollider)[0].density = 1;
@@ -383,7 +390,7 @@ export default class Rope{
     /**断开 */
     public ropeJointDestroy() : void
     {
-        let joint = this.ropePointsArray[0].sp.getComponents(Laya.RopeJoint);
+        let joint = this.ropePointsArray[1].sp.getComponents(Laya.RopeJoint);
         if(joint)
         {
             joint[0].destroy();
@@ -395,6 +402,7 @@ export default class Rope{
         Laya.timer.clear(this,this.pointDestroy);      
         Laya.timer.clear(this,this.toShort);
         Laya.timer.clear(this,this.rotationChange);
+        Laya.timer.clear(this,this.directionChange);        
         this.ropePointsArray.forEach(point => {
             point.sp.removeSelf();
             let body = point.sp.getComponents(Laya.RigidBody);
@@ -462,9 +470,9 @@ export default class Rope{
     {
         if(this.ropeIndex > 2)
         {
+            this.ropePointsArray[this.ropeIndex].sp.visible = true            
             this.ropePointsArray[this.ropeIndex--].body.type = "dynamic";
-            this.ropePointsArray[0].changeMaxLength(8);        
-
+            console.log("【long】");
         }
         // console.log("放下");
     }
@@ -472,26 +480,28 @@ export default class Rope{
     /**绳子变短逻辑 */
     private toShort() : void
     {
-        if(this.ropeIndex > this.ropePointsArray.length-5) 
+        if(this.ropeIndex > this.ropePointsArray.length-7) 
             return;
+            console.log("【short】");
         // console.log(this.ropeIndex + "  len" + this.ropePointsArray.length);
         let obj : any = {};
-        obj.x = -2*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"cos");
-        obj.y = -2*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"sin");
+        obj.x = -80*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"cos");
+        obj.y = -80*this.rotationDeal(this.ropePointsArray[0].x,this.ropePointsArray[0].y,this.ropePointsArray[this.ropeIndex].sp.x,this.ropePointsArray[this.ropeIndex].sp.y,"sin");
         let dic = Dic.countDic_Object({x:this.ropePointsArray[0].x,y:this.ropePointsArray[0].y},{x:this.ropePointsArray[this.ropeIndex].sp.x,y:this.ropePointsArray[this.ropeIndex].sp.y});
-        if(dic < 10)
+        if(dic < 35)
         {
             this.ropePointsArray[this.ropeIndex].body.setVelocity({x:0,y:0});       
             this.ropePointsArray[this.ropeIndex].body.setAngle(0);     
+            this.ropePointsArray[this.ropeIndex].sp.visible = false;
             this.ropePointsArray[this.ropeIndex].body.type = "kinematic";
             this.ropeIndex++;
             Laya.timer.clear(this,this.toShort);
             return;
         }        
-        if(this.ropeIndex < this.ropePointsArray.length-3)
+        if(this.ropeIndex < this.ropePointsArray.length - 5)
         {
 
-            this.ropePointsArray[0].changeMaxLength(-1);
+            // this.ropePointsArray[0].changeMaxLength(-1);
             this.ropePointsArray[this.ropeIndex].body.setVelocity(obj);
         }
     }
@@ -500,6 +510,7 @@ export default class Rope{
     public toShortOneTime() : void
     {
         Laya.timer.loop(16,this,this.toShort);
+        this.toShort();
         // Laya.timer.loop(16,this,this.directionChange);
         // console.log("拉起");        
     }
@@ -507,9 +518,9 @@ export default class Rope{
     /**方向修正 */
     public rotationChange() : void
     {
-        for(let i = 2; i < this.ropePointsArray.length-2; i++ )
+        for(let i = 2; i < this.ropePointsArray.length-1; i++ )
         {
-            if(this.ropePointsArray[i-2].body.type == "kinematic") continue;
+            if(this.ropePointsArray[i-1].body.type == "kinematic") continue;
             let last = this.ropePointsArray[i-1];
             let now = this.ropePointsArray[i];
             this.ropePointsArray[i].sp.rotation = this.rotateRopePoint_2(last.sp.x,last.sp.y,now.sp.x,now.sp.y);
@@ -522,32 +533,33 @@ export default class Rope{
     /** 距离修正*/
     public directionChange() : void
     {
-        // for(let i = 2; i < this.ropePointsArray.length; i++ )
-        // {
-        //   let last = this.ropePointsArray[i-1];
-        //   let now = this.ropePointsArray[i];
-        //   let dic = Dic.countDic_Object({x:last.sp.x,y:last.sp.y},{x:now.sp.x,y:now.sp.y});
-        //   let num = dic - 6;
-        //   if(num > 0)
-        //   {
-        //       if(num<=1)
-        //       {
-        //         now.body.linearVelocity.x = now.body.linearVelocity.x/100000;
-        //         now.body.linearVelocity.y = now.body.linearVelocity.y/100000;               
-        //       }
-        //       else
-        //       {
-        //         now.body.linearVelocity.x = now.body.linearVelocity.x/dic*dic*100000;
-        //         now.body.linearVelocity.y = now.body.linearVelocity.y/dic*dic*100000;
-        //       }
-        //     // console.log("dic::" + num + "  [cos]" + this.rotationDeal(last.sp.x,last.sp.y,now.sp.x,now.sp.y,"cos") + "   [sin]" + this.rotationDeal(last.sp.x,last.sp.y,now.sp.x,now.sp.y,"sin"));
-        //     // now.body.applyForce({x:now.sp.width/2,y:now.sp.height/2},{x:30*num*this.rotationDeal(last.sp.x,last.sp.y,now.sp.x,now.sp.y,"cos"),y:30*num*this.rotationDeal(last.sp.x,last.sp.y,now.sp.x,now.sp.y,"sin")});
-        //   }
-        //   else
-        //   {
-        //     // Laya.timer.clear(this,this.directionChange);
-        //   }
-        // }
+        for(let i = 2; i < this.ropePointsArray.length; i++ )
+        {
+          let last = this.ropePointsArray[i-1];
+          let now = this.ropePointsArray[i];
+          let dic = Dic.countDic_Object({x:last.sp.x,y:last.sp.y},{x:now.sp.x,y:now.sp.y});
+          let num = dic - GameConfig.ROPE_DIC;
+
+          if(num > 0)
+          {
+              if(num<=1)
+              {
+                now.body.linearVelocity.x = now.body.linearVelocity.x/100000;
+                now.body.linearVelocity.y = now.body.linearVelocity.y/100000;               
+              }
+              else
+              {
+                now.body.linearVelocity.x = now.body.linearVelocity.x/dic*dic*100000;
+                now.body.linearVelocity.y = now.body.linearVelocity.y/dic*dic*100000;
+              }
+            // console.log("dic::" + num + "  [cos]" + this.rotationDeal(last.sp.x,last.sp.y,now.sp.x,now.sp.y,"cos") + "   [sin]" + this.rotationDeal(last.sp.x,last.sp.y,now.sp.x,now.sp.y,"sin"));
+            now.body.applyForce({x:now.sp.width/2,y:now.sp.height/2},{x:30*num*this.rotationDeal(last.sp.x,last.sp.y,now.sp.x,now.sp.y,"cos"),y:30*num*this.rotationDeal(last.sp.x,last.sp.y,now.sp.x,now.sp.y,"sin")});
+          }
+          else
+          {
+            Laya.timer.clear(this,this.directionChange);
+          }
+        }
     }
 }
 

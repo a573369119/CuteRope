@@ -108,10 +108,10 @@ import Dic from "../Tool/dic";
         if(index == 2) isApplyForce = this.isApplyForce_candy2;
         if(isApplyForce){
             let dic = Dic.countDic_Object({x:this.sp.x,y:this.sp.y},{x:candy.arr_Sp[0].x,y:candy.arr_Sp[0].y});
-            dic = dic / 400;
+            dic = (dic+50) / 450;
             for(let i=0;i<candy.arr_Body.length;i++){
-                let Vx=Math.sin(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].x-this.sp.x)*(1200*(1-dic));
-                let Vy=-Math.cos(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].y-this.sp.y)*(1200*(1-dic));
+                let Vx=Math.sin(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].x-this.sp.x)*(1200*(1-dic)*1.5);
+                let Vy=-Math.cos(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].y-this.sp.y)*(1200*(1-dic)*1.5);
                 let currVx=candy.arr_Body[0].linearVelocity.x;
                 let currVy=candy.arr_Body[0].linearVelocity.y;
                 candy.arr_Body[i].setVelocity({x:Vx+currVx,y:Vy+currVy});

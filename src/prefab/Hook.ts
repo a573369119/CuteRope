@@ -1,5 +1,6 @@
 import GameConfig from "../config/GameConfig";
 import RopePoint from "./RopePoint";
+import Tool from "../Tool/Tool";
 
 export default class Hook{
     /**横坐标 */
@@ -120,7 +121,7 @@ export default class Hook{
         this.rotation = data.rotation;
         this.length = data.length;
         this.percent = data.percent;
-
+        
     }
 
     //创建钩子精灵
@@ -141,10 +142,11 @@ export default class Hook{
     private setHookBottom() {
         let img = new Laya.Image();
         img.loadImage("gameView/" + "hook1" + ".png");
-        img.pivot(50 / 2, 43 / 2);
+        img.size(50,50);
+        img.pivot(50 / 2, 50 / 2);
         img.pos(0, 0);
-        this.sp.width = img.width;
-        this.sp.height = img.height;
+        // this.sp.width = img.width;
+        // this.sp.height = img.height;
         this.sp.addChild(img);
         return img;
     }
@@ -157,9 +159,9 @@ export default class Hook{
         }        
         this.imgTop.visible = true;
         this.imgTop.skin ="gameView/hookTop.png";
-        this.imgTop.size(20,19);
-        this.imgTop.pivot(20 / 2, 10 / 2);
-        this.imgTop.pos(x + 2, y - 3);
+        this.imgTop.size(20,20);
+        this.imgTop.pivot(20 / 2, 20 / 2);
+        this.imgTop.pos(x, y);
         // this.imgTop.pos(0, 0);
         if(this.canRotate)
         {
@@ -173,15 +175,15 @@ export default class Hook{
             }  
             this.imgTop.visible = false;
             ///rotatesp 设置
-            this.rotateSp.size(68,68);
-            this.rotateSp.pivot(this.imgTop.width/2,this.imgTop.height/2);
-            this.rotateSp.pos(2,2);
+            this.rotateSp.size(100,100);
+            this.rotateSp.pivot(this.imgTop.width/2 + 30,this.imgTop.height/2 + 29);
+            this.rotateSp.pos(0,+4);
             ///imgTop setting
             this.imgTopRotate.visible = true;
             this.imgTopRotate.skin = "gameView/rotateHook.png";
-            this.imgTopRotate.size(68,68);
+            this.imgTopRotate.size(100,100);
             this.imgTopRotate.pivot(this.imgTop.width/2,this.imgTop.height/2);
-            this.imgTopRotate.pos(-16,-15);
+            this.imgTopRotate.pos(0,0);
             this.imgTopRotate.hitTestPrior = true;
             this.imgTopRotate.zOrder = GameConfig.ZORDER_HOOK_TOP;
             // Laya.timer.loop(50,this,this.rotateHook);
@@ -281,7 +283,7 @@ export default class Hook{
     public setRopePoint(ropePoint) : void
     {
         this.ropePoint = ropePoint;
-        Laya.timer.loop(1,this,this.followHook);
+        if(this.percent !== undefined) Laya.timer.loop(1,this,this.followHook);
     }
 
     private followHook() : void
@@ -300,11 +302,11 @@ export default class Hook{
                 let dic = this.ropePoint.sp.x - this.imgTop.x;
                 if(dic > 0)
                 {//左
-                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:-20,y:0};
+                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:-12,y:0};
                 }
                 else
                 {//右
-                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:20,y:0};
+                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:12,y:0};
                 }
             }
             else
@@ -320,11 +322,11 @@ export default class Hook{
                 let dic = this.ropePoint.sp.y - this.imgTop.y;
                 if(dic > 0)
                 {//上
-                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:-20};
+                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:-12};
                 }
                 else
                 {//下
-                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:20};
+                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:12};
                 }
             }
             else
@@ -368,33 +370,6 @@ export default class Hook{
         }
         else
         {
-            // if(this.rem_x == undefined || this.rem_y == undefined)
-            // {
-            //     this.rem_x = mX;
-            //     this.rem_y = mY;
-            //     return ;
-            // }
-            // if(Math.pow(mX - this.rem_x,2) > Math.pow(mY - this.rem_y,2))
-            // {
-            //     dicX = dicX * Math.cos(this.rotation/360*2*Math.PI);
-            //     dicY = dicX * Math.tan(this.rotation/360*2*Math.PI);
-            //     if()   
-            //     {
-            //         this.imgTop.x = this.hook_X + dicX;
-            //         this.sp.x = this.hook_X + dicX;
-            //         this.imgTop.y = this.hook_Y + dicY;
-            //         this.sp.y = this.hook_Y + dicY;
-            //     }
-            // }   
-            // else
-            // {
-            //     dicY = dicY * Math.sin(this.rotation/360*2*Math.PI);
-            //     dicX = dicY / Math.tan(this.rotation/360*2*Math.PI);
-            //     this.imgTop.x = this.hook_X + dicX;
-            //     this.sp.x = this.hook_X + dicX;
-            //     this.imgTop.y = this.hook_Y + dicY;
-            //     this.sp.y = this.hook_Y + dicY; 
-            // }
         }
     
     }
@@ -451,10 +426,13 @@ export default class Hook{
         let fM = Math.sqrt(Math.pow(x,2)+Math.pow(y,2))*Math.sqrt(Math.pow(this.oldPos.x,2)+Math.pow(this.oldPos.y,2));
         let fZ = x*this.oldPos.x + y*this.oldPos.y;
         let rotation = Math.acos(fZ/fM)*180/Math.PI;
+        // console.log("【rotation】" + rotation);
         // console.log(rotation +  " [rotation] " + this.rotateSp.rotation + "[fM]" + fM + "[fZ]" + fZ);
-        console.log(this.rotateSp.rotation)
-        console.log("[x]"　+ x + "[y]" + y + "[oldx]" + this.oldPos.x + " [oldy]" + this.oldPos.y + "[cos]" + fZ/fM);
+        // console.log(this.rotateSp.rotation)
+        // console.log("[x]"　+ x + "[y]" + y + "[oldx]" + this.oldPos.x + " [oldy]" + this.oldPos.y + "[cos]" + fZ/fM);
+        // console.log("old.x:[" + this.oldPos.x + "]  old.y:[" + this.oldPos.y + "]       " + "x:["+x+"],y:["+y+"]");
         let num = this.judge(x,y,this.oldPos);
+        // console.log("【num:】" + num);
         this.oldPos.x = x;
         this.oldPos.y = y;
         if(fM > fZ && num) 
@@ -462,11 +440,11 @@ export default class Hook{
             this.rotateHook(num*rotation);
             this.countRotation += num*rotation;
         }
-        else 
-        {
-            x = x - this.hook_X;
-            y = y - this.hook_Y;
-        }
+        // else 
+        // {
+        //     x = x - this.hook_X;
+        //     y = y - this.hook_Y;
+        // }
         // console.log(Math.abs(this.countRotation));
         if(Math.abs(this.countRotation) > 30)
         {
@@ -484,20 +462,24 @@ export default class Hook{
         let num;
         cZ.x = 1/oldPos.x;
         cZ.y = -1/oldPos.y;
-        if(oldPos.x == 0 || oldPos.y == 0)
+        if(oldPos.x == 0)
+        {
+            cZ.x = 1;
+            cZ.y = 0;
+        }
+        if(oldPos.y == 0)
         {
             cZ.x = 0;
-            cZ.y = 0;
-            return;
+            cZ.y = 1;
         }
         num = cZ.x*x+cZ.y*y;
         // console.log("[x]" + cZ.x*x + "[y]" + cZ.y*y);8
-        if((Laya.stage.mouseX - this.hook_X) > 0 && (Laya.stage.mouseY - this.hook_Y<0) || (Laya.stage.mouseX - this.hook_X) < 0 && (Laya.stage.mouseY - this.hook_Y) >0)
+        if((x) >= 0 && (y) <0 || (x) <= 0 && (y) >0)
         {
-           num = -num;
+            num = -num;
+            console.log("【"+num+"】");
         }
-        // console.log(num);
-        if(num*1000 > 0) return -1;
+        if(num > 0) return -1;
         return 1;
     }
 
@@ -505,8 +487,37 @@ export default class Hook{
     /**hook旋转 */
     private rotateHook(rotation) : void
     {
+        // console.log("【转】:" + rotation);
         this.rotateSp.rotation +=rotation;     
     }
 
+
+    ////////////////////////////////////BEE
+    public followBee(nextPos,ropePoint) : void
+    {
+        this.sp.x = nextPos.x;
+        this.sp.y = nextPos.y;
+        this.imgTop.x = nextPos.x;
+        this.imgTop.y = nextPos.y;
+            // ropePoint.sp.x = nextPos.x;
+            // ropePoint.sp.y = nextPos.y;
+        if(ropePoint)
+        {
+            if(ropePoint.body)
+            {
+                this.ropeFollowBee(nextPos,ropePoint);
+            }
+        }
+    }
+
+    private ropeFollowBee(nextPos,ropePoint) : void
+    {
+        let currentPos = {x:ropePoint.sp.x,y:ropePoint.sp.y};
+        let cos = Tool.rotationDeal(nextPos.x,nextPos.y,currentPos.x,currentPos.y,"cos");
+        let sin = Tool.rotationDeal(nextPos.x,nextPos.y,currentPos.x,currentPos.y,"sin");
+        // let body = ropePoint.sp.getComponents(Laya.RigidBody)[0];
+        
+        (ropePoint.body as Laya.RigidBody).linearVelocity = {x:5*-cos,y:5*-sin};
+    }
 
 }

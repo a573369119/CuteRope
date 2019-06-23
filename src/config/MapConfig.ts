@@ -1,3 +1,5 @@
+import { BouceDrum } from "../prefab/bounceDrum";
+
 /**
  * 地图配置 ， 纯数据
  */
@@ -98,6 +100,10 @@ export module Config {
         public arr_SawTooth : Array<SawToothConfig>;
         /**蜜蜂 */
         public arr_Bee : Array<BeeConfig>;
+        /**CDConfig */
+        public arr_Cd : Array<CdConfig>;
+        /**云朵 */
+        public arr_cloud : Array<CloudConfig>;
         
         constructor(data){
             this.screenRoad = [];
@@ -117,6 +123,8 @@ export module Config {
             this.arr_bounceDrum=[];
             this.arr_SawTooth=[];
             this.arr_Bee = [];
+            this.arr_Cd = [];
+            this.arr_cloud = [];
             this.parseConfigData(data);
         }
 
@@ -165,7 +173,10 @@ export module Config {
             this.parseBounceDrum(data.bounceDrum);
             /**蜜蜂解析 */
             this.parseBee(data.bee);
-            
+            /**CD盘解析 */
+            this.parseCd(data.cd);
+            /**云朵解析 */
+            this.parseCloud(data.cloud);
         }
 
         /**蜘蛛 */
@@ -199,7 +210,11 @@ export module Config {
                 bounceDrumConfig.rotation = bounceDrumObject[i].rotation;
                 bounceDrumConfig.size = bounceDrumObject[i].size; 
 
-                if(bounceDrumObject[i].moveTo) bounceDrumConfig.moveTo = bounceDrumObject[i].moveTo;
+                if(bounceDrumObject[i].moveTo) 
+                {
+                    bounceDrumConfig.moveTo = bounceDrumObject[i].moveTo;
+                    bounceDrumConfig.speed = bounceDrumObject[i].speed;
+                }
                 if(bounceDrumObject[i].rotationV) bounceDrumConfig.rotationV = bounceDrumObject[i].rotationV;
                 if(bounceDrumObject[i].power) bounceDrumConfig.power = bounceDrumObject[i].power;        
 
@@ -216,7 +231,12 @@ export module Config {
             {
                 ropeConfig = new RopeConfig();
                 ropeConfig.num = rope2.length[i];
-                ropeConfig.hookIndex = -1;                
+                ropeConfig.hookIndex = -1;
+                if(rope2.speed)
+                {
+                    if(rope2.speed[i] != undefined && rope2.speed[i] != 0)
+                        ropeConfig.speed = rope2.speed[i];            
+                }                                         
                 if(rope2.hookIndex)
                 {
                     if(rope2.hookIndex[i] || rope2.hookIndex[i] == 0)
@@ -234,7 +254,12 @@ export module Config {
             {
                 ropeConfig = new RopeConfig();
                 ropeConfig.num = rope.length[i];
-                ropeConfig.hookIndex = -1;                
+                ropeConfig.hookIndex = -1;    
+                if(rope.speed)
+                {
+                    if(rope.speed[i] != undefined && rope.speed[i] != 0)
+                        ropeConfig.speed = rope.speed[i];            
+                }
                 if(rope.hookIndex)
                 {
                     if(rope.hookIndex[i] || rope.hookIndex[i] == 0)
@@ -475,8 +500,57 @@ export module Config {
             }
 
         }
+
+        /**Cd */
+        private parseCd(cdObject) : void
+        {
+            if(cdObject)
+            {
+                let cdConfig : CdConfig
+                cdObject.forEach(cd =>{
+                    cdConfig = new CdConfig();
+                    cdConfig.x = cd.x;
+                    cdConfig.y = cd.y;
+                    cdConfig.size = cd.size;
+                    if(cd.hookIndex)
+                    {//hook
+                        cdConfig.arr_hookIndex = cd.hookIndex;
+                    }
+                    if(cd.balloonIndex)
+                    {//泡泡
+                        cdConfig.arr_balloonIndex = cd.balloonIndex;
+                    }
+                    if(cd.forceballIndex)
+                    {//
+                        cdConfig.arr_forceball = cd.forceballIndex;
+                    }
+                    this.arr_Cd.push(cdConfig);
+                });
+                console.log("cd -解析");
+            }
+        }
+
+        /**解析云朵 */
+        private parseCloud(cloudObject) : void
+        {
+            if(cloudObject)
+            {
+                let cloudConfig : CloudConfig;
+                cloudObject.forEach(cloud => {
+                    cloudConfig = new CloudConfig();
+                    cloudConfig.x = cloud.x;
+                    cloudConfig.y = cloud.y;
+                    cloudConfig.style = cloud.style;
+                    cloudConfig.balloonIndex = cloud.balloonIndex;
+                    cloudConfig.bounceDrumIndex = cloud.bounceDrumIndex;
+                    cloudConfig.hookIndex = cloud.hookIndex;
+                    this.arr_cloud.push(cloudConfig);
+                });
+                console.log("cloud - 解析");
+            }
+        }
     }
-    
+
 
     /**candy */
     export class CandyConfig {
@@ -556,6 +630,8 @@ export module Config {
         public hookIndex : number;      
         /** 绳子缩短多少个ropepoint */
         public shortNumber : number;
+        /** 绳子速度 */
+        public speed : number;
     }
 
     /**泡泡 balloon*/
@@ -665,6 +741,8 @@ export module Config {
         public rotationV : number;
         /**移动到 */
         public moveTo : Array<any>;
+        /**移动速度 */
+        public speed : number;
     }
 
     /**反重力按钮 antiGravity*/
@@ -694,7 +772,7 @@ export module Config {
         public speed : number;
     }
 
-    class SawTooth{
+    export class SawTooth{
          /**锯齿横坐标 */
          public sawTooth_X : number;
          /**锯齿纵坐标 */
@@ -705,5 +783,35 @@ export module Config {
          public clockwise : boolean;
     }
 
-
+    /**Cd盘 */
+    export class CdConfig
+    {
+        /**cd x */
+        public x : number;
+        public y : number;
+        /**size */
+        public size : Array<number>;
+        /**hookIndex */
+        public arr_hookIndex : Array<number>;
+        /**hookIndex */
+        public arr_balloonIndex : Array<number>;
+        /**forceball */
+        public arr_forceball : Array<number>;
+    } 
+    /**云朵 */
+    export class CloudConfig
+    {
+        // {"x":323,"y":637.5,"style":["balloon","bounceDrum"],"balloonIndex":0,"bounceDrumIndex":3}
+        /**X */
+        public x : number;
+        public y : number;
+        /**变换那些样式 */
+        public style : Array<string>;
+        /**泡泡下标 */
+        public balloonIndex : number;
+        /**弹力鼓下标*/
+        public bounceDrumIndex : number;
+        /**hhook下标 */
+        public hookIndex : number;
+    }
 }

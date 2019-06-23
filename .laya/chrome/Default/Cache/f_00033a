@@ -1,0 +1,902 @@
+(function(mywin) {
+    var Sdk_Company_Config = "souyou"; // 渠道名称
+    var Sdk_AppId_Config = "10001"; // appId
+    var Sdk_Login_Channel = ['passport', 'weChat', 'QQ', 'sina', 'visitor', 'google', 'facebook']; // 登录选项
+    var Sdk_Pay_Channel = ['weChat', 'Ali', 'Du', 'QQ']; // 支付选项
+    var Sdk_Share_Channel = ['weFirendsCircle', 'QZone', 'Sina'];
+    unifySdk.Sdk_Config_Info = {};
+    var protocol = "https:";
+
+    unifySdk.SdkServerUrl = protocol+ "//api.masteropen.layabox.com/"; // 线上
+    unifySdk.SDKServerPayUrl = protocol + "//api.masteropen.layabox.com/"; // 线上
+    unifySdk.SdkUrl = protocol + "//layamarket.layabox.com/SDK/";   // 页面文件引入 线上
+
+    // unifySdk.SdkServerUrl = "http://openapi.layabox.com/release/auto_api/"; // 测试
+    // unifySdk.SDKServerPayUrl = "http://openapi.layabox.com/release/auto_api"; // 测试
+    // unifySdk.SdkUrl = "//api.dongdong.feng.inner.layabox.com/releaseopen/MarketH5/SDK/"; // 页面文件引入 测试
+
+    // unifySdk.SdkServerUrl = "//api.devopen.layabox.com/"; // 开发
+    // unifySdk.SDKServerPayUrl = "//api.devopen.layabox.com/"; // 开发
+    // unifySdk.SdkUrl = "//192.168.1.106:8000/"; //开发
+    // unifySdk.SdkUrl = "//10.10.82.78:8000/"; //开发
+
+    // unifySdk.WeChatSdk = "//res.wx.qq.com/open/js/jweixin-1.0.0.js"; // 微信JS SDK
+    unifySdk.WeChatSdk = unifySdk.SdkUrl+"js/jweixin-1.0.0.js"; // 微信JS SDK
+    unifySdk.QQshareSDK = protocol + "//connect.qq.com/widget/loader/loader.js?t="+version; // 微信JS SDK
+
+
+    var shareInfo = null; // 分享信息
+    var pay_callback = null; // 支付回调函数
+    var login_callback = null; // 登录回调函数
+    var unifyInfo = null;
+    var unifyLoginInfo = null; // 用户登录信息
+    var sdk_IsLogin = false; // 用户登录状态
+    var __tag = 0;
+    var unifyPayInfo = {
+        currency: "CNY",
+        notifyUrl: protocol + "//paycenter.layabox.com/pay/40/deliver",
+        description: "1",
+        redirectUrl: unifySdk.SdkUrl + "pay_redirect.html"
+    }; // 支付信息
+    var unifyPayOrder = ""; // 支付单号
+    var Sdk_Login_Close = false; // 关闭按钮是否存在
+    var loginByWeChat = false; // 在微信中是否默认微信自动登录
+    var loginReturnUrl = ""; // 登录回调地址
+    var Sdk_time = null; // 微信扫码支付轮询计时器
+    var Sdk_Iframe = ""; // 向游戏postMessage数据的iframe
+    var SDK_IframeId = "";
+    // var layaStorage = window.sessionStorage;
+    function unifySdk() {}
+    var version = "20190329";
+    //   传入参数为object
+    //   company         SDK类型用以激活SDK对应配置文件
+    //   loginChannel    登录的类型主要有四种 'passport','weChat','QQ','sina'，visitor 默认五种都有 可以不传  可以自定义界面显示这些按钮
+    //   payChannel      支付的类型主要有四种  'weChat','Ali','Du','QQ' 默认四种都有 可以不传以后有需求可以添加新的
+    //   loginClose      是否显示关闭按钮   默认为true
+    // SDK 初始化
+    unifySdk.init = function(param, callback) {
+        param.company && (Sdk_Company_Config = param.company);
+        param.appId && (Sdk_AppId_Config = param.appId);
+        param.loginChannel && (Sdk_Login_Channel = param.loginChannel);
+        param.payChannel && (Sdk_Pay_Channel = param.payChannel);
+        param.loginClose && (Sdk_Login_Close = param.loginClose);
+        param.loginByWeChat && (loginByWeChat = param.loginByWeChat);
+        param.gameIframe && (Sdk_Iframe = param.gameIframe);
+        param.gameIframeId && (SDK_IframeId = param.gameIframeId);
+        SDKCommon.loadScript(unifySdk.SdkUrl + "js/unifySdkPage.js?t="+version, function(data) {
+            if (data.result == 0) {
+                // SDKCommon.loadScript(unifySdk.codaJS,function(){});
+                // SDKCommon.loadScript(unifySdk.QQshareSDK);
+                SDKCommon.loadScript(unifySdk.WeChatSdk, function(data) {
+                    console.log("SSO:"+JSON.stringify(data));
+                    // wx.onMenuShareTimeline({
+                    //     title: '123', // 分享标题
+                    //     link: '321', // 分享链接
+                    //     imgUrl: '123', // 分享图标
+                    //     success: function () {
+                    //         // 用户确认分享后执行的回调函数
+                    //     },
+                    //     cancel: function () {
+                    //         // 用户取消分享后执行的回调函数fconso
+                    //     }
+                    // });
+                    if (data.result == 0) {
+                        unifySdk.Sdk_Config_Info = {};
+                        unifySdkPage && unifySdkPage.create(Sdk_Login_Channel, Sdk_Pay_Channel, Sdk_Login_Close, unifySdk.SdkUrl);
+                        var urlParam = getRequest();
+                        var access_token = (urlParam&&urlParam['token']) || getTokenFun() || '';
+                        var token = setTokenFun(access_token);
+                        token = getTokenFun() ;
+                        if(SDKCommon.isWeChat()&&SDKCommon.isIOS()&&!localStorage.getItem("layaWXin")&&!token) {
+                            sdk_IsLogin = false;
+                            unifyLoginInfo = {};
+                            unifyLoginInfo.result = 0;
+                            callback&&callback({result:0,desc:"init ok"});
+                        } else {
+                            SDKCommon.getJson(unifySdk.SdkServerUrl + "sso?access_token="+(token || access_token), function(data) {
+                                // prompt(JSON.stringify(data),JSON.stringify(data));
+                                // alert("init SSO:"+JSON.stringify(data));
+                                // data.channelExt = JSON.parse(data.channelExt);
+                                SDKCommon.isWeChat()&&SDKCommon.isIOS()&&localStorage.setItem("layaWXin",Date.now());
+                                ssoUserInfo(data,callback);
+                            })
+                        }
+                    } else {
+                        callback&&callback({result:-2,desc:"fail"});
+                    }
+                })
+            } else {
+                callback&&callback({result:-2,desc:"fail"});
+            }
+        });
+    }
+    // SDK 登录
+    unifySdk.login = function(param, callback) {
+        console.log("LAYASDK __tag：" + __tag);
+        login_callback = callback;
+        loginReturnUrl = param && param.loginUrl;
+        if (sdk_IsLogin) {
+            unifySdk.getUserInfo(unifyLoginInfo, function(data) {
+                login_callback && login_callback(data);
+            });
+            // login_callback&&login_callback(unifyLoginInfo);
+            unifySdkPage && unifySdkPage.close();
+        } else {
+            if (loginByWeChat == true && SDKCommon.isWeChat()) {
+                loginWeChat();
+                return;
+            }
+            unifySdkPage && unifySdkPage.login(function(data) {
+                unifyInfo = data;
+                switch (data.type) {
+                    case "weChat":
+                        loginWeChat();
+                        break;
+                    case "QQ":
+                        loginQQ();
+                        break;
+                    case "sina":
+                        loginSina();
+                        break;
+                    case 'google':
+                        loginGoogle();
+                        break;
+                    case 'facebook':
+                        loginFacebook();
+                        break;
+                    case "visitor":
+                        loginVisitor();
+                        break;
+                    case "close":
+                        callback && callback({
+                            result: "-1",
+                            desc: "cancel"
+                        });
+                        break;
+                }
+            });
+        }
+    }
+    // 退出登录
+    unifySdk.logout = function(callback) {
+        SDKCommon.getJson(unifySdk.SdkServerUrl + "sso/logout", function(data) {
+            clearTokenFun();
+            if (data.ret == 0) {
+                // layaStorage.removeItem("laya_token");
+                // layaStorage.removeItem("laya_token_time");
+                sdk_IsLogin = false;
+                callback && callback({
+                    result: 0,
+                    desc: "ok"
+                });
+            } else {
+                callback && callback({
+                    result: -2,
+                    desc: "fail"
+                });
+            }
+        })
+    }
+    // 判断是否登录
+    unifySdk.isLogin = function(callback) {
+        callback && callback(sdk_IsLogin);
+    }
+    // 支付接口
+    unifySdk.pay = function(param, callback) {
+        pay_callback = callback;
+        unifyPayInfo = this.payInit(param);
+        unifySdkPage && unifySdkPage.pay({
+            "goodsName": unifyPayInfo.goodsName,
+            "amount": unifyPayInfo.amount,
+            "gameName": unifyPayInfo.gameName
+        }, function(data) {
+            switch (data.type) {
+                case "weChat":
+                    payWeChat();
+                    break;
+                case "Ali":
+                    payAli();
+                    break;
+                // case "Du":
+                //     payBaiDu();
+                //     break;
+                case "QQ":
+                    payQQ();
+                    break;
+                case "weChatCode":
+                    payWeChatCode();
+                    break;
+                case 'coda':
+                    payCoda();
+                    break;
+                case "close":
+                    Sdk_time && clearInterval(Sdk_time);
+                    pay_callback && pay_callback({
+                        result: "-1",
+                        desc: "cancel"
+                    });
+                    break;
+            }
+        })
+
+    }
+    // 支付数据初始化
+    unifySdk.payInit = function(param) {
+        for (var prop in unifyPayInfo) {
+            if (!param[prop]) {
+                if (prop == "description")
+                    param[prop] = param.goodsName || unifyPayInfo[prop];
+                else
+                    param[prop] = unifyPayInfo[prop];
+            }
+        }
+        param.gameId = param.gameId || "";
+        param.redirectUrl = param.redirectUrl || (window.location.top ? window.location.top.href : window.location.href);
+        return param;
+    }
+    // 分享接口
+    unifySdk.share = function(param, callback) {
+        shareInfo = param;
+        switch (param.type) {
+            case "qZone":
+                shareQZone();
+                break;
+            case "sina":
+                shareSina();
+                break;
+            case "QQ":
+                shareQQ();
+                break;
+            default:
+                break;
+        }
+    }
+    // 空间分享
+    function shareQZone() {
+        var url = "//sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?" + "url=" + encodeURIComponent(shareInfo.link) + "&desc=" + encodeURIComponent(shareInfo.desc) + "&title=" + encodeURIComponent(shareInfo.title) + "&pics=" + encodeURIComponent(shareInfo.imgUrl) + "&summary=" + encodeURIComponent(shareInfo.summary || shareInfo.desc) + "&site=" + encodeURIComponent(shareInfo.site || '');
+        window.open(url);
+    }
+    // 新浪分享
+    function shareSina() {
+        var url = "//service.weibo.com/share/share.php?url=" + encodeURIComponent(shareInfo.link) + "&title=" + encodeURIComponent(shareInfo.title) + "&pic=" + encodeURIComponent(shareInfo.imgUrl) + "&appkey=" + shareInfo.sinaUid + "&ralateUid=" + encodeURIComponent(shareInfo.ralateUid) + "&language=" + (shareInfo.language || '');
+        window.open(url);
+    }
+    // 分享给QQ好友
+    function shareQQ() {
+        var url = "//connect.qq.com/widget/shareqq/index.html?url=" + encodeURIComponent(shareInfo.link) + "&desc=" + encodeURIComponent(shareInfo.desc) + "&title=" + encodeURIComponent(shareInfo.title) + "&pics=" + encodeURIComponent(shareInfo.imgUrl) + "&summary=" + encodeURIComponent(shareInfo.summary || shareInfo.desc) + "&flash=&site=" + encodeURIComponent(shareInfo.site);
+        window.open(url)
+    }
+    //
+    unifySdk.userInfo = function(param, callback) {}
+    // 获取验证码
+    unifySdk.serverCode = function(phone) {
+        SDKCommon.getJson(unifySdk.SdkServerUrl + "layapassport/code?mobile=" + phone)
+    }
+    // 判断手机号是否存在
+    unifySdk.existUser = function(userInfoData, callback) {
+        SDKCommon.getJson(unifySdk.SdkServerUrl + "layapassport/existsuser?idtype=" + userInfoData.userType + "&identifier=" + userInfoData.username, function(data) {
+            callback && callback(data);
+        });
+    }
+    // 账户密码登录
+    unifySdk.loginPassport = function(unifyInfo, callback) {
+        SDKCommon.getJson(unifySdk.SdkServerUrl + "layapassport/login?identifier=" + unifyInfo.phone + "&password=" + unifyInfo.password + "&idtype=" + unifyInfo.loginType, function(data) {
+            // alert("login:" + JSON.stringify(data));
+            if (data.ret == 0) {
+                var token = data.data.token || '';
+                token = setTokenFun(token);
+                token = getTokenFun();
+                SDKCommon.getJson(unifySdk.SdkServerUrl + "sso?access_token="+(token || data.data.token), function(data) {
+
+                    // console.log("SSO:"+JSON.stringify(data));
+                    // alert("SSO:"+JSON.stringify(data));
+                    if (data.ret == 0 && data.data.userInfo) {
+                        sdk_IsLogin = true;
+                        unifyLoginInfo = JSON.parse(data.data.userInfo);
+                        unifyLoginInfo.result = 0;
+                        __tag = unifyLoginInfo.tag;
+                        callback&&callback({result:0,desc:"init ok"});
+                        unifySdk.getUserInfo(unifyLoginInfo, function(data){
+                            unifySdkPage && unifySdkPage.close();
+                            login_callback&&login_callback(data);
+                        })
+                    } else if (data.ret == 10000 || data.ret == 10001){
+                        __tag = data.ret;
+                        sdk_IsLogin = false;
+                        unifyLoginInfo = {};
+                        unifyLoginInfo.result = 0;
+                        callback && callback({result:0,desc: "init ok"});
+                    } else {
+                        callback && callback({result:-2,desc: "fail"});
+                    }
+                    console.log("LAYASDK __tag" + __tag);
+                })
+            } else {
+                callback && callback(data);
+            }
+        })
+    }
+    // 修改密码
+    unifySdk.loginChangePWD = function(unifyInfo, callback) {
+        SDKCommon.getJson(unifySdk.SdkServerUrl + "layapassport/phoneresetpassword?identifier=" + unifyInfo.phone + "&password=" + unifyInfo.password + "&idtype=3&code=" + unifyInfo.code + "&confirmpassword=" + unifyInfo.password + "&mode=json&lang=en", function(data) {
+            callback && callback(data);
+        });
+    }
+    // 注册账号
+    unifySdk.loginRegister = function(unifyInfo, callback) {
+        SDKCommon.getJson(unifySdk.SdkServerUrl + "layapassport/register?mobile=" + unifyInfo.phone + "&password=" + unifyInfo.password + "&idtype=3&code=" + unifyInfo.code + "&nickname=&avatarurl=&origin=&ipaddr=&other=", function(data) {
+            // alert("login:" + JSON.stringify(data));
+            if (data.ret == 0) {
+                var token = data.data.token || '';
+                token = setTokenFun(token);
+                token = getTokenFun();
+                SDKCommon.getJson(unifySdk.SdkServerUrl + "sso?access_token="+token, function(data) {
+
+                    // console.log("SSO:"+JSON.stringify(data));
+                    // alert("SSO:"+JSON.stringify(data));
+                    if (data.ret == 0 && data.data.userInfo) {
+                        sdk_IsLogin = true;
+                        unifyLoginInfo = JSON.parse(data.data.userInfo);
+                        unifyLoginInfo.result = 0;
+                        __tag = unifyLoginInfo.tag;
+                        callback&&callback({result:0,desc:"init ok"});
+                        unifySdk.getUserInfo(unifyLoginInfo, function(data){
+                            unifySdkPage && unifySdkPage.close();
+                            login_callback&&login_callback(data);
+                        })
+                    } else if (data.ret == 10000 || data.ret == 10001){
+                        __tag = data.ret;
+                        sdk_IsLogin = false;
+                        unifyLoginInfo = {};
+                        unifyLoginInfo.result = 0;
+                        callback && callback({result:0,desc: "init ok"});
+                    } else {
+                        callback && callback({result:-2,desc: "fail"});
+                    }
+                    console.log("LAYASDK __tag" + __tag);
+                })
+            } else {
+                callback && callback(data);
+            }
+        })
+    }
+    // 微信登录
+    function loginWeChat() {
+        var oldUrl = loginReturnUrl || window.location.href;
+        if (SDKCommon.isWeChat()) {
+            window.location.href = unifySdk.SdkServerUrl + "third/wx?jumpurl=" + encodeURIComponent(oldUrl) + "&account=" + Sdk_Company_Config;
+        } else {
+            unifySdkPage && unifySdkPage.createIframe(unifySdk.SdkServerUrl + "third/wxlogin?jumpurl=" + encodeURIComponent(oldUrl) + "&account=" + Sdk_Company_Config);
+        }
+    }
+    // 格式化返回用户数据
+    unifySdk.getUserInfo = function(param, callback) {
+        console.log("getUserInfo:" + JSON.stringify(param));
+        var data = {
+            userId: param.userId || "",
+            spUserId: param.spUserId || "",
+            sex: param.sex || "",
+            spUserName: param.spUserName || "",
+            nickname: param.nickname || param.nick_name || "",
+            headimg: param.headimg || param.avatar_url || (param.channelExt && param.channelExt.avatar_url) || "",
+            channel: param.channel || "",
+            channelExt: param.channelExt || "",
+            stoken: param.stoken || "",
+            token: param.token || "",
+            result: param.result
+        }
+        console.log("getUserInfo:" + JSON.stringify(data));
+        try {
+            data.spUserName = decodeURIComponent(data.spUserName);
+            data.nickname = decodeURIComponent(data.nickname);
+        } catch(e) {
+            data.spUserName = data.spUserName;
+            data.nickname = data.nickname;
+        }
+
+        mywin.addCookie("laya_sdk_token", data.token, 24 * 30);
+        callback && callback(data);
+    }
+    // 向iframe发送消息
+    unifySdk.postMessage = function(frameName, type, data,frameId) {
+        if(frameId&&document.getElementById(frameId)) {
+            var iframe = document.getElementById(frameId);
+            iframe.postMessage({
+                type: type,
+                data: data
+            }, '*');
+        } else {
+            window.frames[frameName].postMessage({
+                type: type,
+                data: data
+            }, '*');
+        }
+    }
+    unifySdk.setIframeId = function(iframeId,callback) {
+        SDK_IframeId = iframeId;
+        callback&&callback(iframeId);
+    }
+    // QQ登录
+    function loginQQ() {
+        var oldUrl = loginReturnUrl || window.location.href;
+        var newUrl = unifySdk.SdkServerUrl + "third/qqlogin?jumpurl=" + encodeURIComponent(oldUrl) + "&account=" + Sdk_Company_Config;
+        unifySdkPage && unifySdkPage.createIframe(newUrl);
+    }
+    // 新浪登录
+    function loginSina() {
+        unifySdk.getUserInfo(unifyLoginInfo, function(data) {
+            login_callback && login_callback(data);
+        });
+        login_callback && login_callback(unifyLoginInfo);
+    }
+    // 谷歌登录
+    function loginGoogle(){
+        var oldUrl = loginReturnUrl || window.location.href;
+        window.location.href = unifySdk.SdkServerUrl + "third/googlelogin?jumpurl=" + encodeURIComponent(oldUrl) + "&account=" + Sdk_Company_Config;
+    }
+    // Facebook 登录
+    function loginFacebook() {
+        var oldUrl = loginReturnUrl || window.location.href;
+        window.location.href = unifySdk.SdkServerUrl + "third/facebooklogin?jumpurl=" + encodeURIComponent(oldUrl) + "&account=" + Sdk_Company_Config;
+    }
+    // 访客登录
+    function loginVisitor() {
+        unifySdk.getUserInfo(unifyLoginInfo, function(data) {
+            login_callback && login_callback(data);
+        });
+        login_callback && login_callback(unifyLoginInfo);
+    }
+    // SSO 数据判断
+    function ssoUserInfo(data,callback) {
+        if (data.ret == 0 && data.data.userInfo) {
+            sdk_IsLogin = true;
+
+            try {
+                data.data.userInfo = JSON.parse(data.data.userInfo);
+                data.data.userInfo.channelExt = JSON.parse(data.data.userInfo.channelExt);
+            } catch(e){
+
+            }
+
+            unifyLoginInfo = data.data.userInfo;
+            unifyLoginInfo.result = 0;
+            __tag = unifyLoginInfo.tag;
+            callback&&callback({result:0,desc:"init ok"});
+        } else if (data.ret == 10000 || data.ret == 10001){
+            __tag = data.ret;
+            sdk_IsLogin = false;
+            unifyLoginInfo = {};
+            unifyLoginInfo.result = 0;
+            callback && callback({result:0,desc: "init ok"});
+        } else {
+            callback && callback({result:-2,desc: "fail"});
+        }
+        console.log("LAYASDK __tag: " + __tag);
+    }
+    // 微信支付
+    function payWeChat() {
+        payDataGot("wx_pubpay", function(data) {
+            unifyPayOrder = data.data.order_no;
+            data.data.extra && (data.data.extra.timeStamp += "");
+            WeixinJSBridge && WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',  data.data.extra,
+                function(res) {
+                    unifySdkPage && unifySdkPage.close();
+                    if (res.err_msg  ==  "get_brand_wcpay_request:ok") {
+                        pay_callback && pay_callback({
+                            result: 0,
+                            "desc": "ok"
+                        });
+                    } else if (res.err_msg  ==  "get_brand_wcpay_request:cancel") {
+                        pay_callback && pay_callback({
+                            result: -1,
+                            "desc": "cancel"
+                        });
+                    } else if (res.err_msg  ==  "get_brand_wcpay_request:fail") {
+                        pay_callback && pay_callback({
+                            result: -2,
+                            "desc": res.err_desc
+                        });
+                    }
+                }
+            );
+        });
+    }
+    // QQ钱包支付
+    function payQQ() {
+        alert("qq");
+    }
+    // Coda 支付
+    unifySdk.payCoda = function(data) {
+        unifyPayInfo = unifySdk.payInit(data);
+        payCoda();
+
+    }
+    function payCoda() {
+        var url = unifySdk.SDKServerPayUrl + "layapay/getcharge?channel=coda_pay&uid=" + (unifyPayInfo.userId||unifyLoginInfo.userId) + "&info=" + unifyPayInfo.gameId + "|" +unifyPayInfo.goodsName + "&redirect_url=" + encodeURIComponent(unifyPayInfo.redirectUrl) + "&notify_url=" + encodeURIComponent(unifyPayInfo.notifyUrl) +
+            "&subject=" + unifyPayInfo.gameId + "|" +unifyPayInfo.goodsName + "&description=" + unifyPayInfo.gameId + "|" + unifyPayInfo.description + "&amount=" + unifyPayInfo.amount + "&account=" + Sdk_Company_Config + "&currency=" + unifyPayInfo.currency + "&app_id=" + Sdk_AppId_Config + "&param=" + unifyPayInfo.orderId;
+        // window.location.href = url;
+        // Sdk_time = setInterval(function(){
+        SDKCommon.getJson(url, function(data){
+            if(data.ret == 0) {
+                // airtime_checkout(data.data.txnId);
+                // clearInterval(Sdk_time);
+                unifySdkPage.pay({
+                    "goodsName": unifyPayInfo.goodsName,
+                    "amount": unifyPayInfo.amount,
+                    "gameName": unifyPayInfo.gameName
+                }, function(){
+
+                });
+                var redirectUrl = 'https://sandbox.codapayments.com/airtime/begin?type=3&txn_id='+ data.data.txnId;
+                if(!SDKCommon.isPC()) {
+                    redirectUrl += '&browser_type=mobile-web';
+                }
+                // window.open(redirectUrl);
+                unifySdkPage.createIframe( redirectUrl);
+            }
+        })
+        // }, 3000);
+
+
+
+    }
+    // 支付宝支付
+    function payAli() {
+        // company:"souyou",appId:"10001"
+        // unifyPayInfo.payType = SDKCommon.isPC() ? "ali_pcpay":"ali_wappay";
+        var url = unifySdk.SDKServerPayUrl + "layapay/getcharge?channel=ali_wappay&uid=" + (unifyPayInfo.userId||unifyLoginInfo.userId) + "&info=" + encodeURIComponent(unifyPayInfo.gameId + "|" + unifyPayInfo.goodsName) + "&redirect_url=" + encodeURIComponent(unifyPayInfo.redirectUrl) + "&notify_url=" + encodeURIComponent(unifyPayInfo.notifyUrl) +
+            "&subject=" + encodeURIComponent(unifyPayInfo.gameId + "|" + unifyPayInfo.goodsName) + "&description=" + encodeURIComponent(unifyPayInfo.gameId + "|" + unifyPayInfo.description) + "&amount=" + unifyPayInfo.amount + "&account=" + Sdk_Company_Config + "&currency=" + unifyPayInfo.currency + "&app_id=" + Sdk_AppId_Config + "&param=" + encodeURIComponent(unifyPayInfo.orderId);
+        unifySdkPage.createIframe(url);
+    }
+    // 百度钱包支付
+    function payBaiDu() {
+        // company:"souyou",appId:"10001",channel:"bfb_wappay"
+        var url = unifySdk.SDKServerPayUrl + "layapay/getcharge?channel=bfb_wappay&uid=" + (unifyPayInfo.userId||unifyLoginInfo.userId) + "&info=" + encodeURIComponent(unifyPayInfo.gameId + "|" + unifyPayInfo.goodsName) + "&redirect_url=" + encodeURIComponent(unifyPayInfo.redirectUrl) + "&notify_url=" + encodeURIComponent(unifyPayInfo.notifyUrl) +
+            "&subject=" + encodeURIComponent(unifyPayInfo.gameId + "|" + unifyPayInfo.goodsName) + "&description=" + encodeURIComponent(unifyPayInfo.gameId + "|" + unifyPayInfo.description) + "&amount=" + unifyPayInfo.amount + "&account=" + Sdk_Company_Config + "&currency=" + unifyPayInfo.currency + "&app_id=" + Sdk_AppId_Config + "&param=" + encodeURIComponent(unifyPayInfo.orderId) + "&bfbpaytype=2";
+        unifySdkPage.createIframe(url);
+    }
+    // 微信扫码支付
+    function payWeChatCode() {
+        //company:"huo5game",appId:"10001",openid:"onExDwV4IoJblbKKfJV6r5x16F88"
+        payDataGot("wx_pub_qrpay", function(data) {
+            unifyPayOrder = data.data.order_no;
+            unifySdkPage && unifySdkPage.weChatCodeShow(data.data.extra.code_src);
+            payCodeQuery();
+        });
+    }
+    // 微信扫码回调请求
+    function payCodeQuery() {
+        Sdk_time = setInterval(function() {
+            SDKCommon.getJson(unifySdk.SDKServerPayUrl + "layapay/getorderinfo?order_id=" + unifyPayOrder + "&account=" + Sdk_Company_Config + "&app_id=" + Sdk_AppId_Config, function(res) {
+                if (res.data.status == 1) {
+                    clearInterval(Sdk_time);
+                    unifySdkPage && unifySdkPage.close();
+                    pay_callback && pay_callback({
+                        result: 0,
+                        desc: "ok"
+                    });
+                }
+            })
+        }, 3000);
+    }
+    // 微信支付请求
+    function payDataGot(type, callback) {
+        // var redirectUrl = "//mhjy.layabox.com/index.html?relatedid=247"
+        var url = unifySdk.SDKServerPayUrl + "layapay/getcharge?channel=" + type + "&uid=" + (unifyPayInfo.userId||unifyLoginInfo.userId) + "&info=" + encodeURIComponent(unifyPayInfo.gameId + "|" + unifyPayInfo.goodsName) + "&redirect_url=" + encodeURIComponent(unifyPayInfo.redirectUrl) + "&notify_url=" + encodeURIComponent(unifyPayInfo.notifyUrl) +
+            "&subject=" + encodeURIComponent(unifyPayInfo.gameId + "|" + unifyPayInfo.goodsName) + "&description=" + encodeURIComponent(unifyPayInfo.gameId + "|" + unifyPayInfo.description) + "&amount=" + unifyPayInfo.amount + "&account=" + Sdk_Company_Config + "&currency=" + unifyPayInfo.currency + (type == "wx_pubpay" ? "&openid=" + (unifyPayInfo.spUserId||unifyLoginInfo.spUserId) : "") + "&app_id=" + Sdk_AppId_Config + "&param=" + encodeURIComponent(unifyPayInfo.orderId);
+        SDKCommon.getJson(url, function(data) {
+            if (data.ret == 0) {
+                callback && callback({
+                    result: 0,
+                    data: data.data
+                });
+            } else {
+                callback && callback({
+                    result: -2
+                });
+            }
+        })
+    }
+    // 监听postMessage请求
+    window.addEventListener("message", function(e) {
+        if (e.data.type == "payCallback") {
+            e.data.result == 0 && unifySdkPage && unifySdkPage.close();
+            pay_callback && pay_callback({
+                "result": e.data.result
+            });
+        } else if(e.data.type == "shareCallback") {
+            unifySdk.postMessage(Sdk_Iframe, e.data.type, {href:window.location.href}, SDK_IframeId)
+        } else if (unifySdk[e.data.type]) {
+            unifySdk[e.data.type](e.data.data, function(data) {
+                unifySdk.postMessage(Sdk_Iframe, e.data.type, data, SDK_IframeId);
+            })
+        }
+    })
+    // 获取路径中的参数
+    function getRequest(searcUrl) {
+        var url = searcUrl||window.location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+    function setTokenFun(token) {
+        // var time = layaStorage.getItem("laya_token_time");
+        // var nowTime = Date.now();
+        // var localToken = layaStorage.getItem("laya_token");
+        // var localToken = mywin.getCookie("laya_sdk_token");
+        if(token) {
+            // layaStorage.setItem('laya_token_time', nowTime);
+            mywin.addCookie("laya_sdk_token", token, 24 * 30);
+            // layaStorage.setItem('laya_token', token);
+            return token;
+        } else  {
+            clearTokenFun();
+            return '';
+        }
+    }
+
+    function getTokenFun() {
+        // var time = layaStorage.getItem("laya_token_time");
+        // var nowTime = Date.now();
+        var token = '';
+        /*if(!time || (nowTime - time) / 1000 > 60*60*1.8) {
+            clearTokenFun();
+            token = '';
+        } else {*/
+        token = mywin.getCookie("laya_sdk_token") || '';
+        // token = layaStorage.getItem("laya_token") || '';
+        // }
+        return token;
+    }
+
+    function clearTokenFun() {
+        mywin.deleteCookie("laya_sdk_token");
+        /*var time = layaStorage.getItem("laya_token_time");
+        var nowTime = Date.now();
+        if(!time || (nowTime - time) / 1000 > 60*60*1.8) {
+            layaStorage.removeItem("laya_token_time");
+            layaStorage.removeItem("laya_token");
+        }*/
+    }
+
+    mywin.addCookie = function(key, val, hours, domain, path) {
+        if (mywin.isCookie) {
+            mywin._addCookie(key, val, hours, domain, path);
+        } else {
+            var keyData = {
+                val : val
+            };
+            if(hours > 0){//为0时不设定过期时间，浏览器关闭时cookie自动消失
+                var date = new Date();
+                var ms = hours*3600*1000;
+                date.setTime(date.getTime() + ms);
+                keyData.expires = date.toGMTString()
+            }
+            if (domain)
+            {
+                keyData.domain= + domain;
+            } else {
+                keyData.domain=".layabox.com";
+            }
+            if(path) {
+                keyData.path= path;
+            } else {
+                keyData.path= "/";
+            }
+            localStorage.setItem(key, JSON.stringify(keyData))
+        }
+    }
+    mywin._addCookie = function(key ,val, hours, domain, path) {
+        var str = key + "=" + escape(val);
+        if(hours > 0){//为0时不设定过期时间，浏览器关闭时cookie自动消失
+            var date = new Date();
+            var ms = hours*3600*1000;
+            date.setTime(date.getTime() + ms);
+            str += "; expires=" + date.toGMTString();
+        }
+        if (domain)
+        {
+            str += "; domain=" + domain;
+        } else {
+            str += "; domain=.layabox.com";
+        }
+        if(path) {
+            str += "; path=" + path;
+        } else {
+            str += "; path=/";
+        }
+        document.cookie = str;
+    }
+
+    mywin.getCookie = function(key){
+        if (mywin.isCookie) {
+            return mywin._getCookie(key);
+        } else {
+            var keyData = localStorage.getItem(key) || {};
+            try {
+                keyData = JSON.parse(keyData);
+            } catch (e) {
+
+            }
+            if (keyData.expires ) {
+
+                keyData.expiresDate = new Date(keyData.expires);
+                if (keyData.expiresDate < Date.now()) {
+                    mywin.deleteCookie(key);
+                    return "";
+                }
+            }
+            return keyData.val || "";
+        }
+    };
+    mywin._getCookie = function(key) {
+        var arrStr = document.cookie.split("; ");
+        for(var i = 0;i < arrStr.length;i ++){
+            var temp = arrStr[i].split("=");
+            if(temp[0] == key) return unescape(temp[1]);
+        }
+        return '';
+    }
+    mywin.deleteCookie = function(key) {
+        if(mywin.isCookie) {
+            mywin._deleteCookie(key);
+        } else {
+            localStorage.removeItem(key);
+        }
+    }
+    mywin._deleteCookie = function(key){
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        var cval = this.getCookie(key);
+        if(cval!=null)
+            document.cookie= key + "="+cval+"; path=/; domain=.layabox.com; expires="+exp.toGMTString();
+    };
+
+    mywin.isCookie = (function(){
+        mywin._addCookie("test", "test", 1);
+        var data = mywin._getCookie("test");
+        if (data) {
+            mywin._deleteCookie("test");
+            return true;
+        } else {
+            return false;
+        }
+    })();
+    mywin.SDKCommon = (function() {
+        function SDKCommon() {}
+        var storage = mywin.sessionStorage;
+        SDKCommon.serverLink = function() {
+            SDKCommon.getJson(url, callback, tryError);
+
+            function tryError() {
+                SDKCommon.getJson(url, callback, tryError);
+            }
+        }
+        SDKCommon.openUrl = function(frameId, popupUrl, orientation) {
+            var iframe = document.createElement("iframe");
+            iframe.name = "storeGame" + frameId;
+            iframe.frameBorder = "no";
+            iframe.marginwidth = "0px";
+            iframe.marginheight = "0px";
+            iframe.scrolling = "no";
+            iframe.border = "0px"
+            iframe.style.position = "absolute";
+            iframe.style.left = "0px";
+            iframe.style.top = "0px";
+            iframe.style.zIndex = 66666;
+            iframe.style.backgroundColor = "#ffffff";
+            iframe.src = popupUrl;
+            iframe.style.width = document.documentElement.clientWidth + "px";
+            iframe.style.height = document.documentElement.clientHeight + "px";
+            var gamesBox = document.getElementById("gamesBox");
+            if (gamesBox) {
+                gamesBox.style.width = document.documentElement.clientWidth + "px";
+                gamesBox.style.height = document.documentElement.clientHeight + "px";
+                gamesBox.appendChild(iframe)
+            }
+        };
+        SDKCommon.isStorage = function() {
+            try {
+                storage && storage.setItem("TestCode", "Hello");
+                storage && storage.getItem("TestCode");
+                return true;
+            } catch (e) {
+                return false;
+            }
+        };
+        SDKCommon.isWeChat = function() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        SDKCommon.isPC = function() {
+            var ua = navigator.userAgent.toLowerCase();
+            if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)))
+                return false;
+            else
+                return true;
+        }
+        SDKCommon.isIOS = function() {
+            var ua = navigator.userAgent.toLowerCase();
+            if ((navigator.userAgent.match(/(iPhone|iPod|ios|iPad)/i)))
+                return true;
+            else
+                return false;
+        }
+        SDKCommon.loadScript = function(url, onload, onerror) {
+            var scp = document.createElement("script");
+            scp.onload = function() {
+                onload && onload({
+                    "result": 0
+                });
+            };
+            scp.onerror = function() {
+                onerror && onerror({
+                    "result": -100,
+                    "desc": "脚本下载失败"
+                })
+            };
+            document.head.appendChild(scp);
+            scp.src = url;
+        };
+        SDKCommon.getUniqueID = function(splitChar) {
+            var uniqueID = "";
+            for (var i = 1; i <= 32; i++) {
+                uniqueID += Math.floor(Math.random() * 16.0).toString(16);
+                if ((i == 8) || (i == 12) || (i == 16) || (i == 20))
+                    uniqueID += (splitChar ? splitChar : "");
+            }
+            return uniqueID;
+        };
+        SDKCommon.createCallback = function(callback, callbackName) {
+            if (!callbackName)
+                callbackName = "callback" + SDKCommon.getUniqueID("_");
+            window[callbackName] = (function(name) {
+                function CallbackHandler(param) {
+                    if (window[CallbackHandler.funcName]) {
+                        window[CallbackHandler.funcName] = null;
+                        delete window[CallbackHandler.funcName];
+                    }
+                    if (document && document.head) {
+                        var scp = document.getElementById(CallbackHandler.funcName)
+                        scp && document.head.removeChild(scp);
+                    }
+                    callback && callback(param);
+                }
+
+                CallbackHandler.funcName = name;
+                return CallbackHandler;
+            })(callbackName);
+            return callbackName;
+        };
+        SDKCommon.getJson = function(url, callback, onError) {
+            var callbackName = SDKCommon.createCallback(function(param) {
+                callback && callback(param);
+            });
+            var scp = document.createElement("script");
+            document.head.appendChild(scp);
+            scp.id = callbackName;
+            scp.onerror = function() {
+                onError && onError({
+                    "result": -101,
+                    "desc": "json download error"
+                })
+            };
+            scp.src = ((url.indexOf("?") > -1) ? (url + "&callback=" + callbackName) : (url + "?callback=" + callbackName));
+        };
+        SDKCommon.bIsUserLocation = SDKCommon.isStorage();
+        return SDKCommon;
+    })();
+    mywin.LAYA_UNIFY_SDK = unifySdk;
+})(window);

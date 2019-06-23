@@ -87,6 +87,7 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
 
     private onEixt(e) : void
     {
+        this.destroy();
         Laya.Scene.open("Select.scene",true);             
     }
     
@@ -277,7 +278,7 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
     {
         for(let i=0; i<this.arr_Box.length; i++)
         {
-            this.arr_Box[i].boxUI.img_box.on(Laya.Event.CLICK,this,this.clickBox,[i])
+            if(!this.arr_Box[i].boxUI.img_lock.visible) this.arr_Box[i].boxUI.img_box.on(Laya.Event.CLICK,this,this.clickBox,[i]);
         }
         
     }
@@ -285,7 +286,12 @@ export default class SelectBoxPage extends ui.SelectBox.SelectBoxUI
     /**事件 点击盒子 */
     private clickBox(index) : void
     {
-        Laya.Scene.open("SelectRound/SelectRound.scene",true,[this.quarter,index]);        
+        Laya.Scene.open("SelectRound/SelectRound.scene",true,[this.quarter,index],Laya.Handler.create(this,this.onOpen));        
     }    
+
+    private onOpen() : void
+    {
+        this.destroy();
+    }
 
 }

@@ -1,4 +1,5 @@
 import Tool from "../Tool/Tool";
+import GameConfig from "../config/GameConfig";
     export default class Knife{
     /**横坐标 */
     private knife_X:number;
@@ -65,6 +66,7 @@ import Tool from "../Tool/Tool";
         this.sp.width = this.knife.width;
         this.sp.height = this.sp.height; 
         this.sp.visible=true;
+        this.sp.zOrder= GameConfig.ZORDER_KNIFE;
         this.sp.pos(x,y);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
         this.knife.skin = "gameView/"+style+".png";

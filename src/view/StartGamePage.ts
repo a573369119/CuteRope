@@ -30,10 +30,15 @@ export default class StartGame extends ui.StartGameUI{
     {
         switch(e.target)
         {
-            case this.btn_StartGame : Laya.Scene.open("Select.scene");break;
+            case this.btn_StartGame : Laya.Scene.open("Select.scene",true,undefined,Laya.Handler.create(this,this.onOpen));break;
             case this.btn_Imgs : break;
             case this.btn_About : break;
         }
+    }
+
+    private onOpen() : void
+    {
+        this.destroy();
     }
 
 }

@@ -222,13 +222,14 @@ export default class Spider{
     public monsterAction(aName:string,isLoop?:boolean) : void
     {
         if(!isLoop) isLoop=false;
+        this.ani.interval = 100;
         this.ani.loadImages(this.aniUrls(aName,this.getAniLength(aName)));
         this.ani.play(0,isLoop);
         this.img.visible = false;
         this.ani.visible = true;
         // this.sp.visible = false;
     } 
-    /**
+    /**njbg
      * 创建一组动画的url数组（美术资源地址数组）
      * @param aniName  动作的名称，用于生成url
      * @param length   动画最后一帧的索引值，

@@ -55,6 +55,8 @@ export default class Tool{
             }else if(cos>0&&sin<=0){
                 rotation= 90-180/Math.PI*Math.acos(cos);
             }
+            if(y > Y) rotation += 180;
             return rotation;
     }
+
 }

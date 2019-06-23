@@ -27,11 +27,19 @@ export default class RoundPage extends Laya.Scene{
     
     onOpened(arr) : void
     {
+        console.log(this.arr_Card);
         this.quarterIndex = arr[0];
         this.boxIndex = arr[1];
-        this.arr_Card = new Array<ui.SelectRound.RoundItemUI>(); 
-        this.shopDoor = new ui.topLeftUI();
-        this.scene.addChild(this.shopDoor);
+        this.arr_Card = Laya.Pool.getItem("arr_Card");
+
+        if(!this.arr_Card)this.arr_Card = new Array<ui.SelectRound.RoundItemUI>(); 
+        
+        this.shopDoor = Laya.Pool.getItem("shopDoor");
+        if(!this.shopDoor)
+        {
+            this.shopDoor = new ui.topLeftUI();
+            this.scene.addChild(this.shopDoor);
+        }
         this.shopDoor.x = 0 ;
         this.shopDoor.y = 0;
         let skins = Laya.WeakObject.I.get("boxSkin");
@@ -93,27 +101,39 @@ export default class RoundPage extends Laya.Scene{
 
     private onExit() : void
     {
-        Laya.Scene.open("SelectBox/SelectBox.scene",true,this.quarterIndex);
+        Laya.Scene.open("SelectBox/SelectBox.scene",true,this.quarterIndex,Laya.Handler.create(this,this.onOpen));
+    }
+
+    
+
+    private onOpen() : void
+    {
+        this.destroy();
     }
 
     /**事件处理 */
     private onClick(index) : void
     {
-        Laya.Scene.open("GameView/GameBackground.scene",true,[this.quarterIndex,this.boxIndex,index]);
+        // this.autoDestroyAtClosed = true;
+        Laya.Scene.open("GameView/GameBackground.scene",false,[this.quarterIndex,this.boxIndex,index],Laya.Handler.create(this,this.onOpen));
+        
+        // console.log(Laya.stage);
     }
+
 
 
     /**UI创建 */
     private createUI() : void
     {
         let card : ui.SelectRound.RoundItemUI;
-
-        for(let i=0 ; i<25; i++)
-        {
-            card = new ui.SelectRound.RoundItemUI();
-            this.scene.addChild(card);
-            this.arr_Card.push(card);
-        } 
+        if(this.arr_Card.length <= 0){
+            for(let i=0 ; i<25; i++)
+            {
+                card = new ui.SelectRound.RoundItemUI();
+                this.scene.addChild(card);
+                this.arr_Card.push(card);
+            } 
+        }
         this.shopDialog = Laya.WeakObject.I.get("dialog");
         
     }
@@ -215,4 +235,13 @@ export default class RoundPage extends Laya.Scene{
                this.arr_Card[index].img_Count2.x = 20;                  
         }
     }   
+
+    /**销毁 */
+    private recover() : void
+    {
+        Laya.Pool.recover("arr_Card",this.arr_Card);
+        Laya.Pool.recover("shopDoor",this.shopDoor);
+        Laya.Pool.recover("shopDialog",this.shopDialog);
+        
+    } 
 }

@@ -59,6 +59,7 @@ export default class Candy{
         this.candy_AddBody();
         this.candy_AddColider();        
         this.candy_AddCom();
+        this.createCandyApart();
         this.set("nog");
 
     }
@@ -379,18 +380,18 @@ export default class Candy{
         this.arr_Sp = [];
         this.arr_Colider = [];
         /**----------------糖果碎片--------- */
-        if(this.arr_ApartSp!=[]){
-            this.arr_ApartSp.forEach(apartsp=>{
-                apartsp.removeSelf();
-                let body = apartsp.getComponents(Laya.RigidBody);
-                if(body && body[0]) 
-                {
-                    body[0].destroy();
-                }
-            });
-            this.arr_ApartSp=[];
-            this.arr_ApartBody=[];
-        }
+        // if(this.arr_ApartSp!=[]){
+        //     this.arr_ApartSp.forEach(apartsp=>{
+        //         apartsp.removeSelf();
+        //         let body = apartsp.getComponents(Laya.RigidBody);
+        //         if(body && body[0]) 
+        //         {
+        //             body[0].destroy();
+        //         }    
+        //     });
+        //     this.arr_ApartSp=[];
+        //     this.arr_ApartBody=[];
+        // }
         
     }
 
@@ -404,7 +405,7 @@ export default class Candy{
                 sprite.loadImage("gameView/becomeApart"+(i+1)+".png");
                 sprite.pivot(sprite.width/2,sprite.height/2);
                 sprite.visible=false;
-                sprite.zOrder=3;
+                sprite.zOrder = GameConfig.ZORDER_CANDY;
                 this.view.addChild(sprite);
                 this.arr_ApartSp.push(sprite);
             //刚体

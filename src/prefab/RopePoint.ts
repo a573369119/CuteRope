@@ -53,9 +53,10 @@ export default class RopePoint{
     ropePoint_CreateSprite(x,y,rotation):void{
 		this.sp=new Laya.Sprite();
 		this.sp.width = GameConfig.ROPE_WIDTH;
+		this.sp.zOrder = GameConfig.ZORDER_ROPEPOINT;
 		this.sp.height = 12;
+		
 		if(this.index != 0)this.sp.mouseThrough = true;
-		// this.sp.zOrder = 10;
 		// this.sp.loadImage("gameView/candy.png");
 		if(rotation)
 		{

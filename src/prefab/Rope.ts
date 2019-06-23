@@ -35,6 +35,8 @@ export default class Rope{
     public motorSp : Laya.Sprite;
     /**糖果 */
     public candy : Candy;
+    /**接近糖果的速度 */
+    public speed : number;
 
     constructor(view){
         this.isCuted = false;
@@ -64,6 +66,11 @@ export default class Rope{
         this.hookStyle = hookStyle;
         this.createMultiRopePoint(hookX,HookY,ropeLength,hookStyle);
     }
+    /**设置速度 */
+    public setSpeed(speed) : void
+    {
+        this.speed = speed;
+    }
     //自动连接绳子
     initRopeHook2(hookX,hookY,candyX,candyY,hookStyle?) : void
     {
@@ -89,11 +96,11 @@ export default class Rope{
         let x_Add = GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,candyX,candyY,"cos"); 
         let y_Add = GameConfig.ROPE_DIC*this.rotationDeal(hookX,hookY,candyX,candyY,"sin"); 
         for(let i=0;i<count+1;i++){
-            let ropePoint : RopePoint ;
+            let ropePoint : RopePoint ;//= Laya.Pool.getItem("ropePoint");
             if(i<=0){
                 ropePoint=new RopePoint(hookX+x_Add*i,hookY+i*y_Add,"kinematic",i,null,this.rotateRopePoint_2(hookX,hookY,candyX,candyY));
+                ropePoint.addView(this.ropeView);                
                 // this.rotateRopePoint_2(ropePoint);
-                ropePoint.addView(this.ropeView);
             }
             else
             {
@@ -104,8 +111,8 @@ export default class Rope{
                 }
                 //**添加Joint */
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
+                ropePoint.addView(this.ropeView);                
                 // this.rotateRopePoint_2(ropePoint);
-                ropePoint.addView(this.ropeView);
             }
             if(ropePoint.sp.getComponent(Laya.RopeJoint))
             {
@@ -150,37 +157,10 @@ export default class Rope{
         let y_Add=ropeDic*this.rotationDeal(hookX,hookY,hookX,hookY + ropeLength,"sin");
         // if(disPer >= 60) {console.log("距离不够");}   
         for(let i=0;i<disPer+1;i++){
-            let ropePoint : RopePoint ;
+            let ropePoint : RopePoint ;//= Laya.Pool.getItem("ropePoint");
             if(i<=0){
                 ropePoint=new RopePoint(hookX,hookY,"kinematic",i,hookStyle);
-                ropePoint.addView(this.ropeView);
-                // if(this.canRotate)
-                // {
-                //     this.motorSp = new Laya.Sprite();
-                //     this.motorSp.width = 20;
-                //     this.motorSp.height = 20;
-                //     this.motorSp.pivot(10,10);
-                //     this.motorSp.x = hookX;
-                //     this.motorSp.y = hookY;
-                //     let body = new Laya.RigidBody();
-                //     body.type="kinematic";
-                //     // ropePoint.body.type = "dynamic";
-                //     // body.angularVelocity = 2;
-                //     body.allowSleep = false; 
-                //     body.allowRotation = true;
-                //     this.motorSp.addComponentIntance(body);
-                //     let colider = new Laya.CircleCollider();
-                //     colider.isSensor = false;
-                //     colider.radius = 15;
-                //     this.motorSp.addComponentIntance(colider);
-                //     let motorJoint = new Laya.RevoluteJoint();
-                //     // motorJoint.collideConnected = true;
-                //     motorJoint.otherBody = ropePoint.body;
-                //     motorJoint.selfBody = body;
-                //     motorJoint.collideConnected = false;
-                //     this.motorSp.addComponentIntance(motorJoint);
-                //     this.ropeView.addChild(this.motorSp);
-                // }
+                ropePoint.addView(this.ropeView);                
             }
             else
             {
@@ -191,7 +171,7 @@ export default class Rope{
                 }
                 ropePoint.ropePoint_AddJoint(this.ropePointsArray[i-1]);
                 ropePoint.addView(this.ropeView);
-                this.view.addChild(ropePoint.sp);
+                // this.view.addChild(ropePoint.sp);
             }
             if(ropePoint.sp.getComponent(Laya.RopeJoint))
             {
@@ -365,8 +345,9 @@ export default class Rope{
         Laya.timer.clear(this,this.rotationChange);
         Laya.timer.clear(this,this.directionChange);
         this.isCuted = true;
+        // this.ropePointsArray[this.ropePointsArray.length-1].sp.getComponent(Laya.BoxCollider)[0].density = GameConfig.ROPE_POINT_DENSITY;
         this.ropePointsArray.forEach(point => {
-            point.sp.getComponents(Laya.BoxCollider)[0].density = 1;
+            point.sp.getComponents(Laya.BoxCollider)[0].density =  GameConfig.ROPE_POINT_DENSITY;
         });
         
         Laya.timer.loop(16,this,this.pointDestroy);
@@ -404,23 +385,22 @@ export default class Rope{
         Laya.timer.clear(this,this.rotationChange);
         Laya.timer.clear(this,this.directionChange);        
         this.ropePointsArray.forEach(point => {
-            point.sp.removeSelf();
             let body = point.sp.getComponents(Laya.RigidBody);
             let joint = point.sp.getComponents(Laya.RevoluteJoint);
-            let joint2 = point.sp.getComponents(Laya.RopeJoint);
-            let colider = point.sp.getComponents(Laya.BoxCollider);
-            if(body && body[0])
-            {
-                body[0].destroy();
-            }
+            let joint2 = point.sp.getComponents(Laya.RopeJoint);   
             if(joint && joint[0])
             {
                 joint[0].destroy();
             }
             if(joint2 && joint2[0])
             {
-                joint2[0].destroy(0);
+                joint2[0].destroy();
             }
+            if(body && body[0])
+            {
+                body[0].destroy();
+            }
+            point.sp.removeSelf();
         });  
         this.ropePointsArray = [];
         this.jointsArray = [];

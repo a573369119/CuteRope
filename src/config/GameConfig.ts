@@ -17,7 +17,7 @@ export default class GameConfig{
     public static ROPE_WIDTH : number = 6;
     ////////////////////////////////弹力绳子
     /**绳子生成像素间隔*/
-    public static ROPE_JUMP_DIC : number = 8;
+    public static ROPE_JUMP_DIC : number = 6;
     /**绳子节点转动阻力 */
     public static ROPE_JUMP__POINT_ANGULARDAMPING : number = 100000;
     /**绳子线性阻力 */
@@ -25,12 +25,12 @@ export default class GameConfig{
     /**绳子密度 */
     public static ROPE_JUMP__POINT_DENSITY : number =  0.1;
     /**绳子自动靠近糖果速度 */
-    public static ROPE_JUMP__TO_CANDY_SPEED : number = 400;
+    public static ROPE_JUMP__TO_CANDY_SPEED : number = 25;
     ///////////////////////////////糖果
     /**糖果转动阻力 */
     public static CANDY_ANGULARDAMPING : number = 0;
     /**糖果线性转动阻力 */
-    public static CANDY_LINEARDAMPING : number = 0.08;
+    public static CANDY_LINEARDAMPING : number = 0.1;
     /**糖果密度 */
     public static CANDY_DENSITY : number = 200;
     /**糖果重力洗漱 */
@@ -76,14 +76,27 @@ export default class GameConfig{
     public static WOLDE_G = 14;
     /////////////////////////////////////////////层级配置
     /**hook顶部 */
-    public static ZORDER_HOOK_TOP = 3;
+    public static ZORDER_HOOK_TOP = 50;
     /**ropePoint */
-    public static ZORDER_ROPEPOINT = 2;
+    public static ZORDER_ROPEPOINT = 49;
     /**糖果 */
     public static ZORDER_CANDY = 50;
-    /**气泡 */
-    public static ZORDER_BALLON = 51;
+    /**CD */
+    public static ZORDER_CD =  10;
+    /**拖尾 */
+    public static ZORDER_TAIL = 100;
+    /**刺尖 */
+    public static ZORDER_KNIFE = 11;
+    /**泡泡 */
+    public static ZORDER_BALLOON = 51;
+    /**弹力鼓 */
+    public static ZORDER_BOUNCEDRUM = 11;
+    /**云朵 */
+    public static ZORDER_CLOUD = 52;
     /////////////////////////////////////////////////坐标差记录
     public static CaX = 0;
     public static CaY = 0;
+    //////////////////////////////////////////////////
+    /**气泡空气摩擦因素 */
+    public static BALLOON_F = 1;
 }

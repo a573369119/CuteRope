@@ -23,6 +23,9 @@ import Dic from "../Tool/dic";
     public Rotation:number;
     /**是否播放动画2_1 */
     public isPlayAnim2_1:boolean;
+    /**坐标差 */
+    public posChange : any;
+    
     constructor(view){
         this.view=view;
     }
@@ -35,7 +38,9 @@ import Dic from "../Tool/dic";
         this.forceball_ApplyForceAnim(data.forceball_X,data.forceball_Y,data.rotation);
         this.Rotation=data.rotation; 
         this.isPlayAnim2_1=true;
+        this.posChange = {};
     }
+
 
     //更新状态
     update(data):void{
@@ -49,17 +54,23 @@ import Dic from "../Tool/dic";
         this.anim1.visible=true;
         this.anim1.pos(data.forceball_X,data.forceball_Y);
         this.isPlayAnim2_1=true;
+        this.posChange = {};
     }
 
     //创建推力球精灵,作为点击模板
     forceball_CreateSprite(x,y,rotation):void{
-        this.sp=new Laya.Sprite();
-        this.sp.loadImage("gameView/forceballBg.png");
+        if(!this.sp)
+        {
+            this.sp=new Laya.Sprite();
+            this.sp.loadImage("gameView/forceballBg.png");
+            
+        }
+        this.sp.removeSelf();
+        this.view.addChild(this.sp);
         this.sp.pos(x,y);
         this.sp.pivot(this.sp.width/2,this.sp.height/2);
         this.sp.visible=true;
-        this.view.addChild(this.sp);
-        console.log(this.sp.pivotX+"牛逼"+this.sp.height);
+        // console.log(this.sp.pivotX+"牛逼"+this.sp.height);
 
         this.spRect = new Laya.Sprite();
         this.spRect.graphics.drawRect(0,-400,this.sp.width,400,"#a24");
@@ -70,17 +81,21 @@ import Dic from "../Tool/dic";
     
     //创建推力球动画
     forceball_ApplyForceAnim(x,y,rotation):void{
-        this.anim1=new Laya.Animation();
+        if(!this.anim1)
+            this.anim1=new Laya.Animation();
         this.anim1.pos(x,y);
         this.anim1.loadAnimation("GameView/ani/ForceBall.ani");
         this.anim1.rotation=rotation;
         this.anim1.visible=true;
+        this.anim1.removeSelf();
         this.view.addChild(this.anim1);
-        this.anim2_1=new Laya.Animation();
+        if(!this.anim2_1)
+            this.anim2_1=new Laya.Animation();
         this.anim2_1.loadAnimation("GameView/ani/ForceBalloon1.ani");
         this.anim2_1.visible=true;
         this.anim1.addChild(this.anim2_1);
-        this.anim2_2=new Laya.Animation();
+        if(!this.anim2_2)
+            this.anim2_2=new Laya.Animation();
         this.anim2_2.loadAnimation("GameView/ani/ForceBalloon2.ani");
         this.anim2_2.visible=true;
         this.anim1.addChild(this.anim2_2);
@@ -100,6 +115,17 @@ import Dic from "../Tool/dic";
         if(candy2) this.publicApplyForce(candy2,balloonArray,2);
     }
 
+    public setPosChange(x,y) : void
+    {
+        this.posChange.x = x;
+        this.posChange.y = y;
+    }
+
+    public setRotation(rotation) : void
+    {
+        this.Rotation += rotation;
+    }
+
     //**施加力 1 是主糖果 2是副糖果*/
     private publicApplyForce(candy:Candy,balloonArray,index) : void
     {
@@ -107,11 +133,23 @@ import Dic from "../Tool/dic";
         let isApplyForce = this.isApplyForce;
         if(index == 2) isApplyForce = this.isApplyForce_candy2;
         if(isApplyForce){
-            let dic = Dic.countDic_Object({x:this.sp.x,y:this.sp.y},{x:candy.arr_Sp[0].x,y:candy.arr_Sp[0].y});
+            let xChange = 0;
+            let yChange = 0;
+            if(this.posChange.x && this.posChange.y)
+            {
+                xChange = this.posChange.x;
+                yChange = this.posChange.y;
+            }
+            let dic = Dic.countDic_Object({x:this.sp.x + xChange,y:this.sp.y + yChange},{x:candy.arr_Sp[0].x,y:candy.arr_Sp[0].y});
+            console.log(dic + "------------------------------------------");
             dic = (dic+50) / 450;
+            console.log("力度大小" + (1-dic)*100 + "%");
+            console.log("candy x:" + candy.arr_Sp[0].x + "     y:" + candy.arr_Sp[0].y);
+            console.log("forceball x:" + this.sp.x + "   y:" + this.sp.y);
             for(let i=0;i<candy.arr_Body.length;i++){
                 let Vx=Math.sin(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].x-this.sp.x)*(1200*(1-dic)*1.5);
                 let Vy=-Math.cos(this.Rotation/180*Math.PI)/Math.abs(candy.arr_Sp[0].y-this.sp.y)*(1200*(1-dic)*1.5);
+                
                 let currVx=candy.arr_Body[0].linearVelocity.x;
                 let currVy=candy.arr_Body[0].linearVelocity.y;
                 candy.arr_Body[i].setVelocity({x:Vx+currVx,y:Vy+currVy});
@@ -122,6 +160,11 @@ import Dic from "../Tool/dic";
                         }
                     }
                     
+                }
+                //测试
+                if(i==0)
+                {
+                    console.log("vx: " + Vx + "     vy:  " + Vy);
                 }
             }
         }
@@ -139,6 +182,7 @@ import Dic from "../Tool/dic";
         this.sp.x = 100000;
         this.anim1.visible=false;
         this.anim1.x=100000;
+        this.posChange = {};        
     }
 
 }

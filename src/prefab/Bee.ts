@@ -127,36 +127,17 @@ export default class Bee{
         this.sp.x -= 2.5*cos*this.speed;
         this.sp.y -= 2.5*sin*this.speed;
 
-        //影响hook
-        if(this.arr_RopePoint.length>0)
+        
+        for(let i=0; i<this.arr_Hook.length;i++)
         {
-            for(let h = 0; h<this.arr_RopePoint.length; h++)
+            if(i == this.hookIndex)
             {
-                ropePoint = this.arr_RopePoint[h];
-                for(let i=0; i<this.arr_Hook.length;i++)
-                {
-                    if(i == this.hookIndex)
-                    {
-                        if(this.arr_Hook[i].ropePoint){ropePoint = this.arr_Hook[i].ropePoint}
-                        this.arr_Hook[i].followBee({x:this.sp.x,y:this.sp.y},ropePoint);
-                    }
-                }
-            }
-        }
-        else
-        {
-            for(let i=0; i<this.arr_Hook.length;i++)
-            {
-                if(i == this.hookIndex)
-                {
-                    if(this.arr_Hook[i].ropePoint){ropePoint = this.arr_Hook[i].ropePoint}
-                    this.arr_Hook[i].followBee({x:this.sp.x,y:this.sp.y},ropePoint);
-                }
+                this.arr_Hook[i].followBee({x:this.sp.x,y:this.sp.y});
             }
         }
 
         if(Dic.countDic_Object(nextPos,{x:this.sp.x,y:this.sp.y})<5)
-        {
+        {   
             this.sp.x = nextPos.x;
             this.sp.y = nextPos.y;
             this.remRoad += this.dir;//自加

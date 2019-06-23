@@ -1,4 +1,5 @@
 import {ui} from "../ui/layaMaxUI";
+import { PlayerData } from "./Config/PlayerData";
  /**
  * 选择界面
  */
@@ -68,13 +69,22 @@ export default class SelectPage extends ui.SelectUI{
     /*退出 */
     private onExit() : void
     {
-        Laya.Scene.open("StartGame.scene",true);        
+        Laya.Scene.open("StartGame.scene",true,undefined,Laya.Handler.create(this,this.onOpen));      
+          
     }
      /**按钮事件 进入季度关卡 */
      private onSelectBoxStart(index) : void
      {
         console.log("进入第：" + index + "季");
          //进入选择关卡
-         Laya.Scene.open("SelectBox/SelectBox.scene",true,index);
-     }
+         if(Laya.WeakObject.I.get(index).selectLimit <= PlayerData.ins.starNum)
+            Laya.Scene.open("SelectBox/SelectBox.scene",true,index,Laya.Handler.create(this,this.onOpen));
+         else 
+            alert("星星不够，需要" + Laya.WeakObject.I.get(index).selectLimit + "颗！");    
+    }
+
+    private onOpen() : void
+    {
+        this.destroy();
+    }
 }

@@ -1,6 +1,7 @@
 import GameConfig from "../config/GameConfig";
 import RopePoint from "./RopePoint";
 import Tool from "../Tool/Tool";
+import Dic from "../Tool/dic";
 
 export default class Hook{
     /**横坐标 */
@@ -39,6 +40,7 @@ export default class Hook{
     public isDown : boolean;
     /**绳子第一个节点*/
     public ropePoint : RopePoint;
+    public arr_ropePoint : Array<RopePoint>;
     /**鼠标x，y记录 */
     private rem_x : number;
     private rem_y : number;
@@ -60,6 +62,7 @@ export default class Hook{
         this.canRotate = canRotate;
         this.isDown = false;
         this.isCreate = false;     
+        this.arr_ropePoint = [];
         this.setValue(data,size);
         this.hook_CreateSprite(data.hook_X,data.hook_Y,data.style);        
         if(data.style == "hook2")/////////没有图片
@@ -71,6 +74,7 @@ export default class Hook{
     
     //更新状态
     update(data,canRotate,size?):void{
+        
         this.canRotate = canRotate;
         this.isCreate = false; 
         this.sp.visible = true;
@@ -101,6 +105,7 @@ export default class Hook{
         }
         this.sp.pos(data.hook_X,data.hook_Y);
         this.createSilder();
+
     }
     //创建圈
     private createSpp() : void
@@ -178,6 +183,7 @@ export default class Hook{
             this.rotateSp.size(100,100);
             this.rotateSp.pivot(this.imgTop.width/2 + 30,this.imgTop.height/2 + 29);
             this.rotateSp.pos(0,+4);
+            this.rotateSp.zOrder = GameConfig.ZORDER_HOOK_TOP;
             ///imgTop setting
             this.imgTopRotate.visible = true;
             this.imgTopRotate.skin = "gameView/rotateHook.png";
@@ -279,61 +285,73 @@ export default class Hook{
             this.imgTop.y -= (this.length - this.arr_img[0].width*2) * (this.percent);
         }
     }
-    /**设置绑定绳子 */
+    /**设置滑动条绑定绳子 */
     public setRopePoint(ropePoint) : void
     {
-        this.ropePoint = ropePoint;
+        this.arr_ropePoint.push(ropePoint);
         if(this.percent !== undefined) Laya.timer.loop(1,this,this.followHook);
+    }
+
+    /**绑定绳子 */
+    public setHookRopePoint(ropePoint) : void
+    {
+        this.ropePoint = ropePoint;
+        this.arr_ropePoint.push(ropePoint);
     }
 
     private followHook() : void
     {
-        if(this.ropePoint.sp.alpha < 1)
+        for(let i=0;i<this.arr_ropePoint.length;i++)
         {
-            Laya.timer.clear(this,this.followHook);
-        }
-        // this.ropePoint.sp.x = this.imgTop.x;
-        // this.ropePoint.sp.y = this.imgTop.y;
-        if(this.rotation == 0)
-        {
-            // console.log(Math.abs(this.ropePoint.sp.x - this.imgTop.x));
-            if(Math.abs(this.ropePoint.sp.x - this.imgTop.x) >5)
+            let ropePoint = this.arr_ropePoint[i];
+            if(ropePoint.sp.alpha < 1)
             {
-                let dic = this.ropePoint.sp.x - this.imgTop.x;
-                if(dic > 0)
-                {//左
-                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:-12,y:0};
+                Laya.timer.clear(this,this.followHook);
+            }
+            // this.ropePoint.sp.x = this.imgTop.x;
+            // this.ropePoint.sp.y = this.imgTop.y;
+            if(this.rotation == 0)
+            {
+                // console.log(Math.abs(this.ropePoint.sp.x - this.imgTop.x));
+                if(Math.abs(ropePoint.sp.x - this.imgTop.x) >5)
+                {
+                    let dic = ropePoint.sp.x - this.imgTop.x;
+                    if(dic > 0)
+                    {//左
+                        ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:-12,y:0};
+                    }
+                    else
+                    {//右
+                        ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:12,y:0};
+                    }
                 }
                 else
-                {//右
-                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:12,y:0};
-                }
-            }
-            else
-            {
-                this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:0};
+                {
+                    ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:0};
 
-            }
-        }
-        else
-        {
-            if(Math.abs(this.ropePoint.sp.y - this.imgTop.y) >5)
-            {
-                let dic = this.ropePoint.sp.y - this.imgTop.y;
-                if(dic > 0)
-                {//上
-                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:-12};
-                }
-                else
-                {//下
-                    this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:12};
                 }
             }
             else
             {
-                this.ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:0};
+                if(Math.abs(ropePoint.sp.y - this.imgTop.y) >5)
+                {
+                    let dic = ropePoint.sp.y - this.imgTop.y;
+                    if(dic > 0)
+                    {//上
+                        ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:-12};
+                    }
+                    else
+                    {//下
+                        ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:12};
+                    }
+                }
+                else
+                {
+                    ropePoint.sp.getComponents(Laya.RigidBody)[0].linearVelocity = {x:0,y:0};
+                }
             }
         }
+        
     }
 
     /**添加事件 */
@@ -341,7 +359,7 @@ export default class Hook{
     {
         this.imgTop.on(Laya.Event.MOUSE_DOWN,this,this.imgDown);
         Laya.stage.on(Laya.Event.MOUSE_MOVE,this,this.followMouse);
-        Laya.stage.on(Laya.Event.MOUSE_UP,this,this.mouseUp)
+        Laya.stage.on(Laya.Event.MOUSE_UP,this,this.mouseUp);
     }
 
     /**跟随鼠标 */
@@ -409,6 +427,10 @@ export default class Hook{
             });
         Laya.timer.clear(this,this.followMouse);
         Laya.timer.clear(this,this.followHook);
+        this.imgTop.off(Laya.Event.MOUSE_DOWN,this,this.imgDown);
+        Laya.stage.off(Laya.Event.MOUSE_MOVE,this,this.followMouse);
+        Laya.stage.off(Laya.Event.MOUSE_UP,this,this.mouseUp);
+        this.arr_ropePoint = [];
     }
 
     /**hook旋转逻辑 鼠标x y*/
@@ -440,12 +462,6 @@ export default class Hook{
             this.rotateHook(num*rotation);
             this.countRotation += num*rotation;
         }
-        // else 
-        // {
-        //     x = x - this.hook_X;
-        //     y = y - this.hook_Y;
-        // }
-        // console.log(Math.abs(this.countRotation));
         if(Math.abs(this.countRotation) > 30)
         {
             let count = this.countRotation;
@@ -493,21 +509,23 @@ export default class Hook{
 
 
     ////////////////////////////////////BEE
-    public followBee(nextPos,ropePoint) : void
+    public followBee(nextPos,rotation) : void
     {
         this.sp.x = nextPos.x;
         this.sp.y = nextPos.y;
         this.imgTop.x = nextPos.x;
         this.imgTop.y = nextPos.y;
-            // ropePoint.sp.x = nextPos.x;
-            // ropePoint.sp.y = nextPos.y;
-        if(ropePoint)
-        {
-            if(ropePoint.body)
+        // ropePoint.sp.x = nextPos.x;
+        // ropePoint.sp.y = nextPos.y;
+        this.arr_ropePoint.forEach(ropePoint => {
+            if(ropePoint)
             {
-                this.ropeFollowBee(nextPos,ropePoint);
+                if(ropePoint.body)
+                {
+                    this.ropeFollowBee(nextPos,ropePoint);
+                }
             }
-        }
+        });
     }
 
     private ropeFollowBee(nextPos,ropePoint) : void
@@ -515,9 +533,72 @@ export default class Hook{
         let currentPos = {x:ropePoint.sp.x,y:ropePoint.sp.y};
         let cos = Tool.rotationDeal(nextPos.x,nextPos.y,currentPos.x,currentPos.y,"cos");
         let sin = Tool.rotationDeal(nextPos.x,nextPos.y,currentPos.x,currentPos.y,"sin");
-        // let body = ropePoint.sp.getComponents(Laya.RigidBody)[0];
-        
-        (ropePoint.body as Laya.RigidBody).linearVelocity = {x:5*-cos,y:5*-sin};
+        if(Dic.countDic_Object(nextPos,ropePoint) < 10) 
+        {
+            (ropePoint.body as Laya.RigidBody).linearVelocity = {x:0,y:0};
+            return;
+        }
+        (ropePoint.body as Laya.RigidBody).linearVelocity = {x:6.5*-cos,y:6.5*-sin};
     }
+
+
+    public toHook() : void
+    {
+        Laya.timer.loop(16,this,this.toHookPos);
+    }
+
+    private toHookPos() : void
+    {
+        this.arr_ropePoint.forEach(ropePoint => {
+            if(ropePoint)
+            {
+                if(ropePoint.body)
+                {
+                    let currentPos = {x:ropePoint.sp.x,y:ropePoint.sp.y};
+                    let cos = Tool.rotationDeal(this.sp.x,this.sp.y,currentPos.x,currentPos.y,"cos");
+                    let sin = Tool.rotationDeal(this.sp.x,this.sp.y,currentPos.x,currentPos.y,"sin");
+                    if(Dic.countDic_Object(currentPos,this.sp) < 5)
+                    {
+                        Laya.timer.clear(this,this.toHookPos);
+                        ropePoint.body.linearVelocity = {x:0,y:0};
+                    }
+                    else
+                    {
+                        ropePoint.body.linearVelocity = {x:4*-cos,y:4*-sin};
+                    }
+                }
+            }
+        });
+    }
+
+
+/////////////////////////////////////////////////////cd
+    public removAddSelf(sp) : void
+    {
+        this.sp.removeSelf();
+        sp.addChild(this.sp);
+        this.sp.x -= sp.pivotX;
+        this.sp.y -= sp.pivotY;
+        this.imgTop.removeSelf();
+        sp.addChild(this.imgTop);
+        this.imgTop.x -= sp.pivotX;
+        this.imgTop.y -= sp.pivotY;
+    }
+    /**回 */
+    public getSelf(sp) : void
+    {
+        this.sp.removeSelf();
+        this.sp.x += sp.pivotX;
+        this.sp.y += sp.pivotY;
+        this.view.addChild(this.sp);
+        this.imgTop.removeSelf();
+        this.imgTop.x += sp.pivotX;
+        this.imgTop.y += sp.pivotY;
+        this.view.addChild(this.imgTop);
+
+    }
+
+
+
 
 }

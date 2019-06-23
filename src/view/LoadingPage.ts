@@ -27,6 +27,8 @@ export default class LoadingPage extends ui.LoadingUI{
             {url:"res/atlas/gameView/starTime.atlas"},
             {url:"res/atlas/gameView/monster.atlas"},
             {url:"res/atlas/gameView/Bee.atlas"},
+            {url:"res/atlas/gameView/cD.atlas"},
+            {url:"res/atlas/gameView/cloud.atlas"},
             //大图加载
             {url:"unpackage/startGameBg.jpg"},
             {url:"unpackage/cutRope.png"},
@@ -39,7 +41,12 @@ export default class LoadingPage extends ui.LoadingUI{
     private onLoad() : void
     {
         this.lab_Progress.text = "加载完成，进入游戏";
-        Laya.Scene.open("StartGame.scene");
+        Laya.Scene.open("StartGame.scene",true,undefined,Laya.Handler.create(this,this.onOpen));
+    }
+
+    private onOpen() : void
+    {
+        this.destroy();
     }
 
     private onPro(pro,e) : void

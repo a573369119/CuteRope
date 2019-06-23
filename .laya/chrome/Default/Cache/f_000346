@@ -1,0 +1,1320 @@
+<!doctype html>
+<html class="no-js">
+<head>
+	<meta charset="utf-8">
+	<meta name="baidu-site-verification" content="O5DO1n0DYd" />
+	<meta name="google-site-verification" content="JpblxCnu30QFTXwwVV3BFBDP9ObDXUOXlhFWiVIYsOo" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="&lt;code&gt;HTTP消息头&lt;/code&gt;是指，在超文本传输协议（ Hypertext Transfer Protocol ，HTTP）的请求和响应消息中，协议头部分的那些组件。HTTP消息头用来准确描述正在获取的资源、服务器或者客户端的行为，定义了HTTP事务中的具体操作参数。" />
+	<title>HTTP消息头（HTTP headers）－常用的HTTP请求头与响应头 - IT笔录</title>
+	<link rel="canonical" href="//itbilu.com/other/relate/EJ3fKUwUx.html"/>
+	<link rel="icon" href="/img/logo_32X32.ico" type="image/x-icon" />
+	<link href="//cdn.itbilu.com/css/main-min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+     <div class="container">
+          <div class="navbar navbar-default" role="navigation">
+               <div class="navbar-header">
+                    <a class="navbar-brand" href="/"> 
+                         <img src="/img/logo.png" alt="optional logo" height="90" width="90"> 
+                         <span class="logo_title"><strong>IT笔录</strong></span> 
+                         <span class="logo_subtitle">学习，记录，整理</span> 
+                    </a>
+                    <a class="btn btn-navbar btn-default navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="nb_left pull-left"> 
+                              <span class="fa fa-reorder"></span>
+                         </span>
+                         <span class="nb_right pull-right">menu</span>
+                    </a>
+               </div>
+               <div class="collapse navbar-collapse">
+                    <ul class="nav pull-right navbar-nav">
+                         <li ><a href="/">首页</a></li>
+                         <li ><a href="/nodejs">Nodejs</a></li>
+                         <li ><a href="/javascript">javaScript</a></li>
+                         <li ><a href="/database">数据库</a></li>
+                         <li ><a href="/linux">Linux</a></li>
+                         <li  class="active"><a href="/other">其它</a></li>
+                    </ul>
+               </div>
+          </div>
+     </div>
+</header>
+<div class="main">
+<div class="container">
+    <section>
+         <div class="row breadcrumb-row">
+      <ul class="breadcrumb">
+      	
+      		<li><a href="/">首页</a></li>
+      		
+      		    
+                <li><a href="/other">其它</a></li>
+                
+                    <li><a href="/other/relate">相关</a></li>
+                
+              
+      		
+      	
+      </ul>
+ </div>
+         <div class="row">
+              <div id="leftcol" class="col-sm-8 col-md-8">
+                 <h1>HTTP消息头（HTTP headers）－常用的HTTP请求头与响应头</h1>
+                   <p><i class="fa fa-clock-o" title="发布时间"></i>&nbsp;2015年12月26日
+                   &nbsp;&nbsp;
+                   <i class="fa fa-eye" title="阅读"></i>
+                   11768
+                   &nbsp;&nbsp;
+                   <span data-toggle="tooltip" title="声明：本站文章及示例基于特定的环境或软件版本，本站不为因参考本站文章引起的错误或损失负责。在使用前请自行验证是否可用于实际环境。如有纰漏或错误，欢迎进群指正、交流。"><i class="fa fa-exclamation-circle"></i>&nbsp;声明</span>
+                  </p>
+                   <article class="post">
+                        <div class="post_content">
+                        
+                        <p>
+	<br />
+</p>
+<p>
+	<code>HTTP消息头</code>是指，在超文本传输协议（ Hypertext Transfer Protocol ，HTTP）的请求和响应消息中，协议头部分的那些组件。HTTP消息头用来准确描述正在获取的资源、服务器或者客户端的行为，定义了HTTP事务中的具体操作参数。
+</p>
+<ol>
+	<li>
+		<a href="#about">关于HTTP消息头</a> 
+	</li>
+	<li>
+		<a href="#http-request-headers">常用的<code>HTTP请求头</code> </a> 
+	</li>
+	<li>
+		<a href="#http-response-headers">常用的<code>HTTP响应头</code> </a> 
+	</li>
+</ol>
+<p>
+	<br />
+</p>
+<h3 id="about">
+	1. 关于HTTP消息头
+</h3>
+<p>
+	<code>HTTP消息头</code>是在，客户端请求（Request）或服务器响应（Response）时传递的，位请求或响应的第一行，<code>HTTP消息体</code>（请求或响应的内容）是其后传输。<code>HTTP消息头</code>，以明文的字符串格式传送，是以冒号分隔的键/值对，如：<code>Accept-Charset: utf-8</code>，每一个消息头最后以回车符(<code>CR</code>)和换行符(<code>LF</code>)结尾。<code>HTTP消息头</code>结束后，会用一个空白的字段来标识，这样就会出现两个连续的<code>CR-LF</code>。
+</p>
+<p>
+	<code>HTTP消息头</code>由IANA（The Internet Assigned Numbers Authority，互联网数字分配机构）来整理和维护。其标准最早来源于<a href="http://tools.ietf.org/html/rfc4229" target="_blank">RFC 4229</a>。IANA将其整理到了<a href="http://www.iana.org/assignments/message-headers/perm-headers.html" target="_blank">消息头</a>文档，文档中还包括了<a href="http://www.iana.org/assignments/message-headers/message-headers.xhtml#prov-headersl" target="_blank">一些新提出的信息头</a>。
+</p>
+<p>
+	<code>HTTP消息头</code>支持自定义，
+自定义的专用消息头一般会添加<code>'X-'</code>前缀。
+</p>
+<p>
+	<br />
+</p>
+<h3 id="http-request-headers">
+	2. 常用的<code>HTTP请求头</code> 
+</h3>
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>
+				协议头
+			</th>
+			<th>
+				说明
+			</th>
+			<th>
+				示例
+			</th>
+			<th>
+				状态
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				Accept
+			</td>
+			<td>
+				可接受的响应内容类型（<code>Content-Types</code>）。
+			</td>
+			<td>
+				<code>Accept: text/plain</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Accept-Charset
+			</td>
+			<td>
+				可接受的字符集
+			</td>
+			<td>
+				<code>Accept-Charset: utf-8</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="Accept-Encoding">
+			<td>
+				Accept-Encoding
+			</td>
+			<td>
+				可接受的响应内容的编码方式。
+			</td>
+			<td>
+				<code>Accept-Encoding: gzip, deflate</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="Accept-Language">
+			<td>
+				Accept-Language
+			</td>
+			<td>
+				可接受的响应内容语言列表。
+			</td>
+			<td>
+				<code>Accept-Language: en-US</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="Accept-Datetime">
+			<td>
+				Accept-Datetime
+			</td>
+			<td>
+				可接受的按照时间来表示的响应内容版本
+			</td>
+			<td>
+				Accept-Datetime: Sat, 26 Dec 2015 17:30:00 GMT
+			</td>
+			<td>
+				临时
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Authorization
+			</td>
+			<td>
+				用于表示HTTP协议中需要认证资源的认证信息
+			</td>
+			<td>
+				Authorization: Basic OSdjJGRpbjpvcGVuIANlc2SdDE==
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Cache-Control
+			</td>
+			<td>
+				用来指定当前的请求/回复中的，是否使用缓存机制。
+			</td>
+			<td>
+				<code>Cache-Control: no-cache</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Connection
+			</td>
+			<td>
+				客户端（浏览器）想要优先使用的连接类型
+			</td>
+			<td>
+				<code>Connection: keep-alive</code> 
+				<p>
+					<code>Connection: Upgrade</code> 
+				</p>
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Cookie
+			</td>
+			<td>
+				由之前服务器通过<code>Set-Cookie</code>（见下文）设置的一个HTTP协议Cookie
+			</td>
+			<td>
+				<code>Cookie: $Version=1; Skin=new;</code> 
+			</td>
+			<td>
+				固定：标准
+			</td>
+		</tr>
+		<tr id="Content-Length">
+			<td>
+				Content-Length
+			</td>
+			<td>
+				以8进制表示的请求体的长度
+			</td>
+			<td>
+				<code>Content-Length: 348</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Content-MD5
+			</td>
+			<td>
+				请求体的内容的二进制 MD5 散列值（数字签名），以 Base64 编码的结果
+			</td>
+			<td>
+				Content-MD5: oD8dH2sgSW50ZWdyaIEd9D==
+			</td>
+			<td>
+				废弃
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Content-Type
+			</td>
+			<td>
+				请求体的MIME类型 （用于POST和PUT请求中）
+			</td>
+			<td>
+				Content-Type: application/x-www-form-urlencoded
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Date
+			</td>
+			<td>
+				发送该消息的日期和时间（以<a href="http://tools.ietf.org/html/rfc7231#section-7.1.1.1" target="_blank">RFC 7231</a>中定义的"HTTP日期"格式来发送）
+			</td>
+			<td>
+				Date: Dec, 26 Dec 2015 17:30:00 GMT
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Expect
+			</td>
+			<td>
+				表示客户端要求服务器做出特定的行为
+			</td>
+			<td>
+				<code>Expect: 100-continue</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				From
+			</td>
+			<td>
+				发起此请求的用户的邮件地址
+			</td>
+			<td>
+				<code>From: user@itbilu.com</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Host
+			</td>
+			<td>
+				表示服务器的域名以及服务器所监听的端口号。如果所请求的端口是对应的服务的标准端口（80），则端口号可以省略。
+			</td>
+			<td>
+				<code>Host: www.itbilu.com:80</code> 
+				<p>
+					<code>Host: www.itbilu.com</code> 
+				</p>
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				If-Match
+			</td>
+			<td>
+				仅当客户端提供的实体与服务器上对应的实体相匹配时，才进行对应的操作。主要用于像 PUT 这样的方法中，仅当从用户上次更新某个资源后，该资源未被修改的情况下，才更新该资源。
+			</td>
+			<td>
+				If-Match: "9jd00cdj34pss9ejqiw39d82f20d0ikd"
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				If-Modified-Since
+			</td>
+			<td>
+				允许在对应的资源未被修改的情况下返回304未修改
+			</td>
+			<td>
+				If-Modified-Since: Dec, 26 Dec 2015 17:30:00 GMT
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				If-None-Match
+			</td>
+			<td>
+				允许在对应的内容未被修改的情况下返回304未修改（ 304 Not Modified ），参考 超文本传输协议 的实体标记
+			</td>
+			<td>
+				If-None-Match: "9jd00cdj34pss9ejqiw39d82f20d0ikd"
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				If-Range
+			</td>
+			<td>
+				如果该实体未被修改过，则向返回所缺少的那一个或多个部分。否则，返回整个新的实体
+			</td>
+			<td>
+				If-Range: "9jd00cdj34pss9ejqiw39d82f20d0ikd"
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td style="white-space:nowrap;">
+				If-Unmodified-Since
+			</td>
+			<td>
+				仅当该实体自某个特定时间以来未被修改的情况下，才发送回应。
+			</td>
+			<td>
+				If-Unmodified-Since: Dec, 26 Dec 2015 17:30:00 GMT
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Max-Forwards
+			</td>
+			<td>
+				限制该消息可被代理及网关转发的次数。
+			</td>
+			<td>
+				<code>Max-Forwards: 10</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Origin
+			</td>
+			<td>
+				发起一个针对<a href="http://itbilu.com/javascript/js/VkiXuUcC.html" target="_blank">跨域资源共享</a>的请求（该请求要求服务器在响应中加入一个<code>Access-Control-Allow-Origin</code>的消息头，表示访问控制所允许的来源）。
+			</td>
+			<td>
+				<code>Origin: http://www.itbilu.com</code> 
+			</td>
+			<td>
+				固定: 标准
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Pragma
+			</td>
+			<td>
+				与具体的实现相关，这些字段可能在请求/回应链中的任何时候产生。
+			</td>
+			<td>
+				<code>Pragma: no-cache</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Proxy-Authorization
+			</td>
+			<td>
+				用于向代理进行认证的认证信息。
+			</td>
+			<td>
+				Proxy-Authorization: Basic IOoDZRgDOi0vcGVuIHNlNidJi2==
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="range-request-header">
+			<td>
+				Range
+			</td>
+			<td>
+				表示请求某个实体的一部分，字节偏移以0开始。
+			</td>
+			<td>
+				<code>Range: bytes=500-999</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Referer
+			</td>
+			<td>
+				表示浏览器所访问的前一个页面，可以认为是之前访问页面的链接将浏览器带到了当前页面。<code>Referer</code>其实是<code>Referrer</code>这个单词，但RFC制作标准时给拼错了，后来也就将错就错使用<code>Referer</code>了。
+			</td>
+			<td>
+				Referer: http://itbilu.com/nodejs
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="te-request-header">
+			<td>
+				TE
+			</td>
+			<td>
+				浏览器预期接受的传输时的编码方式：可使用回应协议头<code>Transfer-Encoding</code>中的值（还可以使用"trailers"表示数据传输时的分块方式）用来表示浏览器希望在最后一个大小为0的块之后还接收到一些额外的字段。
+			</td>
+			<td>
+				<code>TE: trailers,deflate</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				User-Agent
+			</td>
+			<td>
+				浏览器的身份标识字符串
+			</td>
+			<td>
+				<code>User-Agent: Mozilla/……</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Upgrade
+			</td>
+			<td>
+				要求服务器升级到一个高版本协议。
+			</td>
+			<td>
+				Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Via
+			</td>
+			<td>
+				告诉服务器，这个请求是由哪些代理发出的。
+			</td>
+			<td>
+				Via: 1.0 fred, 1.1 itbilu.com.com (Apache/1.1)
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Warning
+			</td>
+			<td>
+				一个一般性的警告，表示在实体内容体中可能存在错误。
+			</td>
+			<td>
+				Warning: 199 Miscellaneous warning
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<br />
+</p>
+<h3 id="http-response-headers">
+	3. 常用的<code>HTTP响应头</code> 
+</h3>
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>
+				响应头
+			</th>
+			<th>
+				说明
+			</th>
+			<th>
+				示例
+			</th>
+			<th>
+				状态
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				Access-Control-Allow-Origin
+			</td>
+			<td>
+				指定哪些网站可以<code>跨域源资源共享</code> 
+			</td>
+			<td>
+				<code>Access-Control-Allow-Origin: *</code> 
+			</td>
+			<td>
+				临时
+			</td>
+		</tr>
+		<tr id="accept-patch-response-header">
+			<td>
+				Accept-Patch
+			</td>
+			<td>
+				指定服务器所支持的文档补丁格式
+			</td>
+			<td>
+				Accept-Patch: text/example;charset=utf-8
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="accept-ranges-response-header">
+			<td>
+				Accept-Ranges
+			</td>
+			<td>
+				服务器所支持的内容范围
+			</td>
+			<td>
+				<code>Accept-Ranges: bytes</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Age
+			</td>
+			<td>
+				响应对象在代理缓存中存在的时间，以秒为单位
+			</td>
+			<td>
+				<code>Age: 12</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Allow
+			</td>
+			<td>
+				对于特定资源的有效动作;
+			</td>
+			<td>
+				<code>Allow: GET, HEAD</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Cache-Control
+			</td>
+			<td>
+				通知从服务器到客户端内的所有缓存机制，表示它们是否可以缓存这个对象及缓存有效时间。其单位为秒
+			</td>
+			<td>
+				<code>Cache-Control: max-age=3600</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Connection
+			</td>
+			<td>
+				针对该连接所预期的选项
+			</td>
+			<td>
+				<code>Connection: close</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Content-Disposition
+			</td>
+			<td>
+				对已知MIME类型资源的描述，浏览器可以根据这个响应头决定是对返回资源的动作，如：将其下载或是打开。
+			</td>
+			<td>
+				Content-Disposition: attachment; filename="fname.ext"
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Content-Encoding
+			</td>
+			<td>
+				响应资源所使用的编码类型。
+			</td>
+			<td>
+				<code>Content-Encoding: gzip</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Content-Language
+			</td>
+			<td>
+				响就内容所使用的语言
+			</td>
+			<td>
+				<code>Content-Language: zh-cn</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="content-length-response-header">
+			<td>
+				Content-Length
+			</td>
+			<td>
+				响应消息体的长度，用8进制字节表示
+			</td>
+			<td>
+				<code>Content-Length: 348</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Content-Location
+			</td>
+			<td>
+				所返回的数据的一个候选位置
+			</td>
+			<td>
+				<code>Content-Location: /index.htm</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Content-MD5
+			</td>
+			<td>
+				响应内容的二进制 MD5 散列值，以 Base64 方式编码
+			</td>
+			<td>
+				Content-MD5: IDK0iSsgSW50ZWd0DiJUi==
+			</td>
+			<td>
+				已淘汰
+			</td>
+		</tr>
+		<tr id="content-range-response-header">
+			<td>
+				Content-Range
+			</td>
+			<td>
+				如果是响应部分消息，表示属于完整消息的哪个部分
+			</td>
+			<td>
+				Content-Range: bytes 21010-47021/47022
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Content-Type
+			</td>
+			<td>
+				当前内容的<code>MIME</code>类型
+			</td>
+			<td>
+				Content-Type: text/html; charset=utf-8
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Date
+			</td>
+			<td>
+				此条消息被发送时的日期和时间(以<a href="http://tools.ietf.org/html/rfc7231#section-7.1.1.1" target="_blank">RFC 7231</a>中定义的"HTTP日期"格式来表示)
+			</td>
+			<td>
+				Date: Tue, 15 Nov 1994 08:12:31 GMT
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ETag
+			</td>
+			<td>
+				对于某个资源的某个特定版本的一个标识符，通常是一个 消息散列
+			</td>
+			<td>
+				ETag: "737060cd8c284d8af7ad3082f209582d"
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="Expires">
+			<td>
+				Expires
+			</td>
+			<td>
+				指定一个日期/时间，超过该时间则认为此回应已经过期
+			</td>
+			<td>
+				Expires: Thu, 01 Dec 1994 16:00:00 GMT
+			</td>
+			<td>
+				固定: 标准
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Last-Modified
+			</td>
+			<td>
+				所请求的对象的最后修改日期(按照 RFC 7231 中定义的“超文本传输协议日期”格式来表示)
+			</td>
+			<td>
+				Last-Modified: Dec, 26 Dec 2015 17:30:00 GMT
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Link
+			</td>
+			<td>
+				用来表示与另一个资源之间的类型关系，此类型关系是在<a href="https://tools.ietf.org/html/rfc5988" target="_blank">RFC 5988</a>中定义
+			</td>
+			<td>
+				<code>Link: </code>; rel="alternate"
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Location
+			</td>
+			<td>
+				用于在进行重定向，或在创建了某个新资源时使用。
+			</td>
+			<td>
+				Location: http://www.itbilu.com/nodejs
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				P3P
+			</td>
+			<td>
+				P3P策略相关设置
+			</td>
+			<td>
+				P3P: CP="This is not a P3P policy!
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Pragma
+			</td>
+			<td>
+				与具体的实现相关，这些响应头可能在请求/回应链中的不同时候产生不同的效果
+			</td>
+			<td>
+				<code>Pragma: no-cache</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Proxy-Authenticate
+			</td>
+			<td>
+				要求在访问代理时提供身份认证信息。
+			</td>
+			<td>
+				<code>Proxy-Authenticate: Basic</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="PKP">
+			<td>
+				Public-Key-Pins
+			</td>
+			<td>
+				用于防止中间攻击，声明网站认证中传输层安全协议的证书散列值
+			</td>
+			<td>
+				Public-Key-Pins: max-age=2592000; pin-sha256="……";
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="Refresh">
+			<td>
+				Refresh
+			</td>
+			<td>
+				用于重定向，或者当一个新的资源被创建时。默认会在5秒后刷新重定向。
+			</td>
+			<td>
+				Refresh: 5; url=http://itbilu.com
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Retry-After
+			</td>
+			<td>
+				如果某个实体临时不可用，那么此协议头用于告知客户端稍后重试。其值可以是一个特定的时间段(以秒为单位)或一个超文本传输协议日期。
+			</td>
+			<td>
+				<ul>
+					<li>
+						示例1:Retry-After: 120
+					</li>
+					<li>
+						示例2: Retry-After: Dec, 26 Dec 2015 17:30:00 GMT
+					</li>
+				</ul>
+			</td>
+			<td>
+				<p>
+					固定
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Server
+			</td>
+			<td>
+				服务器的名称
+			</td>
+			<td>
+				<code>Server: nginx/1.6.3</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td id="innerlink_set-cookie">
+				Set-Cookie
+			</td>
+			<td>
+				设置<code>HTTP cookie</code> 
+			</td>
+			<td>
+				Set-Cookie: UserID=itbilu; Max-Age=3600; Version=1
+			</td>
+			<td>
+				固定: 标准
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Status
+			</td>
+			<td>
+				通用网关接口的响应头字段，用来说明当前HTTP连接的响应状态。
+			</td>
+			<td>
+				<code>Status: 200 OK</code> 
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr id="trailer-response-header">
+			<td>
+				Trailer
+			</td>
+			<td>
+				<code>Trailer</code>用户说明传输中分块编码的编码信息
+			</td>
+			<td>
+				<code>Trailer: Max-Forwards</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="transfer-encoding-response-header">
+			<td>
+				Transfer-Encoding
+			</td>
+			<td>
+				用表示实体传输给用户的编码形式。包括：<code>chunked</code>、<code>compress</code>、 <code>deflate</code>、<code>gzip</code>、<code>identity</code>。
+			</td>
+			<td>
+				Transfer-Encoding: chunked
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Upgrade
+			</td>
+			<td>
+				要求客户端升级到另一个高版本协议。
+			</td>
+			<td>
+				Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Vary
+			</td>
+			<td>
+				告知下游的代理服务器，应当如何对以后的请求协议头进行匹配，以决定是否可使用已缓存的响应内容而不是重新从原服务器请求新的内容。
+			</td>
+			<td>
+				<code>Vary: *</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Via
+			</td>
+			<td>
+				告知代理服务器的客户端，当前响应是通过什么途径发送的。
+			</td>
+			<td>
+				Via: 1.0 fred, 1.1 itbilu.com (nginx/1.6.3)
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Warning
+			</td>
+			<td>
+				一般性警告，告知在实体内容体中可能存在错误。
+			</td>
+			<td>
+				Warning: 199 Miscellaneous warning
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+		<tr id="www-authenticate-response-header">
+			<td>
+				WWW-Authenticate
+			</td>
+			<td>
+				表示在请求获取这个实体时应当使用的认证模式。
+			</td>
+			<td>
+				<code>WWW-Authenticate: Basic</code> 
+			</td>
+			<td>
+				固定
+			</td>
+		</tr>
+	</tbody>
+</table>
+                        </div>
+                   </article>
+                   <div>
+
+	<p>下一篇：<a href="/other/relate/4J4n8fIPe.html">Http Cookie机制及Cookie的实现原理</a>
+
+
+	<p>上一篇：<a href="/other/relate/E1T0q4EIe.html">HTTP消息头（HTTP headers）－HTTP请求头与HTTP响应头</a>
+
+</div>
+              </div>
+
+              <div id="sidebar" class="col-sm-4 col-md-4">
+                  <aside class="widget">
+    <form method="post" action="/search" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-9">
+            <input placeholder="关键字" name="keyword" class="form-control" type="text"  >
+        </div>
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-default">&nbsp;&nbsp;搜索&nbsp;&nbsp;</button>
+        </div>
+    </div>
+    </form>
+</aside>
+                  
+<aside class="widget">
+    <h4>文章分类</h4>
+    <ul class="grove-list">
+    
+    	
+    		<li class="active"><a href="#">相关</a></li>
+    	
+    
+    </ul>
+</aside>
+
+                  
+<aside class="widget">
+    <h4>阅读排行</h4>
+    <ul class="grove-list">
+        
+        <li> <h5 class="media-heading"><a href="/nodejs/npm/V1PExztfb.html">Sequelize 中文API文档－2. Model 的定...</a> (145554)</h5>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/nodejs/npm/VkYIaRPz-.html">Sequelize 中文API文档－1. 快速入门、Seq...</a> (136924)</h5>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/nodejs/npm/VJIR1CjMb.html">Sequelize 中文API文档－4. 查询与原始查询</a> (50038)</h5>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/linux/management/NymXRUieg.html">解决类似 /usr/lib64/libstdc++.so....</a> (45475)</h5>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/nodejs/npm/41qaV3czb.html">Sequelize 中文API文档－3. 模型（表）之间的...</a> (39981)</h5>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/javascript/js/41KMSZ9a.html">［ES6］Promise对象Promise.all()方法...</a> (19963)</h5>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/linux/man/4yZ9qH_7X.html">curl 命令行工具的使用及命令参数说明</a> (19812)</h5>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/nodejs/npm/N1sdaHTzb.html">Sequelize 中文API文档－5. 实例的使用、In...</a> (18795)</h5>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/other/relate/EkwKysXIl.html">HTTP请求方法：GET、HEAD、POST、PUT、DE...</a> (18554)</h5>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/database/mongo/E1tWQz4_e.html">MongoDB索引管理－索引的创建、查看、删除</a> (17780)</h5>
+         </li>
+        
+    </ul>
+</aside>
+
+                  <aside class="widget">
+    <h4>最新文章</h4>
+    <ul class="grove-list">
+    
+        
+        <li> <h5 class="media-heading"><a href="/nodejs/npm/rkm1YouP4.html">Mongoose中文文档-指南之模型（Models）</a></h5>
+              <p><code>模型</code>是从Schema定义编译的构造函数，模型的实例称为<a href="...</p>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/other/relate/ry5IPQu8V.html">成熟度模型-REST的实现步骤</a></h5>
+              <p>最近看Sam Newman的“微服务设计”，其中提到了Martin Fowler的 Richard...</p>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/linux/man/H1_dxWhz4.html">Linux tail命令与实时日志、文件查看及过滤</a></h5>
+              <p><code>tail</code>是Linux中的一个常用命令，用于查看文件尾部的内容，它与<co...</p>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/nodejs/npm/B1d61mEZ4.html">Mongoose中文文档-指南之文档（Documents）...</a></h5>
+              <p>在Mongoose中，每个文档（<code>Document</code>）都表示对数据库集中一条...</p>
+         </li>
+        
+        <li> <h5 class="media-heading"><a href="/nodejs/npm/Hyn15of14.html">Mongoose中文文档-指南之查询（Queries）</a></h5>
+              <p>Mongoose模型的很多类方法都不能直接返回查询或操作结果，其会返回一个"Query"对象，我们...</p>
+         </li>
+        
+    
+    </ul>
+</aside>
+                  <!-- <aside class="widget">
+    <h4>广告</h4>
+    <p><a href="http://redirect.simba.taobao.com/rd?w=unionnojs&f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3D80FuZnNB1TS6k0Or%252B%252BH4tPg7Qoo6gIwW72fxp1Fq8BiLltG5xFicOdXrTUTgh9sMDPIwxrc30rhDsYaO8QAt%252FkUldzjpLCiPsn0%252BfXTZJrM4I6TE1Mm7FG3abJM7sDg2X7UB%252FLMklcjcDCUJyXw5Pg%253D%253D%26ptype%3D100010%26from%3Dbasic&k=5ccfdb950740ca16&c=un&b=alimm_0&p=mm_26749822_9476439_31826248" rel="nofollow">一包饼〜〜〜</a></p>
+</aside> -->
+                  
+
+                  <aside class="widget">
+    <h4>交流群：564850876</h4>
+    <p><img src="/img/qq-group.png" alt="交流群：564850876" /></p>
+</aside>
+                  <!-- <aside class="widget last">
+	<h4>友情链接</h4>
+	<ul class="grove-list">
+	     <li><a href="http://www.koocode.com" target="_blank">酷码</a></li>
+	</ul>
+</aside> -->
+              </div>
+         </div>
+    </section>
+</div>
+<script type="text/javascript">
+var xhr = new XMLHttpRequest();
+xhr.open("put", "/other/relate/EJ3fKUwUx.html", true);
+// xhr.onreadystatechange = function() { if (xhr.readyState == 4) {console.log(xhr.responseText);}}
+xhr.send();
+</script>
+<footer>
+<div class="container">
+    <!-- <div class="row info">
+        <div class="col-sm-3 residence">
+        
+        </div>
+        <div class="col-sm-5 touch">
+            <ul>
+                <li><strong></strong></li>
+                <li>email：</strong>cn.liuht@gmail.com</li>
+            </ul>
+        </div>
+    </div> -->
+    <div class="row credits">
+        <div class="col-md-12">
+            <div class="row copyright">
+                <div class="col-md-12">
+                 Copyright ©2015-2017 www.itbilu.com all rights reserved<a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备11014171号-3</a>
+                </div>
+            </div>
+        </div>            
+    </div>
+</div>
+</footer>
+</div>
+<script type="text/javascript" src="//cdn.itbilu.com/js/main-min.js"></script>
+<script type="text/javascript">
+	$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?2249745ad1ce80c1744fc6aede553fc1";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	 
+	(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+	})();
+</script>
+</body>
+</html>

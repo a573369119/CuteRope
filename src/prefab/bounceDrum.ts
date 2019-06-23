@@ -1,4 +1,5 @@
 import Candy from "./Candy";
+import GameConfig from "../config/GameConfig";
 
 /**
  * bouceDrum 弹力鼓
@@ -25,6 +26,8 @@ export class BouceDrum{
     public view : any;
     // /**candy */
     private vector : any;
+    //速度
+    private speed : number;
     // public candy : Candy;
     /**是否弹过 */
     private isBounce : boolean;
@@ -68,6 +71,8 @@ export class BouceDrum{
         if(data.moveTo) 
         {
             this.moveTo = data.moveTo;
+            this.speed = 1;
+            if(data.speed) this.speed = data.speed;
             this.change = 1;
             if(this.moveTo[0] < this.x && this.moveTo[1] == this.y)
                 this.change = -1;
@@ -105,6 +110,7 @@ export class BouceDrum{
             this.sp.addChild(this.img);
             this.sp.addChild(this.up);
             this.sp.addChild(this.down);
+            this.sp.zOrder = GameConfig.ZORDER_BOUNCEDRUM;
             this.view.addChild(this.sp);
         }
         this.isBounce = false;
@@ -171,7 +177,8 @@ export class BouceDrum{
                 line = 7*this.power;
                 console.log("速度[" + Math.abs(Math.cos(this.rotation/180*3.14)*body.linearVelocity.y) +  Math.abs(Math.sin(this.rotation/180*3.14)*body.linearVelocity.x) + "]");            
             }
-            candy.setApplyForce({x:candySp.width/2,y:candySp.height/2},{x:110*line*Math.sin(this.rotation/180*Math.PI),y:-110*line*Math.cos(this.rotation/180*Math.PI)});
+            console.log(Math.sin(this.rotation/180*Math.PI) + " , " + Math.cos(this.rotation/180*Math.PI));
+            candy.setApplyForce({x:candySp.width/2,y:candySp.height/2},{x:30000*line*Math.sin(this.rotation/180*Math.PI),y:-30000*line*Math.cos(this.rotation/180*Math.PI)});
             this.playAni();
         }
         else if((this.down.hitTestPoint(candySp.x + xC,candySp.y + yC)))
@@ -191,7 +198,7 @@ export class BouceDrum{
                 line = 7*this.power;
                 console.log("速度[" + Math.abs(Math.cos(rotation/180*3.14)*body.linearVelocity.y) +  Math.abs(Math.sin(rotation/180*3.14)*body.linearVelocity.x) + "]");            
             }
-            candy.setApplyForce({x:candySp.width/2,y:candySp.height/2},{x:110*line*Math.sin(rotation/180*Math.PI),y:-110*line*Math.cos(rotation/180*Math.PI)});
+            candy.setApplyForce({x:candySp.width/2,y:candySp.height/2},{x:30000*line*Math.sin(rotation/180*Math.PI),y:-30000*line*Math.cos(rotation/180*Math.PI)});
             this.playAni();
             
         }
@@ -210,24 +217,24 @@ export class BouceDrum{
         {
             if(this.sp.x == this.moveTo[0]) 
             {
-                this.sp.y += 1.5*this.change;
-                if(this.moveTo[1]+1 >= this.sp.y && this.moveTo[1]-1 < this.sp.y)
+                this.sp.y += 1.5*this.change*this.speed;
+                if(this.moveTo[1]+1*this.speed >= this.sp.y && this.moveTo[1]-1*this.speed < this.sp.y)
                 {
                     this.change = this.change*-1;
                 }
-                if(this.sp.y >= this.y - 1 && this.sp.y < this.y + 1)
+                if(this.sp.y >= this.y - 1*this.speed && this.sp.y < this.y + 1*this.speed)
                 {
                     this.change = this.change*-1;
                 }
             }
             if(this.sp.y == this.moveTo[1]) 
             {
-                this.sp.x += 1.5*this.change;
-                if(this.moveTo[0]+1 >= this.sp.x && this.moveTo[0]-1 < this.sp.x)
+                this.sp.x += 1.5*this.change*this.speed;
+                if(this.moveTo[0]+1*this.speed >= this.sp.x && this.moveTo[0]-1*this.speed < this.sp.x)
                 {
                     this.change = this.change*-1;
                 }
-                if(this.sp.x >= this.x - 1 && this.sp.x < this.x + 1)
+                if(this.sp.x >= this.x - 1*this.speed && this.sp.x < this.x + 1*this.speed)
                 {
                     this.change = this.change*-1;
                 }

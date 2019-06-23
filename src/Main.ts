@@ -42,8 +42,9 @@ class Main {
 			
 		];
 		Laya.loader.load(src,Laya.Handler.create(this,this.onLoad));
+
 	}
-	
+
 	private onLoad() : void
 	{
 		this.keepPlayerData();
@@ -56,8 +57,29 @@ class Main {
 		let object = Laya.loader.getRes("config/selectConfig.json");
 		this.keepLimit(object.limitList);
 		Laya.WeakObject.I.set("boxSkin",object.boxSkin);
-
-		let userData = Laya.loader.getRes("config/playerDataTest.json");
+		let userData ;
+		//测试
+		userData = Laya.loader.getRes("config/playerDataTest.json");
+		Laya.WeakObject.I.set("isTest",userData.isTest);
+		if(!userData.isTest)
+		{
+			//使用
+			userData =  JSON.parse(localStorage.getItem("playerData"));
+			if(!userData){
+				userData = {
+					PlayerTeach: 0,
+					playerStars: 0,
+					playerSuper: 0,
+					playerCard: [
+						{
+							"card":"0-0",
+							"stars":[-1]
+						}
+					]
+				}
+			}
+		}
+		console.log(userData);
 		this.keepUserData(userData);
 				//--------------------------
 		Laya.loader.clearRes("config/selectConfig.json");
@@ -69,7 +91,7 @@ class Main {
     {
         for(let i=0; i<object.length; i++)
         {
-			PlayerData.ins.arr_LimitSelect.push(object[i].selectLimit);
+			// PlayerData.ins.arr_LimitSelect.push(object[i].selectLimit);
 			// Laya.WeakObject.__init__();
 			Laya.WeakObject.I.set(i,object[i]);
 			

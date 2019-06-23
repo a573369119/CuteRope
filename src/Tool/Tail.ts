@@ -1,3 +1,5 @@
+import GameConfig from "../config/GameConfig";
+
 /**
  * 
  * new -> init ->setSingle -> start
@@ -55,12 +57,20 @@ export default class Tail{
         this.arr_Imgs = new Array<Laya.Image>();
         this.rem_LastPos = {x:null,y:null};
         this.spriteImgs = new Laya.Sprite();
+        this.spriteImgs.zOrder = GameConfig.ZORDER_TAIL;
+        this.spriteImgs.removeSelf();
         this.view.addChild(this.spriteImgs);
 
         this.index_Img = 0;
         this.index_ImgUsed = 0;
         this._x = 0;
         this._y = 0;
+    }
+
+
+    public setView(view) : void
+    {
+        this.view = view;
     }
 
     /**
@@ -182,6 +192,7 @@ export default class Tail{
                 this.index_Img++;
                 if(img.scaleX < 0.05)
                 {
+                    img.removeSelf();
                     Laya.Pool.recover("cirleTail",img);
                     // console.log("收入对象池");
                     this.index_ImgUsed++;                
@@ -340,11 +351,12 @@ export default class Tail{
         }
         else
         {
-            if((img as Laya.Image).parent != this.spriteImgs)
-            {
+            // if((img as Laya.Image).parent != this.spriteImgs)
+            // {
                 (img as Laya.Image).removeSelf();
+                (img as Laya.Image)._children = [];
                 this.spriteImgs.addChild(img);
-            }
+            // }
 
         }
         //加入队列

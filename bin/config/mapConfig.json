@@ -317,7 +317,7 @@
                 "mapSkins":[
                     "gameView/gameBg/boxBg_1.png"
                 ],
-                "candy":{"style":"candy","x":140,"y":520},
+                "candy":{"style":"candy","x":160,"y":520},
                 "star":[
                     {"style":"star1","x":240,"y":280,"interval":30,"move":[],"rotateLength":0,"v":0},
                     {"style":"star1","x":260,"y":570,"interval":30,"move":[],"rotateLength":0,"v":0},
@@ -334,7 +334,7 @@
 				"rope":{
                     "hookIndex":[0,1],                                        
 					"length":[
-						20,40
+						60,80
 					]
 				}
             },
@@ -542,8 +542,8 @@
                 "monster":{"x":110,"y":600,"skin":""},
                 "hook":[
                     {"style":"hook1","x":420,"y":100},
-                    {"style":"hook2","x":140,"y":300,"size":130},
-					{"style":"hook2","x":340,"y":600,"size":130}
+                    {"style":"hook2","x":140,"y":300,"size":110},
+					{"style":"hook2","x":340,"y":600,"size":110}
                 ],
 				"rope":{
                     "hookIndex":[0], 
@@ -698,7 +698,7 @@
                 "mapSkins":[
                     "gameView/gameBg/boxBg_1.png"
                 ],
-                "candy":{"style":"candy","x":351,"y":564},
+                "candy":{"style":"candy","x":277,"y":584},
                 "star":[
                     {"style":"star1","x":252,"y":334,"interval":30,"move":[],"rotateLength":0,"v":0},
                     {"style":"star1","x":227,"y":291,"interval":30,"move":[],"rotateLength":0,"v":0},
@@ -712,7 +712,7 @@
 				"rope":{
                     "hookIndex":[0,1], 
 					"length":[
-						20,12
+						30,25
 					]
 				}
             },			
@@ -777,7 +777,7 @@
 				"rope":{
 					"hookIndex":[0],
 					"length":[
-						140
+						100
 					]
 				},
 				"forceball":[
@@ -838,7 +838,7 @@
 				"rope":{
 					"hookIndex":[0,1],
 					"length":[
-						130,130
+						100,100
 					]
 				},
 				"forceball":[
@@ -912,7 +912,7 @@
 				"rope":{
 					"hookIndex":[0,1,2,3],
 					"length":[
-						110,190,190,210
+						90,150,170,180
 					]
 				},
 				"forceball":[
@@ -1118,7 +1118,7 @@
 				"rope":{
 					"hookIndex":[0,1,2,3],
 					"length":[
-						17,17,17,17
+						10,10,10,10
                     ]
                 },
                 "spider":[
@@ -1240,8 +1240,9 @@
 				"rope":{
 					"hookIndex":[0,1,2,3],
 					"length":[
-						13,25,25,115    
-                    ]
+						60,100,100,115    
+                    ],
+                    "speed":[30,30,0]
                 },
                 "spider":[
                     {"x":111,"y":392},
@@ -1263,14 +1264,15 @@
                 ],
                 "monster":{"x":244,"y":691,"skin":""},
                 "hook":[
-					{"style":"hook1","x":240,"y":550},
-					{"style":"hook1","x":240,"y":107}
+					{"style":"hook3","x":240,"y":550},
+					{"style":"hook3","x":240,"y":107}
                 ],
 				"rope":{
 					"hookIndex":[0,1],
 					"length":[
-						180,180
-                    ]
+						140,140
+                    ],
+                    "speed":[30,30,0]
                 },
                 "spider":[
                     {"x":240,"y":107}
@@ -1292,24 +1294,22 @@
                 ],
                 "candy":{"style":"candy","x":325,"y":530},
                 "star":[
-                    {"style":"star1","x":368,"y":454,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":338,"y":454,"interval":30,"move":[],"rotateLength":0,"v":0},
                     {"style":"star1","x":134,"y":474,"interval":30,"move":[],"rotateLength":0,"v":0},
-                    {"style":"star1","x":203,"y":200,"interval":30,"move":[],"rotateLength":0,"v":0}
+                    {"style":"star1","x":203,"y":240,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
-                "monster":{"x":319,"y":365,"skin":""},
+                "monster":{"x":319,"y":345,"skin":""},
                 "hook":[
-					{"style":"hook1","x":240,"y":446},
+					{"style":"hook3","x":240,"y":446},
                     {"style":"hook3","x":410,"y":446},
                     {"style":"hook3","x":240,"y":614},
-                    {"style":"hook1","x":410,"y":614},
-                    {"style":"hook2","x":134,"y":365,"size":100}
-                    
-                    
+                    {"style":"hook3","x":410,"y":614},
+                    {"style":"hook2","x":134,"y":365,"size":80}
                 ],
 				"rope":{
 					"hookIndex":[0,1,2,3],
 					"length":[
-						100,15,15,100
+						45,45,45,45 
                     ]
                 },
                 "spider":[
@@ -1954,7 +1954,7 @@
 				"rope":{
 					"hookIndex":[0,1],
 					"length":[
-						30,10
+						70,40
 					]
 				},
 				"knife":[
@@ -2148,7 +2148,7 @@
 				"rope":{
 					"hookIndex":[0],
 					"length":[
-						130
+						100
 					]
 				},
 				"laser":[
@@ -2264,18 +2264,18 @@
                 "candy":{"style":"candy","x":341,"y":180},
                 "star":[
                     {"style":"star1","x":220,"y":100,"interval":50,"move":[],"rotateLength":0,"v":0},
-                    {"style":"star1","x":220,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":200,"y":400,"interval":30,"move":[],"rotateLength":0,"v":0},
                     {"style":"star1","x":220,"y":530,"interval":100,"move":[],"rotateLength":0,"v":0}  
                 ],
                 "monster":{"x":280,"y":700,"skin":""},
                 "hook":[
 					{"style":"hook1","x":340,"y":80},
-					{"style":"hook2","x":120,"y":400,"size":110}
+					{"style":"hook2","x":120,"y":400,"size":95}
                 ],
 				"rope":{
 					"hookIndex":[0],
 					"length":[
-						120
+						80
 					]
 				},
 				"laser":[
@@ -2308,13 +2308,13 @@
                 "hook":[
 					{"style":"hook1","x":140,"y":200,"rotation":-90,"length":150,"percent":1},
 					{"style":"hook1","x":340,"y":200,"rotation":-90,"length":150,"percent":1},
-					{"style":"hook2","x":140,"y":550,"size":130,"rotation":-90,"length":150,"percent":1},
-					{"style":"hook2","x":340,"y":550,"size":130,"rotation":-90,"length":150,"percent":1}
+					{"style":"hook2","x":165,"y":550,"size":80,"rotation":-90,"length":150,"percent":1},
+					{"style":"hook2","x":315,"y":550,"size":80,"rotation":-90,"length":150,"percent":1}
                 ],
 				"rope":{
 					"hookIndex":[0,1],
 					"length":[
-						130,130
+						100,100
 					]
 				},
 				"laser":[
@@ -2498,7 +2498,7 @@
 				"rope":{
 					"hookIndex":[0],
 					"length":[
-						100
+						70
 					]
                 },				
                 "forceball":[
@@ -2588,7 +2588,7 @@
                 "mapSkins":[
                     "gameView/gameBg/boxBg_4.png"
                 ],
-                "candy":{"style":"candy","x":310,"y":590},
+                "candy":{"style":"candy","x":350,"y":605},
                 "star":[
                     {"style":"star1","x":200,"y":300,"interval":40,"move":[],"rotateLength":30,"v":3},
                     {"style":"star1","x":210,"y":300,"interval":50,"move":[],"rotateLength":50,"v":3},
@@ -2596,14 +2596,14 @@
                 ],
                 "monster":{"x":380,"y":320,"skin":""},
                 "hook":[
-					{"style":"hook1","x":370,"y":500},
-					{"style":"hook1","x":370,"y":710},
-					{"style":"hook1","x":70,"y":600,"rotation":0,"length":175,"percent":1}
+					{"style":"hook3","x":370,"y":500},
+					{"style":"hook3","x":370,"y":710},
+					{"style":"hook3","x":70,"y":600,"rotation":0,"length":175,"percent":1}
                 ],
 				"rope":{
 					"hookIndex":[0,1,2],
 					"length":[
-						100,100,100
+						55,55,70
 					]
 				},
 				"magicHat":[
@@ -2622,32 +2622,32 @@
                 "candy":{"style":"candy","x":240,"y":150},
                 "star":[
                     {"style":"star1","x":130,"y":260,"interval":30,"move":[],"rotateLength":0,"v":0},
-                    {"style":"star1","x":410,"y":350,"interval":30,"move":[],"rotateLength":0,"v":0},
-                    {"style":"star1","x":240,"y":630,"interval":30,"move":[],"rotateLength":0,"v":0}
+                    {"style":"star1","x":350,"y":260,"interval":30,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":320,"y":630,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
-                "monster":{"x":410,"y":420,"skin":""},
+                "monster":{"x":240,"y":370,"skin":""},
                 "hook":[
-					{"style":"hook1","x":110,"y":90},
-					{"style":"hook1","x":370,"y":90},
-					{"style":"hook2","x":170,"y":500,"size":120},
-					{"style":"hook2","x":310,"y":500,"size":120}
+					{"style":"hook1","x":140,"y":90},
+					{"style":"hook1","x":340,"y":90},
+					{"style":"hook2","x":160,"y":490,"size":100},
+					{"style":"hook2","x":320,"y":490,"size":100}
                 ],
 				"rope":{
 					"hookIndex":[0,1],
 					"length":[
-						130,130
+						80,80
 					]
 				},
 				"magicHat":[
-					{"x1":50,"y1":240,"rotation1":92,"move1":[],"rotate1":0,"v1":0,
-					 "x2":430,"y2":580,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
+					{"x1":90,"y1":240,"rotation1":92,"move1":[],"rotate1":0,"v1":0,
+					 "x2":390,"y2":630,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"},
-					{"x1":50,"y1":580,"rotation1":92,"move1":[],"rotate1":0,"v1":0,
-					 "x2":430,"y2":240,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
+					{"x1":90,"y1":630,"rotation1":92,"move1":[],"rotate1":0,"v1":0,
+					 "x2":390,"y2":240,"rotation2":270,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_green"}
 				],
 				"balloon":[
-                    {"x":240,"y":630}
+                    {"x":320,"y":630}
                 ]
             },
 			{
@@ -2711,7 +2711,7 @@
 				"rope":{
 					"hookIndex":[0,1],
 					"length":[
-						120,120
+						100,100
 					]
 				},
 				"magicHat":[
@@ -2724,7 +2724,7 @@
                 ],
 				"forceball":[
                     {"x":170,"y":520,"rotation":0},
-					{"x":170,"y":700,"rotation":0}
+					{"x":170,"y":720,"rotation":0}
 				]
             },
 			{
@@ -2759,7 +2759,7 @@
                     {"x":160,"y":600}
                 ],
 				"forceball":[
-                    {"x":400,"y":570,"rotation":0}
+                    {"x":401,"y":570,"rotation":0}
 				],
 				"laser":[
 					{"x":60,"y":205,"rotation":90,"isAdvanceLaser":true,"time":3,"move":[]},
@@ -2783,20 +2783,20 @@
                 ],
                 "monster":{"x":250,"y":710,"skin":""},
                 "hook":[
-					{"style":"hook1","x":240,"y":200}
+					{"style":"hook1","x":240,"y":610}
                 ],
 				"rope":{
 					"hookIndex":[0],
 					"length":[
-						80
+						200
 					]
 				},
 				"magicHat":[
-					{"x1":150,"y1":600,"rotation1":45,"move1":[],"rotate1":0,"v1":0,
-					 "x2":440,"y2":260,"rotation2":225,"move2":[],"rotate2":0,"v2":0,
+					{"x1":110,"y1":600,"rotation1":45,"move1":[],"rotate1":0,"v1":0,
+					 "x2":380,"y2":260,"rotation2":225,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"},
-					{"x1":50,"y1":270,"rotation1":135,"move1":[],"rotate1":0,"v1":0,
-					 "x2":350,"y2":610,"rotation2":-45,"move2":[],"rotate2":0,"v2":0,
+					{"x1":110,"y1":270,"rotation1":135,"move1":[],"rotate1":0,"v1":0,
+					 "x2":380,"y2":610,"rotation2":-45,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_green"}
 				],
 				"forceball":[
@@ -2906,7 +2906,7 @@
                 "star":[
                     {"style":"star1","x":172,"y":436,"interval":30,"move":[],"rotateLength":0,"v":0},
                     {"style":"star1","x":160,"y":216,"interval":30,"move":[],"rotateLength":0,"v":0},
-                    {"style":"star1","x":273,"y":555,"interval":30,"move":[],"rotateLength":0,"v":0}
+                    {"style":"star1","x":310,"y":555,"interval":30,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":111,"y":708,"skin":""},
                 "hook":[
@@ -2917,12 +2917,12 @@
 				"rope":{
 					"hookIndex":[0,1],
 					"length":[
-						35,15
+						60,60
 					]
 				},
 				"magicHat":[
 					{"x1":100,"y1":208,"rotation1":92,"move1":[],"rotate1":0,"v1":0,
-					 "x2":100,"y2":386,"rotation2":92,"move2":[],"rotate2":0,"v2":0,
+					 "x2":100,"y2":450,"rotation2":92,"move2":[],"rotate2":0,"v2":0,
 					 "color":"hat_red"}
 				]
             },
@@ -3043,7 +3043,7 @@
 					{"x":340,"y":200,"rotation":-90},
 					{"x":340,"y":350,"rotation":-90},
 					{"x":340,"y":500,"rotation":-90},
-					{"x":600,"y":350,"rotation":0}
+					{"x":601,"y":350,"rotation":180}
 				],
 				"laser":[
 					{"x":600,"y":270,"rotation":0,"isAdvanceLaser":true,"time":3,"move":[]}
@@ -3106,7 +3106,7 @@
 					]
 				},
 				"forceball":[
-                    {"x":120,"y":450,"rotation":0}
+                    {"x":121,"y":630,"rotation":0}
 				],
 				"magicHat":[
 					{"x1":110,"y1":200,"rotation1":180,"move1":[],"rotate1":0,"v1":0,
@@ -3408,9 +3408,9 @@
                 ],
                 "candy":{"style":"candy","x":241,"y":250},
                 "star":[
-                    {"style":"star1","x":290,"y":620,"interval":70,"move":[],"rotateLength":0,"v":0},
-                    {"style":"star1","x":190,"y":620,"interval":50,"move":[],"rotateLength":0,"v":0},
-                    {"style":"star1","x":240,"y":580,"interval":80,"move":[],"rotateLength":0,"v":0}
+                    {"style":"star1","x":290,"y":610,"interval":70,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":190,"y":610,"interval":50,"move":[],"rotateLength":0,"v":0},
+                    {"style":"star1","x":240,"y":570,"interval":80,"move":[],"rotateLength":0,"v":0}
                 ],
                 "monster":{"x":80,"y":550,"skin":""},
                 "hook":[
@@ -3422,7 +3422,7 @@
 				"rope":{
 					"hookIndex":[0,1,2,3],
 					"length":[
-						24,24,24,24
+						60,60,60,60
 					]
 				},
 				"magicHat":[
@@ -3434,7 +3434,7 @@
 					 "color":"hat_green"}
 				],
 				"balloon":[
-                    {"x":240,"y":580}
+                    {"x":240,"y":590}
                 ]
             },
 			{
@@ -3562,25 +3562,25 @@
                     ],
                     "monster":{"x":154,"y":84,"skin":""},
                     "hook":[
-                        {"style":"hook3","x":139,"y":485},
-                        {"style":"hook3","x":408,"y":485},
+                        {"style":"hook3","x":139,"y":450},
+                        {"style":"hook3","x":408,"y":520},
                         {"style":"hook1","x":70,"y":543},   
                         {"style":"hook2","x":234,"y":305,"size":110}
                     ],
                     "rope":{
                         "hookIndex":[2],
                         "length":[
-                            50
+                            70
                         ]
                     },
                     "rope2":{
                         "hookIndex":[0,1],                        
                         "length":[
-                            30,10
+                            40,40
                         ]
                     },				
                     "knife":[
-					    {"x":66,"y":399,"style":"knife1","rotation":0,"v":0,"move":[]}
+					    {"x":66,"y":339,"style":"knife1","rotation":0,"v":0,"move":[]}
 				    ],	
                     "balloon":[
                         {"x":70,"y":696}
@@ -4132,13 +4132,13 @@
                     "rope":{
                         "hookIndex":[0,1],
                         "length":[
-                            40,25
+                            80,40
                         ]
                     },
                     "rope2":{
                         "hookIndex":[2,3],                        
                         "length":[
-                            40,25
+                            80,40
                         ]
                     },
                     "balloon":[
@@ -4259,13 +4259,13 @@
                     "rope":{
                         "hookIndex":[0,1],                        
                         "length":[
-                            10,40
+                            40,40
                         ]
                     },
                     "rope2":{
                         "hookIndex":[2,3],
                         "length":[
-                            40,10
+                            40,40
                         ]
                     },
                     "balloon":[
@@ -4338,13 +4338,13 @@
                     "rope":{
                         "hookIndex":[2,3],                        
                         "length":[
-                            40,25
+                            60,60
                         ]
                     },
                     "rope2":{
                         "hookIndex":[2,4],
                         "length":[
-                            40,25
+                            60,60
                         ]
                     },
                     "balloon":[
@@ -4439,8 +4439,8 @@
                     "mapSkins":[
                         "gameView/gameBg/boxBg_5.png"
                     ],
-                    "candy":{"style":"candyOne","x":133,"y":498},
-                    "candy2":{"style":"candyTwo","x":332,"y":498},
+                    "candy":{"style":"candyOne","x":133,"y":505},
+                    "candy2":{"style":"candyTwo","x":332,"y":505},
                     "star":[
                         {"style":"star1","x":114,"y":180,"interval":100,"move":[],"rotateLength":10,"v":2},
                         {"style":"star1","x":154,"y":205,"interval":100,"move":[],"rotateLength":30,"v":1},
@@ -4448,19 +4448,19 @@
                     ],
                     "monster":{"x":336,"y":231,"skin":""},
                     "hook":[
-                        {"style":"hook1","x":134,"y":676},
-                        {"style":"hook1","x":333,"y":676}                                                  
+                        {"style":"hook1","x":154,"y":676},
+                        {"style":"hook1","x":290,"y":676}                                                  
                     ],
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            150
+                            110
                         ]
                     },
                     "rope2":{
                         "hookIndex":[1],
                         "length":[
-                            150
+                            110
                         ]
                     },
                     "balloon":[
@@ -4468,13 +4468,13 @@
                         {"x":325,"y":572}
                     ],
                     "forceball":[
-                        {"x":419,"y":500,"rotation":270}
+                        {"x":400,"y":500,"rotation":270}
                     ],
                     "laser":[
-                        {"x":151,"y":103,"rotation":0,"isAdvanceLaser":true,"time":4,"move":[]},
-                        {"x":48,"y":198,"rotation":90,"isAdvanceLaser":true,"time":4,"move":[]},
-                        {"x":240,"y":202,"rotation":90,"isAdvanceLaser":true,"time":4,"move":[]},
-                        {"x":139,"y":295,"rotation":0,"isAdvanceLaser":true,"time":4,"move":[]}                        
+                        {"x":151,"y":103,"rotation":0,"isAdvanceLaser":true,"time":6,"move":[]},
+                        {"x":48,"y":198,"rotation":90,"isAdvanceLaser":true,"time":6,"move":[]},
+                        {"x":240,"y":202,"rotation":90,"isAdvanceLaser":true,"time":6,"move":[]},
+                        {"x":139,"y":295,"rotation":0,"isAdvanceLaser":true,"time":6,"move":[]}                        
                     ]
                 }
                 
@@ -4601,11 +4601,11 @@
                     "rope":{
                         "hookIndex":[0,1,2],                        
                         "length":[
-                            140,230,290
+                            140,180,240
                         ]
                     },
                     "bounceDrum":[
-                        {"x":186,"y":486,"size":1.5,"rotation":90,"power":1.4}
+                        {"x":190,"y":486,"size":1.5,"rotation":90,"power":0.3}
                     ],
                     "balloon":[
                         {"x":400,"y":493}
@@ -4732,12 +4732,12 @@
                     "rope":{
                         "hookIndex":[0,1],                        
                         "length":[
-                            240,240
+                            190,190
                         ]
                     },
                     "bounceDrum":[
-                        {"x":64,"y":710,"size":1.4,"rotation":90,"power":1},
-                        {"x":408,"y":710,"size":1.4,"rotation":270,"power":1}
+                        {"x":64,"y":710,"size":1.4,"rotation":90,"power":0.6},
+                        {"x":408,"y":710,"size":1.4,"rotation":270,"power":0.6}
                     ],
                     "balloon":[
                         {"x":133,"y":730},
@@ -4753,18 +4753,18 @@
                     ],
                     "candy":{"style":"candy","x":343,"y":507},
                     "star":[
-                        {"style":"star1","x":256,"y":750,"interval":60,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":256,"y":250,"interval":60,"move":[],"rotateLength":0,"v":0},
                         {"style":"star1","x":411,"y":454,"interval":60,"move":[],"rotateLength":80,"v":3},
                         {"style":"star1","x":70,"y":600,"interval":60,"move":[],"rotateLength":80,"v":2}
                     ],
-                    "monster":{"x":86,"y":525,"skin":""},
+                    "monster":{"x":86,"y":580,"skin":""},
                     "hook":[
                         {"style":"hook1","x":259,"y":461}                                                                                                                  
                     ],
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            100
+                            70
                         ]
                     },
                     "bounceDrum":[
@@ -4853,8 +4853,8 @@
                         {"x":156,"y":613}
                     ],
                     "bounceDrum":[
-                        {"x":88,"y":367,"size":1.1,"rotation":90,"power":0.65},
-                        {"x":392,"y":367,"size":1.1,"rotation":90,"power":0.65}
+                        {"x":88,"y":367,"size":1.1,"rotation":90,"power":1},
+                        {"x":392,"y":367,"size":1.1,"rotation":90,"power":1}
                     ],
                     "magicHat":[
                         {"x1":240,"y1":144,"rotation1":180,"move1":[],"rotate1":0,"v1":0,
@@ -4881,8 +4881,8 @@
                     "candy2":{"style":"candyTwo","x":240,"y":580},
                     "star":[
                         {"style":"star1","x":104,"y":547,"interval":60,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":368,"y":547,"interval":60,"move":[],"rotateLength":80,"v":3},
-                        {"style":"star1","x":240,"y":620,"interval":60,"move":[],"rotateLength":80,"v":2}
+                        {"style":"star1","x":368,"y":547,"interval":60,"move":[],"rotateLength":0,"v":3},
+                        {"style":"star1","x":240,"y":660,"interval":60,"move":[],"rotateLength":0,"v":2}
                     ],
                     "monster":{"x":250,"y":214,"skin":""},
                     "hook":[
@@ -4893,13 +4893,13 @@
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            150
+                            125
                         ]
                     },
                     "rope2":{
                         "hookIndex":[1,2],
                         "length":[
-                            150,150
+                            110,110
                         ]
                     },
                     "bounceDrum":[
@@ -4907,14 +4907,14 @@
                         {"x":411,"y":235,"size":1.2,"rotation":200,"power":1}
                     ],
                     "magicHat":[
-                        {"x1":105,"y1":658,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
-                         "x2":368,"y2":658,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
+                        {"x1":100,"y1":650,"rotation1":0,"move1":[],"rotate1":0,"v1":0,
+                         "x2":380,"y2":650,"rotation2":0,"move2":[],"rotate2":0,"v2":0,
                          "color":"hat_red"}
                     ],
                     "balloon":[
                         {"x":104,"y":547},
                         {"x":368,"y":547},
-                        {"x":240,"y":620}
+                        {"x":240,"y":660}
                     ]
                 },
                 {
@@ -4926,9 +4926,9 @@
                     ],
                     "candy":{"style":"candy","x":310,"y":400},
                     "star":[
-                        {"style":"star1","x":104,"y":547,"interval":60,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":368,"y":547,"interval":60,"move":[],"rotateLength":80,"v":3},
-                        {"style":"star1","x":240,"y":620,"interval":60,"move":[],"rotateLength":80,"v":2}
+                        {"style":"star1","x":80,"y":257,"interval":60,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":80,"y":461,"interval":60,"move":[],"rotateLength":80,"v":3},
+                        {"style":"star1","x":309,"y":461,"interval":60,"move":[],"rotateLength":80,"v":2}
                     ],
                     "monster":{"x":106,"y":225,"skin":""},
                     "hook":[
@@ -4937,7 +4937,7 @@
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            100
+                            70
                         ]
                     },
                     "bounceDrum":[
@@ -4989,6 +4989,51 @@
                     ],
                     "forceball":[
                         {"x":236,"y":414,"rotation":180}
+                    ]
+                },
+                {
+                    "mapId":14,
+                    "width":750,
+                    "height":1334,
+                    "mapSkins":[
+                        "gameView/gameBg/boxBg_6.png"
+                    ],
+                    "candy":{"style":"candyOne","x":421,"y":484},
+                    "candy2":{"style":"candyTwo","x":74,"y":399},
+                    "star":[
+                        {"style":"star2","x":240,"y":247,"interval":60,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star2","x":240,"y":388,"interval":60,"move":[],"rotateLength":80,"v":3},
+                        {"style":"star2","x":163,"y":510,"interval":60,"move":[],"rotateLength":80,"v":2}
+                    ],
+                    "monster":{"x":257,"y":167,"skin":""},
+                    "hook":[
+                        {"style":"hook1","x":416,"y":386},                                                                                                           
+                        {"style":"hook1","x":78,"y":317},                                                                                                           
+                        {"style":"hook2","x":258,"y":265,"size":80}                                                                                                            
+                    ],
+                    "rope":{
+                        "hookIndex":[0],                        
+                        "length":[
+                            60
+                        ]
+                    },                   
+                    "rope2":{
+                        "hookIndex":[1],                        
+                        "length":[
+                            40
+                        ]
+                    },
+                    "bounceDrum":[
+                        {"x":78,"y":556,"size":1.1,"rotation":20,"power":0.3},
+                        {"x":185,"y":585.5,"size":1.1,"rotation":5,"power":0.3},
+                        {"x":313,"y":585.5,"size":1.1,"rotation":-5,"power":0.3},
+                        {"x":422,"y":559,"size":1.1,"rotation":-20,"power":0.3}
+                    ],
+                    "balloon":[
+                        {"x":252,"y":386}
+                    ],
+                    "forceball":[
+                        {"x":254,"y":648,"rotation":0}
                     ]
                 },
                 {
@@ -5092,7 +5137,7 @@
                     "rope2":{
                         "hookIndex":[1],                        
                         "length":[
-                            140
+                            100
                         ]
                     },
                     "bounceDrum":[
@@ -5130,11 +5175,11 @@
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            150
+                            120
                         ]
                     },
                     "bounceDrum":[
-                        {"x":161,"y":660,"size":1.4,"rotation":0,"power":0.5}
+                        {"x":161,"y":660,"size":1.4,"rotation":0,"power":1}
                     ],
                     "forceball":[
                         {"x":343,"y":335,"rotation":270}
@@ -5229,9 +5274,9 @@
                     "candy":{"style":"candyOne","x":139,"y":563},
                     "candy2":{"style":"candyTwo","x":303,"y":282},
                     "star":[
-                        {"style":"star1","x":241,"y":465,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":241,"y":515,"interval":30,"move":[],"rotateLength":0,"v":0},
-                        {"style":"star1","x":241,"y":565,"interval":30,"move":[],"rotateLength":0,"v":0}
+                        {"style":"star1","x":261,"y":465,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":261,"y":515,"interval":30,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":261,"y":565,"interval":30,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":110,"y":345,"skin":""},
                     "hook":[
@@ -5241,13 +5286,13 @@
                     "rope":{
                         "hookIndex":[0], 
                         "length":[
-                            90
+                            75
                         ]
                     },
                     "rope2":{
                         "hookIndex":[1], 
                         "length":[
-                            100
+                            75
                         ]
                     },
                     "bounceDrum":[
@@ -5330,7 +5375,7 @@
                         ]
                     },
                     "bounceDrum":[
-                        {"x":429,"y":423,"size":1.2,"rotation":270,"power":1,"moveTo":0}
+                        {"x":429,"y":423,"size":1.2,"rotation":270,"power":0.5,"moveTo":0}
                     ],
                     "balloon":[
                         {"x":110,"y":312},
@@ -5366,7 +5411,7 @@
                     "hook":[
                         {"style":"hook1","x":56,"y":105},
                         {"style":"hook1","x":228,"y":105},
-                        {"style":"hook1","x":56,"y":357,"rotation":0,"length":200,"percent":0.5}                        
+                        {"style":"hook2","x":56,"y":357,"size":80,"rotation":0,"length":200,"percent":0.5}                        
                     ],
                     "rope":{
                         "hookIndex":[0,1], 
@@ -5375,21 +5420,21 @@
                         ]
                     },
                     "bounceDrum":[
-                        {"x":293,"y":357,"size":1,"rotation":0,"power":0.7},
-                        {"x":403,"y":357,"size":1,"rotation":0,"power":0.7},
-                        {"x":513,"y":357,"size":1,"rotation":0,"power":0.7},
-                        {"x":623,"y":357,"size":1,"rotation":0,"power":0.7},
+                        {"x":293,"y":357,"size":1,"rotation":0,"power":0.4},
+                        {"x":403,"y":357,"size":1,"rotation":0,"power":0.4},
+                        {"x":513,"y":357,"size":1,"rotation":0,"power":0.4},
+                        {"x":623,"y":357,"size":1,"rotation":0,"power":0.4},
 
-                        {"x":733,"y":327,"size":1,"rotation":325,"power":0.3},
+                        {"x":733,"y":327,"size":1,"rotation":325,"power":0.5},
 
-                        {"x":117,"y":690,"size":1,"rotation":0,"power":0.7},
-                        {"x":227,"y":690,"size":1,"rotation":0,"power":0.7},
-                        {"x":337,"y":690,"size":1,"rotation":0,"power":0.7},
-                        {"x":447,"y":690,"size":1,"rotation":0,"power":0.7},
-                        {"x":557,"y":690,"size":1,"rotation":0,"power":0.7},
-                        {"x":667,"y":690,"size":1,"rotation":0,"power":0.7},
+                        {"x":117,"y":690,"size":1,"rotation":0,"power":0.4},
+                        {"x":227,"y":690,"size":1,"rotation":0,"power":0.4},
+                        {"x":337,"y":690,"size":1,"rotation":0,"power":0.4},
+                        {"x":447,"y":690,"size":1,"rotation":0,"power":0.4},
+                        {"x":557,"y":690,"size":1,"rotation":0,"power":0.4},
+                        {"x":667,"y":690,"size":1,"rotation":0,"power":0.4},
                         
-                        {"x":777,"y":660,"size":1,"rotation":325,"power":0.7}
+                        {"x":777,"y":660,"size":1,"rotation":325,"power":0.5}
                     ]
                 
                 }      
@@ -6393,9 +6438,9 @@
                     ],
                     "candy":{"style":"candy","x":321,"y":560},
                     "star":[
-                        {"style":"star1","x":180,"y":240,"interval":50,"move":[],"rotateLength":0,"v":2},
-                        {"style":"star1","x":320,"y":630,"interval":50,"move":[],"rotateLength":0,"v":1},
-                        {"style":"star2","x":160,"y":520 ,"interval":100,"move":[],"rotateLength":0,"v":3}
+                        {"style":"star1","x":180,"y":240,"interval":50,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":320,"y":630,"interval":50,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":160,"y":520 ,"interval":50,"move":[],"rotateLength":0,"v":0}
                     ],
                     "monster":{"x":160,"y":720,"skin":""},
                     "hook":[
@@ -6578,25 +6623,25 @@
 					],
                     "candy":{"style":"candy","x":368,"y":1110},
                     "star":[
-                        {"style":"star2","x":290,"y":1213,"interval":50,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star2","x":360,"y":1213,"interval":50,"move":[],"rotateLength":0,"v":2},
                         {"style":"star1","x":149,"y":672,"interval":110,"move":[],"rotateLength":0,"v":1},
                         {"style":"star1","x":149,"y":388 ,"interval":80,"move":[],"rotateLength":0,"v":3}
                     ],
-                    "monster":{"x":91,"y":1113,"skin":""},
+                    "monster":{"x":100,"y":1113,"skin":""},
                     "hook":[
-                        {"style":"hook1","x":220,"y":1171},
+                        {"style":"hook1","x":240,"y":1171},
 						{"style":"hook1","x":396,"y":960},
 						{"style":"hook1","x":446,"y":1214},
-						{"style":"hook2","x":150,"y":244,"size":80},
-						{"style":"hook2","x":150,"y":400,"size":90},
-						{"style":"hook2","x":150,"y":542,"size":100},
-						{"style":"hook2","x":150,"y":733,"size":110},
-						{"style":"hook2","x":150,"y":881,"size":120}
+						{"style":"hook2","x":140,"y":244,"size":120},
+						{"style":"hook2","x":140,"y":400,"size":120},
+						{"style":"hook2","x":140,"y":542,"size":120},
+						{"style":"hook2","x":140,"y":733,"size":120},
+						{"style":"hook2","x":140,"y":881,"size":120}
                     ],
                     "rope":{
                         "hookIndex":[0,1,2],                        
                         "length":[
-                            125,125,125
+                            100,100,100
                         ]
                     },
 					"knife":[
@@ -6607,7 +6652,7 @@
 						{"x":171,"y":1134,"style":"knife3","rotation":90,"v":0,"move":[]}
 					],
 					"balloon":[
-						{"x":290,"y":1213}
+						{"x":360,"y":1213}
 					]					
                 },
 				{
@@ -6789,7 +6834,7 @@
                     "rope":{
                         "hookIndex":[0,1,2,3],                        
                         "length":[
-                            170,170,150,150
+                            170,270,150,150
                         ]
                     },
 					"antiGravity":{"x":100,"y":620},
@@ -6897,7 +6942,7 @@
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            260
+                            180
                         ]
                     },
 					"knife":[
@@ -6932,7 +6977,7 @@
                     "rope":{
                         "hookIndex":[0],                        
                         "length":[
-                            310
+                            250
                         ]
                     },
 					"knife":[
@@ -6945,6 +6990,44 @@
 						{"x":84,"y":415,"rotation":90},
 						{"x":84,"y":531,"rotation":90},
 						{"x":388,"y":586,"rotation":0}
+					]
+					
+                },
+				{
+                    "mapId":16,
+                    "width":750,
+                    "height":1334,
+                    "mapSkins":[
+                        "gameView/gameBg/boxBg_8.png"
+                    ],
+                    "candy":{"style":"candy","x":230,"y":662},
+                    "star":[
+                        {"style":"star1","x":78,"y":252,"interval":80,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":240,"y":252,"interval":60,"move":[],"rotateLength":0,"v":0},
+                        {"style":"star1","x":399,"y":252 ,"interval":100,"move":[],"rotateLength":0,"v":0}
+                    ],
+                    "monster":{"x":255,"y":394,"skin":""},
+                    "hook":[
+                        {"style":"hook1","x":240,"y":154,"canRotate":true},	
+                        {"style":"hook1","x":72,"y":97.5,"size":90},	
+                        {"style":"hook1","x":416,"y":97.5,"size":90}	
+                    ],
+                    "rope":{
+                        "hookIndex":[0],                        
+                        "length":[
+                            350
+                        ]
+                    },
+					"knife":[
+						{"x":245,"y":301,"style":"knife4","rotation":0,"v":0,"move":[]},
+						{"x":245,"y":441,"style":"knife4","rotation":0,"v":0,"move":[]},
+						{"x":143,"y":375,"style":"knife1","rotation":90,"v":0,"move":[143,102]},
+						{"x":342,"y":102,"style":"knife1","rotation":90,"v":0,"move":[342,375]}
+					],
+					"forceball":[
+						{"x":422,"y":559,"rotation":-90},
+						{"x":72,"y":559,"rotation":0},
+						{"x":72,"y":422,"rotation":0}
 					]
 					
                 },
@@ -6974,7 +7057,7 @@
                     },
 					"antiGravity":{"x":50,"y":610},
 					"forceball":[
-						{"x":48,"y":172,"rotation":90}
+						{"x":108,"y":172,"rotation":90}
 					],
 					"balloon":[
 						{"x":70,"y":367},
@@ -6984,6 +7067,41 @@
 						{"x":411,"y":255}
 					]
 					
+                },
+				{
+                    "mapId":18,
+                    "width":750,
+                    "height":1334,
+                    "mapSkins":[
+                        "gameView/gameBg/boxBg_8.png"
+                    ],
+                    "candy":{"style":"candy","x":243,"y":549},
+                    "star":[
+                        {"style":"star1","x":100,"y":290,"interval":50,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star1","x":193,"y":290,"interval":50,"move":[],"rotateLength":0,"v":1},
+                        {"style":"star1","x":290,"y":290 ,"interval":50,"move":[],"rotateLength":0,"v":3}
+                    ],
+                    "monster":{"x":160,"y":419,"skin":""},
+                    "hook":[
+                        {"style":"hook1","x":118,"y":170.5,"canRotate":true},	
+                        {"style":"hook1","x":377.5,"y":170.5,"canRotate":true}
+                    ],
+                    "rope":{
+                        "hookIndex":[0,1],                        
+                        "length":[
+                            300,300
+                        ]
+                    },
+					"knife":[
+						{"x":129,"y":236,"style":"knife4","rotation":0,"v":0,"move":[]},
+						{"x":356.5,"y":236,"style":"knife4","rotation":0,"v":0,"move":[]},
+						{"x":28,"y":363,"style":"knife4","rotation":90,"v":0,"move":[]},
+						{"x":255,"y":400,"style":"knife2","rotation":90,"v":0,"move":[]},
+						{"x":447,"y":344,"style":"knife3","rotation":90,"v":0,"move":[]},
+						{"x":152,"y":474,"style":"knife4","rotation":0,"v":0,"move":[]},
+						{"x":447,"y":530,"style":"knife3","rotation":90,"v":0,"move":[]},
+						{"x":335,"y":639,"style":"knife4","rotation":0,"v":0,"move":[]}
+					]
                 },
 				{
                     "mapId":19,
@@ -7029,6 +7147,37 @@
 					]				
                 },
 				{
+                    "mapId":20,
+                    "width":750,
+                    "height":1334,
+                    "mapSkins":[
+                        "gameView/gameBg/boxBg_8.png"
+                    ],
+                    "candy":{"style":"candy","x":245,"y":129},
+                    "star":[
+                        {"style":"star1","x":136,"y":509,"interval":50,"move":[],"rotateLength":0,"v":2},
+                        {"style":"star1","x":355,"y":379,"interval":50,"move":[],"rotateLength":0,"v":1},
+                        {"style":"star2","x":114,"y":236,"interval":70,"move":[],"rotateLength":0,"v":3}
+                    ],
+                    "monster":{"x":248,"y":568.5,"skin":""},
+                    "hook":[
+                        {"style":"hook1","x":64,"y":121.5},
+						{"style":"hook1","x":433,"y":121.5},	
+						{"style":"hook1","x":237,"y":633.5,"canRotate":true}	
+                    ],
+                    "rope":{
+                        "hookIndex":[0,1,2],                        
+                        "length":[
+                            130,130,380
+                        ]
+                    },
+					"knife":[
+						{"x":237,"y":449.5,"style":"knife1","rotation":0,"v":0,"move":[]}
+                    ],
+					"antiGravity":{"x":427,"y":637.5}
+                    
+                },
+				{
                     "mapId":21,
                     "width":750,
                     "height":1334,
@@ -7049,7 +7198,7 @@
                     "rope":{
                         "hookIndex":[0,1],                        
                         "length":[
-                            30,30
+                            45,45
                         ]
                     },
 					"balloon":[
@@ -7119,7 +7268,7 @@
                     "monster":{"x":400,"y":200,"skin":""},
                     "hook":[
                         {"style":"hook1","x":180,"y":40},
-						{"style":"hook2","x":160,"y":480,"size":80}
+						{"style":"hook2","x":200,"y":480,"size":90}
                     ],
                     "rope":{
                         "hookIndex":[0],                        

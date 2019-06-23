@@ -51,6 +51,7 @@ import Tool from "../Tool/Tool";
             Laya.timer.frameLoop(1,this,this.star_MoveBySelf,[data.move]);
         }*/
     }
+
     //更新状态
     update(data):void{
         this.rotation=0;
